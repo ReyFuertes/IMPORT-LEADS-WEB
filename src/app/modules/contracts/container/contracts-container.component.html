@@ -7,7 +7,7 @@
       <il-sort></il-sort>
     </div>
   </div>
-  <div>
-    <il-contract-card></il-contract-card>
+  <div fxLayout="column" fxLayoutGap="20px">
+    <il-contract-card *ngFor="let card of [0, 1, 2]"></il-contract-card>
   </div>
 </div>

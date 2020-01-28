@@ -10,7 +10,7 @@ import * as moment from 'moment';
 export class ContractCardMilestoneComponent implements OnInit {
   public estimatedDates: { from: string | Date, to: string | Date } = {
     from: moment('1/30/2020').format(),
-    to: moment('2/5/2020').format()
+    to: moment('2/2/2020').format()
   };
   public pointOfDates: string[] = [];
   public mileStoneDates: Array<{ date: string | Date }> = [
