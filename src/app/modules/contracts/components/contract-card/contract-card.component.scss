@@ -1,0 +1,4 @@
+@import 'src/styleguide/styleguide';
+.contract-card {
+  @include contract-card;
+}

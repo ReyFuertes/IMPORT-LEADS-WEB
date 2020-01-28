@@ -1,0 +1,4 @@
+@import 'src/styleguide/styleguide';
+.page-container {
+  @include page-container;
+}

@@ -1,0 +1,38 @@
+<mat-card fxLayout="column" class="contract-card">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <div class="img-box" fxLayoutAlign="center center">
+        <img [src]="svgPath + 'doc-icon-blue.svg'" />
+      </div>
+      <span class="row-text">PI SK19NL0806-1 Touch Dimmer Switch</span>
+    </div>
+    <div class="col-table">
+      <div>
+        <span class="col-text">Contract Date</span>
+        <span class="row-text">23.08.2019</span>
+      </div>
+      <div>
+        <span class="col-text">Created by</span>
+        <span class="row-text">John Doe</span>
+      </div>
+      <div>
+        <span class="col-text">Related Venue</span>
+        <span class="row-text">Venue Name</span>
+      </div>
+      <div>
+        <span class="col-text">Progress</span>
+        <span class="row-text">25% done</span>
+      </div>
+      <div fxFlex="5">
+        <img class="ellipse" [matMenuTriggerFor]="menu" [src]="svgPath + 'dots-icon-blue.svg'" />
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Option 1</button>
+          <button mat-menu-item>Option 2</button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+  <div>
+    <il-contract-card-milestone></il-contract-card-milestone>
+  </div>
+</mat-card>
