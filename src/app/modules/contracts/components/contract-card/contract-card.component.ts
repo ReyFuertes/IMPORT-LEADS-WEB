@@ -1,5 +1,6 @@
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'il-contract-card',
@@ -9,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 
 export class ContractCardComponent implements OnInit {
   public svgPath: string = environment.svgPath;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
+
+  public gotoDetail(id: string): void {
+    this.router.navigateByUrl(`dashboard/contracts/${id}/detail`);
+  }
 }

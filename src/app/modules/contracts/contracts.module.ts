@@ -1,3 +1,5 @@
+import { ContractOverviewPageComponent } from './components/contract-overview-page/contract-overview-page.component';
+import { ContractDetailPageComponent } from './components/contract-detail-page/contract-detail-page.component';
 import { ContractCardMilestoneComponent } from './components/contract-card-milestone/contract-card-milestone.component';
 import { ContractCardComponent } from './components/contract-card/contract-card.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -12,7 +14,16 @@ const routes: Routes = [
   {
     path: '',
     component: ContractsContainerComponent,
-    children: []
+    children: [
+      {
+        path: '',
+        component: ContractOverviewPageComponent
+      },
+      {
+        path: ':id/detail',
+        component: ContractDetailPageComponent
+      }
+    ]
   }
 ];
 
@@ -34,8 +45,10 @@ const materialModules = [
   declarations: [
     ContractsContainerComponent,
     ContractCardComponent,
-    ContractCardMilestoneComponent
+    ContractCardMilestoneComponent,
+    ContractDetailPageComponent,
+    ContractOverviewPageComponent
   ],
   providers: [],
 })
-export class ContactsModule { }
+export class ContractsModule { }

@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     children: [
-      { path: 'contracts', loadChildren: () => import('./modules/contracts/contracts.module').then(m => m.ContactsModule) },
+      { path: 'contracts', loadChildren: () => import('./modules/contracts/contracts.module').then(m => m.ContractsModule) },
       { path: 'inspection-insights', loadChildren: () => import('./modules/inspection-insights/inspection-insights.module').then(m => m.InspectionInsightsModule) },
       { path: 'inspections', loadChildren: () => import('./modules/inspections/inspections.module').then(m => m.InspectionModule) },
       { path: 'performance-insights', loadChildren: () => import('./modules/performance-insights/performance-insights.module').then(m => m.PerformanceInsightsModule) },

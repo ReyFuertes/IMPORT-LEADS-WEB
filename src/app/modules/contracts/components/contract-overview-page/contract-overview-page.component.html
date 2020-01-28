@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div class="header">
+    <div fxFlex>
+      <h1>Contracts</h1>
+    </div>
+    <div fxFlex="15" fxLayoutAlign="end center">
+      <il-sort></il-sort>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutGap="20px">
+    <il-contract-card *ngFor="let card of [0, 1, 2]"></il-contract-card>
+  </div>
+</div>
