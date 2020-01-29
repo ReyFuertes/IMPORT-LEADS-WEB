@@ -1,4 +1,4 @@
-@import "src/styleguide/styleguide";
+@import "src/styleguide/shared";
 :host {
   width: 100%;
 }
@@ -39,7 +39,7 @@
   }
 }
 .milestone__h-line {
-  background-color: $color-gray-1;
+  background-color: $color-gray-2;
   height: 2px;
   width: 100%;
   position: relative;

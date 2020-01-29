@@ -13,11 +13,6 @@
       height: 40px;
     }
   }
-  .img-box {
-    height: 40px;
-    width: 40px;
-    background-color: $color-gray-1;
-  }
   .col-table {
     flex-direction: row;
     box-sizing: border-box;
@@ -52,4 +47,22 @@
 }
 .mat-card {
   border-radius: 0;
+}
+.card-row {
+  padding: 30px;
+  &:nth-child(odd) {
+    border-bottom: thin solid $color-gray-3;
+  }
+}
+.mat-card {
+  .img-box {
+    background-color: $color-gray-2;
+    height: 40px;
+    width: 40px;
+    place-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+  }
 }

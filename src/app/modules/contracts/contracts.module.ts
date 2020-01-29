@@ -1,3 +1,4 @@
+import { ContractDetailProductsComponent } from './components/contract-detail-products/contract-detail-products.component';
 import { ContractOverviewPageComponent } from './components/contract-overview-page/contract-overview-page.component';
 import { ContractDetailPageComponent } from './components/contract-detail-page/contract-detail-page.component';
 import { ContractCardMilestoneComponent } from './components/contract-card-milestone/contract-card-milestone.component';
@@ -47,7 +48,8 @@ const materialModules = [
     ContractCardComponent,
     ContractCardMilestoneComponent,
     ContractDetailPageComponent,
-    ContractOverviewPageComponent
+    ContractOverviewPageComponent,
+    ContractDetailProductsComponent
   ],
   providers: [],
 })

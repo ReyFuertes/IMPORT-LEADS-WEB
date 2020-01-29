@@ -1,0 +1,19 @@
+<div class="products" fxFlex fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div class="img-box">
+      <img [src]="svgPath + 'doc-icon-blue.svg'" />
+    </div>
+    <h2>Products</h2>
+  </div>
+  <div fxLayout="column">
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <il-pill formArrayName="products" *ngFor="let product of formProducts.get('products').controls; let i = index;" [label]="product?.value?.name"></il-pill>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <il-input-select fxFlex="25" [form]="form" [controlName]="'name'"></il-input-select>
+      <il-input fxFlex="25" [form]="form" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
+      <il-input fxFlex="25" [form]="form" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
+      <il-button fxFlex="25" label="Add Product" (click)="addProduct()"></il-button>
+    </div>
+  </div>
+</div>

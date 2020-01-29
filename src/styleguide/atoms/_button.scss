@@ -1,0 +1,14 @@
+@mixin il-button {
+  ::ng-deep {
+    .mat-flat-button {
+      width: fit-content !important;
+      min-width: 112px;
+      height: 32px !important;
+      background-color: $color-primary !important;
+      line-height: 33px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 0;
+    }
+  }
+}

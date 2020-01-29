@@ -1,4 +1,4 @@
-@import 'src/styleguide/styleguide';
-.topnav {
-  @include topnav;
+@import 'src/styleguide/shared';
+.top-nav {
+  @include il-topnav;
 }

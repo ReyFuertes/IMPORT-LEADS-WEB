@@ -1,0 +1,15 @@
+@mixin il-select {
+  ::ng-deep {
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      font-size: 14px !important;
+      top: 22px;
+      color: $color-gray-1;
+    }
+    .mat-focused .mat-form-field-label {
+      color: $color-primary !important;
+    }
+    .mat-form-field.mat-focused .mat-form-field-ripple {
+      background-color: $color-primary !important;
+    }
+  }
+}

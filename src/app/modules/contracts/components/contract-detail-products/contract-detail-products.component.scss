@@ -1,0 +1,6 @@
+@import "src/styleguide/shared";
+.products {
+  > div:nth-child(2) {
+    margin-left: 4%;
+  }
+}
