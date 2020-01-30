@@ -1,0 +1,18 @@
+<mat-accordion>
+  <mat-expansion-panel #pnl="matExpansionPanel" *ngFor="let d of data; let i = index" [expanded]="false" hideToggle="true"
+    [ngClass]="{'expanded-bg': pnl?.expanded}">
+    <mat-expansion-panel-header (click)="expandPanel(pnl)" expandedHeight="150px">
+      <div fxLayout="row" fxLayoutAlign="start start" fxFlex>
+        <div class="title" fxFlex="30" fxLayoutAlign="start start">{{ d?.title }}</div>
+        <div fxFlex [ngClass]="{'border': pnl?.expanded}">
+          <div *ngIf="!pnl?.expanded">{{ d?.description }}</div>
+          <il-textarea *ngIf="pnl?.expanded" (click)="isEventDialog = true" [value]="d?.description"></il-textarea>
+        </div>
+        <div fxFlex="10" fxLayoutAlign="end start" fxLayoutGap="10px">
+          <span class="type">Appearance</span>
+          <img [src]="svgPath + 'arrow-down-icon-blue.svg'">
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+</mat-accordion>

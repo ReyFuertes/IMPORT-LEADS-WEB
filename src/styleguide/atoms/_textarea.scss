@@ -1,0 +1,14 @@
+@mixin il-textarea {
+  ::ng-deep {
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+      height: 0 !important;
+      display: none !important;
+      padding: 5px !important;
+    }
+    textarea.mat-input-element {
+      resize: none;
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+}
