@@ -1,5 +1,6 @@
 import { environment } from './../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'il-expansion-panel',
@@ -9,42 +10,43 @@ import { Component, OnInit } from '@angular/core';
 
 export class ExpansionPanelComponent implements OnInit {
   public svgPath: string = environment.svgPath;
-  public data: any[] =[
-    {
-      title: '2G1W Dimmer Picture',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      title: 'Rated Voltage',
-      description: '<500W'
-    },
-    {
-      title: 'Ive seen other answers suggesting animating',
-      description: 'Start editing to see some magic happen :).'
-    },
-    {
-      title: 'In case anyone is reading this',
-      description: 'transition '
-    }
-  ];
+  @Input()
+  public panels: Array<{ title: string, description: string }>;
   public selectedPnl: number | null;
-
+  public hoveredPnl: number | null;
+  public isEventDialog: boolean = false;
   constructor() { }
 
   ngOnInit() { }
 
-  public onCollapsePnl(pnl: any): void {
-    pnl.expanded = false
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.panels, event.previousIndex, event.currentIndex);
   }
 
-  public isEventDialog: boolean = false;
-  public expandPanel(pnl: any): void {
-    event.stopPropagation();
-    if(this.isEventDialog) {
-      pnl.expanded = true;
+  public onCollapsePnl(pnl: any): void {
+    pnl.expanded = false;
+  }
+
+  public cdkDropListDroppedHandler(event: CdkDragDrop<any[]>) {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex);
+    this.hoveredPnl = event.currentIndex;
+  }
+
+  public expandPanel(pnl: any, event: any): void {
+    if (event.target.classList.contains('no-expand')) {
+      if (pnl.expanded)
+        pnl.close()
+      else
+        pnl.open();
+      return;
+    }
+    if (this.isEventDialog) {
+      pnl.open();
       this.isEventDialog = false;
-    } else {
-      pnl.expanded = pnl.expanded;
     }
   }
 }

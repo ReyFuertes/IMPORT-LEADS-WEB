@@ -8,7 +8,7 @@
       <span>{{ action?.label }}</span>
     </div>
   </div>
-  <!-- <mat-card class="cdc">
+  <mat-card class="cdc">
     <div fxLayout="column">
       <div class="card-row">
         <div fxFlex fxLayout="column" fxLayoutGap="20px">
@@ -52,9 +52,26 @@
         <il-contract-detail-products></il-contract-detail-products>
       </div>
     </div>
-  </mat-card> -->
-
-  <mat-card>
-    <il-expansion-panel></il-expansion-panel>
   </mat-card>
+
+  <mat-tab-group class="il-tab">
+    <mat-tab label="General Design and Specification">
+      <ng-template matTabContent>
+        <il-expansion-panel [panels]="panels"></il-expansion-panel>
+        <div fxLayout="row" fxLayoutAlign="center center" class="footer">
+          <img class="add" *ngIf="!_showTabActions" (click)="_showTabActions = !_showTabActions" [src]="svgPath + 'add-icon-gray.svg'" />
+          <div fxFlex *ngIf="_showTabActions" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <div fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+              <div class="link" (click)="add()">Add a category</div>
+              <div class="link">Add a title</div>
+              <div class="link">Import template</div>
+            </div>
+            <div fxFlex="4" fxLayoutAlign="center center">
+              <img class="close" (click)="_showTabActions = false" [src]="svgPath + 'close-icon-gray.svg'" />
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
 </div>

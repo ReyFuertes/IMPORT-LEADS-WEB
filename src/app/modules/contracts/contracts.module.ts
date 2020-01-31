@@ -9,7 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ContractsContainerComponent } from './container/contracts-container.component';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatMenuModule, MatStepperModule } from '@angular/material';
+import { MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -31,7 +31,8 @@ const routes: Routes = [
 const materialModules = [
   MatCardModule,
   MatMenuModule,
-  MatStepperModule
+  MatStepperModule,
+  MatTabsModule
 ];
 
 @NgModule({

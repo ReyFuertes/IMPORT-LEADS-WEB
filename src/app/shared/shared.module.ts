@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -23,7 +24,8 @@ const materialModules = [
   MatSelectModule,
   MatButtonModule,
   MatAutocompleteModule,
-  MatExpansionModule
+  MatExpansionModule,
+  DragDropModule
 ];
 
 const sharedComponents = [

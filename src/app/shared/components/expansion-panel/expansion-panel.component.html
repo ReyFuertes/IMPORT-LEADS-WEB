@@ -1,16 +1,22 @@
-<mat-accordion>
-  <mat-expansion-panel #pnl="matExpansionPanel" *ngFor="let d of data; let i = index" [expanded]="false" hideToggle="true"
+<mat-accordion cdkDropList (start)="test($event)">
+  <mat-expansion-panel cdkDrag #pnl="matExpansionPanel" *ngFor="let p of panels; let i = index" [expanded]="false" hideToggle="true"
     [ngClass]="{'expanded-bg': pnl?.expanded}">
-    <mat-expansion-panel-header (click)="expandPanel(pnl)" expandedHeight="150px">
-      <div fxLayout="row" fxLayoutAlign="start start" fxFlex>
-        <div class="title" fxFlex="30" fxLayoutAlign="start start">{{ d?.title }}</div>
+    <mat-expansion-panel-header (click)="expandPanel(pnl, $event)" expandedHeight="150px">
+      <div class="inner-container" [ngClass]="{'h-40': !pnl?.expanded}" fxLayout="row" [fxLayoutAlign]="!pnl?.expanded ? 'center center' : 'start start'" fxFlex>
+        <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
+        <div [fxFlexOffset]="hoveredPnl !== i ? '15px': '7px'" fxFlex="30" fxLayoutAlign="start start">{{ p.title }}</div>
         <div fxFlex [ngClass]="{'border': pnl?.expanded}">
-          <div *ngIf="!pnl?.expanded">{{ d?.description }}</div>
-          <il-textarea *ngIf="pnl?.expanded" (click)="isEventDialog = true" [value]="d?.description"></il-textarea>
+          <div *ngIf="!pnl?.expanded">{{ p?.description }}</div>
+          <il-textarea *ngIf="pnl?.expanded" (click)="isEventDialog = true" [value]="p?.description"></il-textarea>
         </div>
-        <div fxFlex="10" fxLayoutAlign="end start" fxLayoutGap="10px">
-          <span class="type">Appearance</span>
-          <img [src]="svgPath + 'arrow-down-icon-blue.svg'">
+        <div class="no-expand" fxFlex="15" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <span class="no-expand">Appearance</span>
+          <img class="no-expand" [src]="svgPath + 'arrow-down-icon-blue.svg'">
+          <img class="no-expand" [src]="svgPath + 'dots-icon-gray.svg'" [matMenuTriggerFor]="appMenu">
+          <mat-menu #appMenu="matMenu">
+            <button mat-menu-item >Edit</button>
+            <button mat-menu-item>Delete</button>
+          </mat-menu>
         </div>
       </div>
     </mat-expansion-panel-header>

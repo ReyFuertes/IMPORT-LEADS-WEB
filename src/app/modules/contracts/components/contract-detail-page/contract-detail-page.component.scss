@@ -1,4 +1,7 @@
 @import "src/styleguide/shared";
+.il-tab {
+  @include il-tab;
+}
 .cdc {
   padding: 0 !important;
 }
@@ -39,4 +42,9 @@
   box-sizing: border-box;
   display: flex;
   font-size: 12px;
+}
+:host ::ng-deep {
+  .mat-card {
+    padding: 0 !important;
+  }
 }

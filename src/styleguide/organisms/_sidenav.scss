@@ -1,8 +1,10 @@
-@mixin sidebar {
+@mixin il-sidebar {
   background-color: $color-black-1;
   max-width: 250px;
   width: 250px;
   outline: none;
+  position: fixed;
+  height: 100%;
   span.cap-case {
     text-transform: uppercase;
   }
