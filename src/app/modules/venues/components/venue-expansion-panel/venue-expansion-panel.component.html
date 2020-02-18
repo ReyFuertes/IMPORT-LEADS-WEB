@@ -1,3 +1,6 @@
+<div class="col-header" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <div *ngFor="let col of colsHeaders" [fxFlex]="col?.width">{{ col?.label }}</div>
+</div>
 <div class="il-draggable-expansion">
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
     <mat-expansion-panel #pnl cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel"
@@ -12,20 +15,10 @@
               <input matInput [value]="item?.name">
             </mat-form-field>
           </div>
-          <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="center center">
-            <div class="actions-item" *ngIf="hoveredIndex === i && selectedIndex !== i">
-              <img [src]="svgPath + 'edit-icon-blue.svg'" />
-              <img [src]="svgPath + 'delete-icon-red.svg'">
-            </div>
-            <div class="actions-item" *ngIf="hoveredIndex === i && selectedIndex === i">
-              <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" />
-              <img [src]="svgPath + 'save-icon-blue.svg'">
-            </div>
-          </div>
         </div>
       </mat-expansion-panel-header>
       <div>
-        <il-tag-expansion-list [questions]="item?.questions"></il-tag-expansion-list>
+        <il-venue-expansion-list [questions]="item?.questions"></il-venue-expansion-list>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

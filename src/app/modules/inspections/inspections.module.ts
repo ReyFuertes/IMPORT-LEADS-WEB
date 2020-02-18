@@ -1,3 +1,11 @@
+import { InspectionReportCommentsComponent } from './components/inspection-report-comments/inspection-report-comments.component';
+import { InspectionReportFailuresComponent } from './components/inspection-report-failures/inspection-report-failures.component';
+import { InspectionReportTagsComponent } from './components/inspection-report-tags/inspection-report-tags.component';
+import { InspectionReportProductsComponent } from './components/inspection-report-products/inspection-report-products.component';
+import { InspectionReportNotableItemsComponent } from './components/inspection-report-notable-items/inspection-report-notable-items.component';
+import { InspectorReportInspectorComponent } from './components/inspection-report-inspector/inspection-report-inspector.component';
+import { InspectionReportInspectionComponent } from './components/inspection-report-inspections/inspection-report-inspections.component';
+import { InspectionReportPageComponent } from './components/inspection-report-page/inspection-report-page.component';
 import { DialogModule } from './../dialogs/dialog.module';
 import { InspectionQualityRequirementComponent } from './components/inspection-quality-requirement/inspection-quality-requirement.component';
 import { InspectionRunPageComponent } from './components/inspection-run-page/inspection-run-page.component';
@@ -26,6 +34,10 @@ const routes: Routes = [
       {
         path: 'run-template',
         component: InspectionRunPageComponent
+      },
+      {
+        path: 'report',
+        component: InspectionReportPageComponent
       }
     ]
   }
@@ -72,7 +84,15 @@ const primeNgModules = [];
     InspectionExpansionPanelComponent,
     InspectionPanelDetailComponent,
     InspectionRunPageComponent,
-    InspectionQualityRequirementComponent
+    InspectionQualityRequirementComponent,
+    InspectionReportPageComponent,
+    InspectorReportInspectorComponent,
+    InspectionReportInspectionComponent,
+    InspectionReportNotableItemsComponent,
+    InspectionReportProductsComponent,
+    InspectionReportTagsComponent,
+    InspectionReportFailuresComponent,
+    InspectionReportCommentsComponent
   ],
   providers: [],
 })

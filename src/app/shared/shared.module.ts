@@ -1,3 +1,4 @@
+import { ExpandablePanelComponent } from './components/expandable-panel/expandable-panel.component';
 import { PopoverMenuComponent } from './components/popover-menu/popover-menu.component';
 import { CalendarModule } from 'primeng/calendar';
 import { AccordionModule } from 'primeng/accordion';
@@ -57,7 +58,8 @@ const sharedComponents = [
   DropdownSelectComponent,
   DropdownSelectComponent,
   DatepickerComponent,
-  PopoverMenuComponent
+  PopoverMenuComponent,
+  ExpandablePanelComponent
 ];
 
 const directives = [

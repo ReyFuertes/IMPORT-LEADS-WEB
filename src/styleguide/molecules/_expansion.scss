@@ -1,5 +1,11 @@
 
 @mixin il-draggable-expansion {
+  .pnl-actions {
+    height: 50px;
+    place-content: center flex-start;
+    align-items: center;
+    display: flex;
+  }
   ::ng-deep {
     .mat-form-field-appearance-legacy .mat-form-field-wrapper {
       padding-bottom: 0;
