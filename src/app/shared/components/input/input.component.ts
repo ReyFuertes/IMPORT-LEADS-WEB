@@ -14,6 +14,10 @@ export class InputComponent implements OnInit {
   public controlName: FormControlName;
   @Input()
   public form: FormGroup;
+  @Input()
+  public isFloatLabel: boolean = false;
+  @Input()
+  public isNumberOnly: boolean = false;;
 
   constructor() { }
 

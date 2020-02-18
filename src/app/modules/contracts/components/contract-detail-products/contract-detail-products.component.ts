@@ -1,6 +1,7 @@
+import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'il-contract-detail-products',
@@ -10,62 +11,52 @@ import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 
 export class ContractDetailProductsComponent implements OnInit {
   public svgPath: string = environment.svgPath;
-  public items: Array<{ name: string, qty?: string | number, cost?: string | number }> = [
-    {
-      name: 'Touch Dimmer Switch',
-      qty: 1,
-      cost: 1
-    },
-    {
-      name: 'Touch Dimmer Switch > 1G1W 1283',
-      qty: 1,
-      cost: 1
-    },
-    {
-      name: 'Touch Dimmer Switch > 2G1W 1306',
-      qty: 1,
-      cost: 1
-    },
-    {
-      name: 'Touch Dimmer Switch',
-      qty: 1,
-      cost: 1
-    },
-    {
-      name: 'Touch Dimmer Switch > 1G1W 1283',
-      qty: 1,
-      cost: 1
-    },
-    {
-      name: 'Touch Dimmer Switch > 2G1W 1306',
-      qty: 1,
-      cost: 1
-    }
-  ];
   public products: FormArray;
   public form: FormGroup;
   public formProducts: FormGroup;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      name: [''],
-      qty: [null],
-      cost: [null]
+      id: [null],
+      name: ['', Validators.required],
+      qty: [null, Validators.required],
+      cost: [null, Validators.required]
     });
     this.formProducts = this.fb.group({
-      products: this.fb.array([...this.items])
+      products: new FormArray([])
+    });
+
+    this.setProduct({
+      label: 'Touch Dimmer Switch',
+      value: 'Touch Dimmer Switch'
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
 
-  public createItem(item: { name: string, qty?: string | number, cost?: string | number }): FormGroup {
+  }
+
+  public setProduct(item: SimpleItem): void {
+    let formMembers = (<FormArray>this.formProducts.get('products')).controls;
+    formMembers.push(this.fb.group(item));
+  }
+
+  public onRemove(id: number): void {
+    const products = this.formProducts.get('products') as FormArray;
+    const i = products.controls.findIndex(x => x.value === id);
+    products.removeAt(i);
+  }
+
+  public createItem(item: SimpleItem): FormGroup {
     return this.fb.group(item);
   }
 
   public addProduct(): void {
     if (this.form.value) {
       this.products = this.formProducts.get('products') as FormArray;
-      this.products.push(this.createItem(this.form.value));
+      this.products.push(this.createItem({
+        label: this.form.value.name,
+        value: this.form.value.id
+      }));
       this.form.reset();
     }
   }

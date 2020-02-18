@@ -1,0 +1,39 @@
+@import "src/styleguide/shared";
+.il-button {
+  @include il-button;
+}
+.hidden {
+  display: none !important;
+}
+.title-col {
+  font-weight: 500;
+  font-weight: 14px;
+  cursor: pointer;
+  height: 40px;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+.actions-col {
+  font-size: 14px;
+  font-weight: 500;
+  color: $color-black-2;
+  height: 50px;
+  span {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-primary;
+  }
+  > div {
+    height: 50px;
+    margin-right: 20px;
+  }
+}
+::ng-deep p-inputswitch {
+  @include il-input-switch;
+}
+.il-draggable-expansion {
+  @include il-draggable-expansion;
+}
+

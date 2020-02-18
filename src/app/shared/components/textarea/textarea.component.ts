@@ -1,3 +1,4 @@
+import { FormControlName, FormGroup } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -8,7 +9,16 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class TextareaComponent implements OnInit {
   @Input()
-  public value: string;
+  public controlName: FormControlName;
+  @Input()
+  public form: FormGroup;
+  @Input()
+  public placeholder: string;
+  @Input()
+  public rows: number = 3;
+  @Input()
+  public isFloatLabel: boolean = false;
+
   constructor() { }
 
   ngOnInit() { }

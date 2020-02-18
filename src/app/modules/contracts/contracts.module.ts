@@ -1,3 +1,9 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContractRightContentComponent } from './components/contract-right-content/contract-right-content.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ContractExpansionPanelComponent } from './components/contract-expansion-panel/contract-expansion-panel.component';
+import { DialogModule } from './../dialogs/dialog.module';
+import { ContractAddComponent } from './components/contract-add/contract-add.component';
 import { ContractDetailProductsComponent } from './components/contract-detail-products/contract-detail-products.component';
 import { ContractOverviewPageComponent } from './components/contract-overview-page/contract-overview-page.component';
 import { ContractDetailPageComponent } from './components/contract-detail-page/contract-detail-page.component';
@@ -9,7 +15,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ContractsContainerComponent } from './container/contracts-container.component';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule } from '@angular/material';
+import { MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule, MatButtonModule, MatDialogModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatSelectModule, MatAutocompleteModule, MatExpansionModule, MatSlideToggleModule } from '@angular/material';
+import { SidebarModule } from 'primeng/sidebar';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 const routes: Routes = [
   {
@@ -28,19 +36,41 @@ const routes: Routes = [
   }
 ];
 
+const primeNgModules = [
+  SidebarModule,
+  InputSwitchModule
+];
+
 const materialModules = [
+  MatListModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatBadgeModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatAutocompleteModule,
+  MatExpansionModule,
+  DragDropModule,
   MatCardModule,
   MatMenuModule,
   MatStepperModule,
-  MatTabsModule
+  MatTabsModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
+    ...primeNgModules,
     ...materialModules,
+    DialogModule,
     RouterModule.forChild(routes)
   ],
   exports: [],
@@ -50,7 +80,10 @@ const materialModules = [
     ContractCardMilestoneComponent,
     ContractDetailPageComponent,
     ContractOverviewPageComponent,
-    ContractDetailProductsComponent
+    ContractDetailProductsComponent,
+    ContractAddComponent,
+    ContractExpansionPanelComponent,
+    ContractRightContentComponent
   ],
   providers: [],
 })

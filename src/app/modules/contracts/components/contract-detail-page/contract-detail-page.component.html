@@ -3,12 +3,12 @@
     <h1>PI SK19NL0806-1 Touch Dimmer Switch</h1>
   </div>
   <div fxLayout="row" fxLayoutGap="20px">
-    <div class="action-item" *ngFor="let action of actionOptions" fxLayoutAlign="start center" fxLayoutGap="5px">
-      <img [src]="svgPath + action?.icon" />
-      <span>{{ action?.label }}</span>
+    <div class="action-item" *ngFor="let option of options" (click)="option?.action()" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <img [src]="svgPath + option?.icon" />
+      <span>{{ option?.label }}</span>
     </div>
   </div>
-  <mat-card class="cdc">
+  <mat-card>
     <div fxLayout="column">
       <div class="card-row">
         <div fxFlex fxLayout="column" fxLayoutGap="20px">
@@ -18,7 +18,7 @@
             </div>
             <h2>Contract</h2>
           </div>
-          <div *ngFor="let i of [0, 1]" class="item-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <div *ngFor="let i of [0, 1]" fxLayoutGap="25px" class="item-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
             <div>
               <div>Company</div>
               <div>CIL China</div>
@@ -54,17 +54,31 @@
     </div>
   </mat-card>
 
-  <mat-tab-group class="il-tab">
-    <mat-tab label="General Design and Specification">
+  <mat-tab-group *ngFor="let i of [0, 1, 2]" class="il-tab">
+    <mat-tab class="tab-1">
+      <ng-template mat-tab-label>
+        <div class="tab-header"></div>
+        <span class="tab-title">General Design and Specification</span>
+      </ng-template>
       <ng-template matTabContent>
-        <il-expansion-panel [panels]="panels"></il-expansion-panel>
+        <il-contract-expansion-panel [panels]="panels"></il-contract-expansion-panel>
+        <!-- make this a component -->
         <div fxLayout="row" fxLayoutAlign="center center" class="footer">
           <img class="add" *ngIf="!_showTabActions" (click)="_showTabActions = !_showTabActions" [src]="svgPath + 'add-icon-gray.svg'" />
           <div fxFlex *ngIf="_showTabActions" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <div fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-              <div class="link" (click)="add()">Add a category</div>
-              <div class="link">Add a title</div>
-              <div class="link">Import template</div>
+            <div class="actions-links" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+              <div (click)="add()">
+                <img [src]="svgPath + 'add-category-icon-blue.svg'" />
+                <span>Add a category</span>
+              </div>
+              <div>
+                <img [src]="svgPath + 'add-title-icon-blue.svg'" />
+                <span>Add a title</span>
+              </div>
+              <div>
+                <img [src]="svgPath + 'templates-icon-blue.svg'" />
+                <span>Import template</span>
+              </div>
             </div>
             <div fxFlex="4" fxLayoutAlign="center center">
               <img class="close" (click)="_showTabActions = false" [src]="svgPath + 'close-icon-gray.svg'" />
@@ -74,4 +88,17 @@
       </ng-template>
     </mat-tab>
   </mat-tab-group>
+
+  <!-- <div class="fab-buttons">
+    <button class="il-fab default" mat-fab>
+      <img [src]="svgPath + 'templates-icon-blue.svg'" />
+    </button>
+    <button (click)="addContract()" class="il-fab" mat-fab>
+      <img [src]="svgPath + 'add-icon-white.svg'" />
+    </button>
+  </div> -->
+
+  <p-sidebar class="il-rightnav" [(visible)]="showRightNav" position="right" [showCloseIcon]="false">
+    <il-contract-right-content (closeEmitter)="showRightNav = $event"></il-contract-right-content>
+  </p-sidebar>
 </div>

@@ -1,10 +1,12 @@
 @mixin il-topnav {
   box-shadow: $box-shadow;
-  width: 100%;
+  width: calc(100% - 250px);
   height: 64px;
   background-color: $color-white;
-  padding: 0 20px 0 30px;
+  padding: 0 30px;
   position: fixed;
+  display: flex;
+  z-index: 999;
   > div:first-child {
     padding: 10px 0 0 0;
   }

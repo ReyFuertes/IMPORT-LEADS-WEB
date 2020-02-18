@@ -24,3 +24,27 @@ h5 {
   font-weight: 400;
   margin: 0;
 }
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 22px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 14px;
+  font-weight: 550;
+}
+.mat-form-field {
+  width: 100%;
+}
+.ui-widget-overlay.ui-sidebar-mask {
+  opacity: 0 !important;
+  // display: none;
+  z-index: 999 !important;
+}
+.il-rightnav .ui-sidebar {
+  z-index: 1000 !important;
+}

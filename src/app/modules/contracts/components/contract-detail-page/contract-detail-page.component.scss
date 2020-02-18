@@ -1,18 +1,53 @@
 @import "src/styleguide/shared";
+.il-rightnav {
+  @include rightnav;
+}
+.il-fab {
+  @include il-fab;
+  left: 95%;
+  top: 82%;
+  &.default {
+    left: 95%;
+    top: 75%;
+  }
+}
+.footer > div {
+  @include fade-in;
+}
+.tab-title {
+  position: fixed;
+}
+.tab-header {
+  border-bottom: 100px solid $color-white;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  width: 100%;
+}
 .il-tab {
   @include il-tab;
 }
-.cdc {
-  padding: 0 !important;
+.hidden {
+  display: none;
+}
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
 }
 .item-container {
+  margin-bottom: 0;
   > div {
     color: $color-black-1;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
     margin-right: 20px;
     flex-direction: column;
     box-sizing: border-box;
     display: flex;
+    width: 25%;
     div:first-child {
       font-size: 12px;
       color: $color-gray-1;
@@ -44,7 +79,23 @@
   font-size: 12px;
 }
 :host ::ng-deep {
+  .mat-tab-label .mat-tab-label-content {
+    width: 100%;
+  }
+  .mat-tab-label-content {
+    height: 50px;
+    position: relative;
+    left: -7px;
+  }
+  .mat-tab-label {
+    background-color: transparent;
+    padding: 0;
+    width: 310px;
+  }
   .mat-card {
     padding: 0 !important;
   }
 }
+
+
+

@@ -1,3 +1,6 @@
 <div class="il-button">
-  <button mat-flat-button color="primary">{{ label }}</button>
+  <button [class]="type">
+    <img *ngIf="img" [src]="img" />
+    <span *ngIf="label">{{ label }}</span>
+  </button>
 </div>

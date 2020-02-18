@@ -35,7 +35,7 @@
   .col-text {
     font-size: 11px;
     font-weight: normal;
-    color: $color-gray-2;
+    color: $color-gray-1;
   }
   .row-text {
     font-size: 14px;
@@ -47,6 +47,7 @@
 }
 .mat-card {
   border-radius: 0;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08) !important;
 }
 .card-row {
   padding: 30px;
@@ -56,7 +57,7 @@
 }
 .mat-card {
   .img-box {
-    background-color: $color-gray-2;
+    background-color: $color-gray-3;
     height: 40px;
     width: 40px;
     place-content: center;

@@ -9,6 +9,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ButtonComponent implements OnInit {
   @Input()
   public label: string = '';
+  @Input()
+  public type: string = 'default';
+  @Input()
+  public img: string = '';
   constructor() { }
 
   ngOnInit() { }
