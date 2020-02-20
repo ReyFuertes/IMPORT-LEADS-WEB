@@ -1,0 +1,14 @@
+@import "src/styleguide/shared";
+.list-item {
+  height: 32px;
+  background-color: $color-white;
+  padding-left: 32px;
+  padding-right: 10px;
+  > div {
+    width: 100%;
+  }
+  &:hover {
+    background-color: $color-gray-3;
+    cursor: pointer;
+  }
+}

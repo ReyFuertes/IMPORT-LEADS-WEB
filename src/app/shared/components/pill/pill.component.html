@@ -1,0 +1,4 @@
+<div class="il-pill" fxLayoutGap="5px">
+  <span>{{ item?.label }}</span>
+  <img (click)="removeEmitter.emit(item?.value)" [src]="svgPath + 'close-icon-white.svg'" />
+</div>

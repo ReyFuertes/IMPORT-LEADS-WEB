@@ -1,0 +1,26 @@
+@mixin il-dialog {
+  width: 1024px;
+  height: 448px;
+  > div {
+    width: 100%;
+  }
+  .header {
+    padding: 16px;
+    > div {
+      width: 100%;
+    }
+  }
+  .content {
+    background-color: $color-white-1;
+    padding: 40px;
+  }
+  .footer {
+    padding: 20px;
+  }
+}
+::ng-deep {
+  .mat-dialog-container {
+    padding: 0 !important;
+    overflow: hidden;
+  }
+}

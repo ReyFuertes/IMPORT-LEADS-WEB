@@ -1,0 +1,17 @@
+@import "src/styleguide/shared";
+.il-button {
+  @include il-button;
+}
+.hidden {
+  display: none !important;
+}
+.il-draggable-expansion {
+  @include il-draggable-expansion;
+}
+.actions-item {
+  &:first-child {
+    img {
+      margin-right: 7px;
+    }
+  }
+}

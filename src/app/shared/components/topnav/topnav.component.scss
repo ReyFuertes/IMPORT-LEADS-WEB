@@ -1,0 +1,4 @@
+@import 'src/styleguide/shared';
+.top-nav {
+  @include il-topnav;
+}

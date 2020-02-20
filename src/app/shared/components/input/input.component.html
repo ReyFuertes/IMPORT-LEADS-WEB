@@ -1,0 +1,6 @@
+<div *ngIf="form" [formGroup]="form" class="input">
+  <mat-form-field [floatLabel]="isFloatLabel ? '' : 'never'">
+    <input *ngIf="isNumberOnly" matInput [formControlName]="controlName" numbersOnly [placeholder]="placeholder" autocomplete="off">
+    <input *ngIf="!isNumberOnly" matInput [formControlName]="controlName" [placeholder]="placeholder" autocomplete="off">
+  </mat-form-field>
+</div>

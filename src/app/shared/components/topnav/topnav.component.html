@@ -1,0 +1,23 @@
+<div fxLayout="row" class="top-nav" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <div fxFlex fxLayoutAlign="start center">
+    <img class="search-icon" [src]="svgPath + 'search-icon-black.svg'" />
+    <mat-form-field class="search" floatLabel="never">
+      <input matInput placeholder="Search for contracts, templates, users, tags">
+    </mat-form-field>
+  </div>
+  <div fxFlex="20" fxLayoutAlign="end center" fxLayoutGap="40px">
+    <div fxLayoutAlign="end center">
+      <img [src]="svgPath + 'chat-icon-black.svg'" />
+      <span matBadge="4" matBadgeColor="warn"></span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+      <img [src]="imgPath + 'profile.png'" />
+      <span class="name">John Doe</span>
+      <img class="arrow" [matMenuTriggerFor]="menu" [src]="svgPath + 'arrow-down-icon-black.svg'" />
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item>Help</button>
+      </mat-menu>
+    </div>
+  </div>
+</div>
