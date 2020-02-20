@@ -1,0 +1,44 @@
+@import "src/styleguide/shared";
+canvas {
+  height: 400px !important;
+}
+h1 {
+  margin-top: 15px;
+}
+.bar-chart {
+  padding: 0px 20px;
+}
+.circle-graphs {
+  padding: 15px 0px 10px;
+}
+:host ::ng-deep {
+  .mat-expansion-panel-body {
+    padding: 24px 0 0 0 !important;
+    background-color: $color-white !important;
+  }
+  .mat-list {
+    width: 100%;
+    background: $color-white-1;
+    padding: 25px 5px;
+    
+    .mat-list-item {
+      height: 65px;
+    }
+    .mat-list-item:not(:last-child) {
+      border-right: 1px solid $color-gray-2;
+    }
+    .mat-list-item-content {
+      display: block;
+      padding: 0 20px;
+    }
+  }
+  .mat-table {
+    width: 100%;
+    margin-top: 20px;
+
+    .mat-header-cell {
+      background: $color-white-1;
+    }
+  }
+
+}

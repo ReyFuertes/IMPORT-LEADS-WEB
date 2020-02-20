@@ -36,7 +36,8 @@ export class InspectionExpansionPanelComponent extends GenericPanelComponent imp
       {
         label: 'REPORT',
         value: 'REPORT',
-        icon: 'inspection-icon-black.svg'
+        icon: 'inspection-icon-black.svg',
+        action: this.onOpenReport
       },
       {
         label: 'DELETE',
@@ -48,6 +49,10 @@ export class InspectionExpansionPanelComponent extends GenericPanelComponent imp
 
   public onEdit = () => {
     this.router.navigateByUrl('/dashboard/inspections/run-template');
+  }
+
+  public onOpenReport = () => {
+    this.router.navigateByUrl('/dashboard/inspections/report');
   }
 
   public expandPnl(pnl: any, event: any, i: number): void {

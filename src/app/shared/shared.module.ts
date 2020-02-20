@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
+import { CircleGraphComponent } from './components/circle-graph/circle-graph.component';
 
 const materialModules = [
   MatListModule,
@@ -59,7 +60,8 @@ const sharedComponents = [
   DropdownSelectComponent,
   DatepickerComponent,
   PopoverMenuComponent,
-  ExpandablePanelComponent
+  ExpandablePanelComponent,
+  CircleGraphComponent
 ];
 
 const directives = [

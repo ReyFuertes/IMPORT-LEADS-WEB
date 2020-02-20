@@ -10,8 +10,7 @@
         </mat-list>
       </div>
     </div>
-    
-    <div class="doughnut-chart" fxLayout="row">
+    <div fxLayout="row">
       <div fxFlex="50">
         <canvas baseChart
           [data]="doughnutChartDataPF"
@@ -20,7 +19,6 @@
           [chartType]="doughnutChartTypePF">
         </canvas>
       </div>
-
       <div fxFlex="50">
         <canvas baseChart
           [data]="doughnutChartData"
@@ -30,7 +28,6 @@
         </canvas>
       </div>
     </div>
-    
     <table mat-table [dataSource]="dataSource">
 
       <ng-container matColumnDef="item">
