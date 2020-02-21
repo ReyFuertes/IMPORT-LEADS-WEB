@@ -12,41 +12,42 @@ export interface Notable {
   comments: string;
 }
 
+
 const ELEMENT_DATA: Notable[] = [
   {
     item: '2',
     product: 'Lasergun > Green',
-    appearance: '',
-    materials: '',
-    measurements: '',
-    packaging: '',
+    appearance: 'close',
+    materials: 'close',
+    measurements: 'check',
+    packaging: 'close',
     comments: 'is not sandal one, is different model.'
   },
   {
     item: '4',
     product: 'Lasergun > Blue',
-    appearance: '',
-    materials: '',
-    measurements: '',
-    packaging: '',
+    appearance: 'close',
+    materials: 'close',
+    measurements: 'check',
+    packaging: 'close',
     comments: 'is not sandal one, is different model.'
   },
   {
     item: '5',
     product: 'Lasergun > Orange',
-    appearance: '',
-    materials: '',
-    measurements: '',
-    packaging: '',
+    appearance: 'close',
+    materials: 'check',
+    measurements: 'close',
+    packaging: 'close',
     comments: 'is not sandal one, is different model.'
   },
   {
     item: '8',
     product: 'Lasergun > Yellow',
-    appearance: '',
-    materials: '',
-    measurements: '',
-    packaging: '',
+    appearance: 'close',
+    materials: 'check',
+    measurements: 'close',
+    packaging: 'close',
     comments: 'is not sandal one, is different model.'
   }
 ];
@@ -75,8 +76,12 @@ export class InspectionReportNotableItemsComponent implements OnInit {
   public doughnutChartOptions = {
     responsive: true,
     rotation: 1 * Math.PI,
-    circumference: 1 * Math.PI
+    circumference: 1 * Math.PI,
+    cutoutPercentage: 60
   };
+  public pieChartColors: Color[] = [
+    { backgroundColor: ['#B8D5CD', '#9abfa4', '#90b299', '#740E05'] },
+  ];
 
   public doughnutChartLabelsPF: Label[] = ['Passed items', 'Failed items'];
   public doughnutChartDataPF: MultiDataSet = [
@@ -86,8 +91,12 @@ export class InspectionReportNotableItemsComponent implements OnInit {
   public doughnutChartOptionsPF = {
     responsive: true,
     rotation: 1 * Math.PI,
-    circumference: 1 * Math.PI
+    circumference: 1 * Math.PI,
+    cutoutPercentage: 60
   };
+  public pieChartColorsPF: Color[] = [
+    { backgroundColor: ['#B8D5CD', '#740E05'] },
+  ];
 
   public displayedColumns: string[] = ['item', 'product', 'appearance', 'materials', 'measurements', 'packaging', 'comments'];
   public dataSource = ELEMENT_DATA;

@@ -16,28 +16,28 @@ const ELEMENT_DATA: Tag[] = [
     failed: 2,
     passed: 49,
     failureRate: 4,
-    aQLimit: 'X',
+    aQLimit: 'close',
   },
   {
     tag: 'Materials',
     failed: 1,
     passed: 50,
     failureRate: 2,
-    aQLimit: 'X',
+    aQLimit: 'close',
   },
   {
     tag: 'Packaging',
     failed: 1,
     passed: 50,
     failureRate: 2,
-    aQLimit: 'X',
+    aQLimit: 'close',
   },
   {
     tag: 'Measurements',
     failed: 3,
     passed: 48,
     failureRate: 6,
-    aQLimit: 'X',
+    aQLimit: 'close',
   }
 ];
 
@@ -63,8 +63,8 @@ export class InspectionReportTagsComponent implements OnInit {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [49, 50, 48, 50], label: 'Passsed Items' },
-    { data: [2, 1, 1, 3], label: 'Failed Items' }
+    { data: [49, 50, 48, 50], categoryPercentage: 0.4, label: 'Passsed Items' },
+    { data: [2, 1, 1, 3], categoryPercentage: 0.4, label: 'Failed Items' }
   ];
 
   public barChartColors: Color[] = [

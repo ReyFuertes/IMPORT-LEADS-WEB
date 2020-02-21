@@ -20,7 +20,7 @@ import { InspectionPageComponent } from './components/inspection-page/inspection
 import { NgModule } from '@angular/core';
 import { InspectionsContainerComponent } from './container/inspections-container.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatTabsModule, MatButtonModule, MatListModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatSelectModule, MatExpansionModule, MatCardModule, MatDialogModule, MatSlideToggleModule, MatTooltipModule, MatTableModule, MatRadioModule } from '@angular/material';
+import { MatIconModule, MatTabsModule, MatButtonModule, MatListModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatSelectModule, MatExpansionModule, MatCardModule, MatDialogModule, MatSlideToggleModule, MatTooltipModule, MatTableModule, MatRadioModule } from '@angular/material';
 import { ChartsModule } from 'ng2-charts';
 
 const routes: Routes = [
@@ -45,6 +45,7 @@ const routes: Routes = [
 ];
 
 const materialModules = [
+  MatIconModule,
   MatTabsModule,
   MatButtonModule,
   MatListModule,

@@ -8,8 +8,15 @@ h1 {
 .bar-chart {
   padding: 0px 20px;
 }
+.close {
+  color: $color-red;
+}
 .circle-graphs {
-  padding: 15px 0px 10px;
+  padding: 20px 0px 10px;
+
+  div:first-of-type {
+    color: $color-gray-2;
+  }
 }
 :host ::ng-deep {
   .mat-expansion-panel-body {
