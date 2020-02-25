@@ -11,8 +11,8 @@
       <mat-tab label="New Template">
         <div class="new-template" fxLayout="column" fxLayoutGap="10px">
           <div>
-            <il-dropdown-select placeholder="Desired run date" [items]="items"></il-dropdown-select>
-            <il-datepicker></il-datepicker>
+            <il-dropdown-select placeholder="Assigned To" [items]="items"></il-dropdown-select>
+            <il-datepicker [placeholder]="'Desired run date'"></il-datepicker>
           </div>
           <div class="content" fxLayout="column" fxLayoutAlign="start start">
             <div fxLayout="row" fxLayoutAlign="center center">
