@@ -1,5 +1,5 @@
-import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
+import { RelatedProduct } from '../../venues.models';
 
 @Component({
   selector: 'il-venue-expansion-list',
@@ -8,27 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class VenueExpansionListComponent implements OnInit {
-  public svgPath: string = environment.svgPath;
   @Input()
-  public questions: string[];
-  public hoveredIndex: number | null = null;
-  public selectedIndex: number | null = null;
+  public items: RelatedProduct[];
+  @Input()
+  public colsHeaders: Array<{ label: string, width?: string | number }>;
   constructor() { }
 
   ngOnInit() { }
 
-  public onClose(): void {
-    setTimeout(() => {
-      this.selectedIndex = null;
-    }, 100);
-  }
-
-  public mouseout(): void {
-    this.hoveredIndex = null;
-    this.selectedIndex = null;
-  }
-
-  public onHover(i: number) {
-    this.hoveredIndex = i;
-  }
 }

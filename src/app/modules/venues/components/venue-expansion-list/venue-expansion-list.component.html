@@ -1,23 +1,22 @@
-<div>
-  <div *ngFor="let question of questions; let i= index" class="list-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <div (mouseover)="onHover(i)" (mouseleave)="mouseout()">
-      <div fxFlex fxLayoutAlign="start center" fxLayoutGap="10px">
-        <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
-        <span *ngIf="selectedIndex !== i">{{question}}</span>
-        <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
-          <input matInput [value]="question">
-        </mat-form-field>
-      </div>
-      <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="center center">
-        <div class="actions-item" *ngIf="hoveredIndex === i && selectedIndex !== i" fxLayoutGap="10px">
-          <img (click)="selectedIndex = i" [src]="svgPath + 'edit-icon-blue.svg'" />
-          <img [src]="svgPath + 'delete-icon-red.svg'">
-        </div>
-        <div class="actions-item" *ngIf="hoveredIndex === i && selectedIndex === i" fxLayoutGap="10px">
-          <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" />
-          <img [src]="svgPath + 'save-icon-blue.svg'">
-        </div>
-      </div>
-    </div>
+<div class="col-header" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <div *ngFor="let col of colsHeaders" [fxFlex]="col?.width">{{ col?.label }}</div>
+</div>
+<div *ngFor="let item of items; let i = index"
+  class="product-list" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
+  <div fxFlex="33" fxLayoutAlign="start center">
+  </div>
+  <div fxFlex="35" fxLayoutAlign="start center">
+    <il-pill [matTooltip]="item.product.label" [item]="item.product"
+      (removeEmitter)="onRemove($event)">
+    </il-pill>
+  </div>
+  <div fxFlex="10" fxLayoutAlign="start center">
+    <span>${{item.averagePrice}}</span>
+  </div>
+  <div fxFlex="10" fxLayoutAlign="start center">
+    <span>{{item.avgPassFail}}%</span>
+  </div>
+  <div fxFlex="10" fxLayoutAlign="start center">
+    <span>{{item.quantity}}</span>
   </div>
 </div>

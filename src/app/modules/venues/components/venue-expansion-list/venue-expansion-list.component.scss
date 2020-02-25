@@ -1,14 +1,36 @@
 @import "src/styleguide/shared";
-.list-item {
-  height: 32px;
+.col-header {
+  font-size: 12px;
+  font-weight: normal;
+  width: 100%;
+  height: 48px;
+  margin-bottom: 0 !important;
+  color: $color-gray-1;
   background-color: $color-white;
-  padding-left: 32px;
+  padding-left: 28px;
   padding-right: 10px;
-  > div {
-    width: 100%;
+  border-bottom: 1px solid $color-gray-3;
+}
+.product-list {
+  border-bottom: 1px solid $color-gray-3;
+  height: 48px;
+  padding-left: 25px;
+  padding-right: 10px;
+}
+::ng-deep {
+  .il-pill {
+    margin-right: 5px;
+    margin-bottom: 0px;
+    cursor: default;
+
+    img {
+      display: none;
+    }
   }
-  &:hover {
-    background-color: $color-gray-3;
-    cursor: pointer;
+  .multi-line-tooltip {
+    white-space: pre-line;
+    border-radius: 0 !important;
+    padding: 15px !important;
+    line-height: 18px;
   }
 }

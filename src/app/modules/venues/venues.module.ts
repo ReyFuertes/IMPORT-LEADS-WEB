@@ -11,7 +11,7 @@ import { VenueOverviewPageComponent } from './components/venue-overview-page/ven
 import { VenuesContainerComponent } from './container/venues-container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatCardModule, MatStepperModule, MatTabsModule, MatDialogModule, MatSlideToggleModule } from '@angular/material';
+import { MatIconModule, MatTooltipModule, MatButtonToggleModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatCardModule, MatStepperModule, MatTabsModule, MatDialogModule, MatSlideToggleModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -30,6 +30,9 @@ const primeNgModules = [
 ];
 
 const materialModules = [
+  MatIconModule,
+  MatTooltipModule,
+  MatButtonToggleModule,
   MatListModule,
   MatFormFieldModule,
   MatInputModule,

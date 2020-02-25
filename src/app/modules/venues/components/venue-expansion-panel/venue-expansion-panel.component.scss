@@ -26,3 +26,29 @@
     }
   }
 }
+mat-icon {
+  color: $color-gray-2;
+}
+.rating {
+  color: $color-yellow;
+}
+.rating-label {
+  margin-left: 5px;
+}
+::ng-deep {
+  .il-pill {
+    margin-right: 5px;
+    margin-bottom: 0px !important;
+    cursor: default;
+
+    img {
+      display: none;
+    }
+  }
+  .multi-line-tooltip {
+    white-space: pre-line;
+    border-radius: 0 !important;
+    padding: 15px !important;
+    line-height: 18px;
+  }
+}

@@ -6,6 +6,15 @@
     <div fxFlex="120px" fxLayoutAlign="end center">
       <il-sort></il-sort>
     </div>
+    <mat-button-toggle-group value="products" name="fontStyle" aria-label="Font Style" fxLayoutAlign="end center">
+      <mat-button-toggle value="products" (click)="onProductClick()">products</mat-button-toggle>
+      <mat-button-toggle value="address" (click)="onAddressClick()">address</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
-  <il-venue-expansion-panel [colsHeaders]="ctCols" [items]="items"></il-venue-expansion-panel>
+  <div *ngIf="isProduct; else address">
+    <il-venue-expansion-panel [colsHeaders]="ctColsProduct" [items]="venuesProduct" [isProduct]="isProduct"></il-venue-expansion-panel>
+  </div>
+  <ng-template #address>
+    <il-venue-expansion-panel [colsHeaders]="ctColsAddress" [items]="venuesAddress" [isProduct]="isProduct"></il-venue-expansion-panel>
+  </ng-template>
 </div>

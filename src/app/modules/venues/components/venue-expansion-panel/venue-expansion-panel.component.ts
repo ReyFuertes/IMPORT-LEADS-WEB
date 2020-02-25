@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { VenuesProduct, RelatedProduct } from '../../venues.models';
 
 @Component({
   selector: 'il-venue-expansion-panel',
@@ -13,14 +14,49 @@ import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
 export class VenueExpansionPanelComponent extends GenericPanelComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public items: Array<{ id: string, name: string, questions?: string[] }>;
+  public items: VenuesProduct[];
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
   @Input()
   public colsHeaders: Array<{ label: string, width?: string | number }>;
+  public rates = new Array(5);
+  @Input()
+  public isProduct: boolean;
+
+  public ctColsRelatedProduct: Array<{label: string, width?: string | number}> = [
+    {
+      label: '',
+      width: 32
+    },
+    {
+      label: 'Configured products',
+      width: 35
+    },
+    {
+      label: 'Avg. Price',
+      width: 10
+    },
+    {
+      label: 'Avg. pass/fail',
+      width: 10
+    },
+    {
+      label: 'Qnt. of items',
+      width: 10
+    }
+  ];
   constructor() {
     super();
   }
 
   ngOnInit() { }
+
+  public getToolTip(product: RelatedProduct[]): string {
+    let tooltip = '';
+    for (const entry of product) {
+      tooltip = tooltip + entry.product.label + '\n';
+    }
+    return tooltip;
+  }
+
 }

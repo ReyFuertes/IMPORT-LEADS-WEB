@@ -7,18 +7,61 @@
       *ngFor="let item of items; let i = index" hideToggle="true">
 
       <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i)" (mouseover)="onHover(i)" (mouseleave)="mouseout()">
-        <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
+        <div *ngIf="isProduct; else address" class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
-          <div fxFlex fxLayoutAlign="start center">
+          <div fxFlex="22" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item?.name}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="item?.name">
             </mat-form-field>
           </div>
+          <div fxFlex="10" fxLayoutAlign="start center">
+            <span>{{item.location}}</span>
+          </div>
+          <div fxFlex="25" fxLayoutAlign="start center">
+            <il-pill *ngFor="let product of item?.relatedProducts | slice:0:2; let i = index;" [matTooltipClass]="'multi-line-tooltip'" [matTooltip]="getToolTip(item?.relatedProducts)" [item]="product.product"
+              (removeEmitter)="onRemove($event)">
+            </il-pill>
+          </div>
+          <div fxFlex="10" fxLayoutAlign="start center">
+            <span>{{item.contracts}}</span>
+          </div>
+          <div fxFlex="10" fxLayoutAlign="start center">
+            <span>{{item.inspections}}</span>
+          </div>
+          <div fxFlex="10" fxLayoutAlign="start center">
+            <span>{{item.avgPassFail}}%</span>
+          </div>
+          <div fxFlex="10" fxLayoutAlign="start center">
+            <mat-icon *ngFor="let rate of rates; let i = index;" [ngClass]="{'rating': i <= (item.rating-1)}" >star</mat-icon>
+            <span class="rating-label">{{item.rating}}</span>
+          </div>
         </div>
+
+        <ng-template #address>
+          <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
+            <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
+            <div fxFlex="25" fxLayoutAlign="start center">
+              <span *ngIf="selectedIndex !== i">{{item?.name}}</span>
+              <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
+                <input matInput [value]="item?.name">
+              </mat-form-field>
+            </div>
+            <div fxFlex="55" fxLayoutAlign="start center">
+              <span>{{item.location}}</span>
+            </div>
+            <div fxFlex="10" fxLayoutAlign="start center">
+              <span>{{item.contactPerson}}</span>
+            </div>
+            <div fxFlex="10" fxLayoutAlign="start center">
+              <span>{{item.phone}}</span>
+            </div>
+          </div>
+        </ng-template>
+        
       </mat-expansion-panel-header>
-      <div>
-        <il-venue-expansion-list [questions]="item?.questions"></il-venue-expansion-list>
+      <div *ngIf="isProduct;">
+        <il-venue-expansion-list [colsHeaders]="ctColsRelatedProduct" [items]="item?.relatedProducts"></il-venue-expansion-list>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
