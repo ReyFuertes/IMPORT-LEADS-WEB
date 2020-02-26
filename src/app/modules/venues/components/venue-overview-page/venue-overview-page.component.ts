@@ -1,7 +1,9 @@
 import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { Component, OnInit } from '@angular/core';
 import { VenuesProduct, VenuesAddress } from '../../venues.models';
- 
+import { VenuesAddDialogComponent } from 'src/app/modules/dialogs/components/venues/venues-add-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'il-venue-overview-page',
   templateUrl: './venue-overview-page.component.html',
@@ -133,7 +135,7 @@ export class VenueOverviewPageComponent implements OnInit {
   public ctColsProduct: Array<{label: string, width?: string | number}> = [
     {
       label: 'Venue name',
-      width: 25
+      width: 20
     },
     {
       label: 'Location',
@@ -158,6 +160,10 @@ export class VenueOverviewPageComponent implements OnInit {
     {
       label: 'Rating',
       width: 10
+    },
+    {
+      label: '',
+      width: '35px'
     }
   ];
 
@@ -215,9 +221,13 @@ export class VenueOverviewPageComponent implements OnInit {
     {
       label: 'Contracts',
       width: 10
+    },
+    {
+      label: '',
+      width: '35px'
     }
   ];
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() { }
 
@@ -227,5 +237,10 @@ export class VenueOverviewPageComponent implements OnInit {
 
   public onAddressClick() {
     this.isProduct = false;
+  }
+
+  public onAddVenues(): void {
+    const dialogRef = this.dialog.open(VenuesAddDialogComponent, {data: this.isProduct});
+    dialogRef.afterClosed().subscribe(result => { });
   }
 }

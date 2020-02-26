@@ -8,12 +8,14 @@ import { ContractAddDialogComponent } from './components/contracts/contract-add-
 import { NgModule } from '@angular/core';
 import { MatDialogModule, MatButtonModule, MatListModule } from '@angular/material';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { VenuesAddDialogComponent } from './components/venues/venues-add-dialog.component';
 
 const dialogComponents = [
   ContractAddDialogComponent,
   AQLDialogComponent,
   BriefDialogComponent,
-  InspectionCommentDialogComponent
+  InspectionCommentDialogComponent,
+  VenuesAddDialogComponent
 ];
 
 const materialModules = [

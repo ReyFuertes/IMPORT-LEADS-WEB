@@ -26,7 +26,7 @@ export class VenueExpansionPanelComponent extends GenericPanelComponent implemen
   public ctColsRelatedProduct: Array<{label: string, width?: string | number}> = [
     {
       label: '',
-      width: 32
+      width: 30
     },
     {
       label: 'Configured products',
@@ -57,6 +57,10 @@ export class VenueExpansionPanelComponent extends GenericPanelComponent implemen
       tooltip = tooltip + entry.product.label + '\n';
     }
     return tooltip;
+  }
+
+  public onPreventExpandPanel(event: any) {
+    event.stopPropagation();
   }
 
 }

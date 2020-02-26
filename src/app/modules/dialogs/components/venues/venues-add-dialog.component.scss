@@ -1,0 +1,28 @@
+@import "src/styleguide/shared";
+.content {
+  background-color: $color-white !important;
+  padding: 0 40px !important;
+  width: 100%;
+}
+.il-button {
+  @include il-button;
+}
+.il-dialog {
+  @include il-dialog;
+  width: 672px;
+  height: 598px;
+}
+.header {
+  margin-bottom: 0 !important;
+}
+img {
+  cursor: pointer;
+}
+.address {
+  height: 425px;
+}
+:host ::ng-deep {
+  .mat-focused .mat-form-field-underline {
+    background-color: $color-primary !important;
+  }
+}

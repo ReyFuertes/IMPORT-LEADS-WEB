@@ -7,14 +7,14 @@
   margin-bottom: 0 !important;
   color: $color-gray-1;
   background-color: $color-white;
-  padding-left: 28px;
+  padding-left: 38px;
   padding-right: 10px;
   border-bottom: 1px solid $color-gray-3;
 }
 .product-list {
   border-bottom: 1px solid $color-gray-3;
   height: 48px;
-  padding-left: 25px;
+  padding-left: 20px;
   padding-right: 10px;
 }
 ::ng-deep {
@@ -22,10 +22,6 @@
     margin-right: 5px;
     margin-bottom: 0px;
     cursor: default;
-
-    img {
-      display: none;
-    }
   }
   .multi-line-tooltip {
     white-space: pre-line;

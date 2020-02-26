@@ -1,9 +1,9 @@
-<div class="col-header" fxLayoutAlign="center center" fxLayoutGap="20px">
+<div class="col-header" fxLayoutAlign="center center" fxLayoutGap="10px">
   <div *ngFor="let col of colsHeaders" [fxFlex]="col?.width">{{ col?.label }}</div>
 </div>
 <div *ngFor="let item of items; let i = index"
-  class="product-list" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
-  <div fxFlex="33" fxLayoutAlign="start center">
+  class="product-list" fxLayout="row" fxLayoutGap="10px">
+  <div fxFlex="32" fxLayoutAlign="start center">
   </div>
   <div fxFlex="35" fxLayoutAlign="start center">
     <il-pill [item]="item.product"

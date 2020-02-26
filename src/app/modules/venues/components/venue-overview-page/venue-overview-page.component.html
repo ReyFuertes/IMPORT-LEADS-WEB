@@ -7,8 +7,8 @@
       <il-sort></il-sort>
     </div>
     <mat-button-toggle-group value="products" name="fontStyle" aria-label="Font Style" fxLayoutAlign="end center">
-      <mat-button-toggle value="products" (click)="onProductClick()">products</mat-button-toggle>
-      <mat-button-toggle value="address" (click)="onAddressClick()">address</mat-button-toggle>
+      <mat-button-toggle class="il-button il-bg-blue" value="products" (click)="onProductClick()">products</mat-button-toggle>
+      <mat-button-toggle class="il-button il-bg-blue" value="address" (click)="onAddressClick()">address</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <div *ngIf="isProduct; else address">
@@ -17,4 +17,7 @@
   <ng-template #address>
     <il-venue-expansion-panel [colsHeaders]="ctColsAddress" [items]="venuesAddress" [isProduct]="isProduct"></il-venue-expansion-panel>
   </ng-template>
+  <div class="action-btn">
+    <button mat-button color="primary" class="mat-elevation-z4" (click)="onAddVenues()"><mat-icon>add</mat-icon></button>
+  </div>
 </div>
