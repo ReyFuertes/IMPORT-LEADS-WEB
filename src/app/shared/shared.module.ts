@@ -24,6 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CircleGraphComponent } from './components/circle-graph/circle-graph.component';
+import { DropdownMultiSelectComponent } from './components/dropdown-multi-select/dropdown-multi-select.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 const materialModules = [
   MatListModule,
@@ -61,7 +63,8 @@ const sharedComponents = [
   DatepickerComponent,
   PopoverMenuComponent,
   ExpandablePanelComponent,
-  CircleGraphComponent
+  CircleGraphComponent,
+  DropdownMultiSelectComponent
 ];
 
 const directives = [
@@ -74,6 +77,7 @@ const directives = [
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    NgxMatSelectSearchModule,
     ...materialModules,
     ...primeNgModules,
     RouterModule,

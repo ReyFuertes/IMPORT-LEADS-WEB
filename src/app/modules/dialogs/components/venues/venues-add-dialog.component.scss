@@ -10,7 +10,8 @@
 .il-dialog {
   @include il-dialog;
   width: 672px;
-  height: 598px;
+  height: 620px;
+  position: relative;
 }
 .header {
   margin-bottom: 0 !important;
@@ -21,8 +22,16 @@ img {
 .address {
   height: 425px;
 }
+.footer  {
+  position: absolute;
+  bottom: 0px;
+}
 :host ::ng-deep {
   .mat-focused .mat-form-field-underline {
     background-color: $color-primary !important;
+  }
+
+  .il-pill {
+    margin-bottom: 5px !important;
   }
 }

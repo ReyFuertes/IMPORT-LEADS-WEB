@@ -22,7 +22,7 @@
             </mat-form-field>
           </div>
           <div fxFlex="25" fxLayoutAlign="start center">
-            <il-pill (click)="$event.stopPropagation();" *ngFor="let product of item?.relatedProducts | slice:0:2; let i = index;"
+            <il-pill (click)="onPreventExpandPanel($event)" *ngFor="let product of item?.relatedProducts | slice:0:2; let i = index;"
               [matTooltipClass]="'multi-line-tooltip'" [matTooltip]="getToolTip(item?.relatedProducts)" [item]="product.product"
               (removeEmitter)="onRemove($event)">
             </il-pill>

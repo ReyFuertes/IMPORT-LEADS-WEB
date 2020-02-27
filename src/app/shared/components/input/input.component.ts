@@ -17,7 +17,9 @@ export class InputComponent implements OnInit {
   @Input()
   public isFloatLabel: boolean = false;
   @Input()
-  public isNumberOnly: boolean = false;;
+  public isNumberOnly: boolean = false;
+  @Input()
+  public isRequired: boolean = false;
 
   constructor() { }
 
