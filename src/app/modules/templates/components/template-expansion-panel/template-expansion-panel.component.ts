@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
@@ -17,4 +18,10 @@ export class TemplateExpansionPanelComponent extends GenericPanelComponent imple
   }
 
   ngOnInit() { }
+
+  public dragStart: boolean = false;
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.dragStart = false;
+  }
 }

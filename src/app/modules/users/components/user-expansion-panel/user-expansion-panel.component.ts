@@ -25,6 +25,12 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
   ngOnInit() {
   }
 
+  public dragStart: boolean = false;
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.users, event.previousIndex, event.currentIndex);
+    this.dragStart = false;
+  }
+
   public getAccessString(access: UserAccess[]): string {
     let accessString = '';
     for (const acc of access) {

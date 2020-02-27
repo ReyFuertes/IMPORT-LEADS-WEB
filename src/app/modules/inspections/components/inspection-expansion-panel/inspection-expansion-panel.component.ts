@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { SimpleItem, Menu } from './../../../../shared/generics/generic.model';
 import { InspectionPanelModel } from './../../inspections.models';
@@ -23,6 +24,12 @@ export class InspectionExpansionPanelComponent extends GenericPanelComponent imp
   public isCategory: boolean = false;
   constructor(private router: Router) {
     super();
+  }
+
+  public dragStart: boolean = false;
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.dragStart = false;
   }
 
   ngOnInit() {

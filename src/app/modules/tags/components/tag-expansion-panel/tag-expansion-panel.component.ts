@@ -22,4 +22,10 @@ export class TagExpansionPanelComponent extends GenericPanelComponent implements
   }
 
   ngOnInit() { }
+
+  public dragStart: boolean = false;
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.dragStart = false;
+  }
 }

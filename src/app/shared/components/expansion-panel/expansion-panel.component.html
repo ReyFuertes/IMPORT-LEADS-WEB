@@ -1,4 +1,4 @@
-<mat-accordion cdkDropList (start)="test($event)">
+<mat-accordion cdkDropList (start)="drop($event)">
   <mat-expansion-panel cdkDrag #pnl="matExpansionPanel" *ngFor="let p of panels; let i = index" [expanded]="false" hideToggle="true"
     [ngClass]="{'expanded-bg': pnl?.expanded}">
     <mat-expansion-panel-header (click)="expandPanel(pnl, $event)" expandedHeight="150px">
@@ -7,7 +7,7 @@
         <div [fxFlexOffset]="hoveredPnl !== i ? '15px': '7px'" fxFlex="30" fxLayoutAlign="start start">{{ p.title }}</div>
         <div fxFlex [ngClass]="{'border': pnl?.expanded}">
           <div *ngIf="!pnl?.expanded">{{ p?.description }}</div>
-          <il-textarea *ngIf="pnl?.expanded" (click)="isEventDialog = true" [value]="p?.description"></il-textarea>
+          <il-textarea *ngIf="pnl?.expanded" (click)="isEventDialog = true"></il-textarea>
         </div>
         <div class="no-expand" fxFlex="15" fxLayoutAlign="end center" fxLayoutGap="10px">
           <span class="no-expand">Appearance</span>

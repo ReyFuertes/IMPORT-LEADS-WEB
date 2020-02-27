@@ -45,6 +45,13 @@ export class VenueExpansionPanelComponent extends GenericPanelComponent implemen
       width: 10
     }
   ];
+
+  public dragStart: boolean = false;
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.dragStart = false;
+  }
+
   constructor() {
     super();
   }

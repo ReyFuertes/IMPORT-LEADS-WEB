@@ -8,7 +8,7 @@ import { Chart } from 'chart.js';
 })
 export class CircleGraphComponent implements OnInit {
   @Input()
-  public graphData: any[];
+  public graphData: any;
   public canvas: any;
   public ctx: any;
   public myChart: any = [];
