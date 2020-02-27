@@ -1,3 +1,4 @@
+import { EllipseMenuComponent } from './components/ellipse-menu/ellipse-menu.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
 import { ExpandablePanelComponent } from './components/expandable-panel/expandable-panel.component';
 import { PopoverMenuComponent } from './components/popover-menu/popover-menu.component';
@@ -66,7 +67,8 @@ const sharedComponents = [
   ExpandablePanelComponent,
   CircleGraphComponent,
   DropdownMultiSelectComponent,
-  ExpansionPanelComponent
+  ExpansionPanelComponent,
+  EllipseMenuComponent
 ];
 
 const directives = [

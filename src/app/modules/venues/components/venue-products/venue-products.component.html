@@ -1,13 +1,13 @@
-<div class="col-header" fxLayoutAlign="center center" fxLayoutGap="10px">
-  <div *ngFor="let col of colsHeaders" [fxFlex]="col?.width">{{ col?.label }}</div>
+<div class="col-header" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <div *ngFor="let col of colsHeaders; let last = last" [fxFlex]="col?.width">{{ col?.label }}</div>
 </div>
 <div class="il-draggable-expansion">
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
-    <mat-expansion-panel #pnl cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel"
-      *ngFor="let item of items; let i = index" hideToggle="true">
+    <mat-expansion-panel #pnl cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel" *ngFor="let item of items; let i = index"
+      hideToggle="true">
 
       <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i)" (mouseover)="onHover(i)" (mouseleave)="mouseout()">
-        <div *ngIf="isProduct; else address" class="pnl-header" fxLayout="row" fxLayoutGap="10px">
+        <div class="pnl-header" fxLayout="row" fxLayoutGap="10px">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
           <div fxFlex="20" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.name}}</span>
@@ -22,32 +22,32 @@
             </mat-form-field>
           </div>
           <div fxFlex="25" fxLayoutAlign="start center">
-            <il-pill (click)="onPreventExpandPanel($event)" *ngFor="let product of item?.relatedProducts | slice:0:2; let i = index;"
+            <il-pill (click)="onPreventExpandPanel($event)" *ngFor="let product of item?.relatedProducts | slice:0:1; let i = index;"
               [matTooltipClass]="'multi-line-tooltip'" [matTooltip]="getToolTip(item?.relatedProducts)" [item]="product.product"
               (removeEmitter)="onRemove($event)">
             </il-pill>
           </div>
-          <div  fxFlex.lt-md="8" fxFlex="10" fxLayoutAlign="start center">
+          <div fxFlex="8" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.contracts}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never" (click)="onPreventExpandPanel($event)">
               <input matInput [value]="item.contracts">
             </mat-form-field>
           </div>
-          <div fxFlex="10" fxLayoutAlign="start center">
+          <div fxFlex="8" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.inspections}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never" (click)="onPreventExpandPanel($event)">
               <input matInput [value]="item.inspections">
             </mat-form-field>
           </div>
-          <div fxFlex="10" fxLayoutAlign="start center">
+          <div fxFlex="8" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.avgPassFail}}%</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never" (click)="onPreventExpandPanel($event)">
               <input matInput [value]="item.avgPassFail">
             </mat-form-field>
           </div>
-          <div fxFlex="10" fxLayoutAlign="start center">
+          <div fxFlex fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">
-              <mat-icon *ngFor="let rate of rates; let i = index;" [ngClass]="{'rating': i <= (item.rating-1)}" >star</mat-icon>
+              <mat-icon *ngFor="let rate of rates; let i = index;" [ngClass]="{'rating': i <= (item.rating-1)}">star</mat-icon>
             </span>
             <span *ngIf="selectedIndex !== i" class="rating-label">{{item.rating}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never" (click)="onPreventExpandPanel($event)">
@@ -56,36 +56,8 @@
           </div>
         </div>
 
-        <ng-template #address>
-          <div class="pnl-header" fxLayout="row" fxLayoutGap="10px">
-            <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
-            <div fxFlex="25" fxLayoutAlign="start center">
-              <span *ngIf="selectedIndex !== i">{{item?.name}}</span>
-              <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
-                <input matInput [value]="item?.name">
-              </mat-form-field>
-            </div>
-            <div fxFlex="55" fxLayoutAlign="start center">
-              <span *ngIf="selectedIndex !== i">{{item.location}}</span>
-              <mat-form-field *ngIf="selectedIndex === i" floatLabel="never" (click)="onPreventExpandPanel($event)">
-                <input matInput [value]="item.location">
-              </mat-form-field>
-            </div>
-            <div fxFlex="10" fxLayoutAlign="start center">
-              <span *ngIf="selectedIndex !== i">{{item.contactPerson}}</span>
-              <mat-form-field *ngIf="selectedIndex === i" floatLabel="never" (click)="onPreventExpandPanel($event)">
-                <input matInput [value]="item.contactPerson">
-              </mat-form-field>
-            </div>
-            <div fxFlex="10" fxLayoutAlign="start center">
-              <span *ngIf="selectedIndex !== i">{{item.phone}}</span>
-              <mat-form-field *ngIf="selectedIndex === i" floatLabel="never" (click)="onPreventExpandPanel($event)">
-                <input matInput [value]="item.phone">
-              </mat-form-field>
-            </div>
-          </div>
-        </ng-template>
-        <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="center center">
+        <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="end center">
+          <il-ellipse-menu class="menu-ellipse"></il-ellipse-menu>
           <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex !== i">
             <img [src]="svgPath + 'edit-icon-blue.svg'" />
             <img [src]="svgPath + 'delete-icon-red.svg'">
@@ -96,7 +68,7 @@
           </div>
         </div>
       </mat-expansion-panel-header>
-      <div *ngIf="isProduct;">
+      <div>
         <il-venue-expansion-list [colsHeaders]="ctColsRelatedProduct" [items]="item?.relatedProducts"></il-venue-expansion-list>
       </div>
     </mat-expansion-panel>

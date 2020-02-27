@@ -12,22 +12,22 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class VenueOverviewPageComponent implements OnInit {
   public isProduct = true;
-  public venuesProduct: VenuesProduct[]  = [
+  public venuesProduct: VenuesProduct[] = [
     {
       id: 1,
       name: 'Canhui toys limited ',
       location: 'GuangZhou',
-      relatedProducts:  [
+      relatedProducts: [
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch'},
+          product: { label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch' },
           averagePrice: 19,
           avgPassFail: 3,
           quantity: 5000
         },
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch 1G1', value: 'Touch Dimmer Switch 1G1'},
+          product: { label: 'Touch Dimmer Switch 1G1', value: 'Touch Dimmer Switch 1G1' },
           averagePrice: 15,
           avgPassFail: 3,
           quantity: 1000
@@ -45,7 +45,7 @@ export class VenueOverviewPageComponent implements OnInit {
       relatedProducts: [
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch'},
+          product: { label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch' },
           averagePrice: 19,
           avgPassFail: 3,
           quantity: 5000
@@ -63,21 +63,21 @@ export class VenueOverviewPageComponent implements OnInit {
       relatedProducts: [
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch'},
+          product: { label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch' },
           averagePrice: 19,
           avgPassFail: 3,
           quantity: 5000
         },
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch 1G1', value: 'Touch Dimmer Switch 1G1'},
+          product: { label: 'Touch Dimmer Switch 1G1', value: 'Touch Dimmer Switch 1G1' },
           averagePrice: 15,
           avgPassFail: 3,
           quantity: 1000
         },
         {
           id: 1,
-          product: {label: 'Touch Dimmer 2G2', value: 'Touch Dimmer 2G2'},
+          product: { label: 'Touch Dimmer 2G2', value: 'Touch Dimmer 2G2' },
           averagePrice: 18,
           avgPassFail: 3,
           quantity: 4000
@@ -92,10 +92,10 @@ export class VenueOverviewPageComponent implements OnInit {
       id: 4,
       name: 'Sankou Electronic Technology',
       location: 'GuangZhou',
-      relatedProducts:  [
+      relatedProducts: [
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch'},
+          product: { label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch' },
           averagePrice: 19,
           avgPassFail: 3,
           quantity: 5000
@@ -110,17 +110,17 @@ export class VenueOverviewPageComponent implements OnInit {
       id: 5,
       name: 'Winyea toys Limited ',
       location: 'Beijing',
-      relatedProducts:  [
+      relatedProducts: [
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch'},
+          product: { label: 'Touch Dimmer Switch', value: 'Touch Dimmer Switch' },
           averagePrice: 19,
           avgPassFail: 3,
           quantity: 5000
         },
         {
           id: 1,
-          product: {label: 'Touch Dimmer Switch 1G1', value: 'Touch Dimmer Switch 1G1'},
+          product: { label: 'Touch Dimmer Switch 1G1', value: 'Touch Dimmer Switch 1G1' },
           averagePrice: 15,
           avgPassFail: 3,
           quantity: 1000
@@ -132,7 +132,7 @@ export class VenueOverviewPageComponent implements OnInit {
       rating: 2.8
     }
   ];
-  public ctColsProduct: Array<{label: string, width?: string | number}> = [
+  public ctColsProduct: Array<{ label: string, width?: string | number }> = [
     {
       label: 'Venue name',
       width: 20
@@ -147,15 +147,15 @@ export class VenueOverviewPageComponent implements OnInit {
     },
     {
       label: 'Contracts',
-      width: 10
+      width: 8
     },
     {
       label: 'Inspections',
-      width: 10
+      width: 8
     },
     {
       label: 'Avg. pass/fail',
-      width: 10
+      width: 8
     },
     {
       label: 'Rating',
@@ -163,7 +163,6 @@ export class VenueOverviewPageComponent implements OnInit {
     },
     {
       label: '',
-      width: '35px'
     }
   ];
 
@@ -205,7 +204,7 @@ export class VenueOverviewPageComponent implements OnInit {
     }
   ];
 
-  public ctColsAddress: Array<{label: string, width?: string | number}> = [
+  public ctColsAddress: Array<{ label: string, width?: string | number }> = [
     {
       label: 'Venue name',
       width: 25
@@ -240,7 +239,7 @@ export class VenueOverviewPageComponent implements OnInit {
   }
 
   public onAddVenues(): void {
-    const dialogRef = this.dialog.open(VenuesAddDialogComponent, {data: this.isProduct});
+    const dialogRef = this.dialog.open(VenuesAddDialogComponent, { data: this.isProduct });
     dialogRef.afterClosed().subscribe(result => { });
   }
 }

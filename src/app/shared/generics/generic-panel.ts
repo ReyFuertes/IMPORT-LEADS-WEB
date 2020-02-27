@@ -21,7 +21,7 @@ export abstract class GenericPanelComponent {
     event.preventDefault();
     const classList = event.target.parentNode.classList;
     this.selectedIndex = null;
-    if (classList.contains('actions-item')) {
+    if (classList.contains('menu-icon')) {
       pnl.close();
       this.selectedIndex = i;
     }
