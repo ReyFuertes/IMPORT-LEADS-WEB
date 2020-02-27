@@ -80,7 +80,7 @@ export class InspectionReportNotableItemsComponent implements OnInit {
     cutoutPercentage: 60
   };
   public pieChartColors: Color[] = [
-    { backgroundColor: ['#B8D5CD', '#9abfa4', '#90b299', '#740E05'] },
+    { backgroundColor: ['#c4e3c8', '#b5daba', '#a8cfad', '#b23434'] },
   ];
 
   public doughnutChartLabelsPF: Label[] = ['Passed items', 'Failed items'];
@@ -95,7 +95,7 @@ export class InspectionReportNotableItemsComponent implements OnInit {
     cutoutPercentage: 60
   };
   public pieChartColorsPF: Color[] = [
-    { backgroundColor: ['#B8D5CD', '#740E05'] },
+    { backgroundColor: ['#c4e2c7', '#b23434'] },
   ];
 
   public displayedColumns: string[] = ['item', 'product', 'appearance', 'materials', 'measurements', 'packaging', 'comments'];

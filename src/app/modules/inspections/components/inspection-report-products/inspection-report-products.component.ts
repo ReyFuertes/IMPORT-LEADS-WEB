@@ -60,8 +60,8 @@ export class InspectionReportProductsComponent implements OnInit {
   ];
 
   public barChartColors: Color[] = [
-    { backgroundColor: '#B8D5CD' },
-    { backgroundColor: '#740E05' },
+    { backgroundColor: '#c4e3c8' },
+    { backgroundColor: '#b23535' },
   ];
 
   public displayedColumns: string[] = ['product', 'failed', 'passed'];

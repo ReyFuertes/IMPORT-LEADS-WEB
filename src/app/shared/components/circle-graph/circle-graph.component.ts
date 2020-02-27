@@ -23,7 +23,7 @@ export class CircleGraphComponent implements OnInit {
   private loadChart(): void {
     this.ctx = this.canvasRef.nativeElement.getContext('2d');
 
-    const color0 = '#740E05';
+    const color0 = '#b23535';
     const gradients = [];
     const gradient = this.ctx.createLinearGradient(0, 0, 180, 180);
     gradient.addColorStop(0, color0);

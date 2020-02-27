@@ -87,7 +87,7 @@ export class InspectionReportInspectionComponent implements OnInit {
     }
   ];
   public barChartColors: Color[] = [
-    { backgroundColor: '#FFB38A' },
+    { backgroundColor: '#f48a69' },
   ];
 
   public displayedColumns: string[] = ['inspector', 'date', 'duration', 'item', 'average'];
