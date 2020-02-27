@@ -1,0 +1,189 @@
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../users.models';
+
+@Component({
+  selector: 'il-user-overview-page',
+  templateUrl: './user-overview-page.component.html',
+  styleUrls: ['./user-overview-page.component.scss']
+})
+export class UserOverviewPageComponent implements OnInit {
+  public users: User[] = [
+    {
+      id: 1,
+      name: 'Jane Doe',
+      position: 'CEO',
+      role:
+      {
+        id: 1,
+        title: 'Admin'
+      },
+      company: 'CIL China',
+      phone: '+86 10 0000 0000',
+      access: [
+        {
+          id: 1,
+          title: 'Contracts'
+        },
+        {
+          id: 2,
+          title: 'Inspections'
+        },
+        {
+          id: 3,
+          title: 'Executing Inspections'
+        },
+        {
+          id: 4,
+          title: 'Data Pages'
+        },
+        {
+          id: 5,
+          title: 'Platform Settings'
+        },
+        {
+          id: 6,
+          title: 'Chat'
+        }
+      ]
+    },
+    {
+      id: 2,
+      name: 'John Doe',
+      position: 'Inspector',
+      role:
+      {
+        id: 2,
+        title: 'Inspector'
+      },
+      company: 'CIL China',
+      phone: '+86 10 0000 0000',
+      access: [
+        {
+          id: 1,
+          title: 'Contracts'
+        },
+        {
+          id: 2,
+          title: 'Inspections'
+        },
+        {
+          id: 6,
+          title: 'Chat'
+        }
+      ]
+    },
+    {
+      id: 3,
+      name: 'Koen',
+      position: 'Manager',
+      role:
+      {
+        id: 3,
+        title: 'Manager'
+      },
+      company: 'CIL China',
+      phone: '+86 10 0000 0000',
+      access: [
+        {
+          id: 1,
+          title: 'Contracts'
+        },
+        {
+          id: 2,
+          title: 'Inspections'
+        },
+        {
+          id: 4,
+          title: 'Data Pages'
+        },
+        {
+          id: 6,
+          title: 'Chat'
+        }
+      ]
+    },
+    {
+      id: 4,
+      name: 'Mary Jan',
+      position: 'Inspector',
+      role:
+      {
+        id: 2,
+        title: 'Inspector'
+      },
+      company: 'CIL China',
+      phone: '+86 10 0000 0000',
+      access: [
+        {
+          id: 2,
+          title: 'Inspections'
+        },
+        {
+          id: 6,
+          title: 'Chat'
+        }
+      ]
+    },
+    {
+      id: 5,
+      name: 'Tammy Li',
+      position: 'Inspector',
+      role:
+      {
+        id: 2,
+        title: 'Inspector'
+      },
+      company: 'CIL China',
+      phone: '+86 10 0000 0000',
+      access: [
+        {
+          id: 2,
+          title: 'Inspections'
+        },
+        {
+          id: 6,
+          title: 'Chat'
+        }
+      ]
+    }
+  ];
+  public ctColsUsers: Array<{label: string, width?: string | number}> = [
+    {
+      label: 'Name',
+      width: 25
+    },
+    {
+      label: 'Position',
+      width: 10
+    },
+    {
+      label: 'Role',
+      width: 10
+    },
+    {
+      label: 'Company',
+      width: 10
+    },
+    {
+      label: 'Phone number',
+      width: 10
+    },
+    {
+      label: 'Access',
+      width: 32
+    },
+    {
+      label: '',
+      width: '35px'
+    }
+  ];
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  public onAddUser() {
+
+  }
+
+}
