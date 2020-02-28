@@ -22,7 +22,7 @@
             </mat-form-field>
           </div>
           <div fxFlex="10" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
-            <span class="user-role" *ngIf="selectedIndex !== i">{{user.role.title}}</span>
+            <span class="user-role">{{user.role.title}}</span>
             <il-popover-select [options]="roles" class="action-col"></il-popover-select>
           </div>
           <div fxFlex="10" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
@@ -38,10 +38,7 @@
             </mat-form-field>
           </div>
           <div fxFlex="32" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
-            <span class="user-access" *ngIf="selectedIndex !== i">{{getAccessString(user.access)}}</span>
-            <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
-              <input matInput [value]="getAccessString(user.access)">
-            </mat-form-field>
+            <span class="user-access">{{getAccessString(user.access)}}</span>
             <il-popover-select [options]="access" class="action-col" [multiSelect]="true"></il-popover-select>
           </div>
         </div>
