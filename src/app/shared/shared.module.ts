@@ -29,6 +29,7 @@ import { CircleGraphComponent } from './components/circle-graph/circle-graph.com
 import { DropdownMultiSelectComponent } from './components/dropdown-multi-select/dropdown-multi-select.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { PopoverSelectComponent } from './components/popover-select/popover-select.component';
+import { PopoverMultiSelectComponent } from './components/popover-multi-select/popover-multi-select.component';
 
 const materialModules = [
   MatListModule,
@@ -72,7 +73,8 @@ const sharedComponents = [
   DropdownMultiSelectComponent,
   ExpansionPanelComponent,
   EllipseMenuComponent,
-  PopoverSelectComponent
+  PopoverSelectComponent,
+  PopoverMultiSelectComponent
 ];
 
 const directives = [

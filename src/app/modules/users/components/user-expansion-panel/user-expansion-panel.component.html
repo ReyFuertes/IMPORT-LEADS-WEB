@@ -39,7 +39,7 @@
           </div>
           <div fxFlex="32" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
             <span class="user-access">{{getAccessString(user.access)}}</span>
-            <il-popover-select [options]="access" class="action-col" [multiSelect]="true"></il-popover-select>
+            <il-popover-multi-select [options]="access" class="action-col"></il-popover-multi-select>
           </div>
         </div>
 
