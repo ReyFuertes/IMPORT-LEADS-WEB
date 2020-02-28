@@ -6,22 +6,25 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ContractAddDialogComponent } from './components/contracts/contract-add-dialog.component';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatButtonModule, MatListModule } from '@angular/material';
+import { MatDialogModule, MatButtonModule, MatListModule, MatCheckboxModule } from '@angular/material';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VenuesAddDialogComponent } from './components/venues/venues-add-dialog.component';
+import { UserAddDialogComponent } from './components/users/user-add-dialog.component';
 
 const dialogComponents = [
   ContractAddDialogComponent,
   AQLDialogComponent,
   BriefDialogComponent,
   InspectionCommentDialogComponent,
-  VenuesAddDialogComponent
+  VenuesAddDialogComponent,
+  UserAddDialogComponent
 ];
 
 const materialModules = [
   MatButtonModule,
   MatDialogModule,
-  MatListModule
+  MatListModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

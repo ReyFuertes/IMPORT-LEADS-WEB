@@ -8,3 +8,9 @@ export interface Menu {
   icon?: string;
   action?: () => void;
 }
+
+export interface DropdownSelect {
+  id: number;
+  label: string;
+  action?: () => void;
+}

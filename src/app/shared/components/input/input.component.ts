@@ -20,6 +20,8 @@ export class InputComponent implements OnInit {
   public isNumberOnly: boolean = false;
   @Input()
   public isRequired: boolean = false;
+  @Input()
+  inputType: string = '';
 
   constructor() { }
 

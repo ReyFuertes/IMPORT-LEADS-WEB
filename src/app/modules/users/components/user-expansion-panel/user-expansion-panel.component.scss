@@ -19,13 +19,23 @@
 .il-draggable-expansion {
   @include il-draggable-expansion;
 }
+.user-image {
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.user-access {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+.user-role {
+  width: 65px;
+}
 .menu-icon {
   &:first-child {
     img {
       margin-right: 7px;
     }
   }
-}
-mat-icon {
-  color: $color-gray-2;
 }

@@ -9,6 +9,7 @@
         <div class="pnl-header" fxLayout="row" fxLayoutGap="10px">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
           <div fxFlex="25" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
+            <img class="user-image"[src]="user?.image">
             <span *ngIf="selectedIndex !== i">{{user.name}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="user.name">
@@ -21,10 +22,8 @@
             </mat-form-field>
           </div>
           <div fxFlex="10" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
-            <span *ngIf="selectedIndex !== i">{{user.role.title}}</span>
-            <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
-              <input matInput [value]="user.role.title">
-            </mat-form-field>
+            <span class="user-role" *ngIf="selectedIndex !== i">{{user.role.title}}</span>
+            <il-popover-select [options]="roles" class="action-col"></il-popover-select>
           </div>
           <div fxFlex="10" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
             <span *ngIf="selectedIndex !== i">{{user.company}}</span>
@@ -39,10 +38,11 @@
             </mat-form-field>
           </div>
           <div fxFlex="32" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
-            <span *ngIf="selectedIndex !== i" class="rating-label">{{getAccessString(user.access)}}</span>
+            <span class="user-access" *ngIf="selectedIndex !== i">{{getAccessString(user.access)}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="getAccessString(user.access)">
             </mat-form-field>
+            <il-popover-select [options]="access" class="action-col" [multiSelect]="true"></il-popover-select>
           </div>
         </div>
 

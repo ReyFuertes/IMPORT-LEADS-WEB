@@ -5,6 +5,7 @@ export interface User {
   role: UserRole;
   company: string;
   phone?: string;
+  image?: string;
   access?: UserAccess[];
 }
 

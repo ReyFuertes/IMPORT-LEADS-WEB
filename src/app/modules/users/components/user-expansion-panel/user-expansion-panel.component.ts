@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { UserAccess } from '../../users.models';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { UserAccess } from '../../users.models';
+import { DropdownSelect } from './../../../../shared/generics/generic.model';
 
 @Component({
   selector: 'il-user-expansion-panel',
@@ -17,6 +18,48 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
   public selectedIndex: number | null = null;
   @Input()
   public colsHeaders: Array<{ label: string, width?: string | number }>;
+  public selected = 'option2';
+  public roles: DropdownSelect[] = [
+    {
+      id: 1,
+      label: 'Admin',
+    },
+    {
+      id: 2,
+      label: 'Inspector'
+    },
+    {
+      id: 3,
+      label: 'Manager'
+    },
+  ];
+
+  public access: DropdownSelect[] = [
+    {
+      id: 1,
+      label: 'Contracts'
+    },
+    {
+      id: 2,
+      label: 'Inspections'
+    },
+    {
+      id: 3,
+      label: 'Executing Inspections'
+    },
+    {
+      id: 4,
+      label: 'Data Pages'
+    },
+    {
+      id: 5,
+      label: 'Platform Settings'
+    },
+    {
+      id: 6,
+      label: 'Chat'
+    },
+  ];
 
   constructor() {
     super();
@@ -34,7 +77,7 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
   public getAccessString(access: UserAccess[]): string {
     let accessString = '';
     for (const acc of access) {
-      accessString = accessString + acc.title + ',';
+      accessString = accessString + acc.title + ', ';
     }
     return accessString.replace(/,\s*$/, '');
   }

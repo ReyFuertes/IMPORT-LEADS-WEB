@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../users.models';
+import { UserAddDialogComponent } from 'src/app/modules/dialogs/components/users/user-add-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'il-user-overview-page',
@@ -19,6 +21,7 @@ export class UserOverviewPageComponent implements OnInit {
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
+      image: 'https://dummyimage.com/28x28/c7c5c7/f5f5f5.png',
       access: [
         {
           id: 1,
@@ -57,6 +60,7 @@ export class UserOverviewPageComponent implements OnInit {
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
+      image: 'https://dummyimage.com/28x28/c7c5c7/f5f5f5.png',
       access: [
         {
           id: 1,
@@ -83,6 +87,7 @@ export class UserOverviewPageComponent implements OnInit {
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
+      image: 'https://dummyimage.com/28x28/c7c5c7/f5f5f5.png',
       access: [
         {
           id: 1,
@@ -113,6 +118,7 @@ export class UserOverviewPageComponent implements OnInit {
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
+      image: 'https://dummyimage.com/28x28/c7c5c7/f5f5f5.png',
       access: [
         {
           id: 2,
@@ -135,6 +141,7 @@ export class UserOverviewPageComponent implements OnInit {
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
+      image: 'https://dummyimage.com/28x28/c7c5c7/f5f5f5.png',
       access: [
         {
           id: 2,
@@ -177,13 +184,14 @@ export class UserOverviewPageComponent implements OnInit {
       width: '35px'
     }
   ];
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
-  public onAddUser() {
-
+  public onAddUser(): void {
+    const dialogRef = this.dialog.open(UserAddDialogComponent);
+    dialogRef.afterClosed().subscribe(result => { });
   }
 
 }

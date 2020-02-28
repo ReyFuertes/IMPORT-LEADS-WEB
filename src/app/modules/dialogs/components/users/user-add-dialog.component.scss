@@ -1,0 +1,18 @@
+@import "src/styleguide/shared";
+.il-button {
+  @include il-button;
+}
+.il-dialog {
+  @include il-dialog;
+  width: 672px;
+  height: 640px;
+}
+:host ::ng-deep {
+  .mat-focused .mat-form-field-underline {
+    background-color: $color-primary !important;
+  }
+
+  mat-checkbox span{
+    font-size: 14px;
+  }
+}

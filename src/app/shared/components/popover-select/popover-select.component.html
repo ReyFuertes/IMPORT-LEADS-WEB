@@ -1,0 +1,7 @@
+<mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+<mat-menu #menu="matMenu" yPosition="below" xPosition="before">
+  <button *ngFor="let option of options" (click)="onSelectOption(option)" mat-menu-item fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <span *ngIf="!multiSelect">{{ option?.label }}</span>
+    <mat-checkbox *ngIf="multiSelect">{{ option?.label }}</mat-checkbox>
+  </button>
+</mat-menu>
