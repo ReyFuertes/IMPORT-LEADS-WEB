@@ -35,7 +35,7 @@ mat-icon {
 .rating-label {
   margin-left: 5px;
 }
-::ng-deep {
+:host ::ng-deep {
   .il-pill {
     margin-right: 5px;
     margin-bottom: 0px !important;

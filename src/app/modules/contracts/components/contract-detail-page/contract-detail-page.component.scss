@@ -79,6 +79,9 @@
   font-size: 12px;
 }
 :host ::ng-deep {
+  .mat-ink-bar {
+    display: none;
+  }
   .mat-tab-label .mat-tab-label-content {
     width: 100%;
   }
@@ -90,6 +93,7 @@
   .mat-tab-label {
     background-color: transparent;
     padding: 0;
+    opacity: 1 !important;
     width: 310px;
   }
   .mat-card {
