@@ -10,7 +10,11 @@ import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { UserOverviewPageComponent } from './components/user-overview-page/user-overview-page.component';
 import { UserExpansionPanelComponent } from './components/user-expansion-panel/user-expansion-panel.component';
-import { MatIconModule, MatTooltipModule, MatButtonToggleModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatCardModule, MatStepperModule, MatTabsModule, MatDialogModule, MatSlideToggleModule } from '@angular/material';
+import { MatTableModule, MatIconModule, MatTooltipModule, MatButtonToggleModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatCardModule, MatStepperModule, MatTabsModule, MatDialogModule, MatSlideToggleModule } from '@angular/material';
+import { UserProfilePageComponent } from './components/user-profile-page/user-profile-page.component';
+import { UserProfileDetailsComponent } from './components/user-profile-details/user-profile-details.component';
+import { UserProfileSummaryComponent } from './components/user-profile-summary/user-profile-summary.component';
+import { UserProfileInspectionComponent } from './components/user-profile-inspection/user-profile-inspection.component';
 
 const routes: Routes = [
   {
@@ -20,6 +24,10 @@ const routes: Routes = [
       {
         path: '',
         component: UserOverviewPageComponent
+      },
+      {
+        path: 'profile',
+        component: UserProfilePageComponent
       }
     ]
   }
@@ -49,7 +57,8 @@ const materialModules = [
   MatTabsModule,
   MatButtonModule,
   MatDialogModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatTableModule
 ];
 @NgModule({
   imports: [
@@ -67,7 +76,11 @@ const materialModules = [
   declarations: [
     UsersContainerComponent,
     UserOverviewPageComponent,
-    UserExpansionPanelComponent
+    UserExpansionPanelComponent,
+    UserProfilePageComponent,
+    UserProfileDetailsComponent,
+    UserProfileSummaryComponent,
+    UserProfileInspectionComponent
   ],
   providers: [],
 })
