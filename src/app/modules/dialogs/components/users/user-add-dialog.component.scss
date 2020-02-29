@@ -7,6 +7,12 @@
   width: 672px;
   height: 640px;
 }
+.il-dialog .content {
+  padding: 40px 88px !important;
+}
+img {
+  cursor: pointer;
+}
 :host ::ng-deep {
   .mat-focused .mat-form-field-underline {
     background-color: $color-primary !important;
