@@ -1,5 +1,5 @@
 <div class="col-header" fxLayoutAlign="center center" fxLayoutGap="10px">
-  <div *ngFor="let col of colsHeaders" [fxFlex]="col?.width">{{ col?.label }}</div>
+  <div *ngFor="let col of colsHeaders; let first = first" [fxFlex.gt-lg]="col?.width" [fxFlex]="first ? '21' : col?.width">{{ col?.label }}</div>
 </div>
 <div class="il-draggable-expansion">
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
@@ -37,20 +37,9 @@
               <input matInput [value]="user.phone">
             </mat-form-field>
           </div>
-          <div fxFlex="32" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)">
+          <div fxFlex="32" fxLayoutAlign="start center" (click)="onPreventExpandPanel($event)" fxLayoutGap="5px">
             <span class="user-access">{{getAccessString(user.access)}}</span>
             <il-popover-multi-select [options]="access" class="action-col"></il-popover-multi-select>
-          </div>
-        </div>
-
-        <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="center center">
-          <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex !== i">
-            <img [src]="svgPath + 'edit-icon-blue.svg'" />
-            <img [src]="svgPath + 'delete-icon-red.svg'">
-          </div>
-          <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex === i">
-            <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" />
-            <img [src]="svgPath + 'save-icon-blue.svg'">
           </div>
         </div>
       </mat-expansion-panel-header>

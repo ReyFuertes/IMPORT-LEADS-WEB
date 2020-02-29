@@ -18,6 +18,9 @@
 }
 .il-draggable-expansion {
   @include il-draggable-expansion;
+  .mat-expansion-panel-header {
+    padding-right: 15px !important;
+  }
 }
 .user-image {
   border-radius: 50%;
@@ -27,7 +30,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 400px;
+  width: 380px;
 }
 .user-role {
   width: 65px;
