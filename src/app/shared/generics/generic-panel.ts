@@ -3,12 +3,15 @@ export abstract class GenericPanelComponent {
   public selectedIndex: number | null = null;
 
   public mouseout(): void {
+    if (this.selectedIndex != null) return;
+
     this.hoveredIndex = null;
     this.selectedIndex = null;
   }
 
   public onHover(i: number) {
-    this.hoveredIndex = i;
+    if (this.selectedIndex == null)
+      this.hoveredIndex = i;
   }
 
   public onClose(): void {

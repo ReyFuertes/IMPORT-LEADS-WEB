@@ -1,4 +1,4 @@
-export interface VenuesProduct {
+export interface VenueProduct {
   id: number;
   name: string;
   location: string;

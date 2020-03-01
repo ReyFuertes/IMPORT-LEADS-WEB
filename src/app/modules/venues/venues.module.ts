@@ -1,3 +1,4 @@
+import { VenueAddressComponent } from './components/venue-address/venue-address.component';
 import { VenueProductsComponent } from './components/venue-products/venue-products.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -71,7 +72,8 @@ const materialModules = [
     VenueOverviewPageComponent,
     VenueExpansionPanelComponent,
     VenueExpansionListComponent,
-    VenueProductsComponent
+    VenueProductsComponent,
+    VenueAddressComponent
   ],
   providers: [],
 })

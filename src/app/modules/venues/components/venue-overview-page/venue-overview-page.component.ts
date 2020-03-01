@@ -1,6 +1,6 @@
 import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { Component, OnInit } from '@angular/core';
-import { VenuesProduct, VenuesAddress } from '../../venues.models';
+import { VenueProduct, VenuesAddress } from '../../venues.models';
 import { VenuesAddDialogComponent } from 'src/app/modules/dialogs/components/venues/venues-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -11,8 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class VenueOverviewPageComponent implements OnInit {
-  public isProduct = true;
-  public venuesProduct: VenuesProduct[] = [
+  public isProduct: boolean = true;
+  public venuesProduct: VenueProduct[] = [
     {
       id: 1,
       name: 'Canhui toys limited ',
@@ -166,7 +166,7 @@ export class VenueOverviewPageComponent implements OnInit {
     }
   ];
 
-  public venuesAddress: VenuesAddress[] = [
+  public venueAddress: VenuesAddress[] = [
     {
       id: 1,
       name: 'Canhui toys limited ',

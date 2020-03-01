@@ -68,6 +68,16 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
   ngOnInit() {
   }
 
+  public onClickPnl(pnl: any, event: any, i: number): void {
+    event.preventDefault();
+    const classList = event.target.parentNode.classList;
+    this.selectedIndex = null;
+    if (classList.contains('action-col')) {
+      pnl.close();
+      this.selectedIndex = i;
+    }
+  }
+
   public dragStart: boolean = false;
   public drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.users, event.previousIndex, event.currentIndex);
