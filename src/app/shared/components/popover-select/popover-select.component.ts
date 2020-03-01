@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { SimpleItem } from 'src/app/shared/generics/generic.model';
+import { environment } from './../../../../environments/environment';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DropdownSelect } from './../../generics/generic.model';
 
 @Component({
@@ -7,17 +9,16 @@ import { DropdownSelect } from './../../generics/generic.model';
   styleUrls: ['./popover-select.component.scss']
 })
 export class PopoverSelectComponent implements OnInit {
-
+  public svgPath: string = environment.svgPath;
   @Input()
-  public options: DropdownSelect[];
+  public selectedItem: SimpleItem;
+  @Input()
+  public options: SimpleItem[];
+  @Output()
+  public selectedEmitter = new EventEmitter<SimpleItem>();
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  public onSelectOption(option: DropdownSelect) {
-    console.log(option);
-  }
+  ngOnInit() { }
 
 }

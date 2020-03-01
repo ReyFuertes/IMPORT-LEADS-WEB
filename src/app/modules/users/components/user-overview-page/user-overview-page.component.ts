@@ -16,8 +16,8 @@ export class UserOverviewPageComponent implements OnInit {
       position: 'CEO',
       role:
       {
-        id: 1,
-        title: 'Admin'
+        value: '1',
+        label: 'Admin'
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
@@ -55,8 +55,8 @@ export class UserOverviewPageComponent implements OnInit {
       position: 'Inspector',
       role:
       {
-        id: 2,
-        title: 'Inspector'
+        value: '2',
+        label: 'Inspector'
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
@@ -82,8 +82,8 @@ export class UserOverviewPageComponent implements OnInit {
       position: 'Manager',
       role:
       {
-        id: 3,
-        title: 'Manager'
+        value: '3',
+        label: 'Manager'
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
@@ -113,8 +113,8 @@ export class UserOverviewPageComponent implements OnInit {
       position: 'Inspector',
       role:
       {
-        id: 2,
-        title: 'Inspector'
+        value: 2,
+        label: 'Inspector'
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',
@@ -136,8 +136,8 @@ export class UserOverviewPageComponent implements OnInit {
       position: 'Inspector',
       role:
       {
-        id: 2,
-        title: 'Inspector'
+        value: 2,
+        label: 'Inspector'
       },
       company: 'CIL China',
       phone: '+86 10 0000 0000',

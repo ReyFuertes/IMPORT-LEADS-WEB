@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { VenueExpansionListComponent } from './components/venue-expansion-list/venue-expansion-list.component';
-import { VenueExpansionPanelComponent } from './components/venue-expansion-panel/venue-expansion-panel.component';
 import { VenueOverviewPageComponent } from './components/venue-overview-page/venue-overview-page.component';
 import { VenuesContainerComponent } from './container/venues-container.component';
 import { NgModule } from '@angular/core';
@@ -70,7 +69,6 @@ const materialModules = [
   declarations: [
     VenuesContainerComponent,
     VenueOverviewPageComponent,
-    VenueExpansionPanelComponent,
     VenueExpansionListComponent,
     VenueProductsComponent,
     VenueAddressComponent

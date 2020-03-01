@@ -1,4 +1,5 @@
 @mixin il-draggable-expansion {
+
   .pnl-actions {
     height: 50px;
     place-content: center flex-start;
@@ -54,6 +55,7 @@
       background-color: $color-white;
       border: thin $color-gray-2 solid;
       padding-left: 7px;
+
     }
     .mat-form-field-label {
       top: 29px;

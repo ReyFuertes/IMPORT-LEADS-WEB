@@ -1,3 +1,5 @@
+import { User } from './../../users.models';
+import { SimpleItem } from 'src/app/shared/generics/generic.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -13,23 +15,23 @@ import { DropdownSelect } from './../../../../shared/generics/generic.model';
 export class UserExpansionPanelComponent extends GenericPanelComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public users: any[];
+  public users: User[];
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
   @Input()
   public colsHeaders: Array<{ label: string, width?: string | number }>;
-  public selected = 'option2';
-  public roles: DropdownSelect[] = [
+  public selectedRole: SimpleItem;
+  public roles: SimpleItem[] = [
     {
-      id: 1,
+      value: '1',
       label: 'Admin',
     },
     {
-      id: 2,
+      value: '2',
       label: 'Inspector'
     },
     {
-      id: 3,
+      value: '3',
       label: 'Manager'
     },
   ];
@@ -63,18 +65,26 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
 
   constructor() {
     super();
-   }
+  }
 
   ngOnInit() {
+  }
+
+  public selectedRoleChange(event: any): void {
+    this.selectedRole = event;
+    console.log(event);
   }
 
   public onClickPnl(pnl: any, event: any, i: number): void {
     event.preventDefault();
     const classList = event.target.parentNode.classList;
-    this.selectedIndex = null;
-    if (classList.contains('action-col')) {
+    console.log(classList);
+    if (classList.contains('action-col')
+      || classList.contains('pnl-header')
+      || classList.contains('mat-expansion-panel')
+      || classList.contains('no-expand')
+    ) {
       pnl.close();
-      this.selectedIndex = i;
     }
   }
 

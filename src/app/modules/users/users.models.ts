@@ -15,6 +15,6 @@ export interface UserAccess {
 }
 
 export interface UserRole {
-  id: number;
-  title: string;
+  value: string | number;
+  label: string;
 }
