@@ -9,8 +9,8 @@ import { environment } from '../../../../../environments/environment';
 })
 export class UserProfileDetailsComponent implements OnInit {
   public svgPath: string = environment.svgPath;
+  public imgPath: string = environment.imgPath;
   public form: FormGroup;
-  public userPicture: string = 'https://dummyimage.com/72x72/cfcfcf/ffffff.png';
 
   public roles: Array<{ id: number, label: string}> = [
     {
@@ -35,7 +35,5 @@ export class UserProfileDetailsComponent implements OnInit {
     });
    }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

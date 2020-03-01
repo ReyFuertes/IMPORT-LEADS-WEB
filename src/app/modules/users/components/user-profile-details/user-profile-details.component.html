@@ -12,19 +12,19 @@
     </div>
     <div>
       <div fxFlex="112px">
-        <img [src]="userPicture">
+        <img [src]="imgPath + 'sample-img.png'" />
       </div>
       <div fxFlex>
       <span class="self-intro">Self introduction</span>
       <div class="self-desc">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
         when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </div>
         <div>
           <div fxFlex fxLayout="row" fxLayoutGap="20px">
             <il-input fxFlex="30" [form]="form" isFloatLabel="true" [controlName]="'position'" placeholder="Position"></il-input>
             <il-dropdown-multi-select fxFlex *ngIf="roles" placeHolder="Role"
-                                    errorMessage="Role is required!" [validate]="validateDropdown" 
+                                    errorMessage="Role is required!" [validate]="validateDropdown"
                                     [dataList]="roles" (selectItemChange)="handleSelectChange($event)">
           </il-dropdown-multi-select>
             <il-input fxFlex="30" [form]="form" isFloatLabel="true" [controlName]="'company'" placeholder="Company"></il-input>

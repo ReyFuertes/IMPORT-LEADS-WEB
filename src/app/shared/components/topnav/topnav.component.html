@@ -12,10 +12,10 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
       <img [src]="imgPath + 'profile.png'" />
-      <span class="name">John Doe</span>
+      <span [matMenuTriggerFor]="menu">John Doe</span>
       <img class="arrow" [matMenuTriggerFor]="menu" [src]="svgPath + 'arrow-down-icon-black.svg'" />
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Profile</button>
+        <button mat-menu-item routerLink="dashboard/users/profile">Profile</button>
         <button mat-menu-item>Settings</button>
         <button mat-menu-item>Help</button>
       </mat-menu>
