@@ -1,0 +1,11 @@
+@import "src/styleguide/shared";
+
+.il-button.large {
+  height: 32px;
+  margin-top: 10px;
+}
+:host ::ng-deep {
+  .mat-form-field {
+    width: 140px;
+  }
+}

@@ -1,0 +1,36 @@
+<mat-card class="graph-card">
+  <div fxLayout="column" fxLayoutGap="20px">
+    <div class="bar-chart">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [colors]="barChartColors"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+    </div>
+    <div class="bar-chart" fxLayout>
+      <canvas baseChart 
+        [datasets]="barChartDataContracts"
+        [labels]="barChartLabelsContracts"
+        [options]="barChartOptionsContracts"
+        [colors]="barChartColorsContracts"
+        [legend]="barChartLegendContracts"
+        [chartType]="barChartTypeContracts">
+      </canvas>
+    </div>
+    <div class="bar-chart" fxLayout>
+      <canvas baseChart 
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+ 
+</mat-card>

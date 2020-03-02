@@ -1,0 +1,9 @@
+@import "src/styleguide/shared";
+:host ::ng-deep {
+  .mat-card {
+    padding: 0;
+  }
+  .mat-list-item {
+    border-bottom: 1px solid $color-gray-3;
+  }
+}
