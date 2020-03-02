@@ -4,6 +4,10 @@
 }
 .card-row {
   padding: 40px;
+
+  button:nth-of-type(1) {
+    margin-right: 16px;;
+  }
 }
 .il-button.small {
   font-size: 12px;
@@ -32,7 +36,6 @@
       color: $color-gray-1;
       margin-bottom: 5px;
     }
-    
   }
   > div:first-child {
     margin-right: 40px;
