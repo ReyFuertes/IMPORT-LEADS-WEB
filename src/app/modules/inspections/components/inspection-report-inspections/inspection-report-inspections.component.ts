@@ -74,7 +74,7 @@ export class InspectionReportInspectionComponent implements OnInit {
     '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43',
     '44', '45', '46', '47', '48'];
   public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
+  public barChartLegend = false;
   public barChartPlugins = [];
   public barChartData: ChartDataSets[] = [
     {
@@ -83,10 +83,34 @@ export class InspectionReportInspectionComponent implements OnInit {
         18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2, 5, 5, 6,
         10, 11, 12, 21, 12, 12, 12, 13, 14, 4, 4, 8, 14, 11, 14
       ],
-      label: 'Pieces'
+      label: '',
+      barPercentage: 0.7,
+      categoryPercentage: 1
+    },
+    {
+      data: [
+        1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
+        18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2, 5, 5, 6,
+        10, 11, 12, 21, 12, 12, 12, 13, 14, 4, 4, 8, 14, 11, 14
+      ],
+      label: '',
+      barPercentage: 0.7,
+      categoryPercentage: 1
+    },
+    {
+      data: [
+        1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
+        18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2, 5, 5, 6,
+        10, 11, 12, 21, 12, 12, 12, 13, 14, 4, 4, 8, 14, 11, 14
+      ],
+      label: '',
+      barPercentage: 0.7,
+      categoryPercentage: 1
     }
   ];
   public barChartColors: Color[] = [
+    { backgroundColor: '#f48a69' },
+    { backgroundColor: '#f48a69' },
     { backgroundColor: '#f48a69' },
   ];
 
