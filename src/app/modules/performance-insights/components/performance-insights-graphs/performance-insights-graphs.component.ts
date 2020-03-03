@@ -11,7 +11,19 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 export class PerformanceInsightsGraphsComponent implements OnInit {
   /* amount bar chart */
   public barChartOptions: ChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+          ticks: {
+              fontSize: 26
+          }
+      }],
+      xAxes: [{
+        ticks: {
+            fontSize: 26
+        }
+    }]
+  }
   };
   public barChartLabels: Label[] = [
     '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
@@ -23,8 +35,8 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
   public barChartData: ChartDataSets[] = [
     {
       data: [
-        1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
-        18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2
+        11, 11, 11, 11, 12, 22, 23, 24, 24, 25, 25, 22, 38, 30, 30, 38, 26,
+        11, 18, 18, 21, 22, 22, 23, 34, 24, 45, 45, 42, 11, 42
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
@@ -32,8 +44,8 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
     },
     {
       data: [
-        1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
-        18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2
+        11, 11, 11, 11, 12, 22, 23, 24, 24, 25, 25, 22, 38, 30, 30, 38, 26,
+        11, 18, 18, 21, 22, 22, 23, 34, 24, 45, 45, 42, 11, 42
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
@@ -41,8 +53,8 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
     },
     {
       data: [
-        1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
-        18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2
+        11, 11, 11, 11, 12, 22, 23, 24, 24, 25, 25, 22, 38, 30, 30, 38, 26,
+        11, 18, 18, 21, 22, 22, 23, 34, 24, 45, 45, 42, 11, 42
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
@@ -50,8 +62,8 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
     },
     {
       data: [
-        1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
-        18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2
+        11, 11, 11, 11, 12, 22, 23, 24, 24, 25, 25, 22, 38, 30, 30, 38, 26,
+        11, 18, 18, 21, 22, 22, 23, 34, 24, 45, 45, 42, 11, 42
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
@@ -59,8 +71,8 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
     },
     {
       data: [
-        1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
-        18, 18, 18, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2
+        11, 11, 11, 11, 12, 22, 23, 24, 24, 25, 25, 22, 38, 30, 30, 38, 26,
+        11, 18, 18, 21, 22, 22, 23, 34, 24, 45, 45, 42, 11, 42
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
@@ -77,7 +89,19 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
 
   /* Contracts bar chart */
   public barChartOptionsContracts: ChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+          ticks: {
+              fontSize: 26
+          }
+      }],
+      xAxes: [{
+        ticks: {
+            fontSize: 26
+        }
+      }]
+    }
   };
   public barChartLabelsContracts: Label[] = [
     '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
@@ -149,21 +173,21 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
   public lineChartData: ChartDataSets[] = [
     {
       data: [
-        5, 7, 9, 11, 2, 12, 13, 22, 4, 45, 5, 2, 18, 20, 20, 18, 6,
-        18, 18, 18, 1, 2, 2, 3, 44, 4, 35, 5, 52, 21, 42
+        15, 17, 19, 11, 12, 12, 13, 12, 14, 15, 15, 12, 18, 10, 10, 18, 16,
+        18, 18, 18, 11, 12, 12, 13, 14, 14, 15, 15, 12, 11, 12
       ],
     },
     {
       data: [
-        12, 11, 21, 31, 2, 22, 13, 4, 14, 15, 15, 32, 28, 40, 20, 18, 6,
-        18, 18, 18, 31, 2, 32, 13, 4, 4, 5, 5, 22, 21, 12
+        22, 21, 21, 21, 22, 22, 23, 24, 24, 25, 25, 22, 28, 20, 20, 28, 26,
+        28, 28, 28, 21, 22, 22, 23, 24, 24, 25, 25, 22, 21, 22
       ],
       label: '',
     },
     {
       data: [
-        11, 11, 11, 13, 2, 22, 3, 14, 4, 35, 15, 2, 18, 29, 10, 38, 6,
-        18, 18, 18, 1, 72, 2, 3, 34, 14, 15, 15, 2, 1, 2
+        31, 31, 31, 33, 32, 32, 33, 34, 34, 35, 35, 32, 38, 39, 30, 38, 36,
+        38, 38, 38, 31, 32, 32, 33, 34, 34, 35, 35, 32, 31, 32
       ],
       label: ''
     }
@@ -188,6 +212,18 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
         },
       ],
     },
+    scales: {
+      yAxes: [{
+          ticks: {
+              fontSize: 26
+          }
+      }],
+      xAxes: [{
+        ticks: {
+            fontSize: 26
+        }
+      }]
+    }
   };
 
   public lineChartColors: Color[] = [
