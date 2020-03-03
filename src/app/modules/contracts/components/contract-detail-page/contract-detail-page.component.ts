@@ -16,28 +16,6 @@ import { Observable, fromEvent } from 'rxjs';
 export class ContractDetailPageComponent extends GenericPageDetailComponent<Contract> implements OnInit {
   public svgPath: string = environment.svgPath;
   public options: Array<{ id: number, label: string, icon: string, action?: () => void }>;
-  public panels: Array<{ id: number, title: string, description: string }> = [
-    {
-      id: 1,
-      title: '2G1W Dimmer Picture',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      id: 2,
-      title: 'Rated Voltage',
-      description: '<500W'
-    },
-    {
-      id: 3,
-      title: 'Ive seen other answers suggesting animating',
-      description: 'Start editing to see some magic happen :).'
-    },
-    {
-      id: 4,
-      title: 'In case anyone is reading this',
-      description: 'transition '
-    }
-  ];
   public _showTabActions: boolean = false;
   public showRightNav: boolean = false;
 
@@ -118,9 +96,5 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
   public addContract(): void {
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {});
     dialogRef.afterClosed().subscribe(result => { });
-  }
-
-  public add(): void {
-    this.panels.push({ id: 4, title: 'test title 123', description: 'test description 123' });
   }
 }

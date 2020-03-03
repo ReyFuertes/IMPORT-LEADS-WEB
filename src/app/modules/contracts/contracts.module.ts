@@ -1,3 +1,4 @@
+import { ContractProductSpecsComponent } from './components/contract-product-specs/contract-product-specs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContractRightContentComponent } from './components/contract-right-content/contract-right-content.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -83,7 +84,8 @@ const materialModules = [
     ContractDetailProductsComponent,
     ContractAddComponent,
     ContractExpansionPanelComponent,
-    ContractRightContentComponent
+    ContractRightContentComponent,
+    ContractProductSpecsComponent
   ],
   providers: [],
 })

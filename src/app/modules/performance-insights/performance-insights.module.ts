@@ -1,3 +1,4 @@
+import { CalendarModule } from 'primeng/calendar';
 import { PerformanceInsightsComponent } from './container/performance-insights-container.component';
 import { DialogModule } from './../dialogs/dialog.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -59,6 +60,7 @@ const materialModules = [
     FlexLayoutModule,
     DialogModule,
     ChartsModule,
+    CalendarModule,
     ...materialModules,
     RouterModule.forChild(routes)
   ],
