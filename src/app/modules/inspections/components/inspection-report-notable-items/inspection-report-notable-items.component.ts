@@ -77,7 +77,8 @@ export class InspectionReportNotableItemsComponent implements OnInit {
     responsive: true,
     rotation: 1 * Math.PI,
     circumference: 1 * Math.PI,
-    cutoutPercentage: 60
+    cutoutPercentage: 60,
+    maintainAspectRatio: false
   };
   public pieChartColors: Color[] = [
     { backgroundColor: ['#c4e3c8', '#b5daba', '#a8cfad', '#b23434'] },
@@ -92,7 +93,8 @@ export class InspectionReportNotableItemsComponent implements OnInit {
     responsive: true,
     rotation: 1 * Math.PI,
     circumference: 1 * Math.PI,
-    cutoutPercentage: 60
+    cutoutPercentage: 60,
+    maintainAspectRatio: false
   };
   public pieChartColorsPF: Color[] = [
     { backgroundColor: ['#c4e2c7', '#b23434'] },

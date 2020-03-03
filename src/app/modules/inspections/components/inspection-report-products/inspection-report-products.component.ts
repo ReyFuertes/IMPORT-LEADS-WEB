@@ -47,7 +47,21 @@ export class InspectionReportProductsComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     cutoutPercentage: 85,
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true,
+              stepSize: 10
+          }
+      }],
+      xAxes: [{
+        gridLines: {
+            display: false
+        }
+      }],
+    }
   };
   public barChartLabels: Label[] = ['Lasergun > Green', 'Lasergun > Blue', 'Lasergun > Orange', 'Lasergun > Yellow'];
   public barChartType: ChartType = 'bar';
@@ -55,8 +69,8 @@ export class InspectionReportProductsComponent implements OnInit {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [28, 2, 12, 1], categoryPercentage: 0.4,  label: 'Passsed Items' },
-    { data: [2, 5, 3, 5], categoryPercentage: 0.4, label: 'Failed Items' }
+    { data: [28, 2, 12, 1], categoryPercentage: 0.3,  label: 'Passsed Items' },
+    { data: [2, 5, 3, 5], categoryPercentage: 0.3, label: 'Failed Items' }
   ];
 
   public barChartColors: Color[] = [

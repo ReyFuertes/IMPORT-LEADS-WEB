@@ -56,6 +56,20 @@ export class InspectionReportTagsComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true,
+              stepSize: 10
+          }
+      }],
+      xAxes: [{
+        gridLines: {
+            display: false
+        }
+      }],
+    }
   };
   public barChartLabels: Label[] = ['Apperance', 'Materials', 'Measurements', 'Packaging'];
   public barChartType: ChartType = 'bar';
@@ -63,8 +77,8 @@ export class InspectionReportTagsComponent implements OnInit {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [49, 50, 48, 50], categoryPercentage: 0.4, label: 'Passsed Items' },
-    { data: [2, 1, 1, 3], categoryPercentage: 0.4, label: 'Failed Items' }
+    { data: [49, 50, 48, 50], categoryPercentage: 0.3, label: 'Passsed Items' },
+    { data: [2, 1, 1, 3], categoryPercentage: 0.3, label: 'Failed Items' }
   ];
 
   public barChartColors: Color[] = [

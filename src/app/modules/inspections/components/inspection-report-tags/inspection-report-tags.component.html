@@ -10,15 +10,17 @@
         </mat-list>
       </div>
     </div>
-    <div class="bar-chart" fxLayout>
-			<canvas baseChart  
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [options]="barChartOptions"
-        [colors]="barChartColors"
-        [legend]="barChartLegend"
-        [chartType]="barChartType">
-      </canvas>
+    <div class="chart-container">
+      <div class="chart-container-inner">
+        <canvas baseChart  
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [colors]="barChartColors"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
     </div>
     <div class="circle-graphs" fxLayout="row">
       <div fxFlex="20" fxLayoutAlign="center center">Failure Rate</div>

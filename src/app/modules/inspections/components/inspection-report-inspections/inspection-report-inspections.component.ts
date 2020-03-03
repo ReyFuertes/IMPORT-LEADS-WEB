@@ -66,6 +66,19 @@ export class InspectionReportInspectionComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true
+          }
+      }],
+      xAxes: [{
+        gridLines: {
+            display: false
+        }
+      }],
+    }
   };
   public barChartLabels: Label[] = [
     '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',

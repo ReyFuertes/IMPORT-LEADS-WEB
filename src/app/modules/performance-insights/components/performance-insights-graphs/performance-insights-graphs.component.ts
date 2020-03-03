@@ -12,18 +12,19 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
   /* amount bar chart */
   public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       yAxes: [{
           ticks: {
-              fontSize: 26
+              beginAtZero: true
           }
       }],
       xAxes: [{
-        ticks: {
-            fontSize: 26
+        gridLines: {
+            display: false
         }
-    }]
-  }
+      }],
+    }
   };
   public barChartLabels: Label[] = [
     '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
@@ -90,17 +91,18 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
   /* Contracts bar chart */
   public barChartOptionsContracts: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       yAxes: [{
           ticks: {
-              fontSize: 26
+              beginAtZero: true
           }
       }],
       xAxes: [{
-        ticks: {
-            fontSize: 26
+        gridLines: {
+            display: false
         }
-      }]
+      }],
     }
   };
   public barChartLabelsContracts: Label[] = [
@@ -195,6 +197,14 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
 
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true
+          }
+      }]
+    },
     annotation: {
       annotations: [
         {
@@ -212,18 +222,6 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
         },
       ],
     },
-    scales: {
-      yAxes: [{
-          ticks: {
-              fontSize: 26
-          }
-      }],
-      xAxes: [{
-        ticks: {
-            fontSize: 26
-        }
-      }]
-    }
   };
 
   public lineChartColors: Color[] = [
@@ -246,7 +244,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       pointHoverBorderColor: 'rgba(142, 193, 217,0.8)'
     },
   ];
-  public lineChartLegend = true;
+  public lineChartLegend = false;
   public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
 

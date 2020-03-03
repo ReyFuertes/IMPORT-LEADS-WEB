@@ -1,6 +1,10 @@
 @import "src/styleguide/shared";
-canvas {
-  height: 400px !important;
+.chart-container{
+  overflow-x: auto;
+  padding: 0px 20px;
+}
+.chart-container-inner {
+  height: 220px;
 }
 h2 {
   line-height: 32px;

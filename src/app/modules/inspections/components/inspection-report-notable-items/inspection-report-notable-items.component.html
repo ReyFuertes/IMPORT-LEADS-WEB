@@ -12,22 +12,30 @@
     </div>
     <div fxLayout="row">
       <div fxFlex="50">
-        <canvas baseChart
-          [data]="doughnutChartDataPF"
-          [labels]="doughnutChartLabelsPF"
-          [options]="doughnutChartOptionsPF"
-          [chartType]="doughnutChartTypePF"
-          [colors]="pieChartColorsPF">
-        </canvas>
+        <div class="chart-container">
+          <div class="chart-container-inner">
+            <canvas baseChart
+              [data]="doughnutChartDataPF"
+              [labels]="doughnutChartLabelsPF"
+              [options]="doughnutChartOptionsPF"
+              [chartType]="doughnutChartTypePF"
+              [colors]="pieChartColorsPF">
+            </canvas>
+          </div>
+        </div>
       </div>
       <div fxFlex="50">
-        <canvas baseChart
-          [data]="doughnutChartData"
-          [labels]="doughnutChartLabels"
-          [options]="doughnutChartOptions"
-          [chartType]="doughnutChartType"
-          [colors]="pieChartColors">
-        </canvas>
+        <div class="chart-container">
+          <div class="chart-container-inner">
+            <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [options]="doughnutChartOptions"
+              [chartType]="doughnutChartType"
+              [colors]="pieChartColors">
+            </canvas>
+          </div>
+        </div>
       </div>
     </div>
     <table mat-table [dataSource]="dataSource">

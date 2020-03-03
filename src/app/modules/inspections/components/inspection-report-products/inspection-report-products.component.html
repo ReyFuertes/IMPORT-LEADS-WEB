@@ -10,15 +10,17 @@
         </mat-list>
       </div>
     </div>
-    <div class="bar-chart" fxLayout>
-			<canvas baseChart  
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [options]="barChartOptions"
-        [colors]="barChartColors"
-        [legend]="barChartLegend"
-        [chartType]="barChartType">
-      </canvas>
+    <div class="chart-container">
+      <div class="chart-container-inner">
+        <canvas baseChart  
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [colors]="barChartColors"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
     </div>
     <table mat-table [dataSource]="dataSource">
     
