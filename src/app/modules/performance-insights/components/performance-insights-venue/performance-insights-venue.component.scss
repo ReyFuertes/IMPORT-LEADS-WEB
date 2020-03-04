@@ -1,8 +1,24 @@
 @import "src/styleguide/shared";
-
+.col-header {
+  font-size: 12px;
+  font-weight: normal;
+  width: 100%;
+  height: 48px;
+  margin-bottom: 0 !important;
+  color: $color-gray-1;
+  background-color: $color-white;
+  padding-left: 28px;
+  padding-right: 10px;
+}
 .il-button.large {
   height: 32px;
   margin-top: 10px;
+}
+.hidden {
+  display: none !important;
+}
+.il-draggable-expansion {
+  @include il-draggable-expansion;
 }
 :host ::ng-deep {
   .mat-form-field {

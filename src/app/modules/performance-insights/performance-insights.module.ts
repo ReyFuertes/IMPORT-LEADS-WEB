@@ -15,6 +15,7 @@ import { PerformanceInsightsQuickWinsComponent } from './components/performance-
 import { PerformanceInsightsKpiComponent } from './components/performance-insights-kpi/performance-insights-kpi.component';
 import { PerformanceInsightsVenueComponent } from './components/performance-insights-venue/performance-insights-venue.component';
 import { PerformanceInsightsGraphsComponent } from './components/performance-insights-graphs/performance-insights-graphs.component';
+import { PerformanceInsightsExpansionListComponent } from './components/performance-insights-expansion-list/performance-insights-expansion-list.component';
 const routes: Routes = [
   {
     path: '',
@@ -71,7 +72,8 @@ const materialModules = [
     PerformanceInsightsQuickWinsComponent,
     PerformanceInsightsKpiComponent,
     PerformanceInsightsVenueComponent,
-    PerformanceInsightsGraphsComponent],
+    PerformanceInsightsGraphsComponent,
+    PerformanceInsightsExpansionListComponent],
   providers: [],
 })
 export class PerformanceInsightsModule { }
