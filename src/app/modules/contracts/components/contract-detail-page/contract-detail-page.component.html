@@ -56,14 +56,14 @@
 
   <il-contract-product-specs></il-contract-product-specs>
 
-  <!-- <div class="fab-buttons">
-    <button class="il-fab default" mat-fab>
+  <div class="fab-buttons">
+    <!-- <button class="il-fab default" mat-fab>
       <img [src]="svgPath + 'templates-icon-blue.svg'" />
-    </button>
+    </button> -->
     <button (click)="addContract()" class="il-fab" mat-fab>
       <img [src]="svgPath + 'add-icon-white.svg'" />
     </button>
-  </div> -->
+  </div>
 
   <p-sidebar class="il-rightnav" [(visible)]="showRightNav" position="right" [showCloseIcon]="false">
     <il-contract-right-content (closeEmitter)="showRightNav = $event"></il-contract-right-content>
