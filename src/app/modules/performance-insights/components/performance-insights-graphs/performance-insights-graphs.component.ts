@@ -178,6 +178,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
         15, 17, 19, 11, 12, 12, 13, 12, 14, 15, 15, 12, 18, 10, 10, 18, 16,
         18, 18, 18, 11, 12, 12, 13, 14, 14, 15, 15, 12, 11, 12
       ],
+      borderWidth: 1
     },
     {
       data: [
@@ -185,13 +186,15 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
         28, 28, 28, 21, 22, 22, 23, 24, 24, 25, 25, 22, 21, 22
       ],
       label: '',
+      borderWidth: 1
     },
     {
       data: [
         31, 31, 31, 33, 32, 32, 33, 34, 34, 35, 35, 32, 38, 39, 30, 38, 36,
         38, 38, 38, 31, 32, 32, 33, 34, 34, 35, 35, 32, 31, 32
       ],
-      label: ''
+      label: '',
+      borderWidth: 1
     }
   ];
 
@@ -203,45 +206,59 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
           ticks: {
               beginAtZero: true
           }
+      }],
+      xAxes: [{
+        gridLines: {
+            display: false
+        }
       }]
     },
-    annotation: {
-      annotations: [
-        {
-          type: 'line',
-          mode: 'vertical',
-          scaleID: 'x-axis-0',
-          value: 'March',
-          borderColor: 'orange',
-          borderWidth: 2,
-          label: {
-            enabled: true,
-            fontColor: 'orange',
-            content: 'LineAnno'
-          }
-        },
-      ],
+    annotation: {},
+    // annotation: {
+    //   annotations: [
+    //     {
+    //       type: 'line',
+    //       mode: 'vertical',
+    //       scaleID: 'x-axis-0',
+    //       value: 'March',
+    //       borderColor: 'orange',
+    //       borderWidth: 2,
+    //       label: {
+    //         enabled: true,
+    //         fontColor: 'orange',
+    //         content: 'LineAnno'
+    //       }
+    //     },
+    //   ],
+    // },
+    elements: {
+      point: {
+          radius: 0
+      },
+      line: {
+        tension: 0
+      }
     },
   };
 
   public lineChartColors: Color[] = [
     {
-      backgroundColor: 'rgba(240, 83, 80,0.5)',
-      borderColor: 'rgba(240, 83, 80,1)',
-      pointBackgroundColor: 'rgba(240, 83, 80,1)',
-      pointHoverBorderColor: 'rgba(240, 83, 80,0.8)'
+      backgroundColor: 'rgba(120, 185, 240, 0.2)',
+      borderColor: 'rgba(120, 185, 240, 1)',
+      pointBackgroundColor: 'rgba(120, 185, 240, 1)',
+      pointHoverBorderColor: 'rgba(120, 185, 240, 0.8)'
     },
     {
-      backgroundColor: 'rgba(34, 204, 150,0.5)',
-      borderColor: 'rgba(34, 204, 150,1)',
-      pointBackgroundColor: 'rgba(34, 204, 150,1)',
-      pointHoverBorderColor: 'rgba(34, 204, 150,0.8)'
+      backgroundColor: 'rgba(122, 224, 192,0.2)',
+      borderColor: 'rgba(122, 224, 192, 1)',
+      pointBackgroundColor: 'rgba(122, 224, 192, 1)',
+      pointHoverBorderColor: 'rgba(122, 224, 192, 0.8)'
     },
     {
-      backgroundColor: 'rgba(142, 193, 217,0.5)',
-      borderColor: 'rgba(142, 193, 217,1)',
-      pointBackgroundColor: 'rgba(142, 193, 217,1)',
-      pointHoverBorderColor: 'rgba(142, 193, 217,0.8)'
+      backgroundColor: 'rgba(246, 152, 150,0.2)',
+      borderColor: 'rgba(246, 152, 150,1)',
+      pointBackgroundColor: 'rgba(246, 152, 150,1)',
+      pointHoverBorderColor: 'rgba(246, 152, 150,0.8)'
     },
   ];
   public lineChartLegend = false;
