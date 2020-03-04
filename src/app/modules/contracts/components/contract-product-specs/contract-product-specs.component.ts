@@ -1,7 +1,8 @@
+import { ContractSpecTitleDialogComponent } from './../../../dialogs/components/contract-spec-title/contract-spec-title-dialog.component';
 import { ContractProductSpecDialogComponent } from './../../../dialogs/components/contract-product-spec/contract-product-spec-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'il-contract-product-specs',
@@ -34,13 +35,24 @@ export class ContractProductSpecsComponent implements OnInit {
       description: 'transition '
     }
   ];
-  public specTitle: string = 'General Design and Specification';
+  public tabTitle: string = 'General Design and Specification';
+  @Input()
+  public specTitle: string = 'Specification title';
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() { }
 
   public add(): void {
     this.panels.push({ id: 4, title: 'test title 123', description: 'test description 123' });
+  }
+
+  public addTitle(): void {
+    const dialogRef = this.dialog.open(ContractSpecTitleDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) this.specTitle = result;
+      console.log('The dialog was closed', result);
+    });
   }
 
   public UpdateProductSpecTitle(): void {

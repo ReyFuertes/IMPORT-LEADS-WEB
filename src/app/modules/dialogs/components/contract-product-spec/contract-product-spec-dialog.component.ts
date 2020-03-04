@@ -16,14 +16,9 @@ export class ContractProductSpecDialogComponent implements OnInit {
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<ContractProductSpecDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
     this.form = this.fb.group({
-      id: [''],
-      title: [''],
-      venue: [''],
-      startDate: [null],
-      deliveryDate: [null],
-      details: [''],
-      attachments: [null]
-    }); }
+      title: ['']
+    });
+  }
 
   ngOnInit() { }
 }
