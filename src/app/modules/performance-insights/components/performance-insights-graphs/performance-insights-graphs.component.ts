@@ -103,8 +103,17 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
             display: false
         }
       }],
-    }
+    },
+    elements: {
+      point: {
+          radius: 0
+      },
+      line: {
+        tension: 0
+      }
+    },
   };
+
   public barChartLabelsContracts: Label[] = [
     '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
     '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
@@ -113,6 +122,15 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
   public barChartLegendContracts = false;
   public barChartPluginsContracts = [];
   public barChartDataContracts: ChartDataSets[] = [
+    {
+      data: [
+        1, 1, 1, 3, 2, 2, 3, 4, 4, 5, 5, 2, 8, 9, 0, 8, 6,
+        8, 8, 8, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2
+      ],
+      label: '',
+      borderWidth: 1,
+      type: 'line'
+    },
     {
       data: [
         1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 2, 18, 20, 20, 18, 6,
@@ -160,6 +178,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
     }
   ];
   public barChartColorsContracts: Color[] = [
+    { backgroundColor: 'rgba(120, 185, 240, 0.5)' },
     { backgroundColor: '#7ae0c0' },
     { backgroundColor: '#7ae0c0' },
     { backgroundColor: '#7ae0c0' },
