@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit, Input } from '@angular/core';
 import { InsightVenue } from '../../performance-insights.models';
 import { environment } from '../../../../../environments/environment';
@@ -14,11 +15,17 @@ export class PerformanceInsightsVenueComponent extends GenericPanelComponent imp
   public items: InsightVenue[];
   @Input()
   public colsHeaders: Array<{ label: string, width?: string | number, icon?: string }>;
+  public dragStart: boolean = false;
+
   constructor() {
     super();
-   }
+  }
 
   ngOnInit() {
   }
 
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.dragStart = false;
+  }
 }
