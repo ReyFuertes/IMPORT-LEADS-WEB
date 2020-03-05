@@ -1,4 +1,7 @@
 @import "src/styleguide/shared";
+.venue-card {
+  padding: 0;
+}
 .col-header {
   font-size: 12px;
   font-weight: normal;
@@ -7,8 +10,33 @@
   margin-bottom: 0 !important;
   color: $color-gray-1;
   background-color: $color-white;
-  padding-left: 28px;
-  padding-right: 10px;
+  > div {
+    line-height: 48px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #FAFAFA;
+  }
+  > div:nth-child(1) {
+    padding-left: 28px;
+    background: #ecf3fa;
+  }
+  > div:nth-child(2) {
+    background: #E4EDF7;
+  }
+  > div:nth-child(3) {
+    background: #ECF3FA;
+  }
+  > div:nth-child(4) {
+    background: #ECF3FA;
+  }
+  > div:nth-child(6) {
+    background: #F0F0F0;
+  }
+  > div:nth-child(8) {
+    background: #f0f0f0;
+    padding-top: 15px;
+    height: 48px;
+  }
 }
 .il-button.large {
   height: 32px;
@@ -20,8 +48,16 @@
 .il-draggable-expansion {
   @include il-draggable-expansion;
 }
+
+.venue-filter {
+  padding: 10px 20px;
+}
 :host ::ng-deep {
   .mat-form-field {
     width: 140px;
+  }
+
+  .mat-expansion-panel-header {
+    height: 48px !important;
   }
 }

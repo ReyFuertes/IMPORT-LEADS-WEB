@@ -86,7 +86,7 @@ export class PerformanceInsightsOverviewPageComponent implements OnInit {
     },
     {
       label: 'Product name',
-      width: 25,
+      width: 20,
       icon: 'move-icon-blue.svg'
     },
     {
@@ -104,11 +104,11 @@ export class PerformanceInsightsOverviewPageComponent implements OnInit {
     {
       label: 'Packaging',
       width: 10,
+      icon: 'hide-icon-blue.svg'
     },
     {
       label: 'Appearance',
       width: 10,
-      icon: 'hide-icon-blue.svg'
     },
     {
       label: '',
@@ -117,7 +117,7 @@ export class PerformanceInsightsOverviewPageComponent implements OnInit {
     },
     {
       label: 'Tech. mes.',
-      width: 7
+      width: 12
     }
   ];
   constructor() { }

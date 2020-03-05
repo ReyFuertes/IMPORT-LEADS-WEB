@@ -1,5 +1,5 @@
-<mat-card>
-  <div>
+<mat-card class="venue-card">
+  <div class="venue-filter">
     <div fxFlex>
       <div fxLayout="row" fxFlex fxLayoutGap="32px">
         <mat-form-field>
@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="venue-products">
-    <div class="col-header" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div class="col-header" fxLayoutAlign="start center">
       <div *ngFor="let col of colsHeaders; let last = last" [fxFlex]="col?.width">
         <div>
           <div fxFlex>
@@ -45,10 +45,10 @@
           <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i)" (mouseover)="onHover(i)" (mouseleave)="mouseout()">
             <div class="pnl-header" fxLayout="row" fxLayoutGap="10px">
               <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
-              <div fxFlex="15" fxLayoutAlign="start center">
+              <div fxFlex="14" fxLayoutAlign="start center">
                 <span>{{item.venue}}</span>
               </div>
-              <div fxFlex="26" fxLayoutAlign="start center">
+              <div fxFlex="25" fxLayoutAlign="start center">
                 <il-pill [item]="item.product"
                   (removeEmitter)="onRemove($event)">
                 </il-pill>
@@ -65,13 +65,13 @@
               <div fxFlex="10" fxLayoutAlign="start center">
                 <span>{{item.packaging}}%</span>
               </div>
-              <div fxFlex="9" fxLayoutAlign="start center">
+              <div fxFlex="10" fxLayoutAlign="start center">
                 <span>{{item.appearance}}%</span>
               </div>
-              <div fxFlex="3" fxLayoutAlign="start center">
+              <div class="hide-col" fxFlex="3" fxLayoutAlign="start center">
                 <span>{{item.hideCol}}</span>
               </div>
-              <div fxFlex="7" fxLayoutAlign="start center">
+              <div fxFlex="8" fxLayoutAlign="start center">
                 <span>{{item.techMes}}</span>
               </div>
             </div>

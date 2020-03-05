@@ -6,8 +6,7 @@
   padding-left: 20px;
   padding-right: 10px;
 }
-
-.product-list:first-child {
+.product-list.first {
   border-top: 1px solid $color-gray-3;
 }
 :host ::ng-deep {

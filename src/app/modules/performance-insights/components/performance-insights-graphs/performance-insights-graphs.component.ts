@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Color, Label, BaseChartDirective } from 'ng2-charts';
-import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'il-performance-insights-graphs',
@@ -129,7 +128,8 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       ],
       label: '',
       borderWidth: 1,
-      type: 'line'
+      type: 'line',
+      order: 6
     },
     {
       data: [
@@ -138,7 +138,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
-      label: ''
+      order: 1
     },
     {
       data: [
@@ -147,7 +147,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
-      label: '',
+      order: 2
     },
     {
       data: [
@@ -156,7 +156,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
-      label: ''
+      order: 3
     },
     {
       data: [
@@ -165,7 +165,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
-      label: ''
+      order: 4
     },
     {
       data: [
@@ -174,7 +174,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       ],
       barPercentage: 0.7,
       categoryPercentage: 1,
-      label: 'Amount of due'
+      order: 5
     }
   ];
   public barChartColorsContracts: Color[] = [
@@ -183,7 +183,7 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
     { backgroundColor: '#7ae0c0' },
     { backgroundColor: '#7ae0c0' },
     { backgroundColor: '#7ae0c0' },
-    { backgroundColor: '#7ae0c0' }
+    { backgroundColor: '#7ae0c0' },
   ];
 
   /* failure line chart */
@@ -233,23 +233,6 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
       }]
     },
     annotation: {},
-    // annotation: {
-    //   annotations: [
-    //     {
-    //       type: 'line',
-    //       mode: 'vertical',
-    //       scaleID: 'x-axis-0',
-    //       value: 'March',
-    //       borderColor: 'orange',
-    //       borderWidth: 2,
-    //       label: {
-    //         enabled: true,
-    //         fontColor: 'orange',
-    //         content: 'LineAnno'
-    //       }
-    //     },
-    //   ],
-    // },
     elements: {
       point: {
           radius: 0
@@ -282,8 +265,16 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
   ];
   public lineChartLegend = false;
   public lineChartType = 'line';
-  public lineChartPlugins = [pluginAnnotations];
 
+
+  public items: Array<{ label: string, value?: string}> = [
+    {
+      label: 'Touch Dimmer Switch',
+    },
+    {
+      label: 'Touch Dimmer Switch > 1G1W 1283',
+    }
+  ];
   constructor() { }
 
   ngOnInit() {

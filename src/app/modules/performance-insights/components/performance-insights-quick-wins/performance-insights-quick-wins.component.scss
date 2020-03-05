@@ -16,6 +16,7 @@ h5 {
   color:$color-primary;
   font-weight: 500;
   margin-left: 2px;
+  cursor: pointer;
 }
 :host ::ng-deep {
   .mat-card {
