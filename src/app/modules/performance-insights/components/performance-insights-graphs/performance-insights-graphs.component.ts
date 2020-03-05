@@ -123,13 +123,13 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
   public barChartDataContracts: ChartDataSets[] = [
     {
       data: [
-        1, 1, 1, 3, 2, 2, 3, 4, 4, 5, 5, 2, 8, 9, 0, 8, 6,
-        8, 8, 8, 1, 2, 2, 3, 4, 4, 5, 5, 2, 1, 2
+        0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 0.5, 0.5, 2, 2, 2, 2, 2, 4, 4,
+        4, 4, 3, 0.5, 1, 1, 1, 2, 2, 3, 3, 1, 1, 1
       ],
-      label: '',
       borderWidth: 1,
+      borderColor: '#1e8ae6',
       type: 'line',
-      order: 6
+      order: 0
     },
     {
       data: [
@@ -178,12 +178,12 @@ export class PerformanceInsightsGraphsComponent implements OnInit {
     }
   ];
   public barChartColorsContracts: Color[] = [
-    { backgroundColor: 'rgba(120, 185, 240, 0.5)' },
-    { backgroundColor: '#7ae0c0' },
-    { backgroundColor: '#7ae0c0' },
-    { backgroundColor: '#7ae0c0' },
-    { backgroundColor: '#7ae0c0' },
-    { backgroundColor: '#7ae0c0' },
+    { backgroundColor: 'rgba(30, 138, 230, 0.4)' },
+    { backgroundColor: '#a8e9d5' },
+    { backgroundColor: '#a8e9d5' },
+    { backgroundColor: '#a8e9d5' },
+    { backgroundColor: '#a8e9d5' },
+    { backgroundColor: '#a8e9d5' },
   ];
 
   /* failure line chart */

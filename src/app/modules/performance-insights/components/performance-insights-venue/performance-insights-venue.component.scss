@@ -10,6 +10,7 @@
   margin-bottom: 0 !important;
   color: $color-gray-1;
   background-color: $color-white;
+  /*Should we need to create a variable for this background coloumn or any suggestion for this?*/
   > div {
     line-height: 48px;
     padding-left: 15px;
@@ -41,6 +42,7 @@
 .il-button.large {
   height: 32px;
   margin-top: 10px;
+  font-size: 12px;
 }
 .hidden {
   display: none !important;
@@ -50,7 +52,7 @@
 }
 
 .venue-filter {
-  padding: 10px 20px;
+  padding: 10px 20px 0;
 }
 :host ::ng-deep {
   .mat-form-field {
