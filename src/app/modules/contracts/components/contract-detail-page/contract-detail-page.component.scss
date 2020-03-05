@@ -1,6 +1,9 @@
 @import "src/styleguide/shared";
 .il-rightnav {
   @include rightnav;
+  .upper-pane {
+    height: 200px;
+  }
 }
 .il-fab {
   @include il-fab;

@@ -24,3 +24,8 @@
     background-color: $color-primary !important;
   }
 }
+::ng-deep {
+  .il-sidebar {
+    position: relative !important;
+  }
+}

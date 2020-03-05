@@ -63,9 +63,15 @@
     <button (click)="addContract()" class="il-fab" mat-fab>
       <img [src]="svgPath + 'add-icon-white.svg'" />
     </button>
+
+    <!-- <div fxLayoutAlign="center center">
+      <button mat-flat-button class="il-button primary"> Save </button>
+    </div> -->
   </div>
 
   <p-sidebar class="il-rightnav" [(visible)]="showRightNav" position="right" [showCloseIcon]="false">
-    <il-contract-right-content (closeEmitter)="showRightNav = $event"></il-contract-right-content>
+    <div class="upper-pane">
+      <il-contract-right-content (closeEmitter)="showRightNav = $event"></il-contract-right-content>
+    </div>
   </p-sidebar>
 </div>

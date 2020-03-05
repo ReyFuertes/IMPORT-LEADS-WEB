@@ -1,6 +1,10 @@
 .router-outlet {
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
-  min-height: 100%;
+  width: 100%;
+}
+.contents {
 }
 .sidebar-container {
   width: 250px;

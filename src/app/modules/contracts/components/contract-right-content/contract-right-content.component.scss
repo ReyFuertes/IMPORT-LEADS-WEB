@@ -1,5 +1,6 @@
 @import "src/styleguide/shared";
 .inner-container {
+  display: none;
   overflow-y: auto;
   width: 100%;
   .mat-list:first-child {
