@@ -1,7 +1,7 @@
-@import 'src/styleguide/shared';
+@import "src/styleguide/shared";
 :host {
   position: fixed;
-    height: 100%;
+  height: 100%;
 }
 .il-sidebar {
   @include il-sidebar;

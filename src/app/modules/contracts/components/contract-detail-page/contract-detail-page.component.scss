@@ -71,6 +71,13 @@
   font-size: 12px;
 }
 :host ::ng-deep {
+  .il-rightnav-bottom .ui-sidebar {
+    z-index: 1002;
+    opacity: 1;
+    height: 75px;
+    top: calc(100% - 75px);
+    width: 200px;
+  }
   .mat-ink-bar {
     display: none;
   }
