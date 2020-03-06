@@ -18,7 +18,7 @@
             </div>
             <h2>Contract</h2>
           </div>
-          <div *ngFor="let i of [0, 1]" fxLayoutGap="25px" class="item-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <div class="item-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
             <div>
               <div>Company</div>
               <div>CIL China</div>
@@ -38,6 +38,13 @@
             <div>
               <div>Venue</div>
               <div>Venue Name</div>
+            </div>
+          </div>
+          <div fxFlex class="image-container">
+            <div cdkDropList cdkDropListOrientation="horizontal" class="image-list" (cdkDropListDropped)="drop($event)">
+              <div class="image-box" *ngFor="let image of contractImages" cdkDrag>
+                <img [src]="image">
+              </div>
             </div>
           </div>
         </div>

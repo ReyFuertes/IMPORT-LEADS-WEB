@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject } from '
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts/contract-add-dialog.component';
 import { GenericPageDetailComponent } from 'src/app/shared/generics/generic-page-detail';
 import { Observable, fromEvent } from 'rxjs';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'il-contract-detail-page',
@@ -18,6 +19,14 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
   public options: Array<{ id: number, label: string, icon: string, action?: () => void }>;
   public _showTabActions: boolean = false;
   public showRightNav: boolean = false;
+  public contractImages = [
+    'https://dummyimage.com/130x120/e0d9e0/e0d9e0.png',
+    'https://dummyimage.com/130x120/b0a9b0/b0a9b0.png',
+    'https://dummyimage.com/130x120/9e9e9e/9e9e9e.png',
+    'https://dummyimage.com/130x120/8c8c8c/8c8c8c.png',
+    'https://dummyimage.com/130x120/7a7a7a/7a7a7a.png',
+    'https://dummyimage.com/130x120/6e6d6e/6e6d6e.png',
+  ];
 
   constructor(public fb: FormBuilder, public dialog: MatDialog) {
     super();
@@ -96,5 +105,9 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
   public addContract(): void {
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {});
     dialogRef.afterClosed().subscribe(result => { });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
   }
 }
