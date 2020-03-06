@@ -1,4 +1,9 @@
 @import "src/styleguide/shared";
 .il-pill {
   @include il-pill;
+  cursor: default;
+}
+
+.il-pill.selected {
+  background: $color-blue-2;
 }

@@ -15,7 +15,7 @@
       </ng-template> -->
 
         <ng-template matTabContent>
-          <il-contract-expansion-panel [panels]="panels"></il-contract-expansion-panel>
+          <il-contract-expansion-panel [isRightNavOpen]="isRightNavOpen" [panels]="panels"></il-contract-expansion-panel>
           <!-- make this a component -->
           <div fxLayout="row" fxLayoutAlign="center center" class="footer">
             <img class="add" *ngIf="!_showTabActions" (click)="_showTabActions = !_showTabActions" [src]="svgPath + 'add-icon-gray.svg'" />
@@ -31,7 +31,7 @@
                 </div>
                 <div>
                   <img [src]="svgPath + 'templates-icon-blue.svg'" />
-                  <span>Import template</span>
+                  <span>Import category template</span>
                 </div>
               </div>
               <div fxFlex="4" fxLayoutAlign="center center">

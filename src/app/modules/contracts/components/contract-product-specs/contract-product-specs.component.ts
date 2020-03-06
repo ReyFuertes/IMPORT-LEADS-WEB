@@ -2,7 +2,7 @@ import { ContractSpecTitleDialogComponent } from './../../../dialogs/components/
 import { ContractProductSpecDialogComponent } from './../../../dialogs/components/contract-product-spec/contract-product-spec-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'il-contract-product-specs',
@@ -10,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./contract-product-specs.component.scss']
 })
 
-export class ContractProductSpecsComponent implements OnInit {
+export class ContractProductSpecsComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public _showTabActions: boolean = false;
   public panels: Array<{ id: number, title: string, description: string }> = [
@@ -38,11 +38,17 @@ export class ContractProductSpecsComponent implements OnInit {
   public tabTitle: string = 'General Design and Specification';
   @Input()
   public specTitle: string = 'Specification title';
+  @Input()
+  public isRightNavOpen: boolean = false;
+  public showToggle: boolean = false;
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() { }
 
+  ngOnChanges() {
+    this.isRightNavOpen = this.isRightNavOpen;
+  }
   public add(): void {
     this.panels.push({ id: 4, title: 'test title 123', description: 'test description 123' });
   }

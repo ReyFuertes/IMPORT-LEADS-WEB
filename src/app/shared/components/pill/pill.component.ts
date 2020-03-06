@@ -19,4 +19,12 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit 
 
   ngOnInit() {
   }
+
+  public onHighlightProduct(event: any): void {
+    const products = Array.from(document.querySelectorAll('.il-pill'));
+    products.forEach(product => {
+      product.classList.remove('selected');
+    });
+    event.target.parentElement.classList.add('selected');
+  }
 }

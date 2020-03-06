@@ -3,6 +3,7 @@ import { environment } from './../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'il-contract-add-dialog',
@@ -13,6 +14,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class ContractAddDialogComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public form: FormGroup;
+  public contractImages = [
+    'https://dummyimage.com/42x42/ccc/fff.png',
+    'https://dummyimage.com/42x42/e0d9e0/fff.png',
+    'https://dummyimage.com/42x42/ccc/fff.png',
+    'https://dummyimage.com/42x42/e0d9e0/fff.png',
+    'https://dummyimage.com/42x42/ccc/fff.png',
+    'https://dummyimage.com/42x42/e0d9e0/ccc.png',
+  ];
   constructor(
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<ContractAddDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
@@ -43,5 +52,9 @@ export class ContractAddDialogComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
   }
 }

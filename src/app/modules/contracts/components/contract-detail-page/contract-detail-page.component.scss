@@ -70,22 +70,17 @@
   display: flex;
   font-size: 12px;
 }
-
 .image-container {
   padding: 5px 30px 5px 60px;
 }
-
 .image-list {
   min-height: 60px;
   display: flex;
   flex-direction: row;
-  background: white;
   border-radius: 4px;
   overflow: hidden;
 }
-
 .image-box {
-  border: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
   flex-direction: row;
@@ -93,10 +88,8 @@
   justify-content: space-between;
   box-sizing: border-box;
   cursor: move;
-  background: white;
-  margin: 10px;
+  margin: 8px;
 }
-
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
@@ -104,19 +97,15 @@
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
-
 .cdk-drag-placeholder {
   opacity: 0;
 }
-
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-
 .image-list.cdk-drop-list-dragging .image-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-
 :host ::ng-deep {
   .il-rightnav-bottom .ui-sidebar {
     z-index: 1002;

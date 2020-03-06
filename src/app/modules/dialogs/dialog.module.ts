@@ -12,6 +12,7 @@ import { MatDialogModule, MatButtonModule, MatListModule, MatCheckboxModule } fr
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VenuesAddDialogComponent } from './components/venues/venues-add-dialog.component';
 import { UserAddDialogComponent } from './components/users/user-add-dialog.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const dialogComponents = [
   ContractAddDialogComponent,
@@ -28,7 +29,8 @@ const materialModules = [
   MatButtonModule,
   MatDialogModule,
   MatListModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  DragDropModule
 ];
 
 @NgModule({

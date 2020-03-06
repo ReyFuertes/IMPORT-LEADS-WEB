@@ -1,5 +1,5 @@
 import { environment } from '../../../../../environments/environment';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
 
@@ -9,7 +9,7 @@ import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
   styleUrls: ['./contract-expansion-panel.component.scss']
 })
 
-export class ContractExpansionPanelComponent extends GenericPanelComponent implements OnInit {
+export class ContractExpansionPanelComponent extends GenericPanelComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   @Input()
   public panels: Array<{ title: string, description: string }>;
@@ -21,12 +21,18 @@ export class ContractExpansionPanelComponent extends GenericPanelComponent imple
   public isDescHover: number | null
   public isEventDialog: boolean = false;
   public dragStart: boolean = false;
+  @Input()
+  public isRightNavOpen: boolean = false;
 
   constructor() {
     super();
    }
 
-  ngOnInit() { }
+  ngOnInit() {}
+
+  ngOnChanges() {
+    this.isRightNavOpen = this.isRightNavOpen;
+  }
 
   public onClose(pnl?: any): void {
     pnl.close();

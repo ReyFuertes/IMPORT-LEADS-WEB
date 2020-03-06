@@ -69,7 +69,7 @@
             <span>Appearance</span>
             <img [src]="svgPath + 'arrow-down-icon-blue.svg'">
             <img [src]="svgPath + 'delete-icon-red.svg'">
-            <p-inputSwitch></p-inputSwitch>
+            <p-inputSwitch *ngIf="isRightNavOpen"></p-inputSwitch>
           </div>
         </div>
       </ng-template>

@@ -61,9 +61,9 @@
     </div>
   </mat-card>
 
-  <il-contract-product-specs></il-contract-product-specs>
+  <il-contract-product-specs [isRightNavOpen]="showRightNav"></il-contract-product-specs>
 
-  <div class="fab-buttons">
+  <div *ngIf="!showRightNav" class="fab-buttons">
     <!-- <button class="il-fab default" mat-fab>
       <img [src]="svgPath + 'templates-icon-blue.svg'" />
     </button> -->

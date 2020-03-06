@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Contract } from './../../contract.model';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject, Output, EventEmitter } from '@angular/core';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts/contract-add-dialog.component';
 import { GenericPageDetailComponent } from 'src/app/shared/generics/generic-page-detail';
 import { Observable, fromEvent } from 'rxjs';
@@ -20,13 +20,16 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
   public _showTabActions: boolean = false;
   public showRightNav: boolean = false;
   public contractImages = [
-    'https://dummyimage.com/130x120/e0d9e0/e0d9e0.png',
-    'https://dummyimage.com/130x120/b0a9b0/b0a9b0.png',
-    'https://dummyimage.com/130x120/9e9e9e/9e9e9e.png',
-    'https://dummyimage.com/130x120/8c8c8c/8c8c8c.png',
-    'https://dummyimage.com/130x120/7a7a7a/7a7a7a.png',
-    'https://dummyimage.com/130x120/6e6d6e/6e6d6e.png',
+    'https://dummyimage.com/100x100/e0d9e0/e0d9e0.png',
+    'https://dummyimage.com/100x100/b0a9b0/b0a9b0.png',
+    'https://dummyimage.com/100x100/9e9e9e/9e9e9e.png',
+    'https://dummyimage.com/100x100/8c8c8c/8c8c8c.png',
+    'https://dummyimage.com/100x100/7a7a7a/7a7a7a.png',
+    'https://dummyimage.com/100x100/6e6d6e/6e6d6e.png',
   ];
+
+  @Output()
+  public openNavChange = new EventEmitter<boolean>();
 
   constructor(public fb: FormBuilder, public dialog: MatDialog) {
     super();
@@ -49,16 +52,6 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
         label: 'Edit contract',
         icon: 'edit-icon-blue.svg',
         action: this.editContract
-      },
-      {
-        id: 2,
-        label: 'Add a category',
-        icon: 'add-category-icon-blue.svg'
-      },
-      {
-        id: 3,
-        label: 'Add a title',
-        icon: 'add-title-icon-blue.svg'
       },
       {
         id: 4,
@@ -89,6 +82,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
 
   public createUpdateTemplate = (): void => {
     this.showRightNav = !this.showRightNav;
+    this.openNavChange.emit(this.showRightNav);
   }
 
   public editContract = (): void => {
