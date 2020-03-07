@@ -79,6 +79,9 @@
   flex-direction: row;
   border-radius: 4px;
   overflow: hidden;
+  img {
+    cursor: move;
+  }
 }
 .image-box {
   color: rgba(0, 0, 0, 0.87);

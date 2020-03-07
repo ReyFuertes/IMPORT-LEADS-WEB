@@ -1,8 +1,8 @@
 @import "src/styleguide/shared";
-:host {
-  width: 100%;
-  min-width: 100%;
-}
+// :host {
+//   width: 100%;
+//   min-width: 100%;
+// }
 .il-textarea {
   @include il-textarea;
 }
