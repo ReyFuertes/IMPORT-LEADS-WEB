@@ -92,6 +92,7 @@ export class ContractExpansionPanelComponent extends GenericPanelComponent imple
     event.preventDefault();
     this.selectedPnl = i;
     const classList = event.target.parentNode.classList;
+    //we need to refactor this, there is too much condition for a similar behavior
     if (classList.contains('no-expand')
       || classList.contains('actions-col')
       || classList.contains('ui-inputswitch')
