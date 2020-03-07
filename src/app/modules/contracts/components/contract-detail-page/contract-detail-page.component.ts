@@ -1,12 +1,12 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Contract } from './../../contract.model';
+import { Contract, ProductImage } from './../../contract.model';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject, Output, EventEmitter } from '@angular/core';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts/contract-add-dialog.component';
 import { GenericPageDetailComponent } from 'src/app/shared/generics/generic-page-detail';
 import { Observable, fromEvent } from 'rxjs';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'il-contract-detail-page',
@@ -16,17 +16,26 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 export class ContractDetailPageComponent extends GenericPageDetailComponent<Contract> implements OnInit {
   public svgPath: string = environment.svgPath;
+  public imgPath: string = environment.imgPath;
   public options: Array<{ id: number, label: string, icon: string, action?: () => void }>;
   public _showTabActions: boolean = false;
   public showRightNav: boolean = false;
-  public contractImages = [
-    'https://dummyimage.com/100x100/e0d9e0/e0d9e0.png',
-    'https://dummyimage.com/100x100/b0a9b0/b0a9b0.png',
-    'https://dummyimage.com/100x100/9e9e9e/9e9e9e.png',
-    'https://dummyimage.com/100x100/8c8c8c/8c8c8c.png',
-    'https://dummyimage.com/100x100/7a7a7a/7a7a7a.png',
-    'https://dummyimage.com/100x100/6e6d6e/6e6d6e.png',
-  ];
+  public contractImages: ProductImage[] = [{
+    id: 1,
+    name: 'product-img.png'
+  }, {
+    id: 2,
+    name: 'product-img.png'
+  }, {
+    id: 3,
+    name: 'product-img.png'
+  }, {
+    id: 4,
+    name: 'product-img.png'
+  }, {
+    id: 5,
+    name: 'product-img.png'
+  }];
 
   @Output()
   public openNavChange = new EventEmitter<boolean>();
@@ -91,9 +100,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
         formValues: this.form.value
       }
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe();
   }
 
   public addContract(): void {
@@ -101,7 +108,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
     dialogRef.afterClosed().subscribe(result => { });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  public drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
   }
 }

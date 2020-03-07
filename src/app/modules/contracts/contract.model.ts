@@ -6,4 +6,9 @@ export interface Contract {
   deliveryDate: Date | string;
   details: string;
   attachments?: any[];
+  images: ProductImage[];
+}
+export interface ProductImage {
+  id?: number | string;
+  name?: string
 }

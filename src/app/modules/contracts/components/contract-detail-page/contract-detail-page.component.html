@@ -41,10 +41,8 @@
             </div>
           </div>
           <div fxFlex class="image-container">
-            <div cdkDropList cdkDropListOrientation="horizontal" class="image-list" (cdkDropListDropped)="drop($event)">
-              <div class="image-box" *ngFor="let image of contractImages" cdkDrag>
-                <img [src]="image">
-              </div>
+            <div fxLayout="row" cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutGap="10px" (cdkDropListDropped)="drop($event)">
+              <img cdkDrag *ngFor="let img of contractImages" [src]="imgPath + 'product-img.jpg'">
             </div>
           </div>
         </div>
@@ -62,15 +60,6 @@
   </mat-card>
 
   <il-contract-product-specs [isRightNavOpen]="showRightNav"></il-contract-product-specs>
-
-  <div *ngIf="!showRightNav" class="fab-buttons">
-    <!-- <button class="il-fab default" mat-fab>
-      <img [src]="svgPath + 'templates-icon-blue.svg'" />
-    </button> -->
-    <button (click)="addContract()" class="il-fab" mat-fab>
-      <img [src]="svgPath + 'add-icon-white.svg'" />
-    </button>
-  </div>
 
   <p-sidebar class="il-rightnav" [(visible)]="showRightNav" position="right" [showCloseIcon]="false">
     <div class="upper-pane">
