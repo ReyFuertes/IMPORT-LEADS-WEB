@@ -11,6 +11,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 export class PillComponent extends GenericControl<SimpleItem> implements OnInit {
   public svgPath: string = environment.svgPath;
+  @Input()
+  public selectable: boolean = false;
   @Output()
   public removeEmitter = new EventEmitter<number>();
   constructor() {

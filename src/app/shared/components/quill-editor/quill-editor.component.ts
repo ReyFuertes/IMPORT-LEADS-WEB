@@ -17,6 +17,7 @@ export class QuillEditorComponent implements OnInit {
 
   defaultModules = {
     toolbar: [
+      [{table: true}],
       ['bold', 'italic', 'underline'], // toggled buttons
       [{ header: 1 }, { header: 2 }], // custom button values
       [{ list: 'ordered' }, { list: 'bullet' }],

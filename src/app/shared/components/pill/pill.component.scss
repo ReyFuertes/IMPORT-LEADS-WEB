@@ -3,7 +3,9 @@
   @include il-pill;
   cursor: default;
 }
-
+.p-cursor {
+  cursor: pointer !important;
+}
 .il-pill.selected {
   background: $color-blue-2;
 }
