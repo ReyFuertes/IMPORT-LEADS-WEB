@@ -4,7 +4,6 @@ il-inspection-expansion-panel {
 }
 .template-container {
   > div {
-    margin-top: 24px;
     margin-bottom: 20px;
   }
 }
@@ -26,10 +25,6 @@ il-inspection-expansion-panel {
   .mat-tab-group.mat-primary .mat-ink-bar,
   .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: $color-primary;
-  }
-  .mat-tab-body-content {
-    > div {
-    }
   }
   .mat-tab-label .mat-tab-label-content {
     display: inline-flex;

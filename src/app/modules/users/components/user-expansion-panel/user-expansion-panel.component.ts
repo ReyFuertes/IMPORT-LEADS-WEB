@@ -35,7 +35,6 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
       label: 'Manager'
     },
   ];
-
   public access: DropdownSelect[] = [
     {
       id: 1,
@@ -62,6 +61,7 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
       label: 'Chat'
     },
   ];
+  public dragStart: boolean = false;
 
   constructor() {
     super();
@@ -72,23 +72,15 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
 
   public selectedRoleChange(event: any): void {
     this.selectedRole = event;
-    console.log(event);
   }
 
   public onClickPnl(pnl: any, event: any, i: number): void {
     event.preventDefault();
-    const classList = event.target.parentNode.classList;
-    console.log(classList);
-    if (classList.contains('action-col')
-      || classList.contains('pnl-header')
-      || classList.contains('mat-expansion-panel')
-      || classList.contains('no-expand')
-    ) {
+    if (event.currentTarget.classList.contains('no-expand')) {
       pnl.close();
     }
   }
 
-  public dragStart: boolean = false;
   public drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.users, event.previousIndex, event.currentIndex);
     this.dragStart = false;

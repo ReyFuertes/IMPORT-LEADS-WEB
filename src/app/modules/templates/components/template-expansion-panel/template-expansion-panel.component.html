@@ -3,8 +3,8 @@
     <mat-expansion-panel cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel"
       *ngFor="let item of items; let i = index" hideToggle="true">
 
-      <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i)" (mouseover)="onHover(i)" (mouseleave)="mouseout()">
-        <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
+      <mat-expansion-panel-header class="no-expand" (click)="onClickPnl(pnl, $event, i)" (mouseover)="onHover(i)" (mouseleave)="mouseout()">
+        <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px" class="no-expand">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
           <div fxFlex="200px" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item?.name}}</span>

@@ -24,4 +24,11 @@ export class TemplateExpansionPanelComponent extends GenericPanelComponent imple
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
     this.dragStart = false;
   }
+
+  public onClickPnl(pnl: any, event: any, i: number): void {
+    event.preventDefault();
+    if (event.currentTarget.classList.contains('no-expand')) {
+      pnl.close();
+    }
+  }
 }
