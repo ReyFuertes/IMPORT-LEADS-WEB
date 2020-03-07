@@ -11,3 +11,12 @@
     <il-contract-card *ngFor="let card of [0, 1, 2]"></il-contract-card>
   </div>
 </div>
+
+<div class="fab-buttons">
+  <!-- <button class="il-fab default" mat-fab>
+    <img [src]="svgPath + 'templates-icon-blue.svg'" />
+  </button> -->
+  <button (click)="addContract()" class="il-fab" mat-fab>
+    <img [src]="svgPath + 'add-icon-white.svg'" />
+  </button>
+</div>

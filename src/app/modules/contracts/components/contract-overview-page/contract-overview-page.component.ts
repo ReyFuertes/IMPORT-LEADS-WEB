@@ -1,3 +1,6 @@
+import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts/contract-add-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { environment } from './../../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ContractOverviewPageComponent implements OnInit {
-  constructor() { }
+  public svgPath: string = environment.svgPath;
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() { }
+
+  public addContract(): void {
+    const dialogRef = this.dialog.open(ContractAddDialogComponent, {});
+    dialogRef.afterClosed().subscribe(result => { });
+  }
 }

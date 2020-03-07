@@ -7,6 +7,7 @@ import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/c
 import { GenericPageDetailComponent } from 'src/app/shared/generics/generic-page-detail';
 import { Observable, fromEvent } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AddEditState } from 'src/app/shared/generics/generic.model';
 
 @Component({
   selector: 'il-contract-detail-page',
@@ -97,15 +98,11 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
   public editContract = (): void => {
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {
       data: {
-        formValues: this.form.value
+        formValues: this.form.value,
+        state: AddEditState.Edit
       }
     });
     dialogRef.afterClosed().subscribe();
-  }
-
-  public addContract(): void {
-    const dialogRef = this.dialog.open(ContractAddDialogComponent, {});
-    dialogRef.afterClosed().subscribe(result => { });
   }
 
   public drop(event: CdkDragDrop<any[]>) {

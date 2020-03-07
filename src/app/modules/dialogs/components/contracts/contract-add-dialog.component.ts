@@ -1,9 +1,12 @@
-import { Contract } from './../../../contracts/contract.model';
+import { AddEditDialogState } from './../../../../shared/generics/generic.model';
+import { GenericAddEditComponent } from './../../../../shared/generics/generic-ae';
+import { Contract, ProductImage } from './../../../contracts/contract.model';
 import { environment } from './../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AddEditState } from 'src/app/shared/generics/generic.model';
 
 @Component({
   selector: 'il-contract-add-dialog',
@@ -11,20 +14,30 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./contract-add-dialog.component.scss']
 })
 
-export class ContractAddDialogComponent implements OnInit {
+export class ContractAddDialogComponent extends GenericAddEditComponent<Contract> implements OnInit {
   public svgPath: string = environment.svgPath;
-  public form: FormGroup;
-  public contractImages = [
-    'https://dummyimage.com/42x42/ccc/fff.png',
-    'https://dummyimage.com/42x42/e0d9e0/fff.png',
-    'https://dummyimage.com/42x42/ccc/fff.png',
-    'https://dummyimage.com/42x42/e0d9e0/fff.png',
-    'https://dummyimage.com/42x42/ccc/fff.png',
-    'https://dummyimage.com/42x42/e0d9e0/ccc.png',
-  ];
+  public imgPath: string = environment.imgPath;
+  public contractImages: ProductImage[] = [{
+    id: 1,
+    name: 'product-img.png'
+  }, {
+    id: 2,
+    name: 'product-img.png'
+  }, {
+    id: 3,
+    name: 'product-img.png'
+  }, {
+    id: 4,
+    name: 'product-img.png'
+  }, {
+    id: 5,
+    name: 'product-img.png'
+  }];
+  public title: string = 'Add';
   constructor(
     public fb: FormBuilder,
-    public dialogRef: MatDialogRef<ContractAddDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
+    public dialogRef: MatDialogRef<ContractAddDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: AddEditDialogState) {
+    super();
     this.form = this.fb.group({
       id: [''],
       title: [''],
@@ -34,8 +47,15 @@ export class ContractAddDialogComponent implements OnInit {
       details: [''],
       attachments: [null]
     });
-    if (data)
-      this.formToEntity(data['formValues'] as Contract);
+    if (data) {
+      this.state = data.state;
+      if (this.state === AddEditState.Edit) {
+        this.formToEntity(data.formValues);
+        this.title = 'Edit ' + data.formValues['title'];
+      } else {
+        this.title = 'Add ' + data.formValues['title'];
+      }
+    }
   }
 
   private formToEntity(contract: Contract): void {
@@ -50,11 +70,16 @@ export class ContractAddDialogComponent implements OnInit {
 
   ngOnInit() { }
 
+  public onSave(): void {
+    this.save(this.form.value as Contract)
+      .subscribe(() => this.dialogRef.close(true));
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  public drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
   }
 }

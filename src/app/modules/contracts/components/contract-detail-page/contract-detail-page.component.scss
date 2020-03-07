@@ -5,19 +5,9 @@
     height: 200px;
   }
 }
-.il-fab {
-  @include il-fab;
-  left: 95%;
-  top: 90%;
-  &.default {
-    left: 95%;
-    top: 75%;
-  }
-}
 .footer > div {
   @include fade-in;
 }
-
 .hidden {
   display: none;
 }
