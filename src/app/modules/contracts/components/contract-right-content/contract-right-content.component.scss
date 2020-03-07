@@ -9,6 +9,11 @@
 }
 .right-content {
   > div {
+    &:first-child {
+      padding: 14px 9px 14px 14px;
+      font-size: 14px;
+      font-weight: 550;
+    }
     &:nth-child(2) {
       height: 100%;
       min-height: 100%;
@@ -58,11 +63,6 @@
       padding: 20px 15px 0 15px;
     }
   }
-}
-.title {
-  padding: 14px 9px 14px 7px;
-  font-size: 14px;
-  font-weight: 550;
 }
 .close-icon {
   cursor: pointer;
