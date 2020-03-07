@@ -41,7 +41,7 @@
             </div>
           </div>
           <div fxFlex class="image-container">
-            <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+            <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
               <div cdkDrag *ngFor="let img of contractImages" fxLayoutAlign="center center">
                 <img [src]="imgPath + 'product-img.png'">
               </div>
