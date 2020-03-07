@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 
 export class ContractCardComponent implements OnInit {
   public svgPath: string = environment.svgPath;
+  public imgPath: string = environment.imgPath;
   constructor(private router: Router) { }
 
   ngOnInit() { }
