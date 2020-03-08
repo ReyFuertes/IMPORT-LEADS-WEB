@@ -1,3 +1,5 @@
+import { AddEditState } from './../../../../shared/generics/generic.model';
+import { InspectionRunCommentDialogComponent } from './../../../dialogs/components/inspection-run-comment/inspection-run-comment-dialog.component';
 import { InspectionCommentDialogComponent } from './../../../dialogs/components/inspection-comments/inspection-comments-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
@@ -51,5 +53,12 @@ export class InspectionQualityRequirementComponent implements OnInit {
   public onRemarks(): void {
     const dialogRef = this.dialog.open(InspectionCommentDialogComponent, {});
     dialogRef.afterClosed().subscribe(result => { });
+  }
+
+  public showComment(): void {
+    const dialogRef = this.dialog.open(InspectionRunCommentDialogComponent, {
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe();
   }
 }

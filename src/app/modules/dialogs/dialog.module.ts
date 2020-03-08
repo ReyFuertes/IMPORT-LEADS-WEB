@@ -1,3 +1,4 @@
+import { InspectionRunCommentDialogComponent } from './components/inspection-run-comment/inspection-run-comment-dialog.component';
 import { ContractSpecTitleDialogComponent } from './components/contract-spec-title/contract-spec-title-dialog.component';
 import { ContractProductSpecDialogComponent } from './components/contract-product-spec/contract-product-spec-dialog.component';
 import { InspectionCommentDialogComponent } from './components/inspection-comments/inspection-comments-dialog.component';
@@ -22,7 +23,8 @@ const dialogComponents = [
   VenuesAddDialogComponent,
   UserAddDialogComponent,
   ContractProductSpecDialogComponent,
-  ContractSpecTitleDialogComponent
+  ContractSpecTitleDialogComponent,
+  InspectionRunCommentDialogComponent
 ];
 
 const materialModules = [
