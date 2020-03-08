@@ -58,6 +58,10 @@ export class VenueProductsComponent  extends GenericPanelComponent implements On
 
   ngOnInit() { }
 
+  public dragStarted(event: any) {
+    this.dragStart = event;
+  }
+
   public getToolTip(product: RelatedProduct[]): string {
     let tooltip = '';
     for (const entry of product) {
