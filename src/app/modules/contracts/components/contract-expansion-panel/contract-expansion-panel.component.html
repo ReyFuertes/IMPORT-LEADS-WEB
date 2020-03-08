@@ -46,7 +46,7 @@
       <ng-template #titleInLabelMode>
         <div fxFlex class="title-col" (click)="onSelect(0)">
           <div fxFlex="20px"><img [ngClass]="{'hidden': !onTitleHover(i) }" cdkDragHandle [src]="svgPath + 'drag-icon.svg'" /></div>
-          <div fxFlex fxLayoutAlign="start start">
+          <div fxFlex fxLayoutAlign="start center">
             <span>{{ p.title }}</span>
           </div>
           <div [ngClass]="{'hidden': !onTitleHover(i)}" fxFlex="25px" fxLayoutAlign="start center">
