@@ -81,6 +81,10 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
     }
   }
 
+  public dragStarted(event: any) {
+    this.dragStart = event;
+  }
+
   public drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.users, event.previousIndex, event.currentIndex);
     this.dragStart = false;

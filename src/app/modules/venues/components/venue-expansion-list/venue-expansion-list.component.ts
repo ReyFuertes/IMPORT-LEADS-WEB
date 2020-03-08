@@ -1,3 +1,4 @@
+import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit, Input } from '@angular/core';
 import { RelatedProduct } from '../../venues.models';
 
@@ -16,4 +17,13 @@ export class VenueExpansionListComponent implements OnInit {
 
   ngOnInit() { }
 
+  public dragStart: boolean = false;
+  public drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.dragStart = false;
+  }
+
+  public dragStarted(event: any) {
+    this.dragStart = event;
+  }
 }

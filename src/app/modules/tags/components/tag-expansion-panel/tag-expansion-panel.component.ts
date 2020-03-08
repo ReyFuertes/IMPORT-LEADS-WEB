@@ -28,4 +28,8 @@ export class TagExpansionPanelComponent extends GenericPanelComponent implements
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
     this.dragStart = false;
   }
+
+  public dragStarted(event: any) {
+    this.dragStart = event;
+  }
 }

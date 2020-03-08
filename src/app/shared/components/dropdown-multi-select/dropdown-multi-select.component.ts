@@ -13,40 +13,28 @@ import * as _ from 'lodash';
   styleUrls: ['./dropdown-multi-select.component.scss']
 })
 export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChanges {
-
   @Input()
   public placeHolder: string = '';
-
   @Input()
   public multiSelectDropdown: boolean = false;
-
   @Input()
   public searchItem: boolean = false;
-
   @Input()
   public isRequired: boolean = false;
-
   @Input()
   public dataList: any[] = [];
-
   @Input()
   public clearOption: Observable<void>;
-
   @Input()
   public addItem: any;
-
   @Input()
   public removeItem: any;
-
   @Input()
   public errorMessage: string;
-
   @Input()
   public validate: boolean;
-
   @Input()
   public selectItem: any;
-
   @Output()
   public selectItemChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -56,20 +44,17 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
   public form: FormGroup;
   public dataFilterForm: FormControl = new FormControl();
   public filteredData$: ReplaySubject<any> = new ReplaySubject<any>();
-
   private newDataList: any;
-
   protected _unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
+    this.form = this.fb.group({
       formSelectedItem: [null, (this.isRequired) ? [Validators.compose([Validators.required])] : []]
     });
 
     this.newDataList = this.dataList.slice();
-
     this.filteredData$.next(this.newDataList);
 
     this.dataFilterForm.valueChanges
