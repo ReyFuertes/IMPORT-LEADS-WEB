@@ -35,9 +35,11 @@
 
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'items'" placeholder="Items checked for this run"></il-input>
-    <button class="il-button il-bg-blue" mat-flat-button>
-      <span>Select Product</span>
-    </button>
+    <div fxFlex fxLayoutAlign="end center">
+      <button class="il-button il-bg-blue" mat-flat-button>
+        <span>Select Product</span>
+      </button>
+    </div>
   </div>
   <div>
     <il-inspection-quality-requirement></il-inspection-quality-requirement>
