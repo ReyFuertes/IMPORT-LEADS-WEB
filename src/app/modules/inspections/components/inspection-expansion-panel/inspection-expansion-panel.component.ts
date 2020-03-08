@@ -54,6 +54,10 @@ export class InspectionExpansionPanelComponent extends GenericPanelComponent imp
     ];
   }
 
+  public dragStarted(event: any) {
+    this.dragStart = event;
+  }
+
   public onEdit = () => {
     this.router.navigateByUrl('/dashboard/inspections/run-template');
   }

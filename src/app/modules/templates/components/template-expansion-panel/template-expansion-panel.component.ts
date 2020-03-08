@@ -31,4 +31,8 @@ export class TemplateExpansionPanelComponent extends GenericPanelComponent imple
       pnl.close();
     }
   }
+
+  public dragStarted(event: any) {
+    this.dragStart = event;
+  }
 }
