@@ -11,7 +11,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
   {
     position: 1, conditions: 'All parts shall be in color and materials as shown in the quotation.',
-    verification: [{ label: 'Ok', value: false }, { label: 'Failed', value: true }, { label: 'Comment', value: false }],
+    verification: [{ label: 'Ok', value: true }, { label: 'Failed', value: false }, { label: 'Comment', value: false }],
     remarks: ''
   },
   {
