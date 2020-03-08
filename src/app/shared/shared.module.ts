@@ -1,3 +1,4 @@
+import { InputMaxLengthDirective } from './directives/input-maxlen.directive';
 import { EllipseMenuComponent } from './components/ellipse-menu/ellipse-menu.component';
 import { ExpansionPanelComponent } from './components/expansion-panel/expansion-panel.component';
 import { ExpandablePanelComponent } from './components/expandable-panel/expandable-panel.component';
@@ -81,7 +82,8 @@ const sharedComponents = [
 ];
 
 const directives = [
-  NumberOnlyDirective
+  NumberOnlyDirective,
+  InputMaxLengthDirective
 ];
 
 @NgModule({

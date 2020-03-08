@@ -4,10 +4,15 @@
   </div>
   <div class="actions-panel" fxLayout="row" fxLayoutAlign="start center">
     <div fxFlex="40" fxLayoutGap="5px">
-      <button (click)="onBack()" class="il-button il-bordered-blue" mat-flat-button>
+      <button [matMenuTriggerFor]="appMenu" class="il-button il-bordered-blue" mat-flat-button>
         <img [src]="svgPath + 'enter-icon-blue.svg'" />
         <span>Navigate to</span>
       </button>
+      <mat-menu #appMenu="matMenu">
+        <button (click)="$event.stopPropagation();" mat-menu-item>
+          <il-input fxFlex="100" [form]="formNavigateTo" isFloatLabel="false" [controlName]="'position'" placeholder="Item Position"></il-input>
+        </button>
+      </mat-menu>
       <button class="il-button il-bordered-blue" mat-flat-button>
         <img [src]="svgPath + 'delete-icon-blue.svg'" />
         <span>Delete current and go back </span>
@@ -34,10 +39,12 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-    <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'items'" placeholder="Items checked for this run"></il-input>
-    <button class="il-button il-bg-blue" mat-flat-button>
-      <span>Select Product</span>
-    </button>
+    <il-input fxFlex="25" [form]="form" isFloatLabel="true" [inputMaxLen]="10" [controlName]="'items'" placeholder="Items checked for this run"></il-input>
+    <div fxFlex fxLayoutAlign="end center">
+      <button class="il-button il-bg-blue" mat-flat-button>
+        <span>Select Product</span>
+      </button>
+    </div>
   </div>
   <div>
     <il-inspection-quality-requirement></il-inspection-quality-requirement>
