@@ -35,7 +35,7 @@
 
       <!-- description templates -->
       <ng-template #descInEditMode>
-        <il-quill-editor (closeEmitter)="onSelect(1)" [value]="p?.description"></il-quill-editor>
+        <il-tinymce-editor [value]="p?.description"></il-tinymce-editor>
         <ng-container *ngTemplateOutlet="actionBtns"></ng-container>
       </ng-template>
       <ng-template #descInLabelMode>

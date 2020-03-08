@@ -7,8 +7,11 @@
       <il-sort></il-sort>
     </div>
   </div>
-  <div fxLayout="column" fxLayoutGap="20px">
-    <il-contract-card *ngFor="let card of [0, 1, 2]"></il-contract-card>
+  <div fxLayout="column" fxLayoutGap="20px" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div cdkDrag (cdkDragStarted)="dragStarted(true)" *ngFor="let card of cards">
+      <img class="dd-img" cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
+      <il-contract-card ></il-contract-card>
+    </div>
   </div>
 </div>
 

@@ -1,4 +1,11 @@
 @import "src/styleguide/shared";
+.dd-img {
+  position: relative;
+  top: 25px;
+  left: 6px;
+  z-index: 1;
+  cursor: move;
+}
 .il-fab {
   @include il-fab;
   left: 95%;

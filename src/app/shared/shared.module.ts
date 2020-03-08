@@ -30,6 +30,8 @@ import { DropdownMultiSelectComponent } from './components/dropdown-multi-select
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { PopoverSelectComponent } from './components/popover-select/popover-select.component';
 import { PopoverMultiSelectComponent } from './components/popover-multi-select/popover-multi-select.component';
+import { TinymceEditorComponent } from './components/tinymce-editor/tinymce-editor.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 const materialModules = [
   MatListModule,
@@ -74,7 +76,8 @@ const sharedComponents = [
   ExpansionPanelComponent,
   EllipseMenuComponent,
   PopoverSelectComponent,
-  PopoverMultiSelectComponent
+  PopoverMultiSelectComponent,
+  TinymceEditorComponent
 ];
 
 const directives = [
@@ -88,6 +91,7 @@ const directives = [
     FlexLayoutModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
+    EditorModule,
     ...materialModules,
     ...primeNgModules,
     RouterModule,

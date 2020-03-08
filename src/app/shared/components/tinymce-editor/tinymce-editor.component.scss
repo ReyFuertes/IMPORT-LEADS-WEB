@@ -1,0 +1,10 @@
+@import "src/styleguide/shared";
+:host ::ng-deep {
+  .tm-container {
+    height: 100%;
+  }
+
+  .tox-statusbar {
+    display: none !important;
+  }
+}
