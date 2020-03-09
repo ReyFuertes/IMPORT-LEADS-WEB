@@ -14,6 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { VenuesAddDialogComponent } from './components/venues/venues-add-dialog.component';
 import { UserAddDialogComponent } from './components/users/user-add-dialog.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ContractTemplateDialogComponent } from './components/contract-template/contract-template-dialog.component';
 
 const dialogComponents = [
   ContractAddDialogComponent,
@@ -24,7 +25,8 @@ const dialogComponents = [
   UserAddDialogComponent,
   ContractProductSpecDialogComponent,
   ContractSpecTitleDialogComponent,
-  InspectionRunCommentDialogComponent
+  InspectionRunCommentDialogComponent,
+  ContractTemplateDialogComponent
 ];
 
 const materialModules = [

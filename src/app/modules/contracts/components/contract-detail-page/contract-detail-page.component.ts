@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject, Output, EventEmitter } from '@angular/core';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts/contract-add-dialog.component';
+import { ContractTemplateDialogComponent } from 'src/app/modules/dialogs/components/contract-template/contract-template-dialog.component';
 import { GenericPageDetailComponent } from 'src/app/shared/generics/generic-page-detail';
 import { Observable, fromEvent } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -64,18 +65,24 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
         action: this.editContract
       },
       {
-        id: 4,
+        id: 2,
         label: 'Download',
         icon: 'download-icon-blue.svg'
       },
       {
-        id: 5,
+        id: 3,
         label: 'Create or update template',
         icon: 'templates-icon-blue.svg',
         action: this.createUpdateTemplate
       },
       {
-        id: 6,
+        id: 4,
+        label: 'Save as template',
+        icon: 'save-icon-blue.svg',
+        action: this.saveAsTemplate
+      },
+      {
+        id: 5,
         label: 'Delete contract',
         icon: 'delete-icon-red.svg'
       }
@@ -97,6 +104,16 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
 
   public editContract = (): void => {
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {
+      data: {
+        formValues: this.form.value,
+        state: AddEditState.Edit
+      }
+    });
+    dialogRef.afterClosed().subscribe();
+  }
+
+  public saveAsTemplate = (): void => {
+    const dialogRef = this.dialog.open(ContractTemplateDialogComponent, {
       data: {
         formValues: this.form.value,
         state: AddEditState.Edit
