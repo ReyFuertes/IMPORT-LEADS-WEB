@@ -61,8 +61,15 @@
     </div>
   </mat-card>
 
-  <il-contract-product-specs [isRightNavOpen]="showRightNav"></il-contract-product-specs>
-
+  <div fxLayout="column" fxLayoutGap="20px" cdkDropList (cdkDropListDropped)="dropSpecs($event)">
+    <div *ngFor="let specification of specifications">
+      <il-contract-product-specs-title *ngIf="specification.title" 
+        cdkDrag (cdkDragStarted)="dragStartedSpecs(true)" [specification]="specification"
+        (removeSpecTitleEmitter)="handleRemoveSpecsTitle($event)"></il-contract-product-specs-title>
+      <il-contract-product-specs [isRightNavOpen]="showRightNav" [specification]="specification"></il-contract-product-specs>
+    </div>
+  </div>
+  
   <p-sidebar class="il-rightnav" [(visible)]="showRightNav" position="right" [showCloseIcon]="false">
     <div class="upper-pane">
       <il-contract-right-content (closeEmitter)="showRightNav = $event"></il-contract-right-content>

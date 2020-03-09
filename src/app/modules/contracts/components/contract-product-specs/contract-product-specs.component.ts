@@ -2,7 +2,7 @@ import { ContractSpecTitleDialogComponent } from './../../../dialogs/components/
 import { ContractProductSpecDialogComponent } from './../../../dialogs/components/contract-product-spec/contract-product-spec-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'il-contract-product-specs',
@@ -39,6 +39,8 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
   @Input()
   public specTitle: string = 'Specification title';
   @Input()
+  public specification: Array<{ id: number, title: string, specification?: any}>;
+  @Input()
   public isRightNavOpen: boolean = false;
   public showToggle: boolean = false;
 
@@ -56,8 +58,9 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
   public addTitle(): void {
     const dialogRef = this.dialog.open(ContractSpecTitleDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      if(result) this.specTitle = result;
-      console.log('The dialog was closed', result);
+      if (result) {
+        this.specification['title'] = result;
+      }
     });
   }
 

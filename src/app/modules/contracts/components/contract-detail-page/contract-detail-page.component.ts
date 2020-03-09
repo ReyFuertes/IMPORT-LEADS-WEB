@@ -22,6 +22,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
   public options: Array<{ id: number, label: string, icon: string, action?: () => void }>;
   public _showTabActions: boolean = false;
   public showRightNav: boolean = false;
+  public dragStartSpecs: boolean = false;
   public contractImages: ProductImage[] = [{
     id: 1,
     name: 'product-img.png'
@@ -38,6 +39,17 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
     id: 5,
     name: 'product-img.png'
   }];
+
+  public specifications: Array<{ id: number, title: string, specification?: any}> = [
+    {
+      id: 1,
+      title: ''
+    },
+    {
+      id: 2,
+      title: ''
+    }
+  ];
 
   @Output()
   public openNavChange = new EventEmitter<boolean>();
@@ -124,5 +136,17 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
 
   public drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
+  }
+
+  public dropSpecs(event: CdkDragDrop<any[]>) {
+    moveItemInArray(this.specifications, event.previousIndex, event.currentIndex);
+  }
+
+  public dragStartedSpecs(event: any) {
+    this.dragStartSpecs = event;
+  }
+
+  public handleRemoveSpecsTitle(specificationId: number) {
+    this.specifications.find(spec => spec.id === specificationId).title = '';
   }
 }
