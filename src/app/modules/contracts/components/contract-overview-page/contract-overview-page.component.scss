@@ -10,7 +10,7 @@
   border-radius: 0px;
   background: none;
   box-shadow: none;
-  width: 100%;
+  width: inherit;
 }
 .il-fab {
   @include il-fab;
