@@ -21,11 +21,6 @@
   @include il-draggable-expansion;
 }
 
-.actions-col {
-  > div {
-    height: 50px;
-  }
-}
 ::ng-deep {
   .cdk-drag-preview {
     place-content: stretch flex-start;
@@ -35,8 +30,6 @@
     display: flex;
     height: 48px;
     border-radius: 0 !important;
-    > div {
-      width: 40px;
-    }
+    @extend .il-draggable-expansion; 
   }
 }
