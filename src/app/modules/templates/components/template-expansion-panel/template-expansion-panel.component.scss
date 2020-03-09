@@ -18,3 +18,10 @@
     flex-wrap: nowrap;
   }
 }
+::ng-deep {
+  .cdk-drag-preview {
+    border-radius: 0 !important;
+    @extend .il-draggable-expansion; 
+  }
+}
+

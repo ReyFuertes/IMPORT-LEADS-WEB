@@ -45,3 +45,9 @@
     padding-left: 15px;
   }
 }
+::ng-deep {
+  .cdk-drag-preview {
+    border-radius: 0 !important;
+    @extend .il-draggable-expansion; 
+  }
+}

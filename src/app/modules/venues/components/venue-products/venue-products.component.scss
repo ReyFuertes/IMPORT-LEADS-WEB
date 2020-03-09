@@ -48,3 +48,9 @@ mat-icon {
     line-height: 18px;
   }
 }
+::ng-deep {
+  .cdk-drag-preview {
+    border-radius: 0 !important;
+    @extend .il-draggable-expansion; 
+  }
+}
