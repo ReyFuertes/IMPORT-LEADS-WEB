@@ -91,7 +91,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
         id: 4,
         label: 'Save as template',
         icon: 'save-icon-blue.svg',
-        action: this.saveAsTemplate
+        action: this.saveContractAsTemplate
       },
       {
         id: 5,
@@ -124,7 +124,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
     dialogRef.afterClosed().subscribe();
   }
 
-  public saveAsTemplate = (): void => {
+  public saveContractAsTemplate = (): void => {
     const dialogRef = this.dialog.open(ContractTemplateDialogComponent, {
       data: {
         formValues: this.form.value,
