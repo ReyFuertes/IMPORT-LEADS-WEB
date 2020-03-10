@@ -9,7 +9,7 @@ import { environment } from './../../../../../environments/environment';
 export class ContractProductSpecsTitleComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public specification: Array<{ id: number, title: string, specification?: any}>;
+  public specification: { id: number, title: string };
   @Output()
   public removeSpecTitleEmitter = new EventEmitter<number>();
   constructor() { }
