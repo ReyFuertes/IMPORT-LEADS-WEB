@@ -1,11 +1,13 @@
 
 <div fxLayout="column">
   <div>
-    <div class="tab-header">
-      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-        <span>{{ tabTitle }}</span>
-        <img (click)="UpdateProductSpecTitle()" [src]="svgPath + 'save-icon-blue.svg'" />
+    <div fxLayout="row" fxLayoutGap="5px">
+      <div class="tab-header" >
+        <div fxLayoutAlign="center center">
+          <span>{{ tabTitle }}</span>
+        </div>
       </div>
+      <img (click)="UpdateProductSpecTitle()" [src]="svgPath + 'save-icon-blue.svg'" />
     </div>
     <mat-tab-group class="il-tab">
       <mat-tab class="tab-1">
