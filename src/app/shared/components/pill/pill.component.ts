@@ -16,6 +16,8 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
   public selectable: boolean = false;
   @Output()
   public removeEmitter = new EventEmitter<number>();
+  @Input()
+  public enableHighlight: boolean = false;
   constructor() {
     super();
   }
@@ -29,7 +31,15 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
 
   @ViewChild('btn', { static: false }) ev: any;
   public onHighlightProduct(event: any): void {
+    if (this.enableHighlight === false ) {
+      return;
+    }
     const products = Array.from(document.querySelectorAll('.il-pill'));
-    event.target.parentElement.classList.add('selected');
+    const classes = event.target.parentElement.classList.value;
+    if (classes.indexOf('selected') !== -1) {
+      event.target.parentElement.classList.remove('selected');
+    } else {
+      event.target.parentElement.classList.add('selected');
+    }
   }
 }
