@@ -11,7 +11,6 @@ import { InspectionQualityRequirementComponent } from './components/inspection-q
 import { InspectionRunPageComponent } from './components/inspection-run-page/inspection-run-page.component';
 import { InspectionPanelDetailComponent } from './components/inspection-panel-detail/inspection-panel-detail.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { InspectionExpansionPanelComponent } from './components/inspection-expansion-panel/inspection-expansion-panel.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './../../shared/shared.module';
@@ -22,6 +21,8 @@ import { InspectionsContainerComponent } from './container/inspections-container
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule, MatTabsModule, MatButtonModule, MatListModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatSelectModule, MatExpansionModule, MatCardModule, MatDialogModule, MatSlideToggleModule, MatTooltipModule, MatTableModule, MatRadioModule } from '@angular/material';
 import { ChartsModule } from 'ng2-charts';
+import { InspectionActivePanelComponent } from './components/inspection-active-panel/inspection-active-panel.component';
+import { InspectionFinishedPanelComponent } from './components/inspection-finished-panel/inspection-finished-panel.component';
 
 const routes: Routes = [
   {
@@ -84,7 +85,6 @@ const primeNgModules = [];
   declarations: [
     InspectionsContainerComponent,
     InspectionPageComponent,
-    InspectionExpansionPanelComponent,
     InspectionPanelDetailComponent,
     InspectionRunPageComponent,
     InspectionQualityRequirementComponent,
@@ -95,7 +95,9 @@ const primeNgModules = [];
     InspectionReportProductsComponent,
     InspectionReportTagsComponent,
     InspectionReportFailuresComponent,
-    InspectionReportCommentsComponent
+    InspectionReportCommentsComponent,
+    InspectionActivePanelComponent,
+    InspectionFinishedPanelComponent
   ],
   providers: [],
 })

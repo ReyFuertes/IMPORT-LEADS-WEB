@@ -11,14 +11,14 @@
     <mat-tab label="Active Inspections">
       <ng-template matTabContent>
         <div fxLayout="column" fxLayoutAlign="start center">
-          <il-inspection-expansion-panel [colsHeaders]="ctCols" [items]="items"></il-inspection-expansion-panel>
+          <il-inspection-active-panel [colsHeaders]="ctCols" [items]="items"></il-inspection-active-panel>
         </div>
       </ng-template>
     </mat-tab>
     <mat-tab label="Finished Inspections">
       <ng-template matTabContent>
         <div fxLayout="column" fxLayoutAlign="start center">
-          <il-inspection-expansion-panel [colsHeaders]="catCols" [items]="items"></il-inspection-expansion-panel>
+          <il-inspection-finished-panel [colsHeaders]="catCols" [items]="items"></il-inspection-finished-panel>
         </div>
       </ng-template>
     </mat-tab>

@@ -1,18 +1,17 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-import { SimpleItem, Menu } from './../../../../shared/generics/generic.model';
+import { Menu } from './../../../../shared/generics/generic.model';
 import { InspectionPanelModel } from './../../inspections.models';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
 
 @Component({
-  selector: 'il-inspection-expansion-panel',
-  templateUrl: './inspection-expansion-panel.component.html',
-  styleUrls: ['./inspection-expansion-panel.component.scss']
+  selector: 'il-inspection-active-panel',
+  templateUrl: './inspection-active-panel.component.html',
+  styleUrls: ['./inspection-active-panel.component.scss']
 })
-
-export class InspectionExpansionPanelComponent extends GenericPanelComponent implements OnInit {
+export class InspectionActivePanelComponent extends GenericPanelComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
   public menus: Menu[];
@@ -35,10 +34,9 @@ export class InspectionExpansionPanelComponent extends GenericPanelComponent imp
   ngOnInit() {
     this.menus =  [
       {
-        label: 'EDIT',
-        value: 'EDIT',
-        icon: 'edit-icon-black.svg',
-        action: this.onEdit
+        label: 'RUN',
+        value: 'RUN',
+        icon: 'edit-icon-black.svg'
       },
       {
         label: 'REPORT',
@@ -73,4 +71,5 @@ export class InspectionExpansionPanelComponent extends GenericPanelComponent imp
       pnl.close();
     }
   }
+
 }

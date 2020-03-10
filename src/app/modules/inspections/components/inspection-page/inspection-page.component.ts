@@ -14,6 +14,9 @@ export class InspectionPageComponent implements OnInit {
       title: 'Wood bead bracelet production contract',
       assignedTo: "Rey Fuertes",
       dateRun: '06.10.2019',
+      startDate: '06.10.2019',
+      endDate: '06.10.2019',
+      totalAmount: 200,
       products: [
         {
           label: 'Touch Dimmer Switch',
@@ -26,6 +29,9 @@ export class InspectionPageComponent implements OnInit {
       title: 'Wood bead bracelet inspection (WW)',
       assignedTo: "Tammy Li | CIL China | Procurement officer",
       dateRun: '06.10.2019',
+      startDate: '06.10.2019',
+      endDate: '06.10.2019',
+      totalAmount: 200,
       products: [
         {
           label: 'Touch Dimmer Switch',
@@ -38,6 +44,9 @@ export class InspectionPageComponent implements OnInit {
       title: 'CH EUS20190529',
       assignedTo: "Tammy Li | CIL China | Procurement officer",
       dateRun: '06.10.2019',
+      startDate: '06.10.2019',
+      endDate: '06.10.2019',
+      totalAmount: 200,
       products: [
         {
           label: 'Touch Dimmer Switch',
@@ -50,6 +59,9 @@ export class InspectionPageComponent implements OnInit {
       title: 'ZS-4665 New Square watch',
       assignedTo: "Tammy Li | CIL China | Procurement officer",
       dateRun: '06.10.2019',
+      startDate: '06.10.2019',
+      endDate: '06.10.2019',
+      totalAmount: 200,
       products: [
         {
           label: 'Touch Dimmer Switch',
@@ -61,17 +73,33 @@ export class InspectionPageComponent implements OnInit {
   public ctCols: Array<{label: string, width?: string | number}> = [
     {
       label: 'Contract Name',
-      width: 40
+      width: 27
     },
     {
       label: 'Assigned to',
-      width: 100
+      width: 28
     },
     {
-      label: 'Desired Run Date',
-      width: 20
+      label: 'Configured Run Date',
+      width: 10
+    },
+    {
+      label: 'Start Date',
+      width: 10
+    },
+    {
+      label: 'End Date',
+      width: 10
+    },
+    {
+      label: 'Total Amount',
+      width: 10
+    },
+    {
+      label: '',
+      width: 5
     }
-  ]
+  ];
   public catCols: Array<{label: string, width?: string | number}> = [
     {
       label: 'Contract Name',
@@ -81,7 +109,7 @@ export class InspectionPageComponent implements OnInit {
       label: 'Assigned to',
       width: 100
     }
-  ]
+  ];
   constructor() { }
 
   ngOnInit() { }

@@ -4,5 +4,8 @@ export interface InspectionPanelModel {
   title: string;
   assignedTo?: string;
   dateRun?: string;
-  products?: SimpleItem[]
+  startDate?: string;
+  endDate?: string;
+  totalAmount?: number;
+  products?: SimpleItem[];
 }

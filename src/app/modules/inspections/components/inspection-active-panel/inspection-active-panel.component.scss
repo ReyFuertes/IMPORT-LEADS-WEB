@@ -7,7 +7,7 @@
   margin-bottom: 0 !important;
   color: $color-gray-1;
   background-color: $color-white;
-  padding-left: 28px;
+  padding-left: 15px;
   padding-right: 10px;
 }
 .pnl-header {
@@ -43,6 +43,12 @@
   .mat-expansion-panel-header {
     padding-right: 10px;
     padding-left: 15px;
+  }
+
+  .il-pill {
+    img {
+      display: none !important;
+    }
   }
 }
 ::ng-deep {
