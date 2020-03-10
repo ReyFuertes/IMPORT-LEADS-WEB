@@ -1,6 +1,7 @@
 import { SimpleItem } from './../../generics/generic.model';
 import { GenericControl } from './../../generics/generic-control';
 import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControlName } from '@angular/forms';
 
 @Component({
   selector: 'il-dropdown-select',
@@ -9,9 +10,22 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 
 export class DropdownSelectComponent extends GenericControl<SimpleItem> implements OnInit {
+  @Input()
+  public items: SimpleItem[];
+  @Input()
+  public placeholder: string = '';
+  @Input()
+  public controlName: FormControlName;
+  @Input()
+  public form: FormGroup;
+  public initValue: number;
   constructor() {
     super();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.form) {
+      this.initValue = 1;
+    }
+   }
 }

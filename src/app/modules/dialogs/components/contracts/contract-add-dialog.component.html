@@ -8,9 +8,9 @@
   <div class="content">
     <div *ngIf="form" fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="40px">
       <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'title'" placeholder="title"></il-input>
-      <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'venue'" placeholder="venue"></il-input>
-      <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'startDate'" placeholder="Start Date"></il-input>
-      <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'deliveryDate'" placeholder="Delivery Date"></il-input>
+      <il-dropdown-select fxFlex="25" [form]="form" [controlName]="'venue'" placeholder="venue" [items]="venues"></il-dropdown-select>
+      <il-datepicker fxFlex="25" [form]="form" [controlName]="'startDate'" [placeholder]="'Start Date'"></il-datepicker>
+      <il-datepicker fxFlex="25" [form]="form" [controlName]="'deliveryDate'" [placeholder]="'Delivery Date'"></il-datepicker>
     </div>
     <div fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="40px">
       <il-textarea fxFlex="50" rows="2" isFloatLabel="true" [form]="form" [controlName]="'details'" placeholder="Details"></il-textarea>

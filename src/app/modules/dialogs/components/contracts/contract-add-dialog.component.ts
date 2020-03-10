@@ -33,6 +33,20 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<Contract
     id: 5,
     name: 'product-img.png'
   }];
+  public venues: Array<{ label: string, value?: number | string}> = [
+    {
+      label: 'Canhui toys limited',
+      value: 1
+    },
+    {
+      label: 'Canhui toys limited 2',
+      value: 2
+    },
+    {
+      label: 'Canhui toys limited 3',
+      value: 3
+    }
+  ];
   public title: string = 'Add';
   constructor(
     public fb: FormBuilder,

@@ -14,7 +14,7 @@
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <il-input-select fxFlex="25" [form]="form" [controlName]="'name'"></il-input-select>
       <il-input fxFlex="25" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
-      <il-input fxFlex="25" [form]="form" isNumberOnly="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
+      <il-input fxFlex="25" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
       <button [disabled]="!form.valid" mat-flat-button class="il-button primary" (click)="addProduct()">
         Add Product
       </button>

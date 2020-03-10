@@ -60,8 +60,8 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
       id: ['c28c801d-6556-42aa-8b8c-072f7eb4b17d'],
       title: ['PI SK19NL0806-1 Touch Dim'],
       venue: ['Canhui toys limited'],
-      startDate: ['01.09.2019'],
-      deliveryDate: ['30.12.2019'],
+      startDate: [new Date('01/09/2019')],
+      deliveryDate: [new Date('03/12/2019')],
       details: ['Lorem Ipsum is simply dummy text of the printing industry'],
       attachments: [null]
     });
@@ -83,7 +83,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
       },
       {
         id: 3,
-        label: 'Create or update template',
+        label: 'Create or update checklist',
         icon: 'templates-icon-blue.svg',
         action: this.createUpdateTemplate
       },
