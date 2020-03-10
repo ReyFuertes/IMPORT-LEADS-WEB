@@ -36,12 +36,10 @@
     height: 20px;
     font-size: 14px;
     font-weight: 500;
-    img {
-      cursor: pointer;
-      position: relative;
-      left: 20px;
-    }
   }
+}
+.save-icon {
+  cursor: pointer;
 }
 .il-tab {
   @include il-tab;
