@@ -18,3 +18,14 @@
     cursor: pointer;
   }
 }
+
+.hidden {
+  height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  img {
+    display: none;
+  }
+}
+
+

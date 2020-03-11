@@ -63,8 +63,7 @@
 
   <div fxLayout="column" fxLayoutGap="20px" cdkDropList (cdkDropListDropped)="dropSpecs($event)">
     <div *ngFor="let specification of specifications">
-      <il-contract-product-specs-title *ngIf="specification.title" 
-        cdkDrag (cdkDragStarted)="dragStartedSpecs(true)" [specification]="specification"
+      <il-contract-product-specs-title cdkDrag (cdkDragStarted)="dragStartedSpecs(true)" [specification]="specification"
         (removeSpecTitleEmitter)="handleRemoveSpecsTitle($event)"></il-contract-product-specs-title>
       <il-contract-product-specs [isRightNavOpen]="showRightNav" [specification]="specification"></il-contract-product-specs>
     </div>
