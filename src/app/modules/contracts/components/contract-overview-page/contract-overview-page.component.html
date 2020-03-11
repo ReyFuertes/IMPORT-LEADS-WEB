@@ -10,7 +10,7 @@
   <div fxLayout="column" fxLayoutGap="20px" cdkDropList (cdkDropListDropped)="drop($event)">
     <div cdkDrag (cdkDragStarted)="dragStarted(true)" *ngFor="let card of cards">
       <img class="dd-img" cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
-      <il-contract-card ></il-contract-card>
+      <il-contract-card [contractNum]="card"></il-contract-card>
     </div>
   </div>
 </div>

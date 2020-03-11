@@ -1,5 +1,5 @@
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class ContractCardComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
+  @Input()
+  public contractNum: number;
   constructor(private router: Router) { }
 
   ngOnInit() { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, SimpleChanges, OnChanges, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, SimpleChanges, OnChanges, ElementRef, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ReplaySubject, Subject, Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import * as _ from 'lodash';
   templateUrl: './dropdown-multi-select.component.html',
   styleUrls: ['./dropdown-multi-select.component.scss']
 })
-export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChanges {
+export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChanges, AfterViewChecked {
   @Input()
   public placeHolder: string = '';
   @Input()
@@ -47,7 +47,8 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
   private newDataList: any;
   protected _unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -116,7 +117,7 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
     }
 
     this.filteredData$.next(
-      this.newDataList.filter(data => data.value.toLowerCase().indexOf(search) > -1)
+      this.newDataList.filter(data => data.label.toLowerCase().indexOf(search) > -1)
     );
   }
 
@@ -164,6 +165,10 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
         }
       });
     }
+  }
+
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
   }
 
 }

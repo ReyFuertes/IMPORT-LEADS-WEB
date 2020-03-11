@@ -12,7 +12,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export class ContractOverviewPageComponent implements OnInit {
   public svgPath: string = environment.svgPath;
-  public cards: number[] = [0, 1 , 2];
+  public cards: number[] = [1, 2 , 3];
 
   public dragStart: boolean = false;
   public drop(event: CdkDragDrop<string[]>) {

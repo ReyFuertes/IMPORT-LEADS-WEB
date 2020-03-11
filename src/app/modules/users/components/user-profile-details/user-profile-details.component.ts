@@ -36,4 +36,8 @@ export class UserProfileDetailsComponent implements OnInit {
    }
 
   ngOnInit() {}
+
+  public handleSelectChange(event: any) {
+    // todo
+  }
 }

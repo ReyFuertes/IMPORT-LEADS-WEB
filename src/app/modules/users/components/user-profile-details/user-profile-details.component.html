@@ -26,7 +26,7 @@
             <il-dropdown-multi-select fxFlex *ngIf="roles" placeHolder="Role"
                                     errorMessage="Role is required!" [validate]="validateDropdown"
                                     [dataList]="roles" (selectItemChange)="handleSelectChange($event)">
-          </il-dropdown-multi-select>
+            </il-dropdown-multi-select>
             <il-input fxFlex="30" [form]="form" isFloatLabel="true" [controlName]="'company'" placeholder="Company"></il-input>
           </div>
         </div>

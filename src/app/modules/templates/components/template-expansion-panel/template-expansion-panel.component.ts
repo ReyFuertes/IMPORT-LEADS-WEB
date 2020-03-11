@@ -2,6 +2,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { ContractSelectDialogComponent } from './../../../dialogs/components/contract-select/contract-select-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'il-template-expansion-panel',
@@ -13,7 +15,7 @@ export class TemplateExpansionPanelComponent extends GenericPanelComponent imple
   public svgPath: string = environment.svgPath;
   @Input()
   public items: Array<{ id: string, name: string, description1?: string, description2?: string }>;
-  constructor() {
+  constructor(public dialog: MatDialog) {
     super();
   }
 
@@ -34,5 +36,14 @@ export class TemplateExpansionPanelComponent extends GenericPanelComponent imple
 
   public dragStarted(event: any) {
     this.dragStart = event;
+  }
+
+  public onSelectContract() {
+    const dialogRef = this.dialog.open(ContractSelectDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // todo
+      }
+    });
   }
 }

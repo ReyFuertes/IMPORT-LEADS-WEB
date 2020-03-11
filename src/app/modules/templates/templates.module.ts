@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlockUIModule } from 'primeng/blockui';
 import { PanelModule } from 'primeng/panel';
+import { DialogModule } from './../dialogs/dialog.module';
 
 const routes: Routes = [
   {
@@ -55,6 +56,7 @@ const primeNgModules = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    DialogModule,
     ...materialModules,
     ...primeNgModules,
     RouterModule.forChild(routes)
