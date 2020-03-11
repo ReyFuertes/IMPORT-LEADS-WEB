@@ -33,6 +33,8 @@ import { PopoverSelectComponent } from './components/popover-select/popover-sele
 import { PopoverMultiSelectComponent } from './components/popover-multi-select/popover-multi-select.component';
 import { TinymceEditorComponent } from './components/tinymce-editor/tinymce-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { CkeditorComponent } from './components/ckeditor/ckeditor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 const materialModules = [
   MatListModule,
@@ -78,7 +80,8 @@ const sharedComponents = [
   EllipseMenuComponent,
   PopoverSelectComponent,
   PopoverMultiSelectComponent,
-  TinymceEditorComponent
+  TinymceEditorComponent,
+  CkeditorComponent
 ];
 
 const directives = [
@@ -94,6 +97,7 @@ const directives = [
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
     EditorModule,
+    CKEditorModule,
     ...materialModules,
     ...primeNgModules,
     RouterModule,

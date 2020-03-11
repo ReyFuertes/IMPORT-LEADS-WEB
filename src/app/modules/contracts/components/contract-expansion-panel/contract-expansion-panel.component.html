@@ -35,7 +35,7 @@
 
       <!-- description templates -->
       <ng-template #descInEditMode>
-        <il-tinymce-editor [value]="p?.description"></il-tinymce-editor>
+        <il-ckeditor [value]="p?.description"></il-ckeditor>
         <ng-container *ngTemplateOutlet="actionBtns"></ng-container>
       </ng-template>
       <ng-template #descInLabelMode>

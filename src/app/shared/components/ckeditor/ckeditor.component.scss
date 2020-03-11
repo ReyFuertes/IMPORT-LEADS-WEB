@@ -1,0 +1,6 @@
+@import "src/styleguide/shared";
+:host ::ng-deep {
+  .ck-content {
+    height: 150px;
+  }
+}
