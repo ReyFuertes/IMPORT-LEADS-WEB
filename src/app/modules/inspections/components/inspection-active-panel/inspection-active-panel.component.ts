@@ -32,11 +32,14 @@ export class InspectionActivePanelComponent extends GenericPanelComponent implem
   }
 
   ngOnInit() {
-    this.menus =  [
+    this.menus = [
       {
         label: 'RUN',
         value: 'RUN',
-        icon: 'edit-icon-black.svg'
+        icon: 'edit-icon-black.svg',
+        action: () => {
+          this.router.navigateByUrl('/dashboard/inspections/run-template')
+        }
       },
       {
         label: 'REPORT',
