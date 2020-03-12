@@ -13,7 +13,6 @@ export class VenuesAddDialogComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public form: FormGroup;
   public isProduct: boolean;
-  public headerLabel: string;
   public selectedItems: SimpleItem[] = [];
   public items: SimpleItem[] = [
     {
@@ -41,28 +40,14 @@ export class VenuesAddDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<VenuesAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: boolean) {
       this.isProduct = data;
-      if (this.isProduct) {
-        this.headerLabel = 'Product';
-        this.form = this.fb.group({
-          id: [''],
-          name: [''],
-          location: [''],
-          relatedProducts: [null],
-          contracts: [null],
-          inspections: [null],
-          avgPassFail: [null],
-          rating: [null],
-        });
-      } else {
-        this.headerLabel = 'Address';
-        this.form = this.fb.group({
-          id: [''],
-          name: [''],
-          location: [''],
-          contactPerson: [null],
-          phone: [null],
-        });
-      }
+      this.form = this.fb.group({
+        id: [''],
+        name: [''],
+        location: [''],
+        relatedProducts: [null],
+        contactPerson: [null],
+        phone: [null],
+      });
     }
 
   ngOnInit() {
