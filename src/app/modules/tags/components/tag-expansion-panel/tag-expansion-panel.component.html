@@ -7,7 +7,7 @@
         <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
           <div fxFlex fxLayoutAlign="start center">
-            <span *ngIf="selectedIndex !== i">{{item?.name}} 1</span>
+            <span *ngIf="selectedIndex !== i">{{item?.name}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="item?.name">
             </mat-form-field>

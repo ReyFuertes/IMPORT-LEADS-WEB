@@ -1,5 +1,6 @@
-<div>
-  <div *ngFor="let question of questions; let i= index" class="list-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+  <div cdkDrag (cdkDragStarted)="dragStarted(true)" 
+        *ngFor="let question of questions; let i= index" class="list-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <div (mouseover)="onHover(i)" (mouseleave)="mouseout()">
       <div fxFlex fxLayoutAlign="start center" fxLayoutGap="10px">
         <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />

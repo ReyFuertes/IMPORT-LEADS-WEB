@@ -35,11 +35,17 @@ export class TagOverviewPageComponent implements OnInit {
     },
     {
       id: 4,
-      name: 'Technical measurements'
+      name: 'Technical measurements',
+      questions: [
+        "Did you enclose a technical?",
+      ]
     },
     {
       id: 5,
-      name: 'Technical preformance'
+      name: 'Technical preformance',
+      questions: [
+        "Did you enclose a scheme?",
+      ]
     }
   ];
   constructor() { }
