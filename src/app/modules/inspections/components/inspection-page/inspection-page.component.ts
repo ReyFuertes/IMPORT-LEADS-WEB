@@ -70,26 +70,18 @@ export class InspectionPageComponent implements OnInit {
       ]
     }
   ];
-  public ctCols: Array<{label: string, width?: string | number}> = [
+  public ctCols: Array<{ label: string, width?: string | number }> = [
     {
       label: 'Contract Name',
-      width: 27
+      width: 35
     },
     {
       label: 'Assigned to',
-      width: 28
+      width: 35
     },
     {
       label: 'Configured Run Date',
-      width: 10
-    },
-    {
-      label: 'Start Date',
-      width: 10
-    },
-    {
-      label: 'End Date',
-      width: 10
+      width: 20
     },
     {
       label: 'Total Amount',
@@ -100,14 +92,30 @@ export class InspectionPageComponent implements OnInit {
       width: 5
     }
   ];
-  public catCols: Array<{label: string, width?: string | number}> = [
+  public catCols: Array<{ label: string, width?: string | number }> = [
     {
       label: 'Contract Name',
       width: 40
     },
     {
       label: 'Assigned to',
-      width: 100
+      width: 32
+    },
+    {
+      label: 'Start Date',
+      width: 10
+    },
+    {
+      label: 'End Date',
+      width: 10
+    },
+    {
+      label: 'Run Date',
+      width: 10
+    },
+    {
+      label: 'Total Amount',
+      width: 10
     }
   ];
   constructor() { }
