@@ -31,15 +31,13 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
 
   @ViewChild('btn', { static: false }) ev: any;
   public onHighlightProduct(event: any): void {
-    if (this.enableHighlight === false ) {
-      return;
-    }
-    const products = Array.from(document.querySelectorAll('.il-pill'));
-    const classes = event.target.parentElement.classList.value;
-    if (classes.indexOf('selected') !== -1) {
-      event.target.parentElement.classList.remove('selected');
-    } else {
-      event.target.parentElement.classList.add('selected');
+    if (this.enableHighlight === true ) {
+      const classes = event.target.parentElement.classList.value;
+      if (classes.indexOf('selected') !== -1) {
+        event.target.parentElement.classList.remove('selected');
+      } else {
+        event.target.parentElement.classList.add('selected');
+      }
     }
   }
 }
