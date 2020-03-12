@@ -3,6 +3,9 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { MatDialog } from '@angular/material/dialog';
+import { TagsQuestionDialogComponent } from 'src/app/modules/dialogs/components/tags-question/tags-question-dialog.component';
+import { Tag } from '../../tags.models';
 
 @Component({
   selector: 'il-tag-expansion-panel',
@@ -13,11 +16,11 @@ import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
 export class TagExpansionPanelComponent extends GenericPanelComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public items: Array<{ id: string, name: string, questions?: string[] }>;
+  public items: Tag[];
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     super();
   }
 
@@ -31,5 +34,16 @@ export class TagExpansionPanelComponent extends GenericPanelComponent implements
 
   public dragStarted(event: any) {
     this.dragStart = event;
+  }
+
+  public onAddQuestion(event: any, item: Tag): void {
+    event.stopPropagation();
+
+    const dialogRef = this.dialog.open(TagsQuestionDialogComponent, { data: {} });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        item.questions.push(result);
+      }
+     });
   }
 }

@@ -8,11 +8,11 @@
 .il-draggable-expansion {
   @include il-draggable-expansion;
 }
-.menu-icon {
-  &:first-child {
-    img {
-      margin-right: 7px;
-    }
+.add-icon {
+  .mat-icon {
+    color: $color-primary;
+    margin-right: 0px !important;
+    margin-top: 3px;
   }
 }
 ::ng-deep {

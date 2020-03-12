@@ -16,6 +16,8 @@ import { UserAddDialogComponent } from './components/users/user-add-dialog.compo
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ContractTemplateDialogComponent } from './components/contract-template/contract-template-dialog.component';
 import { ContractSelectDialogComponent } from './components/contract-select/contract-select-dialog.component';
+import { TagsDialogComponent } from './components/tags/tags-dialog.component';
+import { TagsQuestionDialogComponent } from './components/tags-question/tags-question-dialog.component';
 
 const dialogComponents = [
   ContractAddDialogComponent,
@@ -28,7 +30,9 @@ const dialogComponents = [
   ContractSpecTitleDialogComponent,
   InspectionRunCommentDialogComponent,
   ContractTemplateDialogComponent,
-  ContractSelectDialogComponent
+  ContractSelectDialogComponent,
+  TagsDialogComponent,
+  TagsQuestionDialogComponent
 ];
 
 const materialModules = [
