@@ -1,5 +1,5 @@
 <div class="col-header" fxLayoutAlign="center center" fxLayoutGap="10px">
-  <div *ngFor="let col of colsHeaders; let first = first" [fxFlex.gt-lg]="col?.width" [fxFlex]="first ? '21' : col?.width">{{ col?.label }}</div>
+  <div *ngFor="let col of colsHeaders; let first = first" [fxFlex.gt-lg]="col?.width" [fxFlex]="first ? '20' : col?.width">{{ col?.label }}</div>
 </div>
 <div class="il-draggable-expansion">
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
@@ -7,7 +7,7 @@
       <mat-expansion-panel-header class="no-expand" (click)="onClickPnl(pnl, $event, i)" (mouseover)="onHover(i)" (mouseleave)="mouseout()">
         <div class="pnl-header" fxLayout="row" fxLayoutGap="10px">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
-          <div fxFlex="25" fxLayoutAlign="start center">
+          <div fxFlex="20" fxLayoutAlign="start center">
             <img class="user-image" [src]="user?.image">
             <span *ngIf="selectedIndex !== i">{{user?.name}}</span>
             <!-- <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
@@ -30,13 +30,13 @@
               <input matInput [value]="user?.company">
             </mat-form-field> -->
           </div>
-          <div fxFlex="10" fxLayoutAlign="start center">
+          <div fxFlex="17" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{user?.phone}}</span>
             <!-- <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="user?.phone">
             </mat-form-field> -->
           </div>
-          <div fxFlex="32" fxLayoutAlign="start center" fxLayoutGap="5px">
+          <div fxFlex="30" fxLayoutAlign="start center" fxLayoutGap="5px">
             <span class="user-access">{{getAccessString(user?.access)}}</span>
           </div>
           <div fxFlex class="no-expand">

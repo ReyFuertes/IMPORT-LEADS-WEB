@@ -157,7 +157,7 @@ export class UserOverviewPageComponent implements OnInit {
   public ctColsUsers: Array<{label: string, width?: string | number}> = [
     {
       label: 'Name',
-      width: 25
+      width: 20
     },
     {
       label: 'Position',
@@ -173,11 +173,11 @@ export class UserOverviewPageComponent implements OnInit {
     },
     {
       label: 'Phone number',
-      width: 10
+      width: 17
     },
     {
       label: 'Access',
-      width: 32
+      width: 30
     },
     {
       label: '',
