@@ -1,6 +1,6 @@
 <div *ngIf="form" [formGroup]="form" class="input">
   <mat-form-field [floatLabel]="isFloatLabel ? '' : 'never'">
-    <input *ngIf="isNumberOnly" [InputMaxLength]="inputMaxLen" matInput [formControlName]="controlName" numbersOnly [placeholder]="placeholder" autocomplete="off" [required]="isRequired">
-    <input *ngIf="!isNumberOnly" [InputMaxLength]="inputMaxLen" matInput [formControlName]="controlName" [placeholder]="placeholder" autocomplete="off" [required]="isRequired" type="inputType">
+    <input *ngIf="isNumberOnly" [InputMaxLength]="inputMaxLen" matInput [formControlName]="controlName" numbersOnly [placeholder]="placeholder" autocomplete="off" [required]="isRequired" [readonly]="isReadOnly">
+    <input *ngIf="!isNumberOnly" [InputMaxLength]="inputMaxLen" matInput [formControlName]="controlName" [placeholder]="placeholder" autocomplete="off" [required]="isRequired" type="inputType" [readonly]="isReadOnly">
   </mat-form-field>
 </div>

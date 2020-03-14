@@ -14,6 +14,8 @@ export class ContractDetailProductsComponent implements OnInit {
   public products: FormArray;
   public form: FormGroup;
   public formProducts: FormGroup;
+  public subProducts: number[] = [1];
+  public isSubProduct: boolean = false;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       id: [null],
@@ -58,6 +60,21 @@ export class ContractDetailProductsComponent implements OnInit {
         value: this.form.value.id
       }));
       this.form.reset();
+    }
+  }
+
+  public onShowSubProduct() {
+    this.isSubProduct = !this.isSubProduct;
+  }
+
+  public onAddSubProduct() {
+    this.subProducts.push(1);
+  }
+
+  public onRemoveSubProduct(index: number) {
+
+    if (this.subProducts.length > 1) {
+      this.subProducts.splice(index, 1);
     }
   }
 }

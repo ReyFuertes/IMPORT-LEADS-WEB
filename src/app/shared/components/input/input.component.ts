@@ -24,6 +24,8 @@ export class InputComponent implements OnInit {
   public inputType: string = '';
   @Input()
   public inputMaxLen: number = 25;
+  @Input()
+  public isReadOnly: boolean = false;
 
   constructor() { }
 
