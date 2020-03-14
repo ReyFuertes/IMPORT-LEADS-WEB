@@ -1,5 +1,5 @@
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ContractSelectDialogComponent } from './../../../dialogs/components/contract-select/contract-select-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -12,6 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class TemplateCardComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public blocked: boolean = false;
+  @Input()
+  public template: any;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() { }
