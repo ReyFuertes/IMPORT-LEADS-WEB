@@ -1,6 +1,6 @@
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 
 @Component({
@@ -9,13 +9,15 @@ import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@ang
   styleUrls: ['./contract-detail-products.component.scss']
 })
 
-export class ContractDetailProductsComponent implements OnInit {
+export class ContractDetailProductsComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public products: FormArray;
   public form: FormGroup;
   public formProducts: FormGroup;
   public subProducts: number[] = [1];
   public isSubProduct: boolean = false;
+  @Input()
+  public isRightNavOpen: boolean = false;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       id: [null],
@@ -33,8 +35,9 @@ export class ContractDetailProductsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
+  ngOnInit() {}
+  ngOnChanges() {
+    this.isRightNavOpen = this.isRightNavOpen;
   }
 
   public setProduct(item: SimpleItem): void {

@@ -37,6 +37,8 @@ export class InputSelectComponent implements OnInit {
   public controlName: any;
   @Input()
   public form: FormGroup;
+  @Input()
+  public isReadOnly: boolean = false;
 
   public searchedItems: Observable<any[]>;
 

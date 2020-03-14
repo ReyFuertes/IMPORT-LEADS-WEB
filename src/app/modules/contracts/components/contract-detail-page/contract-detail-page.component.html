@@ -8,7 +8,7 @@
       <span>{{ option?.label }}</span>
     </div>
   </div>
-  <mat-card>
+  <mat-card [ngClass]="{'reduce-opacity': showRightNav == true}">
     <div fxLayout="column">
       <div class="card-row">
         <div fxFlex fxLayout="column" fxLayoutGap="20px">
@@ -56,7 +56,7 @@
       </div>
 
       <div class="card-row">
-        <il-contract-detail-products></il-contract-detail-products>
+        <il-contract-detail-products [isRightNavOpen]="showRightNav"></il-contract-detail-products>
       </div>
     </div>
   </mat-card>
