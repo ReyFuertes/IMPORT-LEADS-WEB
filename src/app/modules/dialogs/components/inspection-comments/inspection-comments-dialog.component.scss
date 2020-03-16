@@ -14,6 +14,9 @@
 .header {
   margin-bottom: 0 !important;
 }
+il-textarea {
+  width: 100%;
+}
 :host ::ng-deep {
   .mat-focused .mat-form-field-underline {
     background-color: $color-primary !important;

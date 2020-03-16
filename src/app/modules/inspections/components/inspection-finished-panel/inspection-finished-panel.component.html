@@ -32,7 +32,7 @@
             <span>{{item?.totalAmount}}</span>
           </div>
           <div class="action-col" fxFlex="3" fxLayoutAlign="end center">
-            <il-popover-menu [menus]="menus" class="action-col"></il-popover-menu>
+            <il-popover-menu [menus]="menus" class="action-col" (click)="$event.stopPropagation();"></il-popover-menu>
           </div>
         </div>
       </mat-expansion-panel-header>

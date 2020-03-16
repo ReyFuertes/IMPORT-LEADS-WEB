@@ -3,11 +3,11 @@
     <div fxLayoutAlign="end center">
       <img [src]="svgPath + 'close-icon-big-gray.svg'" />
     </div>
-    <h2>Comments on 1</h2>
+    <h2>Comments on</h2>
   </div>
   <div class="content">
     <div fxLayoutAlign="start start" fxLayout="column" fxLayoutGap="40px">
-      <il-textarea fxFlex="50" rows="2" isFloatLabel="false" [form]="form" [controlName]="'comment'" placeholder="Comment here..."></il-textarea>
+      <il-textarea rows="2" isFloatLabel="false" [form]="form" [controlName]="'comment'" placeholder="Comment here..."></il-textarea>
       <il-upload-box></il-upload-box>
     </div>
     <div>
