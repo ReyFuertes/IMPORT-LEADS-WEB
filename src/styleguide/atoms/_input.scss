@@ -3,6 +3,14 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
+  .errors {
+    position: absolute;
+    top: 37px;
+    left: -1px;
+    font-size: 12px;
+    color: $color-red;
+    font-weight: 500;
+  }
   ::ng-deep {
     .mat-form-field-label-wrapper {
       text-transform: capitalize;
@@ -15,13 +23,6 @@
     }
     .mat-input-element {
       font-size: 14px;
-      // color: $color-primary;
     }
-    // .mat-focused .mat-form-field-label {
-    //   color: $color-black-1 !important;
-    // }
-    // .mat-form-field.mat-focused .mat-form-field-ripple {
-    //   background-color: $color-primary !important;
-    // }
   }
 }

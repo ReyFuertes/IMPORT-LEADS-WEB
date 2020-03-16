@@ -42,7 +42,15 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
     this.formSubProducts.get('subProducts')
       .valueChanges.pipe(takeUntil(this.destroy$))
       .subscribe(subProducts => {
-        this.form.get('cost').patchValue(subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0));
+        const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
+        const valueOfParentProduct = this.form.get('cost').value;
+
+        //if the value of input is less than the value of sub products cost total, mark as invalid error
+        if(parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
+          this.form.controls['cost'].setErrors({'invalid': true});
+        } else {
+          this.form.controls['cost'].setErrors(null);
+        }
       })
     //just a dummy product default value
     this.setProduct({
@@ -99,9 +107,9 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
   public onAddSubProduct() {
     this.subProducts = this.formSubProducts.get('subProducts') as FormArray;
     const item = this.createSubItem({
-      name: this.form.get('name').value,
-      qty: this.form.get('qty').value,
-      cost: this.form.get('cost').value,
+      name: '',
+      qty: 0,
+      cost: 0,
     })
     this.subProducts.push(item);
   }

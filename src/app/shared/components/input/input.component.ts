@@ -26,7 +26,8 @@ export class InputComponent implements OnInit {
   public inputMaxLen: number = 25;
   @Input()
   public isReadOnly: boolean = false;
-
+  @Input()
+  public showErrors: boolean = false;
   constructor() { }
 
   ngOnInit() { }
