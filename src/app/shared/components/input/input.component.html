@@ -1,4 +1,4 @@
-<div *ngIf="form" [formGroup]="form" class="input">
+<div *ngIf="form" [formGroup]="form" class="il-input">
   <mat-form-field [floatLabel]="isFloatLabel ? '' : 'never'">
     <input *ngIf="isNumberOnly" [ngClass]="{'read-only': isReadOnly}" [InputMaxLength]="inputMaxLen" matInput [formControlName]="controlName" numbersOnly [placeholder]="placeholder" autocomplete="off" [required]="isRequired">
     <input *ngIf="!isNumberOnly" [ngClass]="{'read-only': isReadOnly}" [InputMaxLength]="inputMaxLen" matInput [formControlName]="controlName" [placeholder]="placeholder" autocomplete="off" [required]="isRequired" type="inputType"

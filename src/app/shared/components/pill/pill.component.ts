@@ -22,7 +22,9 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
     super();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.item);
+   }
 
   ngAfterViewInit() {
     fromEvent(this.ev.nativeElement, 'dblclick')

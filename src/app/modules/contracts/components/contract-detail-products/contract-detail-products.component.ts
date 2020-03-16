@@ -14,15 +14,17 @@ import { Subject } from 'rxjs';
 export class ContractDetailProductsComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public productsArray: FormArray;
-  public subProducts: FormArray;
+  public subProductsArray: FormArray;
+  public productSubProductsArray: FormArray;
   public form: FormGroup;
   public formProducts: FormGroup;
-  public formSubProducts: FormGroup;
+  public formProductSet: FormGroup;
   public hasSubProducts: boolean = false;
   private destroy$ = new Subject();
 
   @Input()
   public isRightNavOpen: boolean = false;
+
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       id: [null],
@@ -35,35 +37,36 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
       subProducts: new FormArray([]),
     });
     //we separate the sub products, maybe later we will joing this with the products above
-    this.formSubProducts = this.fb.group({
-      subProducts: this.fb.array([])
-    });
-    //get the sub total of all produects
-    this.formSubProducts.get('subProducts')
-      .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe(subProducts => {
-        const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
-        const valueOfParentProduct = this.form.get('cost').value;
+    // this.formProductSet = this.fb.group({
+    //   productSet: this.fb.array([])
+    // });
+    //get the sub total of all productSet
+    // this.formProductSet.get('productSet')
+    //   .valueChanges.pipe(takeUntil(this.destroy$))
+    //   .subscribe(subProducts => {
+    //     const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
+    //     const valueOfParentProduct = this.form.get('cost').value;
 
-        //if the value of input is less than the value of sub products cost total, mark as invalid error
-        if(parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
-          this.form.controls['cost'].setErrors({'invalid': true});
-        } else {
-          this.form.controls['cost'].setErrors(null);
-        }
-      })
-    //just a dummy product default value
-    this.setProduct({
-      label: 'Touch Dimmer Switch',
-      value: 'Touch Dimmer Switch'
-    });
+    //     //if the value of input is less than the value of sub products cost total, mark as invalid error
+    //     if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
+    //       this.form.controls['cost'].setErrors({ 'invalid': true });
+    //     } else {
+    //       this.form.controls['cost'].setErrors(null);
+    //     }
+    //   })
   }
 
   ngOnDestroy() {
     this.destroy$.next();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    //just a dummy product default value
+    this.setProduct({
+      label: 'Touch Dimmer Switch',
+      value: 'Touch Dimmer Switch'
+    });
+  }
   ngOnChanges() {
     this.isRightNavOpen = this.isRightNavOpen;
   }
@@ -83,41 +86,52 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
     return this.fb.group(item);
   }
 
-  public createSubItem(item: any): FormGroup {
-    return this.fb.group(item);
-  }
+  // public createSubItem(item: any): FormGroup {
+  //   return this.fb.group(item);
+  // }
 
-  public addProduct(): void {
+  public addProductToPills(): void {
     if (this.form.value) {
       this.productsArray = this.formProducts.get('products') as FormArray;
-      const item = this.createItem({
+      this.productsArray.push(this.createItem({
         label: this.form.value.name,
         value: this.form.value.id
-      });
-      this.productsArray.push(item);
+      }));
+
+      //so i created a new FormArray so that i can used it in the html with different properties
+      // this.productSubProductsArray = this.formProducts.get('productSubProducts') as FormArray;
+      // this.subProductsArray && this.subProductsArray.value.forEach(subProduct => {
+      //   this.productSubProductsArray.push(this.createItem({
+      //     label: subProduct.name,
+      //     value: Math.floor(Math.random() * 10).toString()
+      //   }));
+      // });
+
       this.form.reset();
+      // this.hasSubProducts = false;
+      // this.subProductsArray.clear();
     }
   }
 
   public onShowSubProduct() {
-    if (!this.subProducts) this.onAddSubProduct();
+    // if (!this.subProductsArray) this.onAddSubProduct();
     this.hasSubProducts = !this.hasSubProducts;
   }
 
   public onAddSubProduct() {
-    this.subProducts = this.formSubProducts.get('subProducts') as FormArray;
-    const item = this.createSubItem({
-      name: '',
-      qty: 0,
-      cost: 0,
-    })
-    this.subProducts.push(item);
+    // this.subProductsArray = this.formProductSet.get('productSet') as FormArray;
+    // const item = this.createSubItem({
+    //   name: '',
+    //   qty: 1,
+    //   cost: 1,
+    // })
+    // this.subProductsArray.push(item);
   }
 
   public onRemoveSubProduct(index: number) {
-    const members = this.formSubProducts.get('subProducts') as FormArray;
-    if (members.length > 1) {
-      members.removeAt(index);
+    const productSet = this.formProductSet.get('productSet') as FormArray;
+    if (productSet.length > 1) {
+      productSet.removeAt(index);
     }
   }
 }

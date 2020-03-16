@@ -1,4 +1,13 @@
 @import "src/styleguide/shared";
-.input {
+.il-input {
   @include il-input;
+  ::ng-deep {
+    input.mat-input-element {
+      font-size: 14px;
+    }
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      font-size: 14px;
+      top: 23px !important;
+    }
+  }
 }
