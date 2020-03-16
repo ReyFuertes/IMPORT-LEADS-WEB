@@ -35,6 +35,7 @@ import { TinymceEditorComponent } from './components/tinymce-editor/tinymce-edit
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { CkeditorComponent } from './components/ckeditor/ckeditor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 const materialModules = [
   MatListModule,
@@ -81,7 +82,8 @@ const sharedComponents = [
   PopoverSelectComponent,
   PopoverMultiSelectComponent,
   TinymceEditorComponent,
-  CkeditorComponent
+  CkeditorComponent,
+  StarRatingComponent
 ];
 
 const directives = [

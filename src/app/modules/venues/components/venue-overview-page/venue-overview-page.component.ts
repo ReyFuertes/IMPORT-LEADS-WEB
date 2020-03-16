@@ -54,7 +54,7 @@ export class VenueOverviewPageComponent implements OnInit {
       contracts: 18,
       inspections: 56,
       avgPassFail: 2,
-      rating: 4.8
+      rating: 4.7
     },
     {
       id: 3,
@@ -129,7 +129,7 @@ export class VenueOverviewPageComponent implements OnInit {
       contracts: 10,
       inspections: 9,
       avgPassFail: 3,
-      rating: 2.8
+      rating: 1.8
     }
   ];
   public ctColsProduct: Array<{ label: string, width?: string | number }> = [

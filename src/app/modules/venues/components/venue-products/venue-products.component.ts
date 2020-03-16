@@ -56,7 +56,8 @@ export class VenueProductsComponent  extends GenericPanelComponent implements On
     super();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+   }
 
   public dragStarted(event: any) {
     this.dragStart = event;

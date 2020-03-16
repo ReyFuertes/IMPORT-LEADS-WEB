@@ -47,7 +47,7 @@
           </div>
           <div fxFlex fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">
-              <mat-icon *ngFor="let rate of rates; let i = index;" [ngClass]="{'rating': i <= (item.rating-1)}">star</mat-icon>
+              <il-star-rating [rating]="item.rating"></il-star-rating>
             </span>
             <span *ngIf="selectedIndex !== i" class="rating-label">{{item.rating}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
