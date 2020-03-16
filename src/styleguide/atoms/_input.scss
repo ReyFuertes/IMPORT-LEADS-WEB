@@ -1,4 +1,8 @@
 @mixin il-input {
+  .read-only {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
   ::ng-deep {
     .mat-form-field-label-wrapper {
       text-transform: capitalize;

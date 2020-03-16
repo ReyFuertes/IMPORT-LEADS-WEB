@@ -2,6 +2,8 @@ import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
+import { take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'il-contract-detail-products',
@@ -11,11 +13,14 @@ import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@ang
 
 export class ContractDetailProductsComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
-  public products: FormArray;
+  public productsArray: FormArray;
+  public subProducts: FormArray;
   public form: FormGroup;
   public formProducts: FormGroup;
-  public subProducts: number[] = [1];
-  public isSubProduct: boolean = false;
+  public formSubProducts: FormGroup;
+  public hasSubProducts: boolean = false;
+  private destroy$ = new Subject();
+
   @Input()
   public isRightNavOpen: boolean = false;
   constructor(private fb: FormBuilder) {
@@ -26,16 +31,31 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
       cost: [null, Validators.required]
     });
     this.formProducts = this.fb.group({
-      products: new FormArray([])
+      products: new FormArray([]),
+      subProducts: new FormArray([]),
     });
-
+    //we separate the sub products, maybe later we will joing this with the products above
+    this.formSubProducts = this.fb.group({
+      subProducts: this.fb.array([])
+    });
+    //get the sub total of all produects
+    this.formSubProducts.get('subProducts')
+      .valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe(subProducts => {
+        this.form.get('cost').patchValue(subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0));
+      })
+    //just a dummy product default value
     this.setProduct({
       label: 'Touch Dimmer Switch',
       value: 'Touch Dimmer Switch'
     });
   }
 
-  ngOnInit() {}
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
+
+  ngOnInit() { }
   ngOnChanges() {
     this.isRightNavOpen = this.isRightNavOpen;
   }
@@ -46,38 +66,50 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
   }
 
   public onRemove(id: number): void {
-    const products = this.formProducts.get('products') as FormArray;
-    const i = products.controls.findIndex(x => x.value === id);
-    products.removeAt(i);
+    const productsArray = this.formProducts.get('products') as FormArray;
+    const i = productsArray.controls.findIndex(x => x.value === id);
+    productsArray.removeAt(i);
   }
 
   public createItem(item: SimpleItem): FormGroup {
     return this.fb.group(item);
   }
 
+  public createSubItem(item: any): FormGroup {
+    return this.fb.group(item);
+  }
+
   public addProduct(): void {
     if (this.form.value) {
-      this.products = this.formProducts.get('products') as FormArray;
-      this.products.push(this.createItem({
+      this.productsArray = this.formProducts.get('products') as FormArray;
+      const item = this.createItem({
         label: this.form.value.name,
         value: this.form.value.id
-      }));
+      });
+      this.productsArray.push(item);
       this.form.reset();
     }
   }
 
   public onShowSubProduct() {
-    this.isSubProduct = !this.isSubProduct;
+    if (!this.subProducts) this.onAddSubProduct();
+    this.hasSubProducts = !this.hasSubProducts;
   }
 
   public onAddSubProduct() {
-    this.subProducts.push(1);
+    this.subProducts = this.formSubProducts.get('subProducts') as FormArray;
+    const item = this.createSubItem({
+      name: this.form.get('name').value,
+      qty: this.form.get('qty').value,
+      cost: this.form.get('cost').value,
+    })
+    this.subProducts.push(item);
   }
 
   public onRemoveSubProduct(index: number) {
-
-    if (this.subProducts.length > 1) {
-      this.subProducts.splice(index, 1);
+    const members = this.formSubProducts.get('subProducts') as FormArray;
+    if (members.length > 1) {
+      members.removeAt(index);
     }
   }
 }

@@ -45,7 +45,7 @@ export class InputSelectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.searchedItems = this.controlName && this.form.get(this.controlName).valueChanges
+    this.searchedItems = this.controlName && this.form.get(this.controlName) && this.form.get(this.controlName).valueChanges
       .pipe(
         startWith(''),
         map(item => item ? this._filterStates(item) : this.items.slice())

@@ -7,7 +7,9 @@
 .il-button {
   @include il-button;
 }
-
+.add-sub-product {
+  cursor: pointer;
+}
 :host ::ng-deep {
   .mat-tab-body-wrapper {
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08) !important;
@@ -37,19 +39,16 @@
     height: 20px;
     width: 20px;
   }
-
   .sub-product {
-    margin-left: 10px;
     img {
       cursor: pointer;
     }
     img:first-child {
       margin-right: 5px;
     }
-
     .il-input-select {
-     font-size: 14px ;
-     font-weight: 500;
+      font-size: 14px;
+      font-weight: 500;
     }
     .mat-form-field-appearance-legacy .mat-form-field-wrapper {
       padding-bottom: 1em;
@@ -58,5 +57,4 @@
       border-top-width: 0;
     }
   }
-  
 }
