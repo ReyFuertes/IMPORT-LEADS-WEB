@@ -1,6 +1,6 @@
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -26,7 +26,7 @@ export interface SubProductPill {
   styleUrls: ['./contract-detail-products.component.scss']
 })
 
-export class ContractDetailProductsComponent implements OnInit, OnChanges {
+export class ContractDetailProductsComponent implements OnInit, AfterViewInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public productsArray: FormArray;
   public subProductsArray: FormArray;
@@ -37,7 +37,7 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
   @Input()
   public isRightNavOpen: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
       id: [null],
       name: ['', Validators.required],
@@ -62,10 +62,14 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
+
   }
 
   ngOnInit() { }
+
+  ngAfterViewInit() {
+
+  }
 
   ngOnChanges() {
     this.isRightNavOpen = this.isRightNavOpen;
@@ -118,6 +122,7 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
       this.form.controls['cost'].setErrors(null);
     }
     this.hasSubProducts = !this.hasSubProducts;
+    this.cdRef.detectChanges();
   }
 
   public onAddSubProduct(): void {

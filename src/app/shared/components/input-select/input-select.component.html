@@ -1,6 +1,6 @@
 <div *ngIf="form" [formGroup]="form" class="il-input-select">
   <mat-form-field floatLabel="never">
-    <input matInput placeholder="Product" aria-label="Product" [matAutocomplete]="auto" [formControlName]="controlName" [readonly]="isReadOnly">
+    <input matInput placeholder="Product" [required]="isRequired" aria-label="Product" [matAutocomplete]="auto" [formControlName]="controlName" [readonly]="isReadOnly">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let item of searchedItems | async" [value]="item?.label">
         <span>{{item?.label}}</span>

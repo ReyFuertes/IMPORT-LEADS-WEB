@@ -2,6 +2,11 @@
 .il-pill {
   @include il-pill;
   cursor: default;
+  animation: showNav 250ms ease-in-out both;
+}
+@keyframes showNav {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 .p-cursor {
   cursor: pointer !important;

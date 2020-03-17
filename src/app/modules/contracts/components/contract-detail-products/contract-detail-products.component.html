@@ -27,7 +27,7 @@
           <div *ngFor="let subProducts of form.get('subProducts')?.controls; let i = index" fxLayout="column">
             <ng-container formArrayName="subProducts">
               <div fxFlex fxLayoutGap="20px" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-                <il-input-select [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
+                <il-input-select [isRequired]="hasSubProducts" [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
                 </il-input-select>
                 <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'qty'"
                   placeholder="Enter quantity"></il-input>

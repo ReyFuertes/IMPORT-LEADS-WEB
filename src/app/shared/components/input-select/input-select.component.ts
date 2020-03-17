@@ -39,7 +39,8 @@ export class InputSelectComponent implements OnInit {
   public form: FormGroup;
   @Input()
   public isReadOnly: boolean = false;
-
+  @Input()
+  public isRequired: boolean = false;
   public searchedItems: Observable<any[]>;
 
   constructor() { }
