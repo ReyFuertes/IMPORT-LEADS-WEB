@@ -7,22 +7,19 @@
   </div>
   <div fxLayout="column">
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <il-pill *ngFor="let product of formProducts?.get('products')?.controls; let i = index;" [item]="product?.value"
+      <il-pill *ngFor="let product of productPillsArray; let i = index;" [item]="product"
         [enableHighlight]="true" (removeEmitter)="onRemove($event)" [selectable]="true">
-      </il-pill>
-      <il-pill *ngFor="let subProducts of formProducts.get('productSubProducts')?.controls; let i = index"
-        [item]="subProducts?.value" [enableHighlight]="true" (removeEmitter)="onRemove($event)" [selectable]="true">
       </il-pill>
     </div>
 
-    <!-- product without set -->
+    <!-- product with/without set -->
     <div class="product-section" fxLayout="row" [formGroup]="form" fxLayoutGap="20px">
       <div fxFlex fxLayout="column" fxLayoutAlign="start start">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
           <il-input-select fxFlex [form]="form" [controlName]="'name'" [isReadOnly]="isRightNavOpen"></il-input-select>
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"
             [isReadOnly]="isRightNavOpen"></il-input>
-          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="true"
+          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="hasSubProducts"
             placeholder="Enter unit cost"></il-input>
           <div fxFlex="5"></div>
         </div>
@@ -50,7 +47,7 @@
           Add Product
         </button>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <mat-checkbox [disabled]="!form.valid" (change)="onShowSubProduct()"></mat-checkbox>
+          <mat-checkbox [disabled]="!form.valid" [checked]="hasSubProducts" (change)="onShowSubProduct()"></mat-checkbox>
           <img *ngIf="subProductsArray" (click)="onAddSubProduct()" class="add-icon"
             [src]="svgPath + 'add-icon-blue.svg'">
         </div>
