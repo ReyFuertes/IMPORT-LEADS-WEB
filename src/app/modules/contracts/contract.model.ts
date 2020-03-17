@@ -1,3 +1,9 @@
+export interface ContractProduct {
+  id?: string | number;
+  name: string;
+  qty: string | number;
+  cost: string | number;
+}
 export interface Contract {
   id?: string;
   title: string;
