@@ -19,11 +19,15 @@
 }
 .il-draggable-expansion {
   @include il-draggable-expansion;
-}
 
+  .mat-action-row {
+    background-color: #fafafa !important;
+  }
+}
 ::ng-deep {
   .cdk-drag-preview {
     border-radius: 0 !important;
     @extend .il-draggable-expansion; 
   }
 }
+

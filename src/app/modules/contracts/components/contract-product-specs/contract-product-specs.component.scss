@@ -44,6 +44,10 @@
 .il-tab {
   @include il-tab;
 }
+mat-icon {
+  color: $color-gray-2;
+  cursor: pointer;
+}
 :host ::ng-deep {
   .mat-tab-label {
     display: none;

@@ -42,7 +42,7 @@
           </div>
           <div fxFlex class="image-container">
             <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
-              <div class="drag-box" cdkDrag *ngFor="let img of contractImages" fxLayoutAlign="center center">
+              <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let img of contractImages" fxLayoutAlign="center center">
                 <div class="drag-placeholder" *cdkDragPlaceholder></div>
                 <img [src]="imgPath + 'product-img.png'">
               </div>
@@ -64,7 +64,7 @@
 
   <div fxLayout="column" fxLayoutGap="20px" cdkDropList (cdkDropListDropped)="dropSpecs($event)">
     <div *ngFor="let specification of specifications" fxLayoutGap="20px">
-      <il-contract-product-specs [isRightNavOpen]="showRightNav" [specification]="specification"></il-contract-product-specs>
+      <il-contract-product-specs [isRightNavOpen]="showRightNav" [specification]="specification" (removeProductSpecEmitter)="handleRemoveProductSpecs($event)"></il-contract-product-specs>
 
       <il-contract-product-specs-title cdkDrag (cdkDragStarted)="dragStartedSpecs(true)" [specification]="specification" (removeSpecTitleEmitter)="handleRemoveSpecsTitle($event)"></il-contract-product-specs-title>
     </div>

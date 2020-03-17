@@ -149,4 +149,8 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<Cont
   public handleRemoveSpecsTitle(specificationId: number) {
     this.specifications.find(spec => spec.id === specificationId).title = '';
   }
+
+  public handleRemoveProductSpecs(specificationId: number) {
+    this.specifications = this.specifications.filter(specification => specification.id !== specificationId);
+  }
 }

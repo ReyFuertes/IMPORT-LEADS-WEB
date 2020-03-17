@@ -16,7 +16,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ContractsContainerComponent } from './container/contracts-container.component';
 import { CommonModule } from '@angular/common';
-import { MatCheckboxModule, MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule, MatButtonModule, MatDialogModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatSelectModule, MatAutocompleteModule, MatExpansionModule, MatSlideToggleModule } from '@angular/material';
+import { MatIconModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule, MatButtonModule, MatDialogModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatSelectModule, MatAutocompleteModule, MatExpansionModule, MatSlideToggleModule } from '@angular/material';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 import { SidebarModule } from 'primeng/sidebar';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ContractProductSpecsTitleComponent } from './components/contract-product-specs-title/contract-product-specs-title.component';
@@ -40,10 +42,12 @@ const routes: Routes = [
 
 const primeNgModules = [
   SidebarModule,
-  InputSwitchModule
+  InputSwitchModule,
+  ConfirmDialogModule
 ];
 
 const materialModules = [
+  MatIconModule,
   MatListModule,
   MatFormFieldModule,
   MatInputModule,
@@ -90,6 +94,8 @@ const materialModules = [
     ContractProductSpecsComponent,
     ContractProductSpecsTitleComponent
   ],
-  providers: [],
+  providers: [
+    ConfirmationService
+  ],
 })
 export class ContractsModule { }

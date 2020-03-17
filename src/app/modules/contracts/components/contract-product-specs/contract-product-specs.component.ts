@@ -3,11 +3,13 @@ import { ContractProductSpecDialogComponent } from './../../../dialogs/component
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'il-contract-product-specs',
   templateUrl: './contract-product-specs.component.html',
-  styleUrls: ['./contract-product-specs.component.scss']
+  styleUrls: ['./contract-product-specs.component.scss'],
+  providers: [ConfirmationService]
 })
 
 export class ContractProductSpecsComponent implements OnInit, OnChanges {
@@ -43,8 +45,11 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
   @Input()
   public isRightNavOpen: boolean = false;
   public showToggle: boolean = false;
+  @Output()
+  public removeProductSpecEmitter = new EventEmitter<number>();
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+    private  confirmationService: ConfirmationService) { }
 
   ngOnInit() { }
 
@@ -68,4 +73,16 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(ContractProductSpecDialogComponent);
     dialogRef.afterClosed().subscribe(result => {});
   }
+
+  public onDeleteProductSpecs() {
+    this.confirmationService.confirm({
+        message: 'Do you want to delete this?',
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        key: 'productSpecs',
+        accept: () => {
+          this.removeProductSpecEmitter.emit(this.specification['id']);
+        }
+    });
+}
 }
