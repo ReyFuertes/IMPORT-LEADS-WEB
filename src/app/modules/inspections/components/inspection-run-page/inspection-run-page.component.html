@@ -8,10 +8,11 @@
         <img [src]="svgPath + 'enter-icon-blue.svg'" />
         <span>Navigate to</span>
       </button>
-      <mat-menu #appMenu="matMenu">
-        <button (click)="$event.stopPropagation();" mat-menu-item>
-          <il-input fxFlex="100" [form]="formNavigateTo" isFloatLabel="false" [controlName]="'position'" placeholder="Item Position"></il-input>
-        </button>
+      <mat-menu class="navigate-to" #appMenu="matMenu">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <il-input fxFlex="100" (click)="$event.stopPropagation();" [form]="formNavigateTo" isFloatLabel="false" [controlName]="'position'" placeholder="Item Position"></il-input>
+          <button mat-flat-button class="il-button primary">Go</button>
+        </div>
       </mat-menu>
       <button class="il-button il-bordered-blue" mat-flat-button>
         <img [src]="svgPath + 'delete-icon-blue.svg'" />
