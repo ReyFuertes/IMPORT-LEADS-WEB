@@ -66,8 +66,6 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
 
   public UpdateProductSpecTitle(): void {
     const dialogRef = this.dialog.open(ContractProductSpecDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }

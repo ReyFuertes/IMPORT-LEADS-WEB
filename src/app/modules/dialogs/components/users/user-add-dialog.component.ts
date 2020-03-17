@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class UserAddDialogComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public form: FormGroup;
-  public roles: Array<{ id: number, label: string}> = [
+  public roles: Array<{ id: number, label: string }> = [
     {
       id: 1,
       label: 'Admin'
@@ -26,7 +26,7 @@ export class UserAddDialogComponent implements OnInit {
     },
   ];
 
-  public accesses: Array<{ id: number, label: string}> = [
+  public accesses: Array<{ id: number, label: string }> = [
     {
       id: 1,
       label: 'Contracts'
@@ -55,24 +55,21 @@ export class UserAddDialogComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<UserAddDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
-      this.form = this.fb.group({
-        id: [''],
-        name: [''],
-        role: [null],
-        company: [''],
-        phone: [''],
-        email: [''],
-        username: [''],
-        password: [''],
-        access: [null],
-      });
-    }
-
-  ngOnInit() {
+    this.form = this.fb.group({
+      id: [''],
+      name: [''],
+      role: [null],
+      company: [''],
+      phone: [''],
+      email: [''],
+      username: [''],
+      password: [''],
+      access: [null],
+    });
   }
 
-  public handleSelectChange(role: any) {
-    console.log(role);
-  }
+  ngOnInit() { }
+
+  public handleSelectChange(role: any) { }
 
 }

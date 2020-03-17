@@ -22,18 +22,16 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
     super();
   }
 
-  ngOnInit() {
-    console.log(this.item);
-   }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     fromEvent(this.ev.nativeElement, 'dblclick')
-      .subscribe((e: any) => console.log('double click', e.nativeElement));
+      .subscribe((e: any) => {});
   }
 
   @ViewChild('btn', { static: false }) ev: any;
   public onHighlightProduct(event: any): void {
-    if (this.enableHighlight === true ) {
+    if (this.enableHighlight === true) {
       const classes = event.target.parentElement.classList.value;
       if (classes.indexOf('selected') !== -1) {
         event.target.parentElement.classList.remove('selected');
