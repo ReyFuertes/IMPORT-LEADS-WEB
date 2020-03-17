@@ -47,8 +47,8 @@
           Add Product
         </button>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <mat-checkbox [disabled]="!form.valid" [checked]="hasSubProducts" (change)="onShowSubProduct()"></mat-checkbox>
-          <img *ngIf="subProductsArray" (click)="onAddSubProduct()" class="add-icon"
+          <mat-checkbox [checked]="hasSubProducts" (change)="onShowSubProduct()"></mat-checkbox>
+          <img *ngIf="subProductsArray && hasSubProducts" (click)="onAddSubProduct()" class="add-icon"
             [src]="svgPath + 'add-icon-blue.svg'">
         </div>
       </div>
