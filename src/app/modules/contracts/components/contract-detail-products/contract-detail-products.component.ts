@@ -34,16 +34,15 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
   public form: FormGroup;
   public hasSubProducts: boolean = false;
   private destroy$ = new Subject();
-
   @Input()
   public isRightNavOpen: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       id: [null],
-      name: ['Product 1', Validators.required],
-      qty: [1, Validators.required],
-      cost: [1, Validators.required],
+      name: ['', Validators.required],
+      qty: [null, Validators.required],
+      cost: [null, Validators.required],
       subProducts: new FormArray([]),
     });
 
@@ -53,7 +52,6 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
       .subscribe(subProducts => {
         const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
         const valueOfParentProduct = this.form.get('cost').value;
-
         //if the value of input is less than the value of sub products cost total, mark as invalid error
         if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
           this.form.controls['cost'].setErrors({ 'invalid': true });
@@ -81,7 +79,7 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
     return this.fb.group(item);
   }
 
-  public flattenProductArray(rawProduct: ProductPill) {
+  public flattenProductArray(rawProduct: ProductPill): SimpleItem[] {
     const newItem: SimpleItem[] = [];
     newItem.push({
       label: rawProduct.name,
@@ -112,7 +110,7 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
     }
   }
 
-  public onShowSubProduct() {
+  public onShowSubProduct(): void {
     if (!this.subProductsArray || this.subProductsArray.length === 0) {
       this.onAddSubProduct();
     } else {
@@ -122,7 +120,7 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
     this.hasSubProducts = !this.hasSubProducts;
   }
 
-  public onAddSubProduct() {
+  public onAddSubProduct(): void {
     this.subProductsArray = this.form.get('subProducts') as FormArray;
     const item = this.createSubItem({
       name: '',
@@ -132,7 +130,7 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
     this.subProductsArray.push(item);
   }
 
-  public onRemoveSubProduct(index: number) {
+  public onRemoveSubProduct(index: number): void {
     const subProduct = this.form.get('subProducts') as FormArray;
     if (subProduct.length > 1) {
       subProduct.removeAt(index);
