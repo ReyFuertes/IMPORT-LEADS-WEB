@@ -28,32 +28,29 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       id: [null],
-      name: ['', Validators.required],
-      qty: [null, Validators.required],
-      cost: [null, Validators.required]
+      name: ['Product 1', Validators.required],
+      qty: [1, Validators.required],
+      cost: [1, Validators.required],
+      subProducts: new FormArray([]),
     });
     this.formProducts = this.fb.group({
       products: new FormArray([]),
-      subProducts: new FormArray([]),
     });
-    //we separate the sub products, maybe later we will joing this with the products above
-    // this.formProductSet = this.fb.group({
-    //   productSet: this.fb.array([])
-    // });
-    //get the sub total of all productSet
-    // this.formProductSet.get('productSet')
-    //   .valueChanges.pipe(takeUntil(this.destroy$))
-    //   .subscribe(subProducts => {
-    //     const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
-    //     const valueOfParentProduct = this.form.get('cost').value;
 
-    //     //if the value of input is less than the value of sub products cost total, mark as invalid error
-    //     if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
-    //       this.form.controls['cost'].setErrors({ 'invalid': true });
-    //     } else {
-    //       this.form.controls['cost'].setErrors(null);
-    //     }
-    //   })
+    //get the sub total of all productSet
+    this.form.get('subProducts')
+      .valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe(subProducts => {
+        const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
+        const valueOfParentProduct = this.form.get('cost').value;
+        console.log(parseInt(totalValueOfSubProducts), parseInt(valueOfParentProduct));
+        //if the value of input is less than the value of sub products cost total, mark as invalid error
+        if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
+          this.form.controls['cost'].setErrors({ 'invalid': true });
+        } else {
+          this.form.controls['cost'].setErrors(null);
+        }
+      })
   }
 
   ngOnDestroy() {
@@ -86,9 +83,9 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
     return this.fb.group(item);
   }
 
-  // public createSubItem(item: any): FormGroup {
-  //   return this.fb.group(item);
-  // }
+  public createSubItem(item: any): FormGroup {
+    return this.fb.group(item);
+  }
 
   public addProductToPills(): void {
     if (this.form.value) {
@@ -114,24 +111,25 @@ export class ContractDetailProductsComponent implements OnInit, OnChanges {
   }
 
   public onShowSubProduct() {
-    // if (!this.subProductsArray) this.onAddSubProduct();
+    //add one product as a default row
+    if (!this.subProductsArray) this.onAddSubProduct();
     this.hasSubProducts = !this.hasSubProducts;
   }
 
   public onAddSubProduct() {
-    // this.subProductsArray = this.formProductSet.get('productSet') as FormArray;
-    // const item = this.createSubItem({
-    //   name: '',
-    //   qty: 1,
-    //   cost: 1,
-    // })
-    // this.subProductsArray.push(item);
+    this.subProductsArray = this.form.get('subProducts') as FormArray;
+    const item = this.createSubItem({
+      name: '',
+      qty: 1,
+      cost: 1,
+    })
+    this.subProductsArray.push(item);
   }
 
   public onRemoveSubProduct(index: number) {
-    const productSet = this.formProductSet.get('productSet') as FormArray;
-    if (productSet.length > 1) {
-      productSet.removeAt(index);
+    const subProduct = this.form.get('subProducts') as FormArray;
+    if (subProduct.length > 1) {
+      subProduct.removeAt(index);
     }
   }
 }

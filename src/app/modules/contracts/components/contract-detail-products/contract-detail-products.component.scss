@@ -1,13 +1,18 @@
 @import "src/styleguide/shared";
-.products {
-  > div:nth-child(2) {
-    margin-left: 4%;
+.product-section {
+  > div {
+    &:nth-child(2) {
+      height: 50px;
+    }
+    > div {
+      width: 100%;
+    }
   }
 }
 .il-button {
   @include il-button;
 }
-.add-sub-product {
+.add-icon, .remove-icon {
   cursor: pointer;
 }
 
