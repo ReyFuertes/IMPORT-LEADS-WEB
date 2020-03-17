@@ -1,7 +1,4 @@
 @import "src/styleguide/shared";
-.vo-container {
-  padding-top: 20px;
-}
 .action-btn {
   position: fixed;
   bottom: 20px;
@@ -27,20 +24,16 @@
       padding-top: 3px;
     }
   }
-
   .mat-button-toggle-label-content {
     line-height: 32px !important;
   }
-
   .mat-button-toggle-group-appearance-standard {
     border: none !important;
   }
-
   .mat-button-toggle-checked {
     background: $color-primary !important;
     color: $color-white !important;
   }
-
   .mat-button-toggle-group {
     margin-left: 30px;
   }

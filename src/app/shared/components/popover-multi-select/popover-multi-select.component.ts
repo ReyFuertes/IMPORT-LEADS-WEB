@@ -16,8 +16,6 @@ export class PopoverMultiSelectComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onSelectOption(option: DropdownSelect) {
-    console.log(option);
-  }
+  public onSelectOption(option: DropdownSelect) {}
 
 }
