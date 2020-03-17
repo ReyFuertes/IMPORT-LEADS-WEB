@@ -17,8 +17,11 @@
       <il-upload-box fxFlex="50"></il-upload-box>
     </div>
     <div class="image-container">
-      <div cdkDropList cdkDropListOrientation="horizontal" class="image-list" (cdkDropListDropped)="drop($event)" fxLayoutGap="20px">
-        <img cdkDrag *ngFor="let img of contractImages" [src]="imgPath + img?.name">
+      <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
+        <div class="drag-box" cdkDrag *ngFor="let img of contractImages" fxLayoutAlign="center center">
+          <div class="drag-placeholder" *cdkDragPlaceholder></div>
+          <img [src]="imgPath + 'product-img.png'">
+        </div>
       </div>
     </div>
   </div>
