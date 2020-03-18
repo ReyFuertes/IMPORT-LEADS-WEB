@@ -15,6 +15,8 @@ import { UserProfilePageComponent } from './components/user-profile-page/user-pr
 import { UserProfileDetailsComponent } from './components/user-profile-details/user-profile-details.component';
 import { UserProfileSummaryComponent } from './components/user-profile-summary/user-profile-summary.component';
 import { UserProfileInspectionComponent } from './components/user-profile-inspection/user-profile-inspection.component';
+import { UserSettingPageComponent } from './components/user-setting-page/user-setting-page.component';
+import { UserSettingDetailsComponent } from './components/user-setting-details/user-setting-details.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: UserProfilePageComponent
+      },
+      {
+        path: 'setting',
+        component: UserSettingPageComponent
       }
     ]
   }
@@ -80,7 +86,9 @@ const materialModules = [
     UserProfilePageComponent,
     UserProfileDetailsComponent,
     UserProfileSummaryComponent,
-    UserProfileInspectionComponent
+    UserProfileInspectionComponent,
+    UserSettingPageComponent,
+    UserSettingDetailsComponent
   ],
   providers: [],
 })
