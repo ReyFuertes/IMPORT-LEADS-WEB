@@ -22,7 +22,7 @@ export class TemplateExpansionPanelComponent extends GenericPanelComponent imple
   ngOnInit() { }
 
   public dragStart: boolean = false;
-  public drop(event: CdkDragDrop<string[]>) {
+  public drop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
     this.dragStart = false;
   }
@@ -34,11 +34,11 @@ export class TemplateExpansionPanelComponent extends GenericPanelComponent imple
     }
   }
 
-  public dragStarted(event: any) {
+  public dragStarted(event: any): void {
     this.dragStart = event;
   }
 
-  public onSelectContract() {
+  public onSelectContract(): void {
     const dialogRef = this.dialog.open(ContractSelectDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

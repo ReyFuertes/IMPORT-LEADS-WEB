@@ -85,7 +85,7 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
     this.dragStart = event;
   }
 
-  public drop(event: CdkDragDrop<string[]>) {
+  public drop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.users, event.previousIndex, event.currentIndex);
     this.dragStart = false;
   }
@@ -98,7 +98,7 @@ export class UserExpansionPanelComponent extends GenericPanelComponent implement
     return accessString.replace(/,\s*$/, '');
   }
 
-  public onPreventExpandPanel(event: any) {
+  public onPreventExpandPanel(event: any): void {
     event.stopPropagation();
   }
 

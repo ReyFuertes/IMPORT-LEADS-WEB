@@ -22,12 +22,10 @@ export class TemplateCardComponent implements OnInit {
     this.blocked = false;
   }
 
-  public onSelectContract() {
+  public onSelectContract(): void {
     const dialogRef = this.dialog.open(ContractSelectDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // todo
-      }
+      if (result) {}
     });
   }
 }

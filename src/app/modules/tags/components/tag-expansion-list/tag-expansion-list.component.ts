@@ -20,12 +20,12 @@ export class TagExpansionListComponent implements OnInit {
   ngOnInit() { }
 
   public dragStart: boolean = false;
-  public drop(event: CdkDragDrop<string[]>) {
+  public drop(event: CdkDragDrop<string[]>): void {
     moveItemInArray(this.questions, event.previousIndex, event.currentIndex);
     this.dragStart = false;
   }
 
-  public dragStarted(event: any) {
+  public dragStarted(event: any): void {
     this.dragStart = event;
   }
 
@@ -40,7 +40,7 @@ export class TagExpansionListComponent implements OnInit {
     this.selectedIndex = null;
   }
 
-  public onHover(i: number) {
+  public onHover(i: number): void {
     this.hoveredIndex = i;
   }
 }

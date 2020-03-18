@@ -74,7 +74,7 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {});
   }
 
-  public onDeleteProductSpecs() {
+  public onDeleteProductSpecs(): void {
     this.confirmationService.confirm({
         message: 'Do you want to delete this?',
         header: 'Delete Confirmation',

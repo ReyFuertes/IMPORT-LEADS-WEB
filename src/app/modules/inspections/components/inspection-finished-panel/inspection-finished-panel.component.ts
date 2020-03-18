@@ -47,15 +47,15 @@ export class InspectionFinishedPanelComponent extends GenericPanelComponent impl
     ];
   }
 
-  public dragStarted(event: any) {
+  public dragStarted(event: any): void {
     this.dragStart = event;
   }
 
-  public onEdit = () => {
+  public onEdit = (): void => {
     this.router.navigateByUrl('/dashboard/inspections/run-template');
   }
 
-  public onOpenReport = () => {
+  public onOpenReport = (): void => {
     this.router.navigateByUrl('/dashboard/inspections/report');
   }
 

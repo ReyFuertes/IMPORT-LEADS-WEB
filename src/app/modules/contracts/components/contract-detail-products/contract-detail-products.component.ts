@@ -61,15 +61,11 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
       })
   }
 
-  ngOnDestroy() {
-
-  }
+  ngOnDestroy() {}
 
   ngOnInit() { }
 
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() {}
 
   ngOnChanges() {
     this.isRightNavOpen = this.isRightNavOpen;

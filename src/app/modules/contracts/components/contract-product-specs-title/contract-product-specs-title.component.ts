@@ -17,8 +17,7 @@ export class ContractProductSpecsTitleComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onRemoveTitle(id: number) {
+  public onRemoveTitle(id: number): void {
     this.removeSpecTitleEmitter.emit(id);
   }
-
 }
