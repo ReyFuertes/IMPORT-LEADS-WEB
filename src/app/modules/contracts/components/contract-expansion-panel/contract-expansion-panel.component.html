@@ -35,7 +35,7 @@
 
       <!-- description templates -->
       <ng-template #descInEditMode>
-        <il-ckeditor [value]="p?.description"></il-ckeditor>
+        <il-primeng-editor [value]="p?.description"></il-primeng-editor>
         <ng-container *ngTemplateOutlet="actionBtns"></ng-container>
       </ng-template>
       <ng-template #descInLabelMode>

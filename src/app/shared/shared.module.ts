@@ -32,10 +32,11 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { PopoverSelectComponent } from './components/popover-select/popover-select.component';
 import { PopoverMultiSelectComponent } from './components/popover-multi-select/popover-multi-select.component';
 import { TinymceEditorComponent } from './components/tinymce-editor/tinymce-editor.component';
-import { EditorModule } from '@tinymce/tinymce-angular';
 import { CkeditorComponent } from './components/ckeditor/ckeditor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { PrimengEditorComponent } from './components/primeng-editor/primeng-editor.component';
+import { EditorModule } from 'primeng/editor';
 
 const materialModules = [
   MatListModule,
@@ -81,9 +82,9 @@ const sharedComponents = [
   EllipseMenuComponent,
   PopoverSelectComponent,
   PopoverMultiSelectComponent,
-  TinymceEditorComponent,
   CkeditorComponent,
-  StarRatingComponent
+  StarRatingComponent,
+  PrimengEditorComponent
 ];
 
 const directives = [
