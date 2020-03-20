@@ -13,7 +13,8 @@ const routes: Routes = [
       { path: 'tags', loadChildren: './modules/tags/tags.module#TagsModule' },
       { path: 'templates', loadChildren: './modules/templates/templates.module#TemplatesModule' },
       { path: 'users', loadChildren: './modules/users/users.module#UsersModule' },
-      { path: 'venues', loadChildren: './modules/venues/venues.module#VenuesModule' }
+      { path: 'venues', loadChildren: './modules/venues/venues.module#VenuesModule' },
+      { path: 'chat', loadChildren: './modules/chat/chat.module#ChatModule' }
     ]
   }
 ];
