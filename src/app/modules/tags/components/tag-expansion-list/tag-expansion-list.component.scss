@@ -7,8 +7,13 @@
   > div {
     width: 100%;
   }
-  &:hover {
+  &:not(:last-child):hover {
     background-color: $color-white-1;
     cursor: pointer;
+  }
+  &:last-child {
+    img {
+      cursor: pointer;
+    }
   }
 }

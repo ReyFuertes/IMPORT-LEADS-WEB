@@ -15,6 +15,7 @@ export class ContractTemplateDialogComponent implements OnInit {
               public dialogRef: MatDialogRef<ContractTemplateDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
                 this.form = this.fb.group({
                   title: [null, Validators.required],
+                  description: [null],
                 });
               }
 

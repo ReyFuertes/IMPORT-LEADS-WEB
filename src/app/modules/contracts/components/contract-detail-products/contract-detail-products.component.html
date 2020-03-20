@@ -6,8 +6,11 @@
     <h2>Products</h2>
   </div>
   <div fxLayout="column">
-    <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
-      <il-pill *ngFor="let product of productPillsArray; let i = index;" [item]="product"
+    <div *ngFor="let product of productPillsArray; let i = index;" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px">
+      <il-pill (click)="OnEditProduct(product)" [item]="{label: product.name}"
+        [enableHighlight]="true" (removeEmitter)="onRemove($event)" [selectable]="true">
+      </il-pill>
+      <il-pill *ngFor="let sub of product.subProducts; let i = index;" [item]="{label: sub.name}"
         [enableHighlight]="true" (removeEmitter)="onRemove($event)" [selectable]="true">
       </il-pill>
     </div>
@@ -43,8 +46,11 @@
       </div>
 
       <div fxFlex="20" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-        <button [disabled]="!form.valid" mat-flat-button class="il-button primary" (click)="addProductToPills()">
+        <button *ngIf="!isEditProduct" mat-flat-button class="il-button primary" (click)="addProductToPills()">
           Add Product
+        </button>
+        <button *ngIf="isEditProduct" mat-flat-button class="il-button primary" (click)="onEditProductSave()">
+          Save Product
         </button>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <mat-checkbox [checked]="hasSubProducts" (change)="onShowSubProduct()"></mat-checkbox>
