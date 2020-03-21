@@ -93,6 +93,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
 
   public addProductToPills(): void {
     if (this.form.value) {
+      const id = this.productPillsArray.length + 1;
+      this.form.controls['id'].patchValue(id);
       this.productPillsArray.push(this.form.value);
       this.onResetForm();
     }
@@ -114,7 +116,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     this.form.controls['qty'].patchValue(product.qty);
     this.form.controls['cost'].patchValue(product.cost);
     this.form.controls['subProducts'].patchValue(product.subProducts);
-    if (product.subProducts) {
+    if (product.subProducts.length > 0) {
       this.subProductsArray = this.form.get('subProducts') as FormArray;
       if (this.subProductsArray) this.subProductsArray.clear();
       product.subProducts.forEach(subItem => {
