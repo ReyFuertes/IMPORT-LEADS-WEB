@@ -13,6 +13,8 @@ import { MatIconModule, MatTooltipModule, MatButtonToggleModule, MatListModule, 
 import { ChatOverviewPageComponent } from './components/chat-overview-page/chat-overview-page.component';
 import { ChatUserListComponent } from './components/chat-user-list/chat-user-list.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { ChatMessageComponent } from './components/chat-message/chat-message.component';
+import { ChatMessageContainerComponent } from './components/chat-message-container/chat-message-container.component';
 
 const routes: Routes = [
   {
@@ -71,6 +73,8 @@ const materialModules = [
     ChatOverviewPageComponent,
     ChatUserListComponent,
     ChatBoxComponent,
+    ChatMessageComponent,
+    ChatMessageContainerComponent,
   ],
   providers: [],
 })

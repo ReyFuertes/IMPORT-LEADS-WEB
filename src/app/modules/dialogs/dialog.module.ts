@@ -18,6 +18,8 @@ import { ContractTemplateDialogComponent } from './components/contract-template/
 import { ContractSelectDialogComponent } from './components/contract-select/contract-select-dialog.component';
 import { TagsDialogComponent } from './components/tags/tags-dialog.component';
 import { TagsQuestionDialogComponent } from './components/tags-question/tags-question-dialog.component';
+import { ChatUserDialogComponent } from './components/chat-user/chat-user-dialog.component';
+import { ChatDetailDialogComponent } from './components/chat-detail/chat-detail-dialog.component';
 
 const dialogComponents = [
   ContractAddDialogComponent,
@@ -53,7 +55,7 @@ const materialModules = [
     FlexLayoutModule
   ],
   exports: [...dialogComponents],
-  declarations: [...dialogComponents],
+  declarations: [...dialogComponents, ChatUserDialogComponent, ChatDetailDialogComponent],
   entryComponents: [...dialogComponents],
   providers: [],
 })

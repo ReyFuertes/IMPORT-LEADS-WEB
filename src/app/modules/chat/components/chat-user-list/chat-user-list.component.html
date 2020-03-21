@@ -1,3 +1,17 @@
-<p>
-  chat-user-list works!
-</p>
+<div class="user-container">
+  <span class="new-chat">+ Start a new chat</span>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let chat of chatUsers;" role="listitem">
+      <div class="user" fxLayout="column">
+        <div fxLayout="row">
+          <img [src]="svgPath + chat.image">
+          <div>
+            <span>{{ chat.name }}</span>
+            <span>{{ chat.subject }}</span>
+          </div>
+        </div>
+        <p>{{ chat.lastChat }}</p>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
