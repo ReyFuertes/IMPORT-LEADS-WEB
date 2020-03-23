@@ -14,11 +14,13 @@ export class ChatUserListComponent implements OnInit {
   public svgPath: string = environment.imgPath;
   @Input()
   public chatUsers: ChatUser;
+  public selectedItem: number = -1;
   constructor(public dialog: MatDialog) { }
   ngOnInit() {
   }
 
-  public onEdit(): void {
+  public onEdit(i?: number): void {
+    this.selectedItem = i
     const dialogRef = this.dialog.open(ChatUserDialogComponent, {});
     dialogRef.afterClosed().subscribe(result => { });
   }

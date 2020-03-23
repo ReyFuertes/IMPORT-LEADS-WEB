@@ -6,6 +6,9 @@
   display: block;
   padding: 14px 14px 6px;
 }
+.selected {
+  background-color: $color-gray-3 !important;
+}
 .user {
    cursor: pointer;
    padding-top: 16px;
@@ -43,7 +46,7 @@
 
 :host ::ng-deep {
   .mat-list {
-  
+
     .mat-list-item {
       height: 104px;
     }
@@ -53,6 +56,6 @@
     .mat-list-item:last-child {
       border-bottom: 1px solid $color-white-1;
     }
-    
+
   }
 }
