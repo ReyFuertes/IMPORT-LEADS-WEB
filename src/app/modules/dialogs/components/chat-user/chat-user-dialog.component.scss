@@ -3,16 +3,28 @@
   @include il-button;
 }
 .il-dialog {
-  width: 440px !important;
+  width: 320px !important;
   padding: 20px;
   > div {
     &:first-child {
       width: 100%;
     }
   }
+  .close {
+    cursor: pointer;
+  }
   .content,
   .header > div {
     width: 100%;
+  }
+  .content {
+    margin-left: -40px;
+    margin-right: -40px;
+    width: 110%;
+    > div:first-child {
+      background-color: $color-gray-3;
+      padding: 0 10px;
+    }
   }
   button {
     min-width: 100px;
@@ -20,6 +32,12 @@
   }
 }
 :host ::ng-deep {
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 10px !important;
+  }
+  .mat-list-item-content {
+    cursor: pointer;
+  }
   .mat-focused .mat-form-field-underline {
     background-color: $color-primary !important;
   }

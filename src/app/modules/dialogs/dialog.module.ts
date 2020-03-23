@@ -20,6 +20,7 @@ import { TagsDialogComponent } from './components/tags/tags-dialog.component';
 import { TagsQuestionDialogComponent } from './components/tags-question/tags-question-dialog.component';
 import { ChatUserDialogComponent } from './components/chat-user/chat-user-dialog.component';
 import { ChatDetailDialogComponent } from './components/chat-detail/chat-detail-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 const dialogComponents = [
   ContractAddDialogComponent,
@@ -34,7 +35,8 @@ const dialogComponents = [
   ContractTemplateDialogComponent,
   ContractSelectDialogComponent,
   TagsDialogComponent,
-  TagsQuestionDialogComponent
+  TagsQuestionDialogComponent,
+  ChatUserDialogComponent
 ];
 
 const materialModules = [
@@ -42,7 +44,8 @@ const materialModules = [
   MatDialogModule,
   MatListModule,
   MatCheckboxModule,
-  DragDropModule
+  DragDropModule,
+  MatDividerModule
 ];
 
 @NgModule({

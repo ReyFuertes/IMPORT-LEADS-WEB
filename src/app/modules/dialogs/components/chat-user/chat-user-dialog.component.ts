@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { environment } from './../../../../../environments/environment';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'il-chat-user-dialog',
@@ -6,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-user-dialog.component.scss']
 })
 export class ChatUserDialogComponent implements OnInit {
-
-  constructor() { }
+  public svgPath: string = environment.svgPath;
+  public imgPath: string = environment.imgPath;
+  public form: FormGroup;
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ChatUserDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
+    this.form = this.fb.group({
+      term: [null]
+    });
+  }
 
   ngOnInit() {
   }

@@ -2,7 +2,7 @@
   <span class="new-chat">+ Start a new chat</span>
   <mat-list role="list">
     <mat-list-item *ngFor="let chat of chatUsers;" role="listitem">
-      <div class="user" fxLayout="column">
+      <div class="user" fxLayout="column" (click)="onEdit()">
         <div fxLayout="row">
           <img [src]="svgPath + chat.image">
           <div>
