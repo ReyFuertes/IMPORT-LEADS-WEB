@@ -36,7 +36,8 @@ const dialogComponents = [
   ContractSelectDialogComponent,
   TagsDialogComponent,
   TagsQuestionDialogComponent,
-  ChatUserDialogComponent
+  ChatUserDialogComponent,
+  ChatDetailDialogComponent
 ];
 
 const materialModules = [
@@ -58,7 +59,7 @@ const materialModules = [
     FlexLayoutModule
   ],
   exports: [...dialogComponents],
-  declarations: [...dialogComponents, ChatUserDialogComponent, ChatDetailDialogComponent],
+  declarations: [...dialogComponents],
   entryComponents: [...dialogComponents],
   providers: [],
 })

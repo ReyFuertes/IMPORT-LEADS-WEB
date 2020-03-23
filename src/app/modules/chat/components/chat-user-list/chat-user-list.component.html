@@ -1,5 +1,5 @@
 <div class="user-container">
-  <span class="new-chat">+ Start a new chat</span>
+  <span class="new-chat" (click)="newChat()">+ Start a new chat</span>
   <mat-list role="list">
     <mat-list-item *ngFor="let chat of chatUsers;" role="listitem">
       <div class="user" fxLayout="column" (click)="onEdit()">

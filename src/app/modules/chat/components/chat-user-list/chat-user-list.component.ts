@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatUser } from '../../chat.models';
 import { environment } from '../../../../../environments/environment';
+import { ChatDetailDialogComponent } from 'src/app/modules/dialogs/components/chat-detail/chat-detail-dialog.component';
 
 @Component({
   selector: 'il-chat-user-list',
@@ -22,4 +23,8 @@ export class ChatUserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => { });
   }
 
+  public newChat(): void {
+    const dialogRef = this.dialog.open(ChatDetailDialogComponent, {});
+    dialogRef.afterClosed().subscribe(result => { });
+  }
 }
