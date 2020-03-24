@@ -18,6 +18,10 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
   public removeEmitter = new EventEmitter<number>();
   @Input()
   public enableHighlight: boolean = false;
+  @Input()
+  public size: string = 'medium';
+  public selected: boolean = false;
+  @ViewChild('btn', { static: false }) ev: any;
   constructor() {
     super();
   }
@@ -26,18 +30,11 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
 
   ngAfterViewInit() {
     fromEvent(this.ev.nativeElement, 'dblclick')
-      .subscribe((e: any) => {});
+      .subscribe((e: any) => { });
   }
 
-  @ViewChild('btn', { static: false }) ev: any;
   public onHighlightProduct(event: any): void {
-    if (this.enableHighlight === true) {
-      const classes = event.target.parentElement.classList.value;
-      if (classes.indexOf('selected') !== -1) {
-        event.target.parentElement.classList.remove('selected');
-      } else {
-        event.target.parentElement.classList.add('selected');
-      }
-    }
+    event.preventDefault();
+    this.selected = !this.selected;
   }
 }

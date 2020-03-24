@@ -53,6 +53,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
       .subscribe(subProducts => {
         const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
         const valueOfParentProduct = this.form.get('cost').value;
+
         //if the value of input is less than the value of sub products cost total, mark as invalid error
         if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
           this.form.controls['cost'].setErrors({ 'invalid': true });
@@ -62,11 +63,11 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
       })
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 
   ngOnInit() { }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   ngOnChanges() {
     this.isRightNavOpen = this.isRightNavOpen;
@@ -130,7 +131,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
       this.hasSubProducts = !this.hasSubProducts;
     }
     this.isEditProduct = !this.isEditProduct;
-    if (!this.isEditProduct)  this.onResetForm();
+    if (!this.isEditProduct) this.onResetForm();
   }
 
   public onShowSubProduct(): void {
@@ -156,9 +157,18 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     this.cdRef.detectChanges();
   }
 
-  public onRemoveSubProduct(index: number): void {
-    const subProduct = this.form.get('subProducts') as FormArray;
-    subProduct.removeAt(index);
+  public onRemoveProduct(product: ProductPill): void {
+    const index = this.productPillsArray.indexOf(product);
+    if (index > -1) {
+      this.productPillsArray.splice(index, 1);
+    }
+  }
+
+  public onRemoveSubProduct(product: ProductPill, subProduct: ProductPill): void {
+    const index = product.subProducts.indexOf(subProduct);
+    if (index > -1) {
+      product.subProducts.splice(index, 1);
+    }
   }
 }
 

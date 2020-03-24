@@ -13,10 +13,29 @@
   display: flex;
   place-content: center;
   align-items: center;
-  span {
-    padding-left: 3px;
+  animation: showNav 250ms ease-in-out both;
+  cursor: pointer;
+  div:not(.small) {
+    position: relative;
+    top: -0.5px;
   }
-  img {
+  img:hover {
     cursor: pointer;
+    -webkit-box-shadow: 0px 0px 3px 2px $color-blue-2;
+    -moz-box-shadow: 0px 0px 3px 2px $color-blue-2;
+    box-shadow: 0px 0px 3px 2px $color-blue-2;
+  }
+  &.medium {
+    cursor: pointer;
+  }
+  &.small {
+    height: 15px;
+    font-size: 10px;
+    padding: 2px 5px;
+    margin-left: -10px !important;
+    position: relative;
+    top: 0.5px;
+    background-color: $color-blue-1;
+    cursor: default;
   }
 }

@@ -16,13 +16,5 @@
 .add-icon, .remove-icon {
   cursor: pointer;
 }
-:host ::ng-deep {
-  il-pill:not(:first-child) { 
-    margin-right: 10px !important;
-    div {
-      height: 20px;
-      padding: 5px;
-    }
-  }
-}
+
 

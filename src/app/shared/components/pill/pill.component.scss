@@ -1,16 +1,25 @@
 @import "src/styleguide/shared";
 .il-pill {
   @include il-pill;
-  cursor: default;
-  animation: showNav 250ms ease-in-out both;
+  > div {
+    animation: showNav 250ms ease-in-out both;
+  }
+}
+.selected {
+  > div {
+    -webkit-box-shadow: 0px 0px 3px 2px $color-blue-2;
+    -moz-box-shadow: 0px 0px 3px 2px $color-blue-2;
+    box-shadow: 0px 0px 3px 2px $color-blue-2;
+  }
 }
 @keyframes showNav {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-.p-cursor {
-  cursor: pointer !important;
-}
-.il-pill.selected {
-  border: solid 2px $color-blue-2;
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 5;
+  }
+  100% {
+    opacity: 1;
+  }
 }

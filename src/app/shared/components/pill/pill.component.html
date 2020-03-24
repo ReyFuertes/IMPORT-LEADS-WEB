@@ -1,4 +1,6 @@
-<div #btn [attr.id]="item?.value" (click)="onHighlightProduct($event)" [ngClass]="{'p-cursor': selectable}" class="il-pill" fxLayoutGap="5px">
-  <span>{{ item?.label }}</span>
-  <img (click)="removeEmitter.emit(item?.value)" [src]="svgPath + 'close-icon-white.svg'" />
+<div [ngClass]="{'selected': selected}">
+  <div #btn [attr.id]="item?.value" (click)="size !== 'small' ? onHighlightProduct($event): null" [ngClass]="{'p-cursor': selectable, 'small': size === 'small'}" class="il-pill" fxLayoutGap="5px">
+    <div>{{ item?.label }}</div>
+    <img (click)="removeEmitter.emit(item?.value)" [src]="svgPath + 'close-icon-white.svg'" />
+  </div>
 </div>
