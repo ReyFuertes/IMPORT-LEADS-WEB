@@ -164,11 +164,15 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     }
   }
 
-  public onRemoveSubProduct(product: ProductPill, subProduct: ProductPill): void {
+  public onRemoveSubProduct(product: ProductPill, subProduct: ProductPill, i: number): void {
+    //remove from displayed array
     const index = product.subProducts.indexOf(subProduct);
     if (index > -1) {
       product.subProducts.splice(index, 1);
     }
+    //remove from form binding
+    const item = this.form.get('subProducts') as FormArray;
+    item.removeAt(i)
   }
 }
 

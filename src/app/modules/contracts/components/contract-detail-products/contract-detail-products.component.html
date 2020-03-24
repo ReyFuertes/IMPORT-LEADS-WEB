@@ -10,7 +10,7 @@
       <ng-container *ngFor="let product of productPillsArray; let i = index;">
         <il-pill (click)="OnEditProduct(product)" [item]="{label: product.name}" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(product)" [selectable]="true">
         </il-pill>
-        <il-pill size="small" *ngFor="let sub of product.subProducts; let i = index;" [item]="{label: sub.name}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(product, sub)" [selectable]="false">
+        <il-pill size="small" *ngFor="let sub of product.subProducts; let i = index;" [item]="{label: sub.name}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(product, sub, $event)" [selectable]="false">
         </il-pill>
       </ng-container>
     </div>
