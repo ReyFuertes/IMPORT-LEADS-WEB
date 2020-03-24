@@ -1,3 +1,4 @@
+import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { ContractSpecTitleDialogComponent } from './../../../dialogs/components/contract-spec-title/contract-spec-title-dialog.component';
 import { ContractProductSpecDialogComponent } from './../../../dialogs/components/contract-product-spec/contract-product-spec-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -41,7 +42,7 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
   @Input()
   public specTitle: string = 'Specification title';
   @Input()
-  public specification: Array<{ id: number, title: string, specification?: any}>;
+  public specification: Array<{ id: number, title: string, specification?: any }>;
   @Input()
   public isRightNavOpen: boolean = false;
   public showToggle: boolean = false;
@@ -49,7 +50,7 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
   public removeProductSpecEmitter = new EventEmitter<number>();
 
   constructor(public dialog: MatDialog,
-    private  confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() { }
 
@@ -71,18 +72,18 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
 
   public UpdateProductSpecTitle(): void {
     const dialogRef = this.dialog.open(ContractProductSpecDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => { });
   }
 
   public onDeleteProductSpecs(): void {
-    this.confirmationService.confirm({
-        message: 'Do you want to delete this?',
-        header: 'Delete Confirmation',
-        icon: 'pi pi-info-circle',
-        key: 'productSpecs',
-        accept: () => {
-          this.removeProductSpecEmitter.emit(this.specification['id']);
-        }
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '410px',
+      data: {}
     });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.removeProductSpecEmitter.emit(this.specification['id']);
+      }
+    });
+  }
 }
