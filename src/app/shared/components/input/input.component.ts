@@ -28,6 +28,8 @@ export class InputComponent implements OnInit {
   public isReadOnly: boolean = false;
   @Input()
   public showErrors: boolean = false;
+  @Input()
+  public isCenter: boolean = false;
   constructor() { }
 
   ngOnInit() { }

@@ -1,0 +1,25 @@
+@import "src/styleguide/shared";
+.il-button {
+  @include il-button;
+}
+.il-dialog {
+  padding: 20px;
+  > div {
+    &:first-child {
+      width: 100%;
+    }
+  }
+  .content {
+    width: 100%;
+    text-align: center;
+  }
+  button {
+    min-width: 100px;
+    width: 107px !important;
+  }
+}
+:host ::ng-deep {
+  .mat-focused .mat-form-field-underline {
+    background-color: $color-primary !important;
+  }
+}

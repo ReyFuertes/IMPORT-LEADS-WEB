@@ -1,3 +1,5 @@
+import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
+import { MatDialog } from '@angular/material/dialog';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit } from '@angular/core';
@@ -38,7 +40,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
   @Input()
   public isRightNavOpen: boolean = false;
 
-  constructor(private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
+  constructor(private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
       id: [null],
       name: [null, Validators.required],
@@ -77,6 +79,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     this.form.reset();
     this.hasSubProducts = false;
     if (this.subProductsArray) this.subProductsArray.clear();
+    this.isEditProduct = false;
   }
 
   public createItem(item: SimpleItem): FormGroup {
@@ -150,7 +153,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     this.subProductsArray = this.form.get('subProducts') as FormArray;
     const item = this.createSubItem({
       name: products.name,
-      qty: 1,
+      qty: this.form.get('qty').value,
       cost: 1,
     });
     this.subProductsArray.push(item);
@@ -158,21 +161,39 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
   }
 
   public onRemoveProduct(product: ProductPill): void {
-    const index = this.productPillsArray.indexOf(product);
-    if (index > -1) {
-      this.productPillsArray.splice(index, 1);
-    }
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '410px',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.productPillsArray.indexOf(product);
+        if (index > -1) {
+          this.productPillsArray.splice(index, 1);
+        }
+        this.onResetForm();
+      }
+    });
   }
 
   public onRemoveSubProduct(product: ProductPill, subProduct: ProductPill, i: number): void {
-    //remove from displayed array
-    const index = product.subProducts.indexOf(subProduct);
-    if (index > -1) {
-      product.subProducts.splice(index, 1);
-    }
-    //remove from form binding
-    const item = this.form.get('subProducts') as FormArray;
-    item.removeAt(i)
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '410px',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        //remove from displayed array
+        const index = product.subProducts.indexOf(subProduct);
+        if (index > -1) {
+          product.subProducts.splice(index, 1);
+        }
+        //remove from form binding
+        const item = this.form.get('subProducts') as FormArray;
+        item.removeAt(i);
+        this.onResetForm();
+      }
+    });
   }
 }
 

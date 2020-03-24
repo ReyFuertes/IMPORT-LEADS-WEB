@@ -20,8 +20,8 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="start start">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
           <il-input-select fxFlex [form]="form" [controlName]="'name'" [isReadOnly]="isRightNavOpen"></il-input-select>
-          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
-          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
+          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" isCenter="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
+          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" isCenter="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
           <div fxFlex="5"></div>
         </div>
         <ng-container *ngIf="hasSubProducts">
@@ -30,8 +30,8 @@
               <div fxFlex fxLayoutGap="20px" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
                 <il-input-select [isRequired]="hasSubProducts" [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
                 </il-input-select>
-                <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
-                <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
+                <il-input fxFlex="15" [form]="subProducts" isCenter="true" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
+                <il-input fxFlex="15" [form]="subProducts" isCenter="true" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
                 <div fxFlex="5" fxLayoutAlign="start center">
                   <img class="remove-icon" (click)="onRemoveSubProduct(i)" [src]="svgPath + 'delete-icon-red.svg'">
                 </div>
@@ -49,7 +49,7 @@
           Save Product
         </button>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <mat-checkbox [checked]="hasSubProducts" (change)="onShowSubProduct()"></mat-checkbox>
+          <mat-checkbox [checked]="hasSubProducts" [disabled]="!form.valid" (change)="onShowSubProduct()"></mat-checkbox>
           <img *ngIf="subProductsArray && hasSubProducts" (click)="onAddSubProduct()" class="add-icon" [src]="svgPath + 'add-icon-blue.svg'">
         </div>
       </div>

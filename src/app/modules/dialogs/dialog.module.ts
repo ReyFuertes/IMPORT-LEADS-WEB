@@ -1,3 +1,4 @@
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { InspectionRunCommentDialogComponent } from './components/inspection-run-comment/inspection-run-comment-dialog.component';
 import { ContractSpecTitleDialogComponent } from './components/contract-spec-title/contract-spec-title-dialog.component';
 import { ContractProductSpecDialogComponent } from './components/contract-product-spec/contract-product-spec-dialog.component';
@@ -37,7 +38,8 @@ const dialogComponents = [
   TagsDialogComponent,
   TagsQuestionDialogComponent,
   ChatUserDialogComponent,
-  ChatDetailDialogComponent
+  ChatDetailDialogComponent,
+  ConfirmationComponent
 ];
 
 const materialModules = [

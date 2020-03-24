@@ -14,12 +14,7 @@
 @mixin il-bg-blue {
   background-color: $color-primary;
   color: $color-white;
-  border-radius: 0;
-  height: 32px;
-  line-height: 25px;
-  padding: 0 10px;
-  font-size: 12px;
-  font-weight: 500;
+  @include btn;
   img {
     margin-right: 5px;
   }
@@ -30,12 +25,7 @@
 @mixin il-bordered-blue {
   border: thin $color-primary solid !important;
   color: $color-primary;
-  border-radius: 0;
-  height: 32px;
-  line-height: 25px;
-  padding: 0 10px;
-  font-size: 12px;
-  font-weight: 500;
+  @include btn;
   img {
     margin-right: 5px;
   }
@@ -51,6 +41,11 @@
   &.primary {
     @include btn;
     background-color: $color-primary;
+    color: $color-white;
+  }
+  &.danger {
+    @include btn;
+    background-color: $color-red;
     color: $color-white;
   }
   &.large {
