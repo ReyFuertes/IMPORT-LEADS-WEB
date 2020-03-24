@@ -1,5 +1,5 @@
 import { environment } from './../../../../environments/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'il-upload-box',
@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class UploadBoxComponent implements OnInit {
   public svgPath: string = environment.svgPath;
+  @Input()
+  public label: string = 'Screenshot contract';
   constructor() { }
 
   ngOnInit() { }
