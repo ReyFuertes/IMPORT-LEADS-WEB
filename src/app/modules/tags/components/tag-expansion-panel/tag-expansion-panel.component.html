@@ -29,5 +29,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-
+  <div class="list-item" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <img [src]="svgPath + 'add-icon-gray.svg'" (click)="onAddTag($event)"/>
+  </div>
 </div>

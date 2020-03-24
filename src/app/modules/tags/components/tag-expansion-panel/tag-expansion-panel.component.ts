@@ -1,3 +1,4 @@
+import { TagsDialogComponent } from 'src/app/modules/dialogs/components/tags/tags-dialog.component';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
@@ -36,13 +37,11 @@ export class TagExpansionPanelComponent extends GenericPanelComponent implements
     this.dragStart = event;
   }
 
-  public onAddQuestion(event: any, item: Tag): void {
-    event.stopPropagation();
-
-    const dialogRef = this.dialog.open(TagsQuestionDialogComponent, { data: {} });
+  public onAddTag(): void {
+    const dialogRef = this.dialog.open(TagsDialogComponent, { data: {} });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        item.questions.push(result);
+        this.items.push({ id: 6, name: result, questions: [] });
       }
      });
   }

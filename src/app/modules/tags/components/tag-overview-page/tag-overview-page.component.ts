@@ -1,7 +1,6 @@
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TagsDialogComponent } from 'src/app/modules/dialogs/components/tags/tags-dialog.component';
 import { Tag } from '../../tags.models';
 
 @Component({
@@ -54,13 +53,4 @@ export class TagOverviewPageComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() { }
-
-  public onAddTag(): void {
-    const dialogRef = this.dialog.open(TagsDialogComponent, { data: {} });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.items.push({ id: 6, name: result, questions: [] });
-      }
-     });
-  }
 }
