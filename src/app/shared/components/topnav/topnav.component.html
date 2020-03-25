@@ -1,13 +1,18 @@
 <div fxLayout="row" class="top-nav" fxLayoutAlign="start center" fxLayoutGap="20px">
   <div fxFlex fxLayoutAlign="start center">
-    <img class="search-icon" [src]="svgPath + 'search-icon-black.svg'" />
-    <mat-form-field class="search" floatLabel="never">
-      <input matInput placeholder="Search for contracts, templates, users, tags">
-    </mat-form-field>
+    <div class="menu-box logo" fxFlex="10">
+      <img [src]="imgPath + 'logo.png'" />
+    </div>
+    <ng-container *ngFor="let menu of toolbarMenu; let i = index">
+      <div class="menu-box" fxFlex="25" *ngIf="menu?.children">
+        <il-menu [menu]="menu"></il-menu>
+      </div>
+      <div class="menu-box" *ngIf="!menu?.children" (click)="menu?.route()" fxFlex="25">{{ menu?.label }}</div>
+    </ng-container>
   </div>
   <div fxFlex="20" fxLayoutAlign="end center" fxLayoutGap="40px">
     <div fxLayoutAlign="end center">
-      <img class="chat" [src]="svgPath + 'chat-icon-black.svg'" routerLink="dashboard/chat"/>
+      <img class="chat" [src]="svgPath + 'chat-icon-black.svg'" routerLink="dashboard/chat" />
       <span matBadge="4" matBadgeColor="warn"></span>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">

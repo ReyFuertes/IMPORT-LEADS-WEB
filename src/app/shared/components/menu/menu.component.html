@@ -1,0 +1,9 @@
+
+  <div fxLayoutGap="5px" fxLayoutAlign="center center">
+    <span (click)="menu.route()"> {{ menu?.label }}</span>
+    <img [src]="svgPath + 'arrow-down-icon-black.svg'" [matMenuTriggerFor]="subMenu">
+  </div>
+  <mat-menu #subMenu="matMenu">
+    <button class="sub-menu-item" *ngFor="let submenu of menu?.children" (click)="submenu?.route()" mat-menu-item>{{ submenu?.label }}</button>
+  </mat-menu>
+

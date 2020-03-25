@@ -1,0 +1,14 @@
+@import "src/styleguide/shared";
+.img,
+.menu-box > div {
+  cursor: pointer;
+}
+::ng-deep {
+  .sub-menu-item.mat-menu-item {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px !important;
+    line-height: 43px !important;
+  }
+}

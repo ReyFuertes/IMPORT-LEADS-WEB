@@ -1,15 +1,10 @@
-@import 'src/styleguide/shared';
+@import "src/styleguide/shared";
 .top-nav {
   @include il-topnav;
+  @include fade-in;
+  overflow: hidden;
 }
-.top-nav {
-  width: calc(100% - 250px);
-}
+
 .chat {
   cursor: pointer;
-}
-@media (max-width: 1280px) {
-  .top-nav {
-    width: calc(100% - 210px) !important;
-  }
 }

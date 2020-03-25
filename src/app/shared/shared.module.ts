@@ -1,3 +1,4 @@
+import { MenuComponent } from './components/menu/menu.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
 import { InputMaxLengthDirective } from './directives/input-maxlen.directive';
 import { EllipseMenuComponent } from './components/ellipse-menu/ellipse-menu.component';
@@ -85,7 +86,8 @@ const sharedComponents = [
   CkeditorComponent,
   StarRatingComponent,
   PrimengEditorComponent,
-  InputSearchComponent
+  InputSearchComponent,
+  MenuComponent
 ];
 
 const directives = [
