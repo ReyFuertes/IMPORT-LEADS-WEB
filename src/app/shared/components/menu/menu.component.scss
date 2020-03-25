@@ -3,6 +3,9 @@
 .menu-box > div {
   cursor: pointer;
 }
+.active-link {
+  background-color: $color-gray-3;
+}
 ::ng-deep {
   .sub-menu-item.mat-menu-item {
     width: 100%;

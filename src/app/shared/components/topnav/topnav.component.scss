@@ -4,7 +4,9 @@
   @include fade-in;
   overflow: hidden;
 }
-
 .chat {
   cursor: pointer;
+}
+.active-link {
+  background-color: $color-gray-3;
 }

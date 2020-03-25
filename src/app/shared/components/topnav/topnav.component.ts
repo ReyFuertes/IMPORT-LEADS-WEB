@@ -12,8 +12,8 @@ export class TopNavComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
   public toolbarMenu: Array<{
-    label: string, route?: () => void, children?: Array<{
-      label: string, route?: () => void
+    label: string, route?: string, children?: Array<{
+      label: string, route?: string
     }>
   }>;
   constructor(private router: Router) { }
@@ -22,33 +22,33 @@ export class TopNavComponent implements OnInit {
     this.toolbarMenu = [
       {
         label: 'AGREEMENTS',
-        route: () => this.router.navigateByUrl('/dashboard/contracts'),
+        route: '/dashboard/contracts',
         children: [
           {
             label: 'TEMPLATES',
-            route: () => this.router.navigateByUrl('/dashboard/templates'),
+            route: '/dashboard/templates',
           },
           {
             label: 'TAGS',
-            route: () => this.router.navigateByUrl('/dashboard/tags'),
+            route: '/dashboard/tags',
           }
         ]
       },
       {
         label: 'ASSESMENTS',
-        route: () => this.router.navigateByUrl('/dashboard/inspections'),
+        route: '/dashboard/inspections',
       },
       {
         label: 'DATA',
-        route: () => this.router.navigateByUrl('dashboard/performance-insights'),
+        route: '/dashboard/performance-insights',
       },
       {
         label: 'VENUES',
-        route: () => this.router.navigateByUrl('/dashboard/venues'),
+        route: '/dashboard/venues',
       },
       {
         label: 'USERS',
-        route: () => this.router.navigateByUrl('/dashboard/users'),
+        route: '/dashboard/users',
       }
     ];
   }

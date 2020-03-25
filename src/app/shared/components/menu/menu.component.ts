@@ -12,8 +12,8 @@ export class MenuComponent implements OnInit {
   @Input()
   public menu: {
     label: string, children?: Array<{
-      label: string, route?: () => void
-    }>, route?: () => void
+      label: string, route?: string
+    }>, route?: string
   };
   constructor() { }
 
