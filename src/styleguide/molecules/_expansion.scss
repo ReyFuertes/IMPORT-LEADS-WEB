@@ -1,4 +1,9 @@
 @mixin il-draggable-expansion {
+  .pnl-header {
+    &:first-child > img {
+      width: 8px;
+    }
+  }
   .actions-col {
     height: 50px;
     > div {

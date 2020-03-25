@@ -25,6 +25,7 @@
 .user-image {
   border-radius: 50%;
   margin-right: 15px;
+  width: 30px;
 }
 .user-access {
   white-space: nowrap;
@@ -45,6 +46,6 @@
 ::ng-deep {
   .cdk-drag-preview {
     border-radius: 0 !important;
-    @extend .il-draggable-expansion; 
+    @extend .il-draggable-expansion;
   }
 }
