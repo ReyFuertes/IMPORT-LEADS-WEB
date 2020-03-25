@@ -19,6 +19,9 @@
     width: 250px;
     @include truncate;
   }
+  img {
+    width: 50px;
+  }
 }
 .img-circle {
   width: 24px;
@@ -38,13 +41,13 @@
 .il-draggable-expansion {
   @include il-draggable-expansion;
   box-shadow: $box-shadow;
+
 }
 :host ::ng-deep {
   .mat-expansion-panel-header {
     padding-right: 10px;
     padding-left: 15px;
   }
-
   .il-pill {
     img {
       display: none !important;
@@ -52,8 +55,35 @@
   }
 }
 ::ng-deep {
+  .mat-expansion-panel {
+    transition: all 1s ease-in-out;
+  }
   .cdk-drag-preview {
     border-radius: 0 !important;
-    @extend .il-draggable-expansion; 
+    @extend .il-draggable-expansion;
+  }
+}
+.fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 0.6s;
+}
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
   }
 }

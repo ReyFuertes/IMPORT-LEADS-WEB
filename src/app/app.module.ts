@@ -19,14 +19,14 @@ const materialModules = [
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     ...materialModules,
     SharedModule,
     HttpClientModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

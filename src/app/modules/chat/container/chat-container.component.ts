@@ -1,3 +1,4 @@
+import { GenericContainer } from './../../../shared/generics/generic-container';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './chat-container.component.html',
   styleUrls: ['./chat-container.component.scss']
 })
-export class ChatContainerComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+export class ChatContainerComponent extends GenericContainer implements OnInit {
+  constructor() {
+    super();
   }
-
 }

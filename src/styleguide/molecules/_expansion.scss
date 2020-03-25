@@ -1,5 +1,7 @@
 @mixin il-draggable-expansion {
+  transition: all 1s ease-in-out;
   .actions-col {
+    transition: all 1s ease-in-out;
     height: 50px;
     > div {
       height: 50px;

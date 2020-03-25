@@ -1,3 +1,4 @@
+import { GenericContainer } from './../../../shared/generics/generic-container';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tags-container.component.scss']
 })
 
-export class TagsContainerComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit() { }
+export class TagsContainerComponent extends GenericContainer implements OnInit {
+  constructor() {
+    super();
+  }
 }

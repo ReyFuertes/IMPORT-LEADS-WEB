@@ -1,3 +1,4 @@
+import { GenericContainer } from './../../../shared/generics/generic-container';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./performance-insights-container.component.scss']
 })
 
-export class PerformanceInsightsComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit() { }
+export class PerformanceInsightsComponent extends GenericContainer implements OnInit {
+  constructor() {
+    super();
+  }
 }

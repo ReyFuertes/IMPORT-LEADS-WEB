@@ -1,7 +1,7 @@
 <div class="col-header" fxLayoutAlign="center center" fxLayoutGap="10px">
   <div *ngFor="let col of colsHeaders" [fxFlex]="col?.width">{{ col?.label }}</div>
 </div>
-<div class="il-draggable-expansion">
+<div class="fade-in il-draggable-expansion">
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
     <mat-expansion-panel (click)="expandPnl(pnl, $event, i)" cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel" *ngFor="let item of items; let i = index" hideToggle="true">
 
