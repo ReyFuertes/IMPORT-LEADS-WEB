@@ -39,7 +39,8 @@ export class TopNavComponent implements OnInit {
         route: () => this.router.navigateByUrl('/dashboard/inspections'),
       },
       {
-        label: 'DATA'
+        label: 'DATA',
+        route: () => this.router.navigateByUrl('dashboard/performance-insights'),
       },
       {
         label: 'VENUES',
