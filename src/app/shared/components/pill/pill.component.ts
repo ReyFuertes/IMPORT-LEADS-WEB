@@ -1,7 +1,8 @@
+import { PillState } from './../../../modules/contracts/contract.model';
 import { SimpleItem } from './../../generics/generic.model';
 import { GenericControl } from './../../generics/generic-control';
 import { environment } from './../../../../environments/environment';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 @Component({
@@ -14,17 +15,21 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
   public svgPath: string = environment.svgPath;
   @Input()
   public selectable: boolean = false;
-  @Output()
-  public removeEmitter = new EventEmitter<number>();
   @Input()
   public enableHighlight: boolean = false;
   @Input()
   public enabled: boolean = true;
   @Input()
+  public state: PillState;
+  @Input()
   public size: string = 'medium';
   public selected: boolean = false;
+  @Output()
+  public removeEmitter = new EventEmitter<number>();
+  @Output()
+  public stateEmitter = new EventEmitter<PillState>();
   @ViewChild('btn', { static: false }) ev: any;
-  constructor() {
+  constructor(private cdRef: ChangeDetectorRef) {
     super();
   }
 
@@ -37,7 +42,9 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
 
   public onHighlightProduct(event: any): void {
     event.preventDefault();
-    this.selected = !this.selected;
+    this.stateEmitter.emit(PillState.reset);
+    this.cdRef.detectChanges();
+    event.currentTarget.parentNode.classList.add('selected');
   }
 
   public get isSizeSmall(): boolean {

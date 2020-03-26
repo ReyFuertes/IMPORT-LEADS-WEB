@@ -1,26 +1,14 @@
+import { ProductPill, PillState } from './../../contract.model';
+import { PillComponent } from './../../../../shared/components/pill/pill.component';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContractProduct } from '../../contract.model';
-
-export interface ProductPill {
-  id?: string | number;
-  name: string;
-  qty: string | number;
-  cost: string | number;
-  subProducts: SubProductPill[];
-}
-export interface SubProductPill {
-  id?: string | number;
-  name: string;
-  qty: string | number;
-  cost: string | number;
-}
 
 @Component({
   selector: 'il-contract-detail-products',
@@ -37,6 +25,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
   public hasSubProducts: boolean = false;
   public isEditProduct: boolean = false;
   private destroy$ = new Subject();
+  public state: PillState = PillState.default;
   @Input()
   public isRightNavOpen: boolean = false;
 
@@ -73,6 +62,13 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
 
   ngOnChanges() {
     this.isRightNavOpen = this.isRightNavOpen;
+  }
+
+  public onStateEmitter(event: PillState): void {
+    const pillArray = document.querySelectorAll('.pill-container')
+    pillArray && pillArray.forEach((item) => {
+      item.classList.remove("selected");
+    })
   }
 
   private onResetForm(): void {
