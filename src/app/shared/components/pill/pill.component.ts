@@ -37,7 +37,7 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
 
   ngAfterViewInit() {
     fromEvent(this.ev.nativeElement, 'dblclick')
-      .subscribe((e: any) => { });
+      .subscribe((e: any) => { this.ev.nativeElement.parentNode.classList.remove('selected') });
   }
 
   public onHighlightProduct(event: any): void {
