@@ -11,5 +11,4 @@ export class InspectionsContainerComponent extends GenericContainer implements O
   constructor() {
     super();
   }
-
 }

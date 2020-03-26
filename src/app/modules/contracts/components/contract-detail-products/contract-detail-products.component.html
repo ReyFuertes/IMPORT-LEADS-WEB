@@ -8,9 +8,9 @@
   <div fxLayout="column">
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px">
       <ng-container *ngFor="let product of productPillsArray; let i = index;">
-        <il-pill (click)="OnEditProduct(product)" [item]="{label: product.name}" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(product)" [selectable]="true">
+        <il-pill (click)="OnEditProduct(product)" [enabled]="!isRightNavOpen" [item]="{label: product.name}" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(product)" [selectable]="true">
         </il-pill>
-        <il-pill size="small" *ngFor="let sub of product.subProducts; let i = index;" [item]="{label: sub.name}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(product, sub, $event)" [selectable]="false">
+        <il-pill size="small" [enabled]="isRightNavOpen" *ngFor="let sub of product.subProducts; let i = index;" [item]="{label: sub.name}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(product, sub, $event)" [selectable]="true">
         </il-pill>
       </ng-container>
     </div>
@@ -20,8 +20,8 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="start start">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
           <il-input-select fxFlex [form]="form" [controlName]="'name'" [isReadOnly]="isRightNavOpen"></il-input-select>
-          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" isCenter="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
-          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" isCenter="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
+          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
+          <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
           <div fxFlex="5"></div>
         </div>
         <ng-container *ngIf="hasSubProducts">
@@ -30,8 +30,8 @@
               <div fxFlex fxLayoutGap="20px" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
                 <il-input-select [isRequired]="hasSubProducts" [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
                 </il-input-select>
-                <il-input fxFlex="15" [form]="subProducts" isCenter="true" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
-                <il-input fxFlex="15" [form]="subProducts" isCenter="true" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
+                <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
+                <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
                 <div fxFlex="5" fxLayoutAlign="start center">
                   <img class="remove-icon" (click)="onRemoveSubProduct(i)" [src]="svgPath + 'delete-icon-red.svg'">
                 </div>

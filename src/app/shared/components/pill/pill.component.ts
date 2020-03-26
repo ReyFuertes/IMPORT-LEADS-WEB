@@ -19,6 +19,8 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
   @Input()
   public enableHighlight: boolean = false;
   @Input()
+  public enabled: boolean = true;
+  @Input()
   public size: string = 'medium';
   public selected: boolean = false;
   @ViewChild('btn', { static: false }) ev: any;
@@ -36,5 +38,9 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
   public onHighlightProduct(event: any): void {
     event.preventDefault();
     this.selected = !this.selected;
+  }
+
+  public get isSizeSmall(): boolean {
+    return this.size === 'small';
   }
 }
