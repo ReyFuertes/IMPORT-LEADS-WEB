@@ -5,10 +5,11 @@
     </div>
     <h2>Products</h2>
   </div>
-  <div fxLayout="column">
+  <div class="cp-container" fxLayout="column">
+    <p *ngIf="productPillsArray && productPillsArray.length > 0">Select the product to select the related terms that you want to inspect</p>
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px">
       <ng-container *ngFor="let product of productPillsArray; let i = index;">
-        <il-pill [state]="state" (stateEmitter)="onStateEmitter($event)" (click)="OnEditProduct(product)" [enabled]="!isRightNavOpen" [item]="{label: product.name}" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(product)" [selectable]="true">
+        <il-pill [state]="state" (stateEmitter)="removeSelection()" (click)="OnEditProduct(product)" [enabled]="!isRightNavOpen" [item]="{label: product.name}" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(product)" [selectable]="true">
         </il-pill>
         <il-pill size="small" [enabled]="isRightNavOpen" *ngFor="let sub of product.subProducts; let i = index;" [item]="{label: sub.name}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(product, sub, $event)" [selectable]="true">
         </il-pill>

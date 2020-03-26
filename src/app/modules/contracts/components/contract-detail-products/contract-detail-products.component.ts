@@ -64,8 +64,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     this.isRightNavOpen = this.isRightNavOpen;
   }
 
-  public onStateEmitter(event: PillState): void {
-    const pillArray = document.querySelectorAll('.pill-container')
+  public removeSelection(): void {
+    const pillArray = document.querySelectorAll('.pill-container');
     pillArray && pillArray.forEach((item) => {
       item.classList.remove("selected");
     })

@@ -42,7 +42,7 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
 
   public onHighlightProduct(event: any): void {
     event.preventDefault();
-    this.stateEmitter.emit(PillState.reset);
+    this.stateEmitter.emit();
     this.cdRef.detectChanges();
     event.currentTarget.parentNode.classList.add('selected');
   }

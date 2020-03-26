@@ -10,6 +10,12 @@
     }
   }
 }
+.cp-container {
+  p {
+    font-size: 14px;
+    color: $color-gray-1;
+  }
+}
 .il-button {
   @include il-button;
 }
