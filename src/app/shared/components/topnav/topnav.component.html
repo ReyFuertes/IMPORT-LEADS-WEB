@@ -8,8 +8,7 @@
         false}" fxFlex="25" *ngIf="menu?.children">
         <il-menu [menu]="menu"></il-menu>
       </div>
-      <div class="menu-box" [routerLink]="menu?.route" *ngIf="!menu?.children" fxFlex="25" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
-        true}">{{ menu?.label }}</div>
+      <div class="menu-box" [routerLink]="menu?.route" *ngIf="!menu?.children" fxFlex="25" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">{{ menu?.label }}</div>
     </ng-container>
   </div>
   <div fxFlex="20" fxLayoutAlign="end center" fxLayoutGap="40px">

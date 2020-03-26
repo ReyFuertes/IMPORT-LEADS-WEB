@@ -1,6 +1,9 @@
 @import "src/styleguide/shared";
-.img,
 .menu-box > div {
+  cursor: pointer;
+}
+img {
+  padding: 5px;
   cursor: pointer;
 }
 .active-link {
