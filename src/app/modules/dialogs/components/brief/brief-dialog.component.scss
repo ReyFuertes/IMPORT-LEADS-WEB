@@ -7,15 +7,11 @@
   width: 672px;
   height: 448px;
   .content {
-    height: 216px;
+    height: 100%;
+    padding: 0 40px !important;
     width: 672px;
     > div > div {
       width: 100%;
     }
-  }
-}
-:host ::ng-deep {
-  .ql-editor {
-    height: 95px !important;
   }
 }
