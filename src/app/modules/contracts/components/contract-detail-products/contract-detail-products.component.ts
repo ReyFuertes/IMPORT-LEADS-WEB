@@ -1,4 +1,4 @@
-import { ProductPill, PillState } from './../../contract.model';
+import { IProductPill, PillState } from './../../contract.model';
 import { PillComponent } from './../../../../shared/components/pill/pill.component';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,7 +8,7 @@ import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, 
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ContractProduct } from '../../contract.model';
+import { IContractProduct } from '../../contract.model';
 
 @Component({
   selector: 'il-contract-detail-products',
@@ -20,7 +20,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
   public svgPath: string = environment.svgPath;
   public productsArray: FormArray;
   public subProductsArray: FormArray;
-  public productPillsArray: ProductPill[] = [];
+  public productPillsArray: IProductPill[] = [];
   public form: FormGroup;
   public hasSubProducts: boolean = false;
   public isEditProduct: boolean = false;
@@ -82,7 +82,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     return this.fb.group(item);
   }
 
-  public createSubItem(item: ContractProduct): FormGroup {
+  public createSubItem(item: IContractProduct): FormGroup {
     return this.fb.group(item);
   }
 
@@ -102,7 +102,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
 
   public onEditProductSave(): void {
     if (this.form.value) {
-      const product: ProductPill = Object.assign([], this.form.value);
+      const product: IProductPill = Object.assign([], this.form.value);
       const i = this.productPillsArray.findIndex(x => x.id === product.id);
       this.productPillsArray[i] = product;
       this.isEditProduct = !this.isEditProduct;
@@ -110,7 +110,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     }
   }
 
-  public OnEditProduct(product: ProductPill): void {
+  public OnEditProduct(product: IProductPill): void {
     this.form.controls['id'].patchValue(product.id);
     this.form.controls['name'].patchValue(product.name);
     this.form.controls['qty'].patchValue(product.qty);
@@ -145,7 +145,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
   }
 
   public onAddSubProduct(): void {
-    const products: ProductPill = Object.assign([], this.form.value);
+    const products: IProductPill = Object.assign([], this.form.value);
     this.subProductsArray = this.form.get('subProducts') as FormArray;
     const item = this.createSubItem({
       name: products.name,
@@ -156,7 +156,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     this.cdRef.detectChanges();
   }
 
-  public onRemoveProduct(product: ProductPill): void {
+  public onRemoveProduct(product: IProductPill): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '410px',
       data: {}
@@ -172,7 +172,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit, O
     });
   }
 
-  public onRemoveSubProduct(product: ProductPill, subProduct: ProductPill, i: number): void {
+  public onRemoveSubProduct(product: IProductPill, subProduct: IProductPill, i: number): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '410px',
       data: {}

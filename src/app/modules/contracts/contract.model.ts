@@ -3,27 +3,27 @@ export enum PillState {
   reset = 1
 }
 
-export interface ProductPill {
+export interface IProductPill {
   id?: string | number;
   name: string;
   qty: string | number;
   cost: string | number;
-  subProducts: SubProductPill[];
+  subProducts: IProductPill[];
 }
-export interface SubProductPill {
+export interface IProductPill {
   id?: string | number;
   name: string;
   qty: string | number;
   cost: string | number;
 }
 
-export interface ContractProduct {
+export interface IContractProduct {
   id?: string | number;
   name: string;
   qty: string | number;
   cost: string | number;
 }
-export interface Contract {
+export interface IContract {
   id?: string;
   title: string;
   venue: string;
@@ -31,9 +31,9 @@ export interface Contract {
   deliveryDate: Date | string;
   details: string;
   attachments?: any[];
-  images: ProductImage[];
+  images: IProductImage[];
 }
-export interface ProductImage {
+export interface IProductImage {
   id?: number | string;
   name?: string
 }

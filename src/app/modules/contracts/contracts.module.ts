@@ -1,3 +1,7 @@
+import { ContractsEffects } from './store/contracts.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { ContractsService } from './contracts.service';
 import { ContractProductSpecsComponent } from './components/contract-product-specs/contract-product-specs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContractRightContentComponent } from './components/contract-right-content/contract-right-content.component';
@@ -22,6 +26,7 @@ import { ConfirmationService } from 'primeng/api';
 import { SidebarModule } from 'primeng/sidebar';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ContractProductSpecsTitleComponent } from './components/contract-product-specs-title/contract-product-specs-title.component';
+import { ContractsReducer } from './store/contracts.reducer';
 
 const routes: Routes = [
   {
@@ -78,7 +83,9 @@ const materialModules = [
     ...primeNgModules,
     ...materialModules,
     DialogModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('contracts', ContractsReducer),
+    EffectsModule.forFeature([ContractsEffects])
   ],
   exports: [],
   declarations: [
@@ -95,7 +102,8 @@ const materialModules = [
     ContractProductSpecsTitleComponent
   ],
   providers: [
-    ConfirmationService
+    ConfirmationService,
+    ContractsService
   ],
 })
 export class ContractsModule { }

@@ -6,8 +6,8 @@ export abstract class BaseService<T> {
   protected baseUrl: string;
 
   constructor(
-    public http: HttpClient) {
-      this.baseUrl = environment.apiUrl;
+    public http: HttpClient, private entity: string) {
+    this.baseUrl = environment.apiUrl;
   }
 
   private getToken(): string {
@@ -28,7 +28,7 @@ export abstract class BaseService<T> {
     return this.http.post<T>(this.baseUrl + url, object, { headers: this.commonHeaders() });
   }
 
-  public get(url?: string): Observable<T> {
-    return this.http.get<T>(this.baseUrl + url, { headers: this.commonHeaders() });
+  public get(query?: string): Observable<T[]> {
+    return this.http.get<T[]>(`${this.baseUrl}${this.entity}`, { headers: this.commonHeaders() });
   }
 }

@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Contract, ProductImage } from './../../contract.model';
+import { IContract, IProductImage } from './../../contract.model';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject, Output, EventEmitter } from '@angular/core';
@@ -16,14 +16,14 @@ import { AddEditState } from 'src/app/shared/generics/generic.model';
   styleUrls: ['./contract-detail-page.component.scss']
 })
 
-export class ContractDetailPageComponent extends GenericPageDetailComponent<Contract> implements OnInit {
+export class ContractDetailPageComponent extends GenericPageDetailComponent<IContract> implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
   public options: Array<{ id: number, label: string, icon: string, action?: () => void }>;
   public _showTabActions: boolean = false;
   public showRightNav: boolean = false;
   public dragStartSpecs: boolean = false;
-  public contractImages: ProductImage[] = [{
+  public contractImages: IProductImage[] = [{
     id: 1,
     name: 'product-img.png'
   }, {

@@ -1,6 +1,6 @@
 import { AddEditDialogState } from './../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from './../../../../shared/generics/generic-ae';
-import { Contract, ProductImage } from './../../../contracts/contract.model';
+import { IContract, IProductImage } from './../../../contracts/contract.model';
 import { environment } from './../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -14,10 +14,10 @@ import { AddEditState } from 'src/app/shared/generics/generic.model';
   styleUrls: ['./contract-add-dialog.component.scss']
 })
 
-export class ContractAddDialogComponent extends GenericAddEditComponent<Contract> implements OnInit {
+export class ContractAddDialogComponent extends GenericAddEditComponent<IContract> implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
-  public contractImages: ProductImage[] = [{
+  public contractImages: IProductImage[] = [{
     id: 1,
     name: 'product-img.png'
   }, {
@@ -72,7 +72,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<Contract
     }
   }
 
-  private formToEntity(contract: Contract): void {
+  private formToEntity(contract: IContract): void {
     this.form.controls['id'].patchValue(contract.id);
     this.form.controls['title'].patchValue(contract.title);
     this.form.controls['venue'].patchValue(contract.venue);
@@ -85,7 +85,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<Contract
   ngOnInit() { }
 
   public onSave(): void {
-    this.save(this.form.value as Contract)
+    this.save(this.form.value as IContract)
       .subscribe(() => this.dialogRef.close(true));
   }
 
