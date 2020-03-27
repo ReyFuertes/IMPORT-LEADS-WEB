@@ -6,13 +6,12 @@
   display: none !important;
 }
 .title-col {
-  font-weight: 500;
-  font-weight: 14px;
-  height: 40px;
-  align-items: center;
-}
-.hidden {
-  display: none;
+  span {
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 ::ng-deep p-inputswitch {
   @include il-input-switch;
@@ -27,7 +26,6 @@
 ::ng-deep {
   .cdk-drag-preview {
     border-radius: 0 !important;
-    @extend .il-draggable-expansion; 
+    @extend .il-draggable-expansion;
   }
 }
-

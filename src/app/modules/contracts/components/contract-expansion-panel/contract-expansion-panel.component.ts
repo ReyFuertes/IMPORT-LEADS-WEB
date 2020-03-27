@@ -68,6 +68,7 @@ export class ContractExpansionPanelComponent extends GenericPanelComponent imple
   }
 
   public mouseover(i: number, colIndctr: number): void {
+    if(this.isRightNavOpen) return;
     this.dragIndex = i;
     if (colIndctr === 0)
       this.isTitleHover = i;
@@ -91,14 +92,17 @@ export class ContractExpansionPanelComponent extends GenericPanelComponent imple
   public expandPnl(pnl: any, event: any, i: number): void {
     event.preventDefault();
     this.selectedPnl = i;
-    const classList = event.target.parentNode.classList;
-    //we need to refactor this, there is too much condition for a similar behavior
-    if (classList.contains('no-expand')
-      || classList.contains('actions-col')
-      || classList.contains('ui-inputswitch')
-      || event.target.tagName == 'DIV' && event.target.classList.contains('ui-inputswitch')
-      || event.target.tagName == 'SPAN') {
+    const classList = event.currentTarget.classList;
+    console.log(classList);
+    if (classList.contains('no-expand')) {
       pnl.close();
     }
+    // if (classList.contains('no-expand')
+    //   || classList.contains('actions-col')
+    //   || classList.contains('ui-inputswitch')
+    //   || event.target.tagName == 'DIV' && event.target.classList.contains('ui-inputswitch')
+    //   || event.target.tagName == 'SPAN') {
+    //   pnl.close();
+    // }
   }
 }

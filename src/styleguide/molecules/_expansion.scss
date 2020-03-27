@@ -8,16 +8,20 @@
     height: 50px;
     > div {
       height: 50px;
-      margin-right: 20px;
+      // margin-right: 20px;
     }
   }
   .pnl-actions {
     height: 50px;
-    place-content: center flex-start;
+    place-content: center flex-end;
     align-items: center;
     display: flex;
     :first-child {
       margin-right: 8px;
+    }
+    span {
+      font-size: 14px;
+      font-weight: 500;
     }
     @media (max-width: 1280px) {
       .menu-icon {

@@ -1,13 +1,12 @@
 <div class="il-draggable-expansion">
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
-    <mat-expansion-panel cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel"
-      *ngFor="let p of panels; let i = index" hideToggle="true">
+    <mat-expansion-panel cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel" *ngFor="let p of panels; let i = index" hideToggle="true">
       <!-- In list display -->
-      <mat-expansion-panel-header [ngClass]="{'hidden': pnl?.expanded}" (click)="expandPnl(pnl, $event, i)" fxLayoutAlign="20px">
+      <mat-expansion-panel-header [ngClass]="{'hidden': pnl?.expanded, 'no-expand': isRightNavOpen}" (click)="expandPnl(pnl, $event, i)" fxLayoutAlign="20px">
         <div fxLayout="row" fxFlex="25" fxLayoutAlign="start center" (mouseover)="mouseover(i, 0)" (mouseleave)="mouseout()">
           <ng-container *ngTemplateOutlet="titleInLabelMode"></ng-container>
         </div>
-        <div fxFlex fxLayout="row" (click)="onSelect(1)" fxLayoutAlign="start center" (mouseover)="mouseover(i, 1)" (mouseleave)="mouseout()">
+        <div fxFlex fxLayout="row" [ngClass]="{'disabled': isRightNavOpen}" (click)="onSelect(1)" fxLayoutAlign="start center" (mouseover)="mouseover(i, 1)" (mouseleave)="mouseout()">
           <div fxFlex>{{ p?.description }}</div>
           <div [ngClass]="{'hidden': !onDescHover(i)}" fxFlex="25px" fxLayoutAlign="start center">
             <img (click)="onEditMode(i, 1)" [src]="svgPath + 'edit-icon-blue.svg'" />
@@ -39,15 +38,15 @@
         <ng-container *ngTemplateOutlet="actionBtns"></ng-container>
       </ng-template>
       <ng-template #descInLabelMode>
-        <div class="desc" fxFlex>{{ p?.description }}</div>
+        <div fxFlex>{{ p?.description }}</div>
       </ng-template>
 
       <!-- title templates -->
       <ng-template #titleInLabelMode>
-        <div fxFlex class="title-col" (click)="onSelect(0)">
+        <div [matTooltip]="p?.title" fxFlex class="title-col" [ngClass]="{'disabled': isRightNavOpen}" (click)="onSelect(0)">
           <div fxFlex="20px"><img [ngClass]="{'hidden': !onTitleHover(i) }" cdkDragHandle [src]="svgPath + 'drag-icon.svg'" /></div>
           <div fxFlex fxLayoutAlign="start center">
-            <span>{{ p.title }}</span>
+            <span>{{ p?.title }}</span>
           </div>
           <div [ngClass]="{'hidden': !onTitleHover(i)}" fxFlex="25px" fxLayoutAlign="start center">
             <img (click)="onEditMode(i, 0)" [src]="svgPath + 'edit-icon-blue.svg'" />
@@ -64,11 +63,13 @@
       </ng-template>
 
       <ng-template #rowActions>
-        <div class="actions-col">
+        <div class="pnl-actions">
           <div class="no-expand" fxLayoutAlign="end center" fxLayoutGap="10px">
-            <span>Appearance</span>
-            <img [src]="svgPath + 'arrow-down-icon-blue.svg'">
-            <img [src]="svgPath + 'delete-icon-red.svg'">
+            <div [ngClass]="{'disabled': isRightNavOpen}">
+              <span>Appearance</span>
+              <img [src]="svgPath + 'arrow-down-icon-blue.svg'">
+              <img [src]="svgPath + 'delete-icon-red.svg'">
+            </div>
             <p-inputSwitch *ngIf="isRightNavOpen"></p-inputSwitch>
           </div>
         </div>

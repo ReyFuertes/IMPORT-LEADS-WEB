@@ -1,23 +1,22 @@
-
 <p-confirmDialog [style]="{width: '50vw'}" key="productSpecs"></p-confirmDialog>
 <div fxLayout="column">
   <div>
     <div fxLayout="row" fxLayoutGap="5px">
-      <div class="tab-header" >
-        <div fxLayoutAlign="center center">
+      <div class="tab-header">
+        <div [ngClass]="{'disabled': isRightNavOpen}" fxLayoutAlign="center center">
           <span>{{ tabTitle }}</span>
         </div>
       </div>
-      <img class="save-icon" (click)="UpdateProductSpecTitle()" [src]="svgPath + 'save-icon-blue.svg'" />
+      <img *ngIf="!isRightNavOpen" class="save-icon" (click)="UpdateProductSpecTitle()" [src]="svgPath + 'save-icon-blue.svg'" />
     </div>
     <mat-tab-group class="il-tab">
       <mat-tab class="tab-1">
         <ng-template matTabContent>
           <il-contract-expansion-panel [isRightNavOpen]="isRightNavOpen" [panels]="panels"></il-contract-expansion-panel>
           <!-- make this a component -->
-          <div fxLayout="row" fxLayoutAlign="center center" class="footer">
-            <img class="add" *ngIf="!_showTabActions" (click)="_showTabActions = !_showTabActions" [src]="svgPath + 'add-icon-gray.svg'" />
-            <img *ngIf="!_showTabActions" (click)="onDeleteProductSpecs()" [src]="svgPath + 'delete-icon-red.svg'" >
+          <div [ngClass]="{'disabled': isRightNavOpen}" fxLayout="row" fxLayoutAlign="center center" class="footer">
+            <img class="add" *ngIf="!_showTabActions" (click)="!isRightNavOpen ? _showTabActions = !_showTabActions: null" [src]="svgPath + 'add-icon-gray.svg'" />
+            <img *ngIf="!_showTabActions" (click)="!isRightNavOpen ? onDeleteProductSpecs(): null" [src]="svgPath + 'delete-icon-red.svg'">
             <div fxFlex *ngIf="_showTabActions" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
               <div class="actions-links" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
                 <div (click)="add()">
