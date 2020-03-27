@@ -33,7 +33,8 @@
           </div>
         </div>
 
-        <div fxFlex="60px" class="pnl-actions" fxLayoutAlign="center center">
+        <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="end center">
+          <il-ellipse-menu class="menu-ellipse"></il-ellipse-menu>
           <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex !== i">
             <img [src]="svgPath + 'edit-icon-blue.svg'" />
             <img [src]="svgPath + 'delete-icon-red.svg'">

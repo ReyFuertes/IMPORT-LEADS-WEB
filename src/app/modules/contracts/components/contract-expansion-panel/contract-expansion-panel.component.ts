@@ -93,16 +93,8 @@ export class ContractExpansionPanelComponent extends GenericPanelComponent imple
     event.preventDefault();
     this.selectedPnl = i;
     const classList = event.currentTarget.classList;
-    console.log(classList);
     if (classList.contains('no-expand')) {
       pnl.close();
     }
-    // if (classList.contains('no-expand')
-    //   || classList.contains('actions-col')
-    //   || classList.contains('ui-inputswitch')
-    //   || event.target.tagName == 'DIV' && event.target.classList.contains('ui-inputswitch')
-    //   || event.target.tagName == 'SPAN') {
-    //   pnl.close();
-    // }
   }
 }

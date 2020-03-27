@@ -38,8 +38,11 @@ export class VenueAddressComponent extends GenericPanelComponent implements OnIn
 
   public onClickPnl(pnl: any, event: any, i: number): void {
     event.preventDefault();
-    if (event.currentTarget.classList.contains('no-expand')) {
+    const classList = event.currentTarget.classList;
+    this.selectedIndex = null;
+    if (classList.contains('menu-icon') || classList.contains('no-expand')) {
       pnl.close();
+      this.selectedIndex = i;
     }
   }
 }

@@ -33,19 +33,19 @@
               <input matInput [value]="item.contracts">
             </mat-form-field>
           </div>
-          <div fxFlex="8" fxLayoutAlign="start center">
+          <div fxFlex="90px" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.inspections}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="item.inspections">
             </mat-form-field>
           </div>
-          <div fxFlex="8" fxLayoutAlign="start center">
+          <div fxFlex="90px" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.avgPassFail}}%</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="item.avgPassFail">
             </mat-form-field>
           </div>
-          <div fxFlex fxLayoutAlign="start center">
+          <div fxFlex="90px" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">
               <il-star-rating [rating]="item.rating"></il-star-rating>
             </span>
