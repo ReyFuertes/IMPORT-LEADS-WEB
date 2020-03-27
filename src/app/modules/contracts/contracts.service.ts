@@ -14,5 +14,4 @@ export class ContractsService extends BaseService<IContract> {
   constructor(http: HttpClient) {
     super(http, 'contracts');
   }
-
 }
