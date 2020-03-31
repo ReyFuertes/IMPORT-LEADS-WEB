@@ -14,6 +14,8 @@ import * as _ from 'lodash';
 })
 export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChanges, AfterViewChecked {
   @Input()
+  public form: FormGroup;
+  @Input()
   public placeHolder: string = '';
   @Input()
   public multiSelectDropdown: boolean = false;
@@ -36,12 +38,11 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
   @Input()
   public selectItem: any;
   @Output()
-  public selectItemChange: EventEmitter<any> = new EventEmitter<any>();
+  public valueEmitter = new EventEmitter<any>();
 
   @ViewChild('multiSelect', { static: false }) multiSelect: MatSelect;
   @ViewChild('submitBtn', { static: false }) submitBtn: ElementRef<HTMLElement>;
 
-  public form: FormGroup;
   public dataFilterForm: FormControl = new FormControl();
   public filteredData$: ReplaySubject<any> = new ReplaySubject<any>();
   private newDataList: any;
@@ -99,7 +100,7 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
   }
 
   public onSelect(event: MatSelectChange): void {
-    this.selectItemChange.emit(event);
+    this.valueEmitter.emit(event);
   }
 
   public onSubmitAttempt(): void {

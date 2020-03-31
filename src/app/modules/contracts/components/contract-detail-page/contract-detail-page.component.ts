@@ -61,7 +61,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       title: ['PI SK19NL0806-1 Touch Dim'],
       venue: ['Canhui toys limited'],
       startDate: [new Date('01/09/2019')],
-      deliveryDate: [new Date('03/12/2019')],
+      delivery_date: [new Date('03/12/2019')],
       details: ['Lorem Ipsum is simply dummy text of the printing industry'],
       attachments: [null]
     });

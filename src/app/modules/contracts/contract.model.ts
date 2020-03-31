@@ -25,10 +25,10 @@ export interface IContractProduct {
 }
 export interface IContract {
   id?: string;
-  title: string;
+  name: string;
   venue: string;
-  startDate: Date | string;
-  deliveryDate: Date | string;
+  start_date: Date | string;
+  delivery_date: Date | string;
   details: string;
   attachments?: any[];
   images: IProductImage[];

@@ -1,4 +1,4 @@
-import { loadContracts, loadContractSuccess } from './contracts.action';
+import { loadContracts, loadContractSuccess, AddContractSuccess } from './contracts.action';
 import { IContract } from './../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
@@ -20,10 +20,14 @@ const contractsReducer = createReducer(
   on(loadContractSuccess, (state, action) => {
     return ({ ...contractsAdapter.addAll(action.items, state) })
   }),
+  on(AddContractSuccess, (state, action) => {
+    return ({ ...state, created: action.created })
+  })
 );
 export function ContractsReducer(state: ContractsState, action: Action) {
   return contractsReducer(state, action);
 }
+export const isCreated = (state: ContractsState) => state.created ? true : false;
 export const getItem = (state: ContractsState) => state.item;
 
 
