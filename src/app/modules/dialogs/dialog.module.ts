@@ -8,7 +8,7 @@ import { AQLDialogComponent } from './components/aql/aql-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ContractAddDialogComponent } from './components/contracts/contract-add-dialog.component';
+import { ContractAddDialogComponent } from './components/contracts-add/contract-add-dialog.component';
 import { NgModule } from '@angular/core';
 import { MatDialogModule, MatButtonModule, MatListModule, MatCheckboxModule } from '@angular/material';
 import { SharedModule } from 'src/app/shared/shared.module';

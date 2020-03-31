@@ -1,7 +1,7 @@
-import { AddEditDialogState } from './../../../../shared/generics/generic.model';
-import { GenericAddEditComponent } from './../../../../shared/generics/generic-ae';
-import { IContract, IProductImage } from './../../../contracts/contract.model';
-import { environment } from './../../../../../environments/environment';
+import { AddEditDialogState } from '../../../../shared/generics/generic.model';
+import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
+import { IContract, IProductImage } from '../../../contracts/contract.model';
+import { environment } from '../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';

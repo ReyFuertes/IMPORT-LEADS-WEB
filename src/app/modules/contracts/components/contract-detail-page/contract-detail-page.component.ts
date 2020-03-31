@@ -3,7 +3,7 @@ import { IContract, IProductImage } from './../../contract.model';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject, Output, EventEmitter } from '@angular/core';
-import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts/contract-add-dialog.component';
+import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts-add/contract-add-dialog.component';
 import { ContractTemplateDialogComponent } from 'src/app/modules/dialogs/components/contract-template/contract-template-dialog.component';
 import { GenericPageDetailComponent } from 'src/app/shared/generics/generic-page-detail';
 import { Observable, fromEvent } from 'rxjs';

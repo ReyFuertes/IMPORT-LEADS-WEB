@@ -7,8 +7,8 @@
   </div>
   <div class="content">
     <div *ngIf="form" fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="40px">
-      <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'title'" placeholder="title"></il-input>
-      <il-dropdown-select fxFlex="25" [form]="form" [controlName]="'venue'" placeholder="venue" [items]="venues"></il-dropdown-select>
+      <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'Title'" placeholder="title"></il-input>
+      <il-dropdown-select fxFlex="25" [form]="form" [controlName]="'venue'" placeholder="Venue" [items]="venues"></il-dropdown-select>
       <il-datepicker fxFlex="25" [form]="form" [controlName]="'startDate'" [placeholder]="'Start Date'"></il-datepicker>
       <il-datepicker fxFlex="25" [form]="form" [controlName]="'deliveryDate'" [placeholder]="'Delivery Date'"></il-datepicker>
     </div>
