@@ -9,7 +9,10 @@
 .il-dialog {
   @include il-dialog;
   width: 672px;
-  height: 528px;
+  .content {
+    height: 352px;
+    min-height: 352px;
+  }
 }
 .header {
   margin-bottom: 0 !important;
