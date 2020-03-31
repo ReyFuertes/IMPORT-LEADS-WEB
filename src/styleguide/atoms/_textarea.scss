@@ -1,4 +1,7 @@
 @mixin il-textarea {
+  .no-resize {
+    resize: none !important;
+  }
   ::ng-deep {
     mat-form-field {
       width: 100%;

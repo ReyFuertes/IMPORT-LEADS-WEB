@@ -20,7 +20,10 @@
 }
 .il-dialog {
   @include il-dialog;
-  height: 560px;
+  .content {
+    height: 352px;
+    min-height: 352px;
+  }
 }
 .cdk-drag-placeholder {
   opacity: 1;

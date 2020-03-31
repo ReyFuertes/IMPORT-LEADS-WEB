@@ -18,7 +18,8 @@ export class TextareaComponent implements OnInit {
   public rows: number = 3;
   @Input()
   public isFloatLabel: boolean = false;
-
+  @Input()
+  public noResize: boolean = false;
   constructor() { }
 
   ngOnInit() { }
