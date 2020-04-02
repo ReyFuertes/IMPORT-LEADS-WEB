@@ -1,4 +1,4 @@
-import { IContract } from './../contract.model';
+import { IContract, ICachedImages } from './../contract.model';
 import { createAction, props } from '@ngrx/store';
 
 export enum ContractActionTypes {
@@ -31,4 +31,8 @@ export const uploadContractImage = createAction(
 export const uploadContractImageSuccess = createAction(
   ContractActionTypes.UploadImageSuccess,
   props<{ Image?: boolean }>()
+);
+export const cacheImages = createAction(
+  ContractActionTypes.UploadImageSuccess,
+  props<{ images: ICachedImages[] }>()
 );

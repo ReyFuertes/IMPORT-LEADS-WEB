@@ -1,3 +1,8 @@
+export interface ICachedImages {
+  id?: string;
+  image?: any;
+  position?: number;
+}
 export enum PillState {
   default = 0,
   reset = 1

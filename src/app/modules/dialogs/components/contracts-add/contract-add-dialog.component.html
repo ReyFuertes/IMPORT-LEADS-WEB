@@ -19,9 +19,9 @@
     </div>
     <div class="image-container">
       <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
-        <div class="drag-box" cdkDrag *ngFor="let img of contractImages" fxLayoutAlign="center center">
+        <div class="drag-box" cdkDrag *ngFor="let cached of cachedImages" fxLayoutAlign="center center">
           <div class="drag-placeholder" *cdkDragPlaceholder></div>
-          <img [src]="imgPath + 'product-img.png'">
+          <img [src]="cached?.image">
         </div>
       </div>
     </div>

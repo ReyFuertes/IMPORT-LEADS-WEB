@@ -7,3 +7,7 @@ export const isContractCreated = createSelector(
   selectedState,
   fromContracts.isCreated
 );
+export const getCachedImages = createSelector(
+  selectedState,
+  fromContracts.getCachedImages
+);

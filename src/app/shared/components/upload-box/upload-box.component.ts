@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../../environments/environment';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -14,11 +15,12 @@ export class UploadBoxComponent implements OnInit {
   public label: string = 'Drop Image Here..';
   @Output()
   public imageEmitter = new EventEmitter<File>();
+  public files: NgxFileDropEntry[] = [];
+
   constructor() { }
 
   ngOnInit() { }
 
-  public files: NgxFileDropEntry[] = [];
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
     for (const droppedFile of files) {
@@ -33,6 +35,7 @@ export class UploadBoxComponent implements OnInit {
       }
     }
   }
+
   public fileOver(event) {
     //console.log(event);
   }
