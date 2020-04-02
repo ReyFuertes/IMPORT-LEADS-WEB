@@ -1,4 +1,4 @@
-export interface ICachedImages {
+export interface ICachedImage {
   id?: string;
   image?: any;
   position?: number;

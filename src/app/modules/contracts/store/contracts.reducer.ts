@@ -1,12 +1,12 @@
 import { loadContracts, loadContractSuccess, AddContractSuccess, cacheImages } from './contracts.action';
-import { IContract, ICachedImages } from './../contract.model';
+import { IContract, ICachedImage } from './../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
 export interface ContractsState extends EntityState<IContract> {
   item?: IContract,
   created?: boolean,
-  cachedImages: ICachedImages[]
+  cachedImages: ICachedImage[]
 }
 export const contractsAdapter: EntityAdapter<IContract> = createEntityAdapter<IContract>({});
 export const initialState: ContractsState = contractsAdapter.getInitialState({

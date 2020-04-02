@@ -8,7 +8,7 @@ import { AppState } from './../../../../store/app.reducer';
 import { ContractsService } from './../../../contracts/contracts.service';
 import { AddEditDialogState } from '../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
-import { IContract, IProductImage, ICachedImages } from '../../../contracts/contract.model';
+import { IContract, IProductImage, ICachedImage } from '../../../contracts/contract.model';
 import { environment } from '../../../../../environments/environment';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -44,7 +44,9 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     }
   ];
   public title: string = 'Add';
-  public images: ICachedImages[] = [];
+  public images: ICachedImage[] = [];
+  public cachedImages: ICachedImage[];
+
   constructor(
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<ContractAddDialogComponent>,
@@ -80,16 +82,21 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     this.form.controls['details'].patchValue(contract.details);
     this.form.controls['attachments'].patchValue(null);
   }
-  public cachedImages: ICachedImages[];
+
   ngOnInit() {
     this.store.pipe(select(getCachedImages)).subscribe(result => this.cachedImages = result);
     this.store.pipe(select(getCachedImages)).subscribe(res => console.log(res));
   }
 
-  public onImageChange(event: File): void {
-    const formData = new FormData();
-    formData.append('file', event, event.name);
+  public onRemoveCachedImage(image: ICachedImage): void {
+    const index: number = this.cachedImages.indexOf(image);
+    if (index !== -1) {
+      this.cachedImages.splice(index, 1);
+      this.store.dispatch(cacheImages({ images: this.cachedImages }));
+    }
+  }
 
+  public onImageChange(event: File): void {
     //collect all drop images in base64 results
     const $result = this.convertBlobToBase64(event).pipe(
       take(1),
@@ -117,6 +124,9 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public onValueChange(event: any): void { }
 
   public save = (contract: IContract): void => {
+    const formData = new FormData();
+    //formData.append('file', event, event.name);
+
     this.store.dispatch(AddContract({ item: contract }));
     this.store.pipe(select(isContractCreated))
       .subscribe(isCreated => this.dialogRef.close(isCreated));

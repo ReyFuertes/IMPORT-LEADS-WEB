@@ -21,7 +21,10 @@
       <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
         <div class="drag-box" cdkDrag *ngFor="let cached of cachedImages" fxLayoutAlign="center center">
           <div class="drag-placeholder" *cdkDragPlaceholder></div>
-          <img [src]="cached?.image">
+          <div fxLayout="column" fxLayoutAlign="center end">
+            <img class="remove" (click)="onRemoveCachedImage(cached)" [src]="svgPath + 'cancel-red-16px.svg'">
+            <img class="thumb-img" [src]="cached?.image">
+          </div>
         </div>
       </div>
     </div>
