@@ -1,3 +1,4 @@
+import { UploadService } from './../../services/upload.service';
 import { ContractsEffects } from './store/contracts.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -105,7 +106,8 @@ const materialModules = [
   ],
   providers: [
     ConfirmationService,
-    ContractsService
+    ContractsService,
+    UploadService
   ],
 })
 export class ContractsModule { }

@@ -15,7 +15,7 @@
     </div>
     <div fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="40px">
       <il-textarea fxFlex="70" rows="5" [noResize]="true" isFloatLabel="true" [form]="form" [controlName]="'details'" placeholder="Details"></il-textarea>
-      <il-upload-box fxFlex="30"></il-upload-box>
+      <il-upload-box (imageEmitter)="onImageChange($event)" fxFlex="30"></il-upload-box>
     </div>
     <div class="image-container">
       <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">

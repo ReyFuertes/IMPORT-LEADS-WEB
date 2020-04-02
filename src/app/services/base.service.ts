@@ -17,9 +17,8 @@ export abstract class BaseService<T> {
   }
 
   protected commonHeaders(): HttpHeaders {
-    const contentType = 'application/json';
     return new HttpHeaders({
-      'Content-Type': contentType,
+      'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: `Bearer ${this.getToken()}`,
     });
@@ -31,5 +30,15 @@ export abstract class BaseService<T> {
 
   public get(query?: string): Observable<T[]> {
     return this.http.get<T[]>(`${this.baseUrl}${this.entity}`, { headers: this.commonHeaders() });
+  }
+
+  public upload(object?: any, additionalParam?: string): Observable<T> {
+    const formatParam = additionalParam ? `/${additionalParam}`: '';
+    let headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+      Accept: "application/json"
+    });
+    headers.set('Content-Type', 'multipart/form-data');
+    return this.http.post<T>(`${this.baseUrl}${this.entity}${formatParam}`, object, { headers: headers });
   }
 }

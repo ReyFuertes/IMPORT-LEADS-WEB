@@ -1,3 +1,5 @@
+import { uploadContractImage } from './../../../contracts/store/contracts.action';
+import { IImage } from './../../../../models/image.model';
 import { isCreated } from './../../../contracts/store/contracts.reducer';
 import { isContractCreated } from './../../../contracts/store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
@@ -14,6 +16,7 @@ import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { Store, select } from '@ngrx/store';
 import { AddContract } from 'src/app/modules/contracts/store/contracts.action';
 
+
 @Component({
   selector: 'il-contract-add-dialog',
   templateUrl: './contract-add-dialog.component.html',
@@ -23,22 +26,7 @@ import { AddContract } from 'src/app/modules/contracts/store/contracts.action';
 export class ContractAddDialogComponent extends GenericAddEditComponent<IContract> implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
-  public contractImages: IProductImage[] = [{
-    id: 1,
-    name: 'product-img.png'
-  }, {
-    id: 2,
-    name: 'product-img.png'
-  }, {
-    id: 3,
-    name: 'product-img.png'
-  }, {
-    id: 4,
-    name: 'product-img.png'
-  }, {
-    id: 5,
-    name: 'product-img.png'
-  }];
+  public contractImages: IImage[];
   public venues: Array<{ label: string, value?: number | string }> = [
     {
       label: 'Canhui toys limited',
@@ -92,7 +80,13 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
 
   ngOnInit() { }
 
-  public onValueChange(event: any): void {}
+  public onImageChange(event: File): void {
+    const formData = new FormData();
+    formData.append('file', event, event.name);
+    this.store.dispatch(uploadContractImage({ file: formData }));
+  }
+
+  public onValueChange(event: any): void { }
 
   public save = (contract: IContract): void => {
     this.store.dispatch(AddContract({ item: contract }));

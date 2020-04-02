@@ -2,7 +2,6 @@ export enum PillState {
   default = 0,
   reset = 1
 }
-
 export interface IProductPill {
   id?: string | number;
   name: string;
@@ -16,7 +15,6 @@ export interface IProductPill {
   qty: string | number;
   cost: string | number;
 }
-
 export interface IContractProduct {
   id?: string | number;
   name: string;

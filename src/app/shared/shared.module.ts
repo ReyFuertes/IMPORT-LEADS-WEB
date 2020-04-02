@@ -1,3 +1,4 @@
+import { NgxFileDropModule } from 'ngx-file-drop';
 import { MenuComponent } from './components/menu/menu.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
 import { InputMaxLengthDirective } from './directives/input-maxlen.directive';
@@ -107,7 +108,7 @@ const directives = [
     ...materialModules,
     ...primeNgModules,
     RouterModule,
-    QuillModule.forRoot()
+    NgxFileDropModule
   ],
   exports: [...sharedComponents, ...directives],
   declarations: [...sharedComponents, ...directives],
