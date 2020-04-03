@@ -13,7 +13,7 @@ import { AddEditDialogState } from '../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
 import { IContract, IProductImage, ICachedImage } from '../../../contracts/contract.model';
 import { environment } from '../../../../../environments/environment';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -45,11 +45,11 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     super();
     this.form = this.fb.group({
       id: [null],
-      contract_name: ['Test Contract'],
+      contract_name: [null, Validators.required],
       venue: [null],
-      start_date: [null],
-      delivery_date: [null],
-      details: ['Contrary to popular belief, Lorem Ipsum is not simply random text'],
+      start_date: [null, Validators.required],
+      delivery_date: [null, Validators.required],
+      details: [null],
       attachments: [null]
     });
     if (data) {
