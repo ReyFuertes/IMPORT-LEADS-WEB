@@ -1,7 +1,8 @@
-import { Venue } from './../venues/venues.models';
+
 export interface ICachedImage {
   id?: string;
   image?: any;
+  filename?: string;
   position?: number;
 }
 export enum PillState {

@@ -94,7 +94,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     //collect all drop images in base64 results
     const $result = this.convertBlobToBase64(event).pipe(
       take(1),
-      tap(b64Result => this.images.push({ id: uuid(), image: b64Result })),
+      tap(b64Result => this.images.push({ id: uuid(), image: b64Result, filename: event.name })),
       switchMap(() => this.store.pipe(take(1), select(getCachedImages))));
     $result.pipe(
       tap(res => this.images.concat(res)))
@@ -123,6 +123,14 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     item.venue = { id: value, name: label };
     //images
 
+    item.images = this.cachedImages.map(ci => {
+      return {
+        id: ci.id,
+        filename: ci.filename
+      }
+    });
+    // item.images = this.cachedImages;
+    console.log(item);
     this.store.dispatch(AddContract({ item }));
     this.store.pipe(select(isContractCreated))
       .subscribe(isCreated => this.dialogRef.close(isCreated));
