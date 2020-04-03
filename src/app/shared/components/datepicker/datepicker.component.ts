@@ -14,7 +14,13 @@ export class DatepickerComponent implements OnInit {
   public controlName: FormControlName;
   @Input()
   public form: FormGroup;
+  @Input()
+  public isDisabled: boolean = true;
   constructor() { }
 
   ngOnInit() {}
+
+  public onKeypress(): any {
+    return false;
+  }
 }
