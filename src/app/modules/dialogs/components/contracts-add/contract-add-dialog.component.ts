@@ -1,8 +1,8 @@
 import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { IVenue } from './../../../venues/venues.models';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
-import { take, switchMap, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { take, switchMap, tap, debounceTime, concatMap, delay } from 'rxjs/operators';
+import { Observable, from, of, forkJoin } from 'rxjs';
 import { uploadContractImage, cacheImages } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
 import { isCreated, ContractsState } from './../../../contracts/store/contracts.reducer';
@@ -36,6 +36,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public title: string = 'Add';
   public images: ICachedImage[] = [];
   public cachedImages: ICachedImage[];
+  public files: File[] = [];
 
   constructor(
     public fb: FormBuilder,
@@ -46,11 +47,10 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     this.form = this.fb.group({
       id: [null],
       contract_name: [null, Validators.required],
-      venue: [null],
+      venue: [null, Validators.required],
       start_date: [null, Validators.required],
-      delivery_date: [null, Validators.required],
-      details: [null],
-      attachments: [null]
+      delivery_date: [null],
+      details: [null]
     });
     if (data) {
       this.state = data.state;
@@ -79,7 +79,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
       this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
         { label: venue.name, value: venue.id }));
-    })
+    });
   }
 
   public onRemoveCachedImage(image: ICachedImage): void {
@@ -91,11 +91,14 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
 
   public onImageChange(event: File): void {
+    this.files.push(event);
     //collect all drop images in base64 results
-    const $result = this.convertBlobToBase64(event).pipe(
-      take(1),
-      tap(b64Result => this.images.push({ id: uuid(), image: b64Result, filename: event.name })),
-      switchMap(() => this.store.pipe(take(1), select(getCachedImages))));
+    const $result = this.convertBlobToBase64(event)
+      .pipe(
+        take(1),
+        tap(b64Result => this.images.push({ id: uuid(), image: b64Result, filename: event.name })),
+        switchMap(() => this.store.pipe(take(1), select(getCachedImages))));
+
     $result.pipe(
       tap(res => this.images.concat(res)))
       .subscribe(() => {
@@ -116,24 +119,26 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
 
   public save = (item: IContract): void => {
-    const formData = new FormData();
-    //formData.append('file', event, event.name);
-
+    //venues and images
     const { label, value } = this.form.get('venue').value;
     item.venue = { id: value, name: label };
-    //images
-
     item.images = this.cachedImages.map(ci => {
-      return {
-        id: ci.id,
-        filename: ci.filename
-      }
+      return { id: ci.id, filename: ci.filename }
     });
-    // item.images = this.cachedImages;
-    console.log(item);
+    //create contract
     this.store.dispatch(AddContract({ item }));
-    this.store.pipe(select(isContractCreated))
-      .subscribe(isCreated => this.dialogRef.close(isCreated));
+    this.store.pipe(take(1), select(isContractCreated))
+      .subscribe(isCreated => {
+        this.dialogRef.close(isCreated);
+        //and upload images
+        from(this.files).pipe(
+          concatMap(item => of(item).pipe(delay(500))),
+        ).subscribe(file => {
+          const formData = new FormData();
+          formData.append('file', file, file.name);
+          this.store.dispatch(uploadContractImage({ file: formData }));
+        })
+      })
   }
 
   onNoClick(): void {
