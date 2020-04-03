@@ -1,3 +1,4 @@
+import { reducers } from './store/app.reducer';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-
+import { VenuesEffects } from './modules/venues/store/venues.effects';
 
 const materialModules = [
 ];
@@ -23,8 +24,8 @@ const materialModules = [
     ...materialModules,
     SharedModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([VenuesEffects]),
     AppRoutingModule,
     BrowserAnimationsModule,
   ],

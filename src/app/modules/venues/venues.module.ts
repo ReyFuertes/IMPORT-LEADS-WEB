@@ -1,3 +1,6 @@
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { VenuesService } from './venues.service';
 import { VenueAddressComponent } from './components/venue-address/venue-address.component';
 import { VenueProductsComponent } from './components/venue-products/venue-products.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
@@ -13,6 +16,8 @@ import { VenuesContainerComponent } from './container/venues-container.component
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule, MatTooltipModule, MatButtonToggleModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatCardModule, MatStepperModule, MatTabsModule, MatDialogModule, MatSlideToggleModule } from '@angular/material';
+import { VenuesReducer } from './store/venues.reducer';
+import { VenuesEffects } from './store/venues.effects';
 
 const routes: Routes = [
   {
@@ -63,7 +68,9 @@ const materialModules = [
     ...primeNgModules,
     ...materialModules,
     DialogModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('venues', VenuesReducer),
+    EffectsModule.forFeature([VenuesEffects])
   ],
   exports: [],
   declarations: [
@@ -73,6 +80,6 @@ const materialModules = [
     VenueProductsComponent,
     VenueAddressComponent
   ],
-  providers: [],
+  providers: [VenuesService],
 })
 export class VenuesModule { }

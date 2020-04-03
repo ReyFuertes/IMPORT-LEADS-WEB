@@ -1,3 +1,4 @@
+import { Venue } from './../venues/venues.models';
 export interface ICachedImage {
   id?: string;
   image?: any;
@@ -28,13 +29,13 @@ export interface IContractProduct {
 }
 export interface IContract {
   id?: string;
-  name: string;
-  venue: string;
-  start_date: Date | string;
-  delivery_date: Date | string;
-  details: string;
+  contract_name: string;
+  venue?: any;
+  start_date?: Date | string;
+  delivery_date?: Date | string;
+  details?: string;
   attachments?: any[];
-  images: IProductImage[];
+  images?: IProductImage[];
 }
 export interface IProductImage {
   id?: number | string;

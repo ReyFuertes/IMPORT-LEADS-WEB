@@ -1,15 +1,15 @@
-export interface VenueProduct {
-  id: number;
+export interface IVenue {
+  id?: string | number;
   name: string;
-  location: string;
-  relatedProducts?: RelatedProduct[];
-  contracts: number;
-  inspections: number;
-  avgPassFail: number;
-  rating: number;
+  location?: string;
+  relatedProducts?: IRelatedProduct[];
+  contracts?: number;
+  inspections?: number;
+  avgPassFail?: number;
+  rating?: number;
 }
 
-export interface RelatedProduct {
+export interface IRelatedProduct {
   id: number;
   product: {label: string, value?: string | number};
   averagePrice: number;
@@ -17,7 +17,7 @@ export interface RelatedProduct {
   quantity: number;
 }
 
-export interface VenuesAddress {
+export interface IVenuesAddress {
   id: number;
   name: string;
   location: string;

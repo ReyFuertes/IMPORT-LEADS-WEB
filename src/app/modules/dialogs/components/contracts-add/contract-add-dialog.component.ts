@@ -1,3 +1,6 @@
+import { getVenuesSelector } from './../../../venues/store/venues.selector';
+import { IVenue } from './../../../venues/venues.models';
+import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { uploadContractImage, cacheImages } from './../../../contracts/store/contracts.action';
@@ -29,20 +32,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
   public contractImages: IImage[];
-  public venues: Array<{ label: string, value?: number | string }> = [
-    {
-      label: 'Canhui toys limited',
-      value: 1
-    },
-    {
-      label: 'Canhui toys limited 2',
-      value: 2
-    },
-    {
-      label: 'Canhui toys limited 3',
-      value: 3
-    }
-  ];
+  public venues: SimpleItem[];
   public title: string = 'Add';
   public images: ICachedImage[] = [];
   public cachedImages: ICachedImage[];
@@ -56,7 +46,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     this.form = this.fb.group({
       id: [null],
       contract_name: ['Test Contract'],
-      venue: [''],
+      venue: [null],
       start_date: [null],
       delivery_date: [null],
       details: ['Contrary to popular belief, Lorem Ipsum is not simply random text'],
@@ -73,19 +63,23 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     }
   }
 
-  private formToEntity(contract: IContract): void {
-    this.form.controls['id'].patchValue(contract.id);
-    this.form.controls['contract_name'].patchValue(contract.name);
-    this.form.controls['venue'].patchValue(contract.venue);
-    this.form.controls['start_date'].patchValue(contract.start_date);
-    this.form.controls['delivery_date'].patchValue(contract.delivery_date);
-    this.form.controls['details'].patchValue(contract.details);
+  private formToEntity(item: IContract): void {
+    this.form.controls['id'].patchValue(item.id);
+    this.form.controls['contract_name'].patchValue(item.contract_name);
+    this.form.controls['venue'].patchValue(item.venue);
+    this.form.controls['start_date'].patchValue(item.start_date);
+    this.form.controls['delivery_date'].patchValue(item.delivery_date);
+    this.form.controls['details'].patchValue(item.details);
     this.form.controls['attachments'].patchValue(null);
   }
-
   ngOnInit() {
-    this.store.pipe(select(getCachedImages)).subscribe(result => this.cachedImages = result);
-    this.store.pipe(select(getCachedImages)).subscribe(res => console.log(res));
+    this.store.pipe(select(getCachedImages))
+      .subscribe(result => this.cachedImages = result);
+
+    this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
+      this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
+        { label: venue.name, value: venue.id }));
+    })
   }
 
   public onRemoveCachedImage(image: ICachedImage): void {
@@ -121,13 +115,15 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     return observable;
   }
 
-  public onValueChange(event: any): void { }
-
-  public save = (contract: IContract): void => {
+  public save = (item: IContract): void => {
     const formData = new FormData();
     //formData.append('file', event, event.name);
 
-    this.store.dispatch(AddContract({ item: contract }));
+    const { label, value } = this.form.get('venue').value;
+    item.venue = { id: value, name: label };
+    //images
+
+    this.store.dispatch(AddContract({ item }));
     this.store.pipe(select(isContractCreated))
       .subscribe(isCreated => this.dialogRef.close(isCreated));
   }

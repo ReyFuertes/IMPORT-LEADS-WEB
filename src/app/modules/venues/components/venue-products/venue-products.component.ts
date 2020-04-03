@@ -3,7 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
-import { VenueProduct, RelatedProduct } from '../../venues.models';
+import { IVenue, IRelatedProduct } from '../../venues.models';
 
 @Component({
   selector: 'il-venue-products',
@@ -14,7 +14,7 @@ import { VenueProduct, RelatedProduct } from '../../venues.models';
 export class VenueProductsComponent  extends GenericPanelComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public items: VenueProduct[];
+  public items: IVenue[];
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
   @Input()
@@ -63,7 +63,7 @@ export class VenueProductsComponent  extends GenericPanelComponent implements On
     this.dragStart = event;
   }
 
-  public getToolTip(product: RelatedProduct[]): string {
+  public getToolTip(product: IRelatedProduct[]): string {
     let tooltip = '';
     for (const entry of product) {
       tooltip = tooltip + entry.product.label + '\n';

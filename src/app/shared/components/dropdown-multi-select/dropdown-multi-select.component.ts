@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, SimpleChanges, OnChanges, ElementRef, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormControlName } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ReplaySubject, Subject, Observable } from 'rxjs';
 import { MatSelect, MatOption, MatSelectChange } from '@angular/material';
@@ -37,6 +37,8 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
   public validate: boolean;
   @Input()
   public selectItem: any;
+  @Input()
+  public controlName: FormControlName;
   @Output()
   public valueEmitter = new EventEmitter<any>();
 
@@ -52,19 +54,13 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
               private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      formSelectedItem: [null, (this.isRequired) ? [Validators.compose([Validators.required])] : []]
-    });
-
     this.newDataList = this.dataList.slice();
     this.filteredData$.next(this.newDataList);
-
     this.dataFilterForm.valueChanges
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe(() => {
         this.filterdata();
       });
-
     if (this.clearOption) {
       this.clearOption.subscribe(() => {
         if (this.multiSelectDropdown) {
@@ -74,39 +70,34 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
         }
       });
     }
+    // this.form.get('venue').valueChanges.subscribe(res => {
+    //   //console.log(res);
+    // })
   }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.addItem && changes.addItem.currentValue) {
       this.addNewItem(changes.addItem.currentValue);
     }
-
     if (changes.removeItem && changes.removeItem.currentValue) {
       this.removeSelectedItem(changes.removeItem.currentValue);
     }
-
     if (changes.validate && changes.validate.currentValue && this.form && this.form.invalid) {
       this.submitBtn.nativeElement.click();
     }
-
     if (changes.selectItem && changes.selectItem.currentValue) {
       this.selectItems(changes.selectItem.currentValue);
     }
   }
-
   ngOnDestroy(): void {
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
   }
-
   public onSelect(event: MatSelectChange): void {
     this.valueEmitter.emit(event);
   }
-
   public onSubmitAttempt(): void {
     this.form.markAsTouched();
   }
-
   private filterdata(): void {
     let search: string = this.dataFilterForm.value;
 
@@ -139,7 +130,6 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
       });
     }
   }
-
   private selectItems(items: any[]): void {
     if (typeof(items) === 'number') {
       items = [{ key: items }];
@@ -155,7 +145,6 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
       });
     });
   }
-
   private removeSelectedItem(item: any): void {
     if (item) {
       this.multiSelect.options.forEach((option: MatOption) => {
@@ -167,9 +156,7 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
       });
     }
   }
-
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
   }
-
 }

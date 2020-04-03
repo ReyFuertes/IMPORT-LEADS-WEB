@@ -1,6 +1,6 @@
 import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
-import { VenueProduct } from './../../venues.models';
+import { IVenue } from './../../venues.models';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -13,7 +13,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class VenueAddressComponent extends GenericPanelComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public items: VenueProduct[];
+  public items: IVenue[];
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
   @Input()

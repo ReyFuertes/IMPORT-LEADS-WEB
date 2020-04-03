@@ -1,5 +1,7 @@
+import { AppState } from 'src/app/store/app.reducer';
 import { GenericContainer } from './../../../shared/generics/generic-container';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'il-inspections-container',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class InspectionsContainerComponent extends GenericContainer implements OnInit {
-  constructor() {
+  constructor(private store: Store<AppState>) {
     super();
   }
 }

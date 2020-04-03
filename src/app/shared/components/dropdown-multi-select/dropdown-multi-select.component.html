@@ -1,6 +1,6 @@
-<form [formGroup]="form">
+<div *ngIf="form" [formGroup]="form">
   <mat-form-field>
-    <mat-select #multiSelect [placeholder]="placeHolder" formControlName="formSelectedItem" [multiple]="multiSelectDropdown" (selectionChange)="onSelect($event)" [required]="isRequired">
+    <mat-select #multiSelect [placeholder]="placeHolder" [formControlName]="controlName" [multiple]="multiSelectDropdown" (selectionChange)="onSelect($event)" [required]="isRequired">
       <mat-option>
         <ngx-mat-select-search [clearSearchInput]="'false'" [placeholderLabel]="'Search'" [formControl]="dataFilterForm" [noEntriesFoundLabel]="'No result'" *ngIf="searchItem"></ngx-mat-select-search>
       </mat-option>
@@ -11,4 +11,4 @@
     <mat-error *ngIf="form.invalid">{{ errorMessage }}</mat-error>
   </mat-form-field>
   <button type="submit" #submitBtn hidden></button>
-</form>
+</div>

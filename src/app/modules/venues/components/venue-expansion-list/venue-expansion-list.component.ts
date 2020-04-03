@@ -1,6 +1,6 @@
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit, Input } from '@angular/core';
-import { RelatedProduct } from '../../venues.models';
+import { IRelatedProduct } from '../../venues.models';
 
 @Component({
   selector: 'il-venue-expansion-list',
@@ -10,7 +10,7 @@ import { RelatedProduct } from '../../venues.models';
 
 export class VenueExpansionListComponent implements OnInit {
   @Input()
-  public items: RelatedProduct[];
+  public items: IRelatedProduct[];
   @Input()
   public colsHeaders: Array<{ label: string, width?: string | number }>;
   constructor() { }

@@ -18,14 +18,14 @@ export class DropdownSelectComponent extends GenericControl<SimpleItem> implemen
   public controlName: FormControlName;
   @Input()
   public form: FormGroup;
-  public initValue: number;
+  // public initValue: number;
   constructor() {
     super();
   }
 
   ngOnInit() {
-    if (this.form) {
-      this.initValue = 1;
-    }
-   }
+    // if (this.form) {
+    //   this.initValue = 1;
+    // }
+  }
 }

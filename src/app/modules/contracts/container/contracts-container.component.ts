@@ -3,6 +3,7 @@ import { AppState } from './../../../store/app.reducer';
 import { GenericContainer } from './../../../shared/generics/generic-container';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { loadVenues } from '../../venues/store/venues.action';
 
 @Component({
   selector: 'il-contracts-container',
@@ -14,6 +15,5 @@ export class ContractsContainerComponent extends GenericContainer implements OnI
   constructor(private store: Store<AppState>) {
     super();
     this.store.dispatch(loadContracts());
-
   }
 }
