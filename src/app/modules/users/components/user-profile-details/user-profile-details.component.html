@@ -1,6 +1,5 @@
-
 <mat-card class="profile-card">
-  <div class="card-row"  fxLayout="column" fxLayoutGap="20px" >
+  <div class="card-row" fxLayout="column" fxLayoutGap="20px">
     <div>
       <div fxFlex>
         <h2>Personal Details</h2>
@@ -15,17 +14,15 @@
         <img [src]="imgPath + 'sample-img.png'" />
       </div>
       <div fxFlex>
-      <span class="self-intro">Self introduction</span>
-      <div class="self-desc">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        <span class="self-intro">Self introduction</span>
+        <div class="self-desc">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </div>
         <div>
           <div fxFlex fxLayout="row" fxLayoutGap="20px">
             <il-input fxFlex="30" [form]="form" isFloatLabel="true" [controlName]="'position'" placeholder="Position"></il-input>
-            <il-dropdown-multi-select fxFlex *ngIf="roles" placeHolder="Role"
-                                    errorMessage="Role is required!" [validate]="validateDropdown"
-                                    [dataList]="roles" (selectItemChange)="handleSelectChange($event)">
+            <il-dropdown-multi-select fxFlex [form]="form" [controlName]="'role'" placeHolder="Role" [dataList]="roles">
             </il-dropdown-multi-select>
             <il-input fxFlex="30" [form]="form" isFloatLabel="true" [controlName]="'company'" placeholder="Company"></il-input>
           </div>
@@ -45,7 +42,7 @@
             <span>Edit</span>
           </div>
         </div>
-        <div  fxFlex class="item-container" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
+        <div fxFlex class="item-container" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
           <div fxFlex="20">
             <div>Phone Number</div>
             <div>+86 10 0000 0000</div>
@@ -90,7 +87,7 @@
             <span>Edit</span>
           </div>
         </div>
-        <div  fxFlex class="item-container" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
+        <div fxFlex class="item-container" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
           <div fxFlex="20">
             <div>Company Name</div>
             <div>CIL China</div>

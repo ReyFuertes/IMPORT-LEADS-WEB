@@ -38,11 +38,8 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public cachedImages: ICachedImage[];
   public files: File[] = [];
 
-  constructor(
-    public fb: FormBuilder,
-    public dialogRef: MatDialogRef<ContractAddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AddEditDialogState,
-    private store: Store<AppState>) {
+  constructor(public fb: FormBuilder, public dialogRef: MatDialogRef<ContractAddDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: AddEditDialogState, private store: Store<AppState>) {
     super();
     this.form = this.fb.group({
       id: [null],
@@ -57,9 +54,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       if (this.state === AddEditState.Edit) {
         this.formToEntity(data.formValues);
         this.title = 'Edit ' + data.formValues['contract_name'];
-      } else {
-        this.title = 'Add ' + data.formValues['contract_name'];
-      }
+      } else this.title = 'Add ' + data.formValues['contract_name'];
     }
   }
 
@@ -81,6 +76,34 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
         { label: venue.name, value: venue.id }));
     });
   }
+
+  public save = (item: IContract): void => {
+    //venues and images
+    const { label, value } = this.form.get('venue').value;
+    item.venue = { id: value, name: label };
+    item.images = this.cachedImages && this.cachedImages.map(ci => {
+      return { id: ci.id, filename: ci.filename }
+    }) || [];
+
+    //create contract
+    this.store.dispatch(AddContract({ item }));
+    this.store.pipe(take(1), select(isContractCreated))
+      .subscribe(isCreated => {
+        this.dialogRef.close(isCreated);
+        //and upload images
+        from(this.files).pipe(
+          concatMap(item => of(item).pipe(delay(500))),
+        ).subscribe(file => {
+          const formData = new FormData();
+          formData.append('file', file, file.name);
+          this.store.dispatch(uploadContractImage({ file: formData }));
+        })
+      })
+  }
+
+  public onNoClick = (): void => this.dialogRef.close();
+
+  public drop = (event: CdkDragDrop<any[]>) => moveItemInArray(this.cachedImages, event.previousIndex, event.currentIndex);
 
   public onRemoveCachedImage(image: ICachedImage): void {
     const index: number = this.cachedImages.indexOf(image);
@@ -116,36 +139,5 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     });
     fileReader.readAsDataURL(blob);
     return observable;
-  }
-
-  public save = (item: IContract): void => {
-    //venues and images
-    const { label, value } = this.form.get('venue').value;
-    item.venue = { id: value, name: label };
-    item.images = this.cachedImages.map(ci => {
-      return { id: ci.id, filename: ci.filename }
-    });
-    //create contract
-    this.store.dispatch(AddContract({ item }));
-    this.store.pipe(take(1), select(isContractCreated))
-      .subscribe(isCreated => {
-        this.dialogRef.close(isCreated);
-        //and upload images
-        from(this.files).pipe(
-          concatMap(item => of(item).pipe(delay(500))),
-        ).subscribe(file => {
-          const formData = new FormData();
-          formData.append('file', file, file.name);
-          this.store.dispatch(uploadContractImage({ file: formData }));
-        })
-      })
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  public drop(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.cachedImages, event.previousIndex, event.currentIndex);
   }
 }

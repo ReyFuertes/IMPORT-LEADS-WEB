@@ -1,7 +1,7 @@
 <div class="il-dialog" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="20px">
   <div class="header" fxLayoutAlign="center center" fxLayout="column">
     <div fxLayoutAlign="end center">
-      <img [src]="svgPath + 'close-icon-big-gray.svg'" (click)="dialogRef.close(false)"/>
+      <img [src]="svgPath + 'close-icon-big-gray.svg'" (click)="dialogRef.close(false)" />
     </div>
     <h2>Add Venue</h2>
   </div>
@@ -11,13 +11,10 @@
         <il-input [form]="form" isFloatLabel="true" [controlName]="'name'" placeholder="Name" [isRequired]="true"></il-input>
         <il-input [form]="form" isFloatLabel="true" [controlName]="'location'" placeholder="Location" [isRequired]="true"></il-input>
         <div class="pill-container" fxLayout="row wrap" fxLayoutGap="5px">
-          <il-pill  *ngFor="let item of selectedItems" [item]="item"
-                    (removeEmitter)="onRemove($event)">
+          <il-pill *ngFor="let item of selectedItems" [item]="item" (removeEmitter)="onRemove($event)">
           </il-pill>
         </div>
-        <il-dropdown-multi-select *ngIf="items" placeHolder="Products" isRequired="true" searchItem="true" 
-                                  errorMessage="Products is required!" multiSelectDropdown="true" [validate]="validateDropdown" 
-                                  [dataList]="items" (selectItemChange)="handleSelectChange($event)">
+        <il-dropdown-multi-select [form]="form" [controlName]="'relatedProducts'" placeHolder="Products" searchItem="true" [dataList]="items">
         </il-dropdown-multi-select>
       </div>
     </div>

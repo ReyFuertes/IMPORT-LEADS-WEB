@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormControlName } from
 import { ViewChild } from '@angular/core';
 import { ReplaySubject, Subject, Observable } from 'rxjs';
 import { MatSelect, MatOption, MatSelectChange } from '@angular/material';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 
 import * as _ from 'lodash';
 
@@ -12,38 +12,19 @@ import * as _ from 'lodash';
   templateUrl: './dropdown-multi-select.component.html',
   styleUrls: ['./dropdown-multi-select.component.scss']
 })
-export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChanges, AfterViewChecked {
+export class DropdownMultiSelectComponent implements OnInit, OnDestroy {
   @Input()
   public form: FormGroup;
   @Input()
   public placeHolder: string = '';
   @Input()
-  public multiSelectDropdown: boolean = false;
-  @Input()
   public searchItem: boolean = false;
   @Input()
-  public isRequired: boolean = false;
-  @Input()
   public dataList: any[] = [];
-  @Input()
-  public clearOption: Observable<void>;
-  @Input()
-  public addItem: any;
-  @Input()
-  public removeItem: any;
-  @Input()
-  public errorMessage: string;
-  @Input()
-  public validate: boolean;
-  @Input()
-  public selectItem: any;
   @Input()
   public controlName: FormControlName;
   @Output()
   public valueEmitter = new EventEmitter<any>();
-
-  @ViewChild('multiSelect', { static: false }) multiSelect: MatSelect;
-  @ViewChild('submitBtn', { static: false }) submitBtn: ElementRef<HTMLElement>;
 
   public dataFilterForm: FormControl = new FormControl();
   public filteredData$: ReplaySubject<any> = new ReplaySubject<any>();
@@ -51,7 +32,7 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
   protected _unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(private fb: FormBuilder,
-              private cdRef: ChangeDetectorRef) { }
+    private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.newDataList = this.dataList.slice();
@@ -61,32 +42,12 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
       .subscribe(() => {
         this.filterdata();
       });
-    if (this.clearOption) {
-      this.clearOption.subscribe(() => {
-        if (this.multiSelectDropdown) {
-          this.multiSelect.options.forEach((option: MatOption) => {
-            option.deselect();
-          });
-        }
-      });
-    }
-    // this.form.get('venue').valueChanges.subscribe(res => {
-    //   //console.log(res);
-    // })
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.addItem && changes.addItem.currentValue) {
-      this.addNewItem(changes.addItem.currentValue);
-    }
-    if (changes.removeItem && changes.removeItem.currentValue) {
-      this.removeSelectedItem(changes.removeItem.currentValue);
-    }
-    if (changes.validate && changes.validate.currentValue && this.form && this.form.invalid) {
-      this.submitBtn.nativeElement.click();
-    }
-    if (changes.selectItem && changes.selectItem.currentValue) {
-      this.selectItems(changes.selectItem.currentValue);
-    }
+
+    //manually mark as valid if has value
+    this.form.get('venue').valueChanges.pipe(take(1)).subscribe(res => {
+      if (res)
+        this.form.controls['venue'].setErrors(null);
+    })
   }
   ngOnDestroy(): void {
     this._unsubscribe$.next();
@@ -111,50 +72,6 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy, OnChange
     this.filteredData$.next(
       this.newDataList.filter(data => data.label.toLowerCase().indexOf(search) > -1)
     );
-  }
-
-  private addNewItem(item: any): void {
-    if (item) {
-      this.newDataList.push(item);
-
-      this.filteredData$.next(this.newDataList);
-
-      setTimeout(() => {
-        this.multiSelect.options.forEach((option: MatOption) => {
-          if (option && option.value) {
-            if (item.key === option.value.key) {
-              option.select();
-            }
-          }
-        });
-      });
-    }
-  }
-  private selectItems(items: any[]): void {
-    if (typeof(items) === 'number') {
-      items = [{ key: items }];
-    }
-
-    setTimeout(() => {
-      this.multiSelect.options.forEach((option: MatOption) => {
-        if (option && option.value) {
-          if (items.some((item) => item.key === option.value.key)) {
-            option.select();
-          }
-        }
-      });
-    });
-  }
-  private removeSelectedItem(item: any): void {
-    if (item) {
-      this.multiSelect.options.forEach((option: MatOption) => {
-        if (option && option.value) {
-          if (item.key === option.value.key) {
-            option.deselect();
-          }
-        }
-      });
-    }
   }
   ngAfterViewChecked() {
     this.cdRef.detectChanges();
