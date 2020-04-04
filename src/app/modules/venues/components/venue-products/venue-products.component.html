@@ -33,19 +33,19 @@
               <input matInput [value]="item.contracts">
             </mat-form-field>
           </div>
-          <div fxFlex="90px" fxLayoutAlign="start center">
+          <div fxFlex="100px" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.inspections}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="item.inspections">
             </mat-form-field>
           </div>
-          <div fxFlex="90px" fxLayoutAlign="start center">
+          <div fxFlex="100px" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">{{item.avgPassFail}}%</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
               <input matInput [value]="item.avgPassFail">
             </mat-form-field>
           </div>
-          <div fxFlex="90px" fxLayoutAlign="start center">
+          <div fxFlex="100px" fxLayoutAlign="start center">
             <span *ngIf="selectedIndex !== i">
               <il-star-rating [rating]="item.rating"></il-star-rating>
             </span>
@@ -56,9 +56,9 @@
           </div>
         </div>
 
-        <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="end center">
-          <il-ellipse-menu class="menu-ellipse"></il-ellipse-menu>
-          <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex !== i">
+        <div fxFlex="100px" class="pnl-actions" fxLayoutAlign="end center">
+          <il-ellipse-menu class="menu-ellipse" *ngIf="hoveredIndex !== i"></il-ellipse-menu>
+          <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex === null">
             <img [src]="svgPath + 'edit-icon-blue.svg'" />
             <img [src]="svgPath + 'delete-icon-red.svg'">
           </div>

@@ -12,6 +12,8 @@ export abstract class GenericPanelComponent {
   public onHover(i: number) {
     if (this.selectedIndex == null)
       this.hoveredIndex = i;
+
+    console.log(this.hoveredIndex, this.selectedIndex);
   }
 
   public onClose(): void {

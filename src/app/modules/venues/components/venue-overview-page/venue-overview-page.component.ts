@@ -143,23 +143,23 @@ export class VenueOverviewPageComponent implements OnInit {
     },
     {
       label: 'Related products',
-      width: 25
+      width: 22
     },
     {
-      label: 'Contracts',
-      width: 8
+      label: 'Contacts',
+      width: '100px'
     },
     {
       label: 'Inspections',
-      width: 8
+      width: '100px'
     },
     {
       label: 'Avg. pass/fail',
-      width: 8
+      width: '110px'
     },
     {
       label: 'Rating',
-      width: 10
+      width: '100px'
     },
     {
       label: '',
@@ -207,23 +207,23 @@ export class VenueOverviewPageComponent implements OnInit {
   public ctColsAddress: Array<{ label: string, width?: string | number }> = [
     {
       label: 'Venue name',
-      width: 25
+      width: 23
     },
     {
       label: 'Location',
       width: 55
     },
     {
-      label: 'Phone Number',
-      width: 10
+      label: 'Contacts',
+      width: '150px'
     },
     {
-      label: 'Contracts',
-      width: 10
+      label: 'Phone Number',
+      width: '150px'
     },
     {
       label: '',
-      width: '35px'
+      width: '100px'
     }
   ];
   constructor(public dialog: MatDialog) { }
