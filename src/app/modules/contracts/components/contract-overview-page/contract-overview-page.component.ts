@@ -1,8 +1,14 @@
+import { tap } from 'rxjs/operators';
+import { getAllContracts } from './../../store/contracts.selector';
+import { AppState } from './../../../../store/app.reducer';
+import { IContract } from './../../contract.model';
+import { Observable } from 'rxjs';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts-add/contract-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'il-contract-overview-page',
@@ -12,16 +18,19 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export class ContractOverviewPageComponent implements OnInit {
   public svgPath: string = environment.svgPath;
-  public cards: number[] = [1, 2 , 3];
+  public contracts: IContract[];
 
   public dragStart: boolean = false;
   public drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.cards, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.contracts, event.previousIndex, event.currentIndex);
     this.dragStart = false;
   }
 
-  constructor(public dialog: MatDialog) {
+  constructor(public store: Store<AppState>, public dialog: MatDialog) {
+    this.store.pipe(select(getAllContracts))
+      .pipe(tap(contracts => this.contracts = contracts)).subscribe();
   }
+
 
   ngOnInit() { }
 

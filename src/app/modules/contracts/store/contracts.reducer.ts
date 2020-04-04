@@ -34,6 +34,8 @@ export function ContractsReducer(state: ContractsState, action: Action) {
 }
 export const isCreated = (state: ContractsState) => state.created ? true : false;
 export const getCachedImages = (state: ContractsState) =>  state.cachedImages;
-export const getItem = (state: ContractsState) => state.item;
+export const getAllContracts = (state: ContractsState) => {
+  return state && state.entities ? Object.values(state.entities) : null;
+};
 
 

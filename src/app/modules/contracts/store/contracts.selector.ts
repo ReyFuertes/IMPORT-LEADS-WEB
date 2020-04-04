@@ -11,3 +11,7 @@ export const getCachedImages = createSelector(
   selectedState,
   fromContracts.getCachedImages
 );
+export const getAllContracts = createSelector(
+  selectedState,
+  fromContracts.getAllContracts
+);
