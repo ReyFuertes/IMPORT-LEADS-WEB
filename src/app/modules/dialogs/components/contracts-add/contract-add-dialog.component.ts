@@ -49,6 +49,11 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       delivery_date: [null],
       details: [null]
     });
+    //manually mark as valid if has value
+    this.form && this.form.get('venue').valueChanges.pipe(take(1)).subscribe(res => {
+      if (res) this.form.controls['venue'].setErrors(null);
+    })
+
     if (data) {
       this.state = data.state;
       if (this.state === AddEditState.Edit) {

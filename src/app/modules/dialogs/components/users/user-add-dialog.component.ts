@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-add-dialog',
@@ -66,6 +67,10 @@ export class UserAddDialogComponent implements OnInit {
       password: [''],
       access: [null],
     });
+    //manually mark as valid if has value
+    this.form && this.form.get('role').valueChanges.pipe(take(1)).subscribe(res => {
+      if (res) this.form.controls['role'].setErrors(null);
+    })
   }
 
   ngOnInit() { }
