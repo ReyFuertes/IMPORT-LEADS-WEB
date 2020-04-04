@@ -1,3 +1,4 @@
+import { QueryParam } from './../../../models/generic..model';
 import { IContract, ICachedImage } from './../contract.model';
 import { createAction, props } from '@ngrx/store';
 
@@ -11,6 +12,7 @@ export enum ContractActionTypes {
 }
 export const loadContracts = createAction(
   ContractActionTypes.LoadContracts,
+  props<{ queryParam: QueryParam }>()
 );
 export const loadContractSuccess = createAction(
   ContractActionTypes.LoadContractsSuccess,
@@ -18,7 +20,7 @@ export const loadContractSuccess = createAction(
 );
 export const AddContract = createAction(
   ContractActionTypes.AddContract,
-  props<{ item: IContract }>()
+  props<{ item: IContract, file?: any }>()
 );
 export const AddContractSuccess = createAction(
   ContractActionTypes.AddContractSuccess,

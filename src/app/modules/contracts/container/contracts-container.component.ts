@@ -14,6 +14,6 @@ import { loadVenues } from '../../venues/store/venues.action';
 export class ContractsContainerComponent extends GenericContainer implements OnInit {
   constructor(private store: Store<AppState>) {
     super();
-    this.store.dispatch(loadContracts());
+    this.store.dispatch(loadContracts(null));
   }
 }

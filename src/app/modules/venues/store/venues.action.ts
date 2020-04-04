@@ -6,7 +6,7 @@ export enum VenueActionTypes {
   LoadVenuesSuccess = '[Venue] Load (success)',
 }
 export const loadVenues = createAction(
-  VenueActionTypes.LoadVenues,
+  VenueActionTypes.LoadVenues
 );
 export const loadVenuesSuccess = createAction(
   VenueActionTypes.LoadVenuesSuccess,

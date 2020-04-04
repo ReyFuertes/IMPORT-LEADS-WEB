@@ -11,8 +11,8 @@ import { of } from 'rxjs';
 export class ContractsEffects {
   addContract$ = createEffect(() => this.actions$.pipe(
     ofType(AddContract),
-    mergeMap(({ item }) => this.contractsService.post(item).pipe(
-      tap(),
+    mergeMap(({ item }) => this.contractsService.post(item)
+    .pipe(
       map((created: any) => {
         return AddContractSuccess({ created });
       })
@@ -20,7 +20,7 @@ export class ContractsEffects {
   ));
   loadContracts$ = createEffect(() => this.actions$.pipe(
     ofType(loadContracts),
-    mergeMap(() => this.contractsService.get().pipe(
+    mergeMap(({ queryParam }) => this.contractsService.getAll(queryParam).pipe(
       map((items: IContract[]) => {
         return loadContractSuccess({ items });
       })

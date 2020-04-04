@@ -9,7 +9,7 @@ import { map, mergeMap, tap } from 'rxjs/operators';
 export class VenuesEffects {
   loadVenues$ = createEffect(() => this.actions$.pipe(
     ofType(loadVenues),
-    mergeMap(() => this.venuesService.get().pipe(
+    mergeMap(() => this.venuesService.getAll().pipe(
       map((items: IVenue[]) => {
         return loadVenuesSuccess({ items });
       })

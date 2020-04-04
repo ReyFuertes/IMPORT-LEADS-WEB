@@ -1,3 +1,4 @@
+import { appNotification } from './../../../../store/notification.action';
 import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { IVenue } from './../../../venues/venues.models';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
@@ -96,20 +97,20 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       .subscribe(isCreated => {
         this.dialogRef.close(isCreated);
         //and upload images
-        from(this.files).pipe(
+        this.files && from(this.files).pipe(
           concatMap(item => of(item).pipe(delay(500))),
         ).subscribe(file => {
           const formData = new FormData();
           formData.append('file', file, file.name);
           this.store.dispatch(uploadContractImage({ file: formData }));
         })
+        if (this.files && this.files.length === 0)
+          this.store.dispatch(appNotification({ success: true }));
       })
   }
 
   public onNoClick = (): void => this.dialogRef.close();
-
   public drop = (event: CdkDragDrop<any[]>) => moveItemInArray(this.cachedImages, event.previousIndex, event.currentIndex);
-
   public onRemoveCachedImage(image: ICachedImage): void {
     const index: number = this.cachedImages.indexOf(image);
     if (index !== -1) {
@@ -117,7 +118,6 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       this.store.dispatch(cacheImages({ images: this.cachedImages }));
     }
   }
-
   public onImageChange(event: File): void {
     this.files.push(event);
     //collect all drop images in base64 results
@@ -133,7 +133,6 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
         this.store.dispatch(cacheImages({ images: this.images }));
       })
   }
-
   public convertBlobToBase64(blob: Blob): Observable<{}> {
     const fileReader = new FileReader();
     const observable = new Observable(observer => {
