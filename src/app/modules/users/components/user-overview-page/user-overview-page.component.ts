@@ -154,7 +154,7 @@ export class UserOverviewPageComponent implements OnInit {
       ]
     }
   ];
-  public ctColsUsers: Array<{label: string, width?: string | number}> = [
+  public ctColsUsers: Array<{ label: string, width?: string | number }> = [
     {
       label: 'Name',
       width: 20
@@ -190,7 +190,7 @@ export class UserOverviewPageComponent implements OnInit {
   }
 
   public onAddUser(): void {
-    const dialogRef = this.dialog.open(UserAddDialogComponent);
+    const dialogRef = this.dialog.open(UserAddDialogComponent, { height: '595px' });
     dialogRef.afterClosed().subscribe(result => { });
   }
 

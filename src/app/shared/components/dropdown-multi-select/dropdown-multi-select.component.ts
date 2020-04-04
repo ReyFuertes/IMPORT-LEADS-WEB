@@ -31,8 +31,9 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy {
   private newDataList: any;
   protected _unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private fb: FormBuilder,
-    private cdRef: ChangeDetectorRef) { }
+  constructor() {
+
+  }
 
   ngOnInit() {
     this.newDataList = this.dataList.slice();
@@ -42,22 +43,10 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.filterdata();
       });
-
-    //manually mark as valid if has value
-    this.form.get('venue').valueChanges.pipe(take(1)).subscribe(res => {
-      if (res)
-        this.form.controls['venue'].setErrors(null);
-    })
   }
   ngOnDestroy(): void {
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
-  }
-  public onSelect(event: MatSelectChange): void {
-    this.valueEmitter.emit(event);
-  }
-  public onSubmitAttempt(): void {
-    this.form.markAsTouched();
   }
   private filterdata(): void {
     let search: string = this.dataFilterForm.value;
@@ -72,8 +61,5 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy {
     this.filteredData$.next(
       this.newDataList.filter(data => data.label.toLowerCase().indexOf(search) > -1)
     );
-  }
-  ngAfterViewChecked() {
-    this.cdRef.detectChanges();
   }
 }

@@ -4,11 +4,12 @@
 }
 .il-dialog {
   @include il-dialog;
-  width: 672px;
-  height: 640px;
-}
-.il-dialog .content {
-  padding: 40px 88px !important;
+  width: 672px !important;
+  .content {
+    padding: 40px 88px !important;
+    min-height: 406px !important;
+    height: 406px !important;
+  }
 }
 img {
   cursor: pointer;
