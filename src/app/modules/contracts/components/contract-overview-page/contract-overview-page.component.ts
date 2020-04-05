@@ -1,10 +1,8 @@
 import { appNotification } from './../../../../store/notification.action';
-import { loadContracts } from './../../store/contracts.action';
-import { tap, delay, take } from 'rxjs/operators';
+import { tap, delay, take, debounceTime } from 'rxjs/operators';
 import { getAllContracts } from './../../store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { IContract } from './../../contract.model';
-import { Observable, of } from 'rxjs';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts-add/contract-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
@@ -30,7 +28,8 @@ export class ContractOverviewPageComponent implements OnInit {
 
   constructor(public store: Store<AppState>, public dialog: MatDialog) {
     this.store.pipe(select(getAllContracts))
-      .pipe(tap(contracts => this.contracts = contracts)).subscribe();
+      .pipe(tap(contracts => this.contracts = contracts), debounceTime(1000))
+      .subscribe();
   }
 
   ngOnInit() { }
@@ -48,7 +47,7 @@ export class ContractOverviewPageComponent implements OnInit {
       if (res) {
         setTimeout(() => {
           this.store.dispatch(appNotification({ success: false }));
-        }, 2000);
+        }, 3000);
       }
     });
   }

@@ -5,7 +5,7 @@ import { take, switchMap, tap, debounceTime, concatMap, delay } from 'rxjs/opera
 import { Observable, from, of, forkJoin } from 'rxjs';
 import { uploadContractImage, cacheImages } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
-import { isContractCreated, getCachedImages } from './../../../contracts/store/contracts.selector';
+import { getCachedImages } from './../../../contracts/store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { AddEditDialogState } from '../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
@@ -90,21 +90,20 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
 
     //create contract
     this.store.dispatch(AddContract({ item }));
-    this.store.pipe(take(1), select(isContractCreated))
-      .subscribe(contract => {
-        this.dialogRef.close(contract);
 
-        //and upload images
-        this.files && from(this.files).pipe(
-          concatMap(item => of(item).pipe(delay(500))),
-        ).subscribe(file => {
-          const formData = new FormData();
-          formData.append('file', file, file.name);
-          this.store.dispatch(uploadContractImage({ file: formData }));
-        })
-        if (this.files && this.files.length === 0)
-          this.store.dispatch(appNotification({ success: true }));
-      })
+    //and upload images
+    this.files && from(this.files).pipe(
+      concatMap(item => of(item).pipe(delay(500))),
+    ).subscribe(file => {
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      this.store.dispatch(uploadContractImage({ file: formData }));
+    })
+    if (this.files && this.files.length === 0)
+      this.store.dispatch(appNotification({ success: true }));
+
+    this.dialogRef.close(true);
+
   }
 
   public onNoClick = (): void => this.dialogRef.close();
