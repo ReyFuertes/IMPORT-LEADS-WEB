@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="20px">
   <div fxLayout="row">
-    <h1>PI SK19NL0806-1 Touch Dimmer Switch</h1>
+    <h1>{{ ($contract | async)?.contract_name }}</h1>
   </div>
   <div fxLayout="row" fxLayoutGap="20px">
     <div class="action-item" *ngFor="let option of options" (click)="option?.action()" fxLayoutAlign="start center" fxLayoutGap="5px">
@@ -21,23 +21,23 @@
           <div class="item-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
             <div>
               <div>Company</div>
-              <div>CIL China</div>
+              <div>{{ ($contract | async)?.company }}</div>
             </div>
             <div>
               <div>Responsible Person</div>
-              <div>Tammy Li</div>
+              <div>{{ ($contract | async)?.responsible_person }}</div>
             </div>
             <div>
               <div>Position</div>
-              <div>Procurement Officer</div>
+              <div>{{ ($contract | async)?.position }}</div>
             </div>
             <div>
               <div>Upload Date</div>
-              <div>12.08.2019</div>
+              <div>{{ ($contract | async)?.upload_date }}</div>
             </div>
             <div>
               <div>Venue</div>
-              <div>Venue Name</div>
+              <div>{{ ($contract | async)?.venue?.name }}</div>
             </div>
           </div>
           <div fxFlex class="image-container">

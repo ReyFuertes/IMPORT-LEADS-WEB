@@ -37,8 +37,8 @@ export interface IContract {
   details?: string;
   attachments?: any[];
   images?: IProductImage[];
-  created_at?: Date | string;
-  updated_at: Date | string;
+  created_at?: Date;
+  updated_at: Date;
 }
 export interface IProductImage {
   id?: number | string;
