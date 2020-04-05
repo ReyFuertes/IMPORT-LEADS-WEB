@@ -13,7 +13,7 @@ export class ContractsEffects {
     ofType(AddContract),
     mergeMap(({ item }) => this.contractsService.post(item)
     .pipe(
-      map((created: any) => {
+      map((created: IContract) => {
         return AddContractSuccess({ created });
       })
     ))

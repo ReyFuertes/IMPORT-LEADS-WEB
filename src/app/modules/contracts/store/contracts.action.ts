@@ -20,11 +20,11 @@ export const loadContractSuccess = createAction(
 );
 export const AddContract = createAction(
   ContractActionTypes.AddContract,
-  props<{ item: IContract, file?: any }>()
+  props<{ item: IContract }>()
 );
 export const AddContractSuccess = createAction(
   ContractActionTypes.AddContractSuccess,
-  props<{ created: boolean }>()
+  props<{ created: IContract }>()
 );
 export const uploadContractImage = createAction(
   ContractActionTypes.UploadImage,

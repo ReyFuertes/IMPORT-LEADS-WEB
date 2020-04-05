@@ -8,7 +8,13 @@ export interface ContractsState extends EntityState<IContract> {
   created?: boolean,
   cachedImages: ICachedImage[]
 }
-export const contractsAdapter: EntityAdapter<IContract> = createEntityAdapter<IContract>({});
+export const contractsAdapter: EntityAdapter<IContract> = createEntityAdapter<IContract>({
+  sortComparer: (a: IContract, b: IContract) => {
+    if (a.created_at < b.created_at) return 1;
+    if (a.created_at > b.created_at) return -1;
+    return 0;
+  }
+});
 export const initialState: ContractsState = contractsAdapter.getInitialState({
   item: null,
   created: null,
@@ -17,13 +23,13 @@ export const initialState: ContractsState = contractsAdapter.getInitialState({
 const contractsReducer = createReducer(
   initialState,
   on(loadContracts, (state) => {
-    return ({ ...contractsAdapter.removeAll(state) })
+    return ({ ...contractsAdapter.removeAll(state) });
+  }),
+  on(AddContractSuccess, (state, action) => {
+    return contractsAdapter.addOne(action.created, state)
   }),
   on(loadContractSuccess, (state, action) => {
     return ({ ...contractsAdapter.addAll(action.items, state) })
-  }),
-  on(AddContractSuccess, (state, action) => {
-    return ({ ...state, created: action.created })
   }),
   on(cacheImages, (state, action) => {
     return ({ ...state, cachedImages: action.images })
@@ -33,9 +39,12 @@ export function ContractsReducer(state: ContractsState, action: Action) {
   return contractsReducer(state, action);
 }
 export const isCreated = (state: ContractsState) => state.created ? true : false;
-export const getCachedImages = (state: ContractsState) =>  state.cachedImages;
+export const getCachedImages = (state: ContractsState) => state.cachedImages;
 export const getAllContracts = (state: ContractsState) => {
-  return state && state.entities ? Object.values(state.entities) : null;
+  const contracts = state && state.entities ? Object.values(state.entities) : null
+  return contracts.sort((a: IContract, b: IContract) => {
+    if (a.created_at < b.created_at) return 1;
+    if (a.created_at > b.created_at) return -1;
+    return 0;
+  });
 };
-
-

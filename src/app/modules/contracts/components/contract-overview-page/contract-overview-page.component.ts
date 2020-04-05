@@ -1,6 +1,6 @@
 import { appNotification } from './../../../../store/notification.action';
 import { loadContracts } from './../../store/contracts.action';
-import { tap, delay } from 'rxjs/operators';
+import { tap, delay, take } from 'rxjs/operators';
 import { getAllContracts } from './../../store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { IContract } from './../../contract.model';
@@ -33,20 +33,23 @@ export class ContractOverviewPageComponent implements OnInit {
       .pipe(tap(contracts => this.contracts = contracts)).subscribe();
   }
 
-
   ngOnInit() { }
+
+  public get hasRecords(): boolean {
+    return Object.keys(this.contracts).length > 0;
+  }
 
   public dragStarted(event: any) {
     this.dragStart = event;
   }
-
   public addContract(): void {
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {});
-    dialogRef.afterClosed().subscribe(() => {
-      setTimeout(() => {
-        this.store.dispatch(appNotification({ success: false }));
-      }, 2000);
-      this.store.dispatch(loadContracts(null));
+    dialogRef.afterClosed().pipe(take(1)).subscribe((res) => {
+      if (res) {
+        setTimeout(() => {
+          this.store.dispatch(appNotification({ success: false }));
+        }, 2000);
+      }
     });
   }
 }

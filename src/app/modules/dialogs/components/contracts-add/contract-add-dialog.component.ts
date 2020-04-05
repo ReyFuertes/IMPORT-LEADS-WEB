@@ -1,15 +1,12 @@
 import { appNotification } from './../../../../store/notification.action';
 import { getVenuesSelector } from './../../../venues/store/venues.selector';
-import { IVenue } from './../../../venues/venues.models';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
 import { uploadContractImage, cacheImages } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
-import { isCreated, ContractsState } from './../../../contracts/store/contracts.reducer';
 import { isContractCreated, getCachedImages } from './../../../contracts/store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
-import { ContractsService } from './../../../contracts/contracts.service';
 import { AddEditDialogState } from '../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
 import { IContract, IProductImage, ICachedImage } from '../../../contracts/contract.model';
@@ -94,8 +91,9 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     //create contract
     this.store.dispatch(AddContract({ item }));
     this.store.pipe(take(1), select(isContractCreated))
-      .subscribe(isCreated => {
-        this.dialogRef.close(isCreated);
+      .subscribe(contract => {
+        this.dialogRef.close(contract);
+
         //and upload images
         this.files && from(this.files).pipe(
           concatMap(item => of(item).pipe(delay(500))),
