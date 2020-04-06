@@ -1,7 +1,7 @@
 @import "src/styleguide/shared";
 .top-nav {
   @include il-topnav;
-  @include fade-in;
+  // @include fade-in;
   overflow: hidden;
 }
 .chat {

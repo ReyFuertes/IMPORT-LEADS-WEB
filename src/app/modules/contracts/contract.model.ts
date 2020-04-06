@@ -41,6 +41,7 @@ export interface IContract {
   updated_at: Date;
 }
 export interface IProductImage {
-  id?: number | string;
-  name?: string
+  id?: string;
+  filename?: string;
+  position?: number
 }

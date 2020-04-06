@@ -42,15 +42,15 @@
           </div>
           <div fxFlex class="image-container">
             <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
-              <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let img of contractImages" fxLayoutAlign="center center">
+              <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let image of contractImages" fxLayoutAlign="center center">
                 <div class="drag-placeholder" *cdkDragPlaceholder></div>
-                <img [src]="imgPath + 'product-img.png'">
+                <img [src]="imgUrl +  image?.filename">
               </div>
             </div>
           </div>
         </div>
         <div fxFlex="176px" fxLayoutAlign="end center">
-          <div class="contract-box">
+          <div class="contract-box fade-in">
             <img [src]="imgPath + 'contract-img.png'">
           </div>
         </div>

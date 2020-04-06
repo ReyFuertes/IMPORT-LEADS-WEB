@@ -1,6 +1,6 @@
 ::-webkit-scrollbar {
   width: 5px;
-  @include fade-in;
+  // @include fade-in;
 }
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px $color-gray-3;

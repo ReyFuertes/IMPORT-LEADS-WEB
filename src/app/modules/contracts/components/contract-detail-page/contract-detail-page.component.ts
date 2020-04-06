@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { getContractById } from './../../store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -29,23 +30,8 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   public _showTabActions: boolean = false;
   public showRightNav: boolean = false;
   public dragStartSpecs: boolean = false;
-  public contractImages: IProductImage[] = [{
-    id: 1,
-    name: 'product-img.png'
-  }, {
-    id: 2,
-    name: 'product-img.png'
-  }, {
-    id: 3,
-    name: 'product-img.png'
-  }, {
-    id: 4,
-    name: 'product-img.png'
-  }, {
-    id: 5,
-    name: 'product-img.png'
-  }];
-
+  public imgUrl: string = `${environment.apiUrl}contracts/image/`;
+  public contractImages: IProductImage[];
   public specifications: Array<{ id: number, title: string, specification?: any }> = [
     {
       id: 1,
@@ -71,9 +57,6 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       details: ['Lorem Ipsum is simply dummy text of the printing industry'],
       images: [null]
     });
-    this.id = this.route.snapshot.paramMap.get('id') || null;
-    if (this.id)
-      this.$contract = this.store.pipe(select(getContractById(this.id)));
   }
 
   ngOnInit() {
@@ -111,6 +94,15 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     fromEvent(window, "scroll").subscribe((e: any) => {
       document.querySelector('.inner-container').scrollTop = (document.documentElement.scrollTop);
     });
+
+    this.id = this.route.snapshot.paramMap.get('id') || null;
+    if (this.id) {
+      this.$contract = this.store.pipe(select(getContractById(this.id)));
+      //passed the contract images to a variable array so we can drag and drop
+      this.$contract && this.$contract.subscribe(c => {
+        if (c) this.contractImages = c.images;
+      });
+    }
   }
   private formToEntity(item: IContract): void {
     this.form.controls['id'].patchValue(item.id);

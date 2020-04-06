@@ -40,7 +40,6 @@
       }
     }
   }
-
   ::ng-deep {
     @media (max-width: 1280px) {
       .material-icons {
@@ -107,7 +106,7 @@
     }
     .mat-expanded .mat-content {
       overflow-y: auto;
-      @include fade-in;
+      // @include fade-in;
     }
     .mat-expansion-panel {
       background-color: $color-white;
