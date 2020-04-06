@@ -40,11 +40,12 @@
               <div>{{ ($contract | async)?.venue?.name }}</div>
             </div>
           </div>
-          <div fxFlex class="image-container">
-            <div cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
+          <div class="image-container">
+            <div fxLayout="row" cdkDropList class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center" (cdkDropListDropped)="drop($event)">
               <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let image of contractImages" fxLayoutAlign="center center">
                 <div class="drag-placeholder" *cdkDragPlaceholder></div>
-                <img [src]="imgUrl +  image?.filename">
+                <!-- <img [src]="imgUrl +  image?.filename"> -->
+                <div class="img" [ngStyle]="{'background-image': getBg(imgUrl +  image?.filename)}"></div>
               </div>
             </div>
           </div>

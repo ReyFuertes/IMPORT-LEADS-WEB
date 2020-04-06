@@ -28,27 +28,28 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public state: PillState = PillState.default;
   @Input()
   public isRightNavOpen: boolean = false;
-  public items: Array<{ label: string, value: string }> = [
+  @Input()
+  public suggestions: Array<{ label: string, value: string }> = [
     {
       label: 'Product 1',
       value: '1'
     },
     {
-      label: 'zxc 2',
+      label: 'Product 2',
       value: '2'
     },
     {
-      label: 'bnm 3',
+      label: 'Product 3',
       value: '3'
     },
     {
-      label: '67876',
+      label: 'Product 4',
       value: '4'
     },
     {
-      label: 'SFDF',
+      label: 'Product 5',
       value: '5'
-    },
+    }
   ];
 
   constructor(private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
@@ -59,14 +60,12 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       cost: [null, Validators.required],
       subProducts: new FormArray([]),
     });
-
     //get the sub total of all productSet
     this.form.get('subProducts')
       .valueChanges.pipe(takeUntil(this.destroy$))
       .subscribe(subProducts => {
         const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
         const valueOfParentProduct = this.form.get('cost').value;
-
         //if the value of input is less than the value of sub products cost total, mark as invalid error
         if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
           this.form.controls['cost'].setErrors({ 'invalid': true });

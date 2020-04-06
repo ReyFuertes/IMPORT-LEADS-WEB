@@ -21,7 +21,7 @@
     <div *ngIf="!isRightNavOpen" class="product-section" fxLayout="row" [formGroup]="form" fxLayoutGap="20px">
       <div fxFlex fxLayout="column" fxLayoutAlign="start start">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-          <il-input-select fxFlex [form]="form" [controlName]="'name'" [isReadOnly]="isRightNavOpen"></il-input-select>
+          <il-input-select fxFlex [form]="form" [controlName]="'name'" [suggestions]="suggestions" [isReadOnly]="isRightNavOpen"></il-input-select>
 
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
@@ -31,7 +31,7 @@
           <div *ngFor="let subProducts of form.get('subProducts')?.controls; let i = index" fxLayout="column">
             <ng-container formArrayName="subProducts">
               <div fxFlex fxLayoutGap="20px" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-                <il-input-select [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
+                <il-input-select [suggestions]="suggestions" [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
                 </il-input-select>
                 <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
                 <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>

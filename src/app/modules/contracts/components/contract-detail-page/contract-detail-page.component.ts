@@ -113,6 +113,9 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     this.form.controls['details'].patchValue(item.details);
     this.form.controls['attachments'].patchValue(null);
   }
+  public getBg(url: string): string {
+    return `url(${url})`;
+  }
   public showTabActions(): void {
     this._showTabActions != this._showTabActions;
   }

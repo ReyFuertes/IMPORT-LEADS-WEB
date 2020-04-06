@@ -16,7 +16,7 @@
       border-bottom: thin $color-red solid !important;
     }
     &.ui-inputwrapper-focus .ui-autocomplete-input {
-      border-bottom: 2px #3f51b5 solid !important;
+      border-bottom: 2px $color-primary solid !important;
     }
   }
   // .mat-form-field-ripple {
