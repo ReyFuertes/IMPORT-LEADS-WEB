@@ -39,6 +39,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { PrimengEditorComponent } from './components/primeng-editor/primeng-editor.component';
 import { EditorModule } from 'primeng/editor';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 const materialModules = [
   MatListModule,
@@ -59,7 +60,8 @@ const materialModules = [
 
 const primeNgModules = [
   AccordionModule,
-  CalendarModule
+  CalendarModule,
+  AutoCompleteModule
 ];
 
 const sharedComponents = [

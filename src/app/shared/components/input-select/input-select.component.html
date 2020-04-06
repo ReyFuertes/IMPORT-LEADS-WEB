@@ -1,10 +1,3 @@
 <div *ngIf="form" [formGroup]="form" class="il-input-select">
-  <mat-form-field floatLabel="never">
-    <input matInput placeholder="Product" [required]="isRequired" aria-label="Product" [matAutocomplete]="auto" [formControlName]="controlName" [readonly]="isReadOnly">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let item of searchedItems | async" [value]="item?.label">
-        <span>{{item?.label}}</span>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+  <p-autoComplete [disabled]="isReadOnly" [formControlName]="controlName" [placeholder]="placeholder" field="label" [suggestions]="filtered" (completeMethod)="filter($event)"></p-autoComplete>
 </div>

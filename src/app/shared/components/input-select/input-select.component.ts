@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { SimpleItem } from './../../generics/generic.model';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output } from '@angular/core';
 import { FormGroup, FormControl, FormControlName } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -11,25 +12,25 @@ import { Observable } from 'rxjs';
 
 export class InputSelectComponent implements OnInit {
   @Input()
-  public items: Array<{ label: string, value: string }> = [
+  public suggestions: Array<{ label: string, value: string }> = [
     {
       label: 'Product 1',
       value: '1'
     },
     {
-      label: 'zxc 2',
+      label: 'Product 2',
       value: '2'
     },
     {
-      label: 'bnm 3',
+      label: 'Product 3',
       value: '3'
     },
     {
-      label: '67876',
+      label: 'Product 4',
       value: '4'
     },
     {
-      label: 'SFDF',
+      label: 'Product 5',
       value: '5'
     }
   ];
@@ -38,23 +39,28 @@ export class InputSelectComponent implements OnInit {
   @Input()
   public form: FormGroup;
   @Input()
-  public isReadOnly: boolean = false;
+  public placeholder: string = 'Your product here..';
   @Input()
-  public isRequired: boolean = false;
-  public searchedItems: Observable<any[]>;
+  public isReadOnly: boolean = false;
+  public filtered: SimpleItem[] | any[];
 
   constructor() { }
 
-  ngOnInit() {
-    this.searchedItems = this.controlName && this.form.get(this.controlName) && this.form.get(this.controlName).valueChanges
-      .pipe(
-        startWith(''),
-        map(item => item ? this._filterStates(item) : this.items.slice())
-      );
+  ngOnInit() { }
+
+  public filter(event) {
+    let query = event.query;
+    this.filtered = this.filterArr(query, this.suggestions);
   }
 
-  private _filterStates(value: string): any[] {
-    const filterValue = value.toLowerCase();
-    return this.items.filter(state => state.label.toLowerCase().indexOf(filterValue) === 0);
+  public filterArr(query, items: any[]): any[] {
+    let filtered: any[] = [];
+    for (let i = 0; i < items.length; i++) {
+      let country = items[i];
+      if (country.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(country);
+      }
+    }
+    return filtered;
   }
 }

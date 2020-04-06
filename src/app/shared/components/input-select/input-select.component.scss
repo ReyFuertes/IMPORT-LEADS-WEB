@@ -1,15 +1,28 @@
 @import "src/styleguide/shared";
-.il-input-select {
-  @include il-select;
-
-  ::ng-deep {
-    input.mat-input-element {
-      font-size: 14px;
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-label {
-      color: rgba(0, 0, 0, 0.54);
-      font-size: 14px;
-      top: 23px !important;
+:host ::ng-deep {
+  .ui-autocomplete {
+    width: 100% !important;
+    .ui-autocomplete-input {
+      border: none !important;
+      border-bottom: 1px solid $color-gray-1 !important;
+      border-radius: 0;
+      width: 100% !important;
     }
   }
+  p-autocomplete {
+    position: relative;
+    top: -3px;
+    &.ng-invalid.ng-touched .ui-autocomplete-input {
+      border-bottom: thin $color-red solid !important;
+    }
+    &.ui-inputwrapper-focus .ui-autocomplete-input {
+      border-bottom: 2px #3f51b5 solid !important;
+    }
+  }
+  // .mat-form-field-ripple {
+  //   opacity: 1;
+  //   transform: scaleX(1);
+  //   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.1s cubic-bezier(0.25, 0.8, 0.25, 1),
+  //     background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  // }
 }

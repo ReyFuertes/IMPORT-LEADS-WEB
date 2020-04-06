@@ -1,16 +1,16 @@
 <div class="products" fxFlex fxLayout="column" fxLayoutGap="20px">
-  <div *ngIf="!isRightNavOpen && productPillsArray" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <div *ngIf="!isRightNavOpen && productPillsArr" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <div class="img-box">
       <img [src]="svgPath + 'doc-icon-blue.svg'" />
     </div>
     <h2>Products</h2>
   </div>
   <div class="cp-container" fxLayout="column">
-    <p *ngIf="isRightNavOpen && productPillsArray && productPillsArray.length > 0">Select the product to select the related terms that you want to inspect</p>
+    <p *ngIf="isRightNavOpen && productPillsArr && productPillsArr.length > 0">Select the product to select the related terms that you want to inspect</p>
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px">
-      <ng-container *ngFor="let product of productPillsArray; let i = index;">
-        <il-pill [state]="state" (stateEmitter)="removeSelection()" (click)="OnEditProduct(product)" [enabled]="!isRightNavOpen ||isRightNavOpen && (product?.subProducts && !product?.subProducts.length > 0)" [item]="{label: product.name}" [enableHighlight]="true"
-          (removeEmitter)="onRemoveProduct(product)" [selectable]="true">
+      <ng-container *ngFor="let product of productPillsArr; let i = index;">
+        <il-pill [state]="state" (stateEmitter)="removeSelection()" (click)="OnEditProduct(product)" [enabled]="!isRightNavOpen ||isRightNavOpen && (product?.subProducts && !product?.subProducts.length > 0)" [item]="{label: product.name}"
+          [enableHighlight]="true" (removeEmitter)="onRemoveProduct(product)" [selectable]="true">
         </il-pill>
         <il-pill size="small" [enabled]="isRightNavOpen" *ngFor="let sub of product.subProducts; let i = index;" [item]="{label: sub.name}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(product, sub, $event)" [selectable]="true">
         </il-pill>
@@ -22,6 +22,7 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="start start">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
           <il-input-select fxFlex [form]="form" [controlName]="'name'" [isReadOnly]="isRightNavOpen"></il-input-select>
+
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
           <div fxFlex="5"></div>
@@ -30,7 +31,7 @@
           <div *ngFor="let subProducts of form.get('subProducts')?.controls; let i = index" fxLayout="column">
             <ng-container formArrayName="subProducts">
               <div fxFlex fxLayoutGap="20px" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-                <il-input-select [isRequired]="hasSubProducts" [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
+                <il-input-select [form]="subProducts" [controlName]="'name'" fxFlex fxFlexOffset="20px">
                 </il-input-select>
                 <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
                 <il-input fxFlex="15" [form]="subProducts" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
