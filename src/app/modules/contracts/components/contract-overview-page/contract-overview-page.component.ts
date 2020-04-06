@@ -37,7 +37,6 @@ export class ContractOverviewPageComponent implements OnInit {
   public get hasRecords(): boolean {
     return Object.keys(this.contracts).length > 0;
   }
-
   public dragStarted(event: any) {
     this.dragStart = event;
   }
@@ -47,7 +46,7 @@ export class ContractOverviewPageComponent implements OnInit {
       if (res) {
         setTimeout(() => {
           this.store.dispatch(appNotification({ success: false }));
-        }, 3000);
+        }, 2000);
       }
     });
   }
