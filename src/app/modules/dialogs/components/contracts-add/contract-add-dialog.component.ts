@@ -9,7 +9,7 @@ import { getCachedImages } from './../../../contracts/store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { AddEditDialogState } from '../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
-import { IContract, IProductImage, ICachedImage } from '../../../contracts/contract.model';
+import { IContract, IProductImage } from '../../../contracts/contract.model';
 import { environment } from '../../../../../environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -32,8 +32,8 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public contractImages: IImage[];
   public venues: SimpleItem[];
   public title: string = 'Add';
-  public images: ICachedImage[] = [];
-  public cachedImages: ICachedImage[];
+  public images: IProductImage[] = [];
+  public cachedImages: IProductImage[];
   public files: File[] = [];
 
   constructor(public fb: FormBuilder, public dialogRef: MatDialogRef<ContractAddDialogComponent>,
@@ -81,7 +81,6 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
 
   public save = (item: IContract): void => {
-    //venues and images
     const { label, value } = this.form.get('venue').value;
     item.venue = { id: value, name: label };
     //and upload images
@@ -90,22 +89,16 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       files.append('files', ci.file, ci.filename);
       return { id: ci.id, filename: ci.filename, size: ci.size, mimetype: ci.mimetype }
     }) || [];
-
-    //create contract
+    //save/upload contract
     this.store.dispatch(AddContract({ item }));
     this.store.dispatch(uploadContractImage({ files }));
     this.dialogRef.close(true);
-
-    // const formData = new FormData();
-    // this.files && this.files.forEach(file => {
-    //   const newFileName = `${uuid()}.${file.name.split('?')[0].split('.').pop()}`;
-    //   formData.append('file', file, newFileName);
-    // });
   }
 
   public onNoClick = (): void => this.dialogRef.close();
   public drop = (event: CdkDragDrop<any[]>) => moveItemInArray(this.cachedImages, event.previousIndex, event.currentIndex);
-  public onRemoveCachedImage(image: ICachedImage): void {
+
+  public onRemoveCachedImage(image: IProductImage): void {
     const index: number = this.cachedImages.indexOf(image);
     if (index !== -1) {
       this.cachedImages.splice(index, 1);

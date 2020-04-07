@@ -1,5 +1,5 @@
 
-export interface ICachedImage {
+export interface IProductImage {
   id?: string;
   image?: any;
   filename?: string;
@@ -42,9 +42,4 @@ export interface IContract {
   images?: IProductImage[];
   created_at?: Date;
   updated_at: Date;
-}
-export interface IProductImage {
-  id?: string;
-  filename?: string;
-  position?: number
 }

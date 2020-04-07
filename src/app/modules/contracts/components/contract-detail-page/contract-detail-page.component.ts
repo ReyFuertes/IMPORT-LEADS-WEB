@@ -141,6 +141,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     });
     dialogRef.afterClosed().subscribe();
   }
+  public trackByField = (i: number, field: IProductImage) => field.position = i;
   public drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
   }

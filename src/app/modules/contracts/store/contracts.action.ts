@@ -1,5 +1,5 @@
 import { QueryParam } from './../../../models/generic..model';
-import { IContract, ICachedImage } from './../contract.model';
+import { IContract, IProductImage } from './../contract.model';
 import { createAction, props } from '@ngrx/store';
 
 export enum ContractActionTypes {
@@ -36,5 +36,5 @@ export const uploadContractImageSuccess = createAction(
 );
 export const cacheImages = createAction(
   ContractActionTypes.UploadImageSuccess,
-  props<{ images: ICachedImage[] }>()
+  props<{ images: IProductImage[] }>()
 );
