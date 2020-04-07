@@ -92,8 +92,6 @@ img {
   min-width: 100px;
   min-height: 100px;
   cursor: move;
-  position: relative;
-  top: 20px;
 }
 :host ::ng-deep {
   .image-list.cdk-drop-list-dragging .drag-box:not(.cdk-drag-placeholder) {
