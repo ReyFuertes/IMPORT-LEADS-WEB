@@ -1,7 +1,7 @@
 <div class="il-dialog" fxLayout="column" fxLayoutAlign="center center">
   <div class="header" fxLayoutAlign="center center" fxLayout="column">
     <div fxLayoutAlign="end center">
-      <img [src]="svgPath + 'close-icon-big-gray.svg'" />
+      <img class="close" (click)="dialogRef.close(false)" [src]="svgPath + 'close-icon-big-gray.svg'" />
     </div>
     <div fxLayoutAlign="center center">
       <h2>{{modalTitle}}</h2>
