@@ -3,8 +3,9 @@ export enum AddEditState {
   'Edit' = 2
 }
 export interface AddEditDialogState {
-  formValues: any;
-  state: AddEditState
+  id?: string;
+  formValues?: any;
+  state?: AddEditState
 }
 export interface SimpleItem {
   label: string;

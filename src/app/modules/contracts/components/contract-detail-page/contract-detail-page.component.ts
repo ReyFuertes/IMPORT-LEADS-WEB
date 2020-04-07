@@ -50,12 +50,12 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   constructor(private store: Store<AppState>, private route: ActivatedRoute, public fb: FormBuilder, public dialog: MatDialog) {
     super();
     this.form = this.fb.group({
-      id: ['c28c801d-6556-42aa-8b8c-072f7eb4b17d'],
-      title: ['PI SK19NL0806-1 Touch Dim'],
-      venue: ['Canhui toys limited'],
-      startDate: [new Date('01/09/2019')],
-      delivery_date: [new Date('03/12/2019')],
-      details: ['Lorem Ipsum is simply dummy text of the printing industry'],
+      id: [null],
+      title: [null],
+      venue: [null],
+      startDate: [null],
+      delivery_date: [null],
+      details: [null],
       images: [null]
     });
   }
@@ -101,8 +101,10 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       this.$contract = this.store.pipe(select(getContractById(this.id)));
       //passed the contract images to a variable array so we can drag and drop
       this.$contract && this.$contract.subscribe(c => {
-        console.log(c)
-        if (c) this.contractImages = c.images.sort((a, b) => this.orderByAsc(a, b))
+        if (c) {
+          this.form.patchValue(c);
+          this.contractImages = c.images.sort((a, b) => this.orderByAsc(a, b));
+        }
       });
     }
   }
@@ -112,15 +114,6 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       if (a.position < b.position) return -1;
       return 0;
     }
-  }
-  private formToEntity(item: IContract): void {
-    this.form.controls['id'].patchValue(item.id);
-    this.form.controls['contract_name'].patchValue(item.contract_name);
-    this.form.controls['venue'].patchValue(item.venue);
-    this.form.controls['start_date'].patchValue(item.start_date);
-    this.form.controls['delivery_date'].patchValue(item.delivery_date);
-    this.form.controls['details'].patchValue(item.details);
-    this.form.controls['attachments'].patchValue(null);
   }
   public getBg(url: string): string {
     return `url(${url})`;
@@ -135,6 +128,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   public editContract = (): void => {
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {
       data: {
+        id: this.id,
         formValues: this.form.value,
         state: AddEditState.Edit
       }

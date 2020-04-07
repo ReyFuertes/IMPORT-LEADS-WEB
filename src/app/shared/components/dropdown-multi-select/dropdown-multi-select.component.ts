@@ -19,20 +19,24 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy {
   @Input()
   public dataList: any[] = [];
   @Input()
-  public controlName: FormControlName;
+  public controlName: any;
   @Output()
   public valueEmitter = new EventEmitter<any>();
-
-  public dataFilterForm: FormControl = new FormControl();
-  public filteredData$: ReplaySubject<any> = new ReplaySubject<any>();
+  public dataFilterForm = new FormControl();
+  public filteredData$ = new ReplaySubject<any>();
   private newDataList: any;
-  protected _unsubscribe$: Subject<void> = new Subject<void>();
+  protected _unsubscribe$ = new Subject<void>();
 
   constructor() {
 
   }
 
   ngOnInit() {
+    //when edit mode pass id to display selected item
+    const id = this.form.get(this.controlName).value
+      && this.form.get(this.controlName).value.id || null;
+    if (id) this.form.get(this.controlName).patchValue(id)
+    //filter etc..
     this.newDataList = this.dataList.slice();
     this.filteredData$.next(this.newDataList);
     this.dataFilterForm.valueChanges

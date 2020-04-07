@@ -1,3 +1,4 @@
+import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { appNotification } from './../../../../store/notification.action';
 import { tap, delay, take, debounceTime } from 'rxjs/operators';
 import { getAllContracts } from './../../store/contracts.selector';
@@ -41,7 +42,9 @@ export class ContractOverviewPageComponent implements OnInit {
     this.dragStart = event;
   }
   public addContract(): void {
-    const dialogRef = this.dialog.open(ContractAddDialogComponent, {});
+    const dialogRef = this.dialog.open(ContractAddDialogComponent, {
+      data: { state: AddEditState.Add }
+    });
     dialogRef.afterClosed().pipe(take(1)).subscribe((res) => {
       if (res) {
         setTimeout(() => {

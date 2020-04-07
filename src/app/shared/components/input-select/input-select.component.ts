@@ -34,7 +34,6 @@ export class InputSelectComponent implements OnInit {
 
   public filterArr(query, items: any[]): any[] {
     let filtered: any[] = [];
-    console.log(items);
     items && items.forEach((val, i) => {
       if (val.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
         filtered.push(val);
