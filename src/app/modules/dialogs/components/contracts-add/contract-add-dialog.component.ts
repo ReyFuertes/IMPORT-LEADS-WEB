@@ -31,7 +31,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public imgPath: string = environment.imgPath;
   public contractImages: IImage[];
   public venues: SimpleItem[];
-  public title: string = 'Add';
+  public modalTitle: string = 'Add';
   public images: IProductImage[] = [];
   public cachedImages: IProductImage[];
   public files: File[] = [];
@@ -61,8 +61,8 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       this.store.pipe(select(getContractById(data.id)))
         .subscribe(c => this.formToEntity(c));
 
-      this.title = 'Edit ' + data.formValues['contract_name'];
-    } else this.title = 'Add '
+      this.modalTitle = 'Edit ' + data.formValues['contract_name'];
+    } else this.modalTitle = 'Add '
 
   }
 
@@ -83,7 +83,6 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
         { label: venue.name, value: venue.id }));
     });
-    this.store.subscribe(res => console.log(res));
   }
 
   public save = (item: IContract): void => {
@@ -109,7 +108,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     return `url(${base64})`;
   }
   public onNoClick = (): void => this.dialogRef.close();
-  public drop = (event: CdkDragDrop<any[]>) => moveItemInArray(this.cachedImages, event.previousIndex, event.currentIndex);
+  public drop = (event: CdkDragDrop<any[]>) => moveItemInArray(this.cachedImages || this.form.get('images').value, event.previousIndex, event.currentIndex);
 
   public onRemoveCachedImage(image: IProductImage): void {
     const index: number = this.cachedImages.indexOf(image);

@@ -51,7 +51,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     super();
     this.form = this.fb.group({
       id: [null],
-      title: [null],
+      contract_name: [null],
       venue: [null],
       startDate: [null],
       delivery_date: [null],
