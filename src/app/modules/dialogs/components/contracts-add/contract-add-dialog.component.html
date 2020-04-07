@@ -20,8 +20,8 @@
       <il-upload-box (imageEmitter)="onImageChange($event)" fxFlex="30"></il-upload-box>
     </div>
     <div class="image-container">
-      <div cdkDropList (cdkDropListDropped)="drop($event)" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
-        <div class="drag-box" cdkDrag *ngFor="let cached of (cachedImages ? cachedImages : form.get('images').value)" [cdkDragData]="cached" fxLayoutAlign="center center">
+      <div *ngIf="cachedImages && cachedImages.length > 0" cdkDropList (cdkDropListDropped)="drop($event)" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
+        <div class="drag-box" cdkDrag *ngFor="let cached of cachedImages" [cdkDragData]="cached" fxLayoutAlign="center center">
           <div class="drag-placeholder" *cdkDragPlaceholder></div>
           <div fxLayout="column" fxLayoutAlign="center end">
             <img class="remove" (click)="onRemoveCachedImage(cached)" [src]="svgPath + 'cancel-red-16px.svg'">

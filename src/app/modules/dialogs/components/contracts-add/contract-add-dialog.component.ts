@@ -1,6 +1,6 @@
 import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
-import { take, switchMap, tap, debounceTime, concatMap, delay } from 'rxjs/operators';
+import { take, switchMap, tap, debounceTime, concatMap, delay, map } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
 import { uploadContractImages, cacheImages } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
@@ -33,7 +33,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public venues: SimpleItem[];
   public modalTitle: string = 'Add';
   public images: IProductImage[] = [];
-  public cachedImages: IProductImage[];
+  public cachedImages: IProductImage[] = [];
   public files: File[] = [];
   public imgUrl: string = `${environment.apiUrl}contracts/image/`;
 
@@ -67,17 +67,22 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
 
   private formToEntity(item: IContract): void {
-    this.form.controls['id'].patchValue(item.id);
-    this.form.controls['contract_name'].patchValue(item.contract_name);
-    this.form.controls['venue'].patchValue(item.venue);
-    this.form.controls['start_date'].patchValue(item.start_date);
-    this.form.controls['delivery_date'].patchValue(item.delivery_date);
-    this.form.controls['details'].patchValue(item.details);
-    this.form.controls['images'].patchValue(item.images);
+    const { id, contract_name, venue, start_date, delivery_date, details, images } = item;
+    this.form.controls['id'].patchValue(id);
+    this.form.controls['contract_name'].patchValue(contract_name);
+    this.form.controls['venue'].patchValue(venue);
+    this.form.controls['start_date'].patchValue(start_date);
+    this.form.controls['delivery_date'].patchValue(delivery_date);
+    this.form.controls['details'].patchValue(details);
+    this.form.controls['images'].patchValue(images);
+    this.store.dispatch(cacheImages({ images: Object.assign([], images) }));
   }
   ngOnInit() {
+    /* we call these from state because the data that is stored/pushed in here is from dropped images */
     this.store.pipe(select(getCachedImages))
-      .subscribe(result => this.cachedImages = result);
+      .subscribe(result => {
+        if (result) this.cachedImages = result;
+      });
 
     this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
       this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
@@ -121,25 +126,20 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   public onImageChange(event: File): void {
     this.files.push(event);
     //collect all drop images in base64 results
-    const $result = this.convertBlobToBase64(event)
-      .pipe(
-        take(1),
-        tap(b64Result => this.images.push({
-          id: uuid(),
-          image: b64Result,
-          filename: `${uuid()}.${event.name.split('?')[0].split('.').pop()}`,
-          file: event,
-          size: event.size,
-          mimetype: event.type
-        })),
-        switchMap(() => this.store.pipe(take(1), select(getCachedImages))));
-
-    $result.pipe(
-      tap(res => this.images.concat(res)))
-      .subscribe(() => {
-        console.log(this.images);
-        this.store.dispatch(cacheImages({ images: this.images }));
-      })
+    this.convertBlobToBase64(event)
+      .pipe(take(1),
+        map(b64Result => {
+          return {
+            id: uuid(),
+            image: b64Result,
+            filename: `${uuid()}.${event.name.split('?')[0].split('.').pop()}`,
+            file: event,
+            size: event.size,
+            mimetype: event.type
+          }
+        }))
+      .subscribe((result) => this.store
+        .dispatch(cacheImages({ images: this.cachedImages.concat([result]) })));
   }
   public convertBlobToBase64(blob: Blob): Observable<{}> {
     const fileReader = new FileReader();
