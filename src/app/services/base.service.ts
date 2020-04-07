@@ -8,7 +8,7 @@ export abstract class BaseService<T> {
 
   constructor(
     public http: HttpClient,
-    private entity: string) {
+    private entity: string = '') {
     this.baseUrl = environment.apiUrl;
   }
 
@@ -27,6 +27,11 @@ export abstract class BaseService<T> {
 
   public post(object?: T): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}${this.entity}`, object, { headers: this.commonHeaders() });
+  }
+
+  public patch(object: T, url?: string): Observable<T> {
+    return this.http.patch<T>(`${this.baseUrl}${this.entity}/${url}`, object, { headers: this.commonHeaders() }
+    );
   }
 
   public getAll(param?: QueryParam): Observable<T[]> {

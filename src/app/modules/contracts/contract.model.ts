@@ -7,6 +7,7 @@ export interface IProductImage {
   file?: File;
   size?: any;
   mimetype?: string;
+  contractId?: string;
 }
 export enum PillState {
   default = 0,

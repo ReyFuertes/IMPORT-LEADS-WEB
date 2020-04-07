@@ -1,3 +1,4 @@
+import { ImagesService } from './../../services/images.service';
 import { UploadService } from './../../services/upload.service';
 import { ContractsEffects } from './store/contracts.effects';
 import { EffectsModule } from '@ngrx/effects';
@@ -107,7 +108,8 @@ const materialModules = [
   providers: [
     ConfirmationService,
     ContractsService,
-    UploadService
+    UploadService,
+    ImagesService
   ],
 })
 export class ContractsModule { }

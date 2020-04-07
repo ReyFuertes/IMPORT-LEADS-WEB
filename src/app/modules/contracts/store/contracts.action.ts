@@ -7,8 +7,9 @@ export enum ContractActionTypes {
   LoadContractsSuccess = '[Contract] Load (success)',
   AddContract = '[Contract] Add',
   AddContractSuccess = '[Contract] Add (success)',
-  UploadImage = '[Contract] Upload',
-  UploadImageSuccess = '[Contract] Upload (success)',
+  UploadImages = '[Contract] Upload Images',
+  UploadImagesSuccess = '[Contract] Upload Images (success)',
+  ReorderImages = '[Contract] Reorder Images',
 }
 export const loadContracts = createAction(
   ContractActionTypes.LoadContracts,
@@ -26,15 +27,19 @@ export const AddContractSuccess = createAction(
   ContractActionTypes.AddContractSuccess,
   props<{ created: IContract }>()
 );
-export const uploadContractImage = createAction(
-  ContractActionTypes.UploadImage,
+export const uploadContractImages = createAction(
+  ContractActionTypes.UploadImages,
   props<{ files: any }>()
 );
 export const uploadContractImageSuccess = createAction(
-  ContractActionTypes.UploadImageSuccess,
+  ContractActionTypes.UploadImagesSuccess,
   props<{ Image?: boolean }>()
 );
 export const cacheImages = createAction(
-  ContractActionTypes.UploadImageSuccess,
+  ContractActionTypes.UploadImagesSuccess,
+  props<{ images: IProductImage[] }>()
+);
+export const ReOrderImages = createAction(
+  ContractActionTypes.ReorderImages,
   props<{ images: IProductImage[] }>()
 );

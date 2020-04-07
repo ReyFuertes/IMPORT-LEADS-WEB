@@ -41,7 +41,7 @@ export function ContractsReducer(state: ContractsState, action: Action) {
 
 export const getCachedImages = (state: ContractsState) => state.cachedImages;
 export const getAllContracts = (state: ContractsState) => {
-  const contracts = state && state.entities ? Object.values(state.entities) : null
+  const contracts: IContract[] = state && state.entities ? Object.values(state.entities) : null;
   return contracts.sort((a: IContract, b: IContract) => {
     if (a.created_at < b.created_at) return 1;
     if (a.created_at > b.created_at) return -1;

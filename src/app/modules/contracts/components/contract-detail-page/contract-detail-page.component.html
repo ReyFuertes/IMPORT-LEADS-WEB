@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="image-container">
-            <div cdkDropList (cdkDropListDropped)="drop($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
+            <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
               <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let image of contractImages; trackBy: trackByField" [cdkDragData]="image" fxLayoutAlign="center center">
                 <div class="drag-placeholder" *cdkDragPlaceholder></div>
                 <div *ngIf="image && image?.filename" class="img" [ngStyle]="{'background-image': getBg(imgUrl +  image?.filename)}"></div>

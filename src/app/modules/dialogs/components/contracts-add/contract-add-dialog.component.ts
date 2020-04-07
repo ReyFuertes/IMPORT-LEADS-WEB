@@ -3,7 +3,7 @@ import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
-import { uploadContractImage, cacheImages } from './../../../contracts/store/contracts.action';
+import { uploadContractImages, cacheImages } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
 import { getCachedImages } from './../../../contracts/store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
@@ -45,13 +45,13 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       venue: [null, Validators.required],
       start_date: [null, Validators.required],
       delivery_date: [null],
-      details: [null]
+      details: [null],
+      images: [null]
     });
     //manually mark as valid if has value
     this.form && this.form.get('venue').valueChanges.pipe(take(1)).subscribe(res => {
       if (res) this.form.controls['venue'].setErrors(null);
     })
-
     if (data) {
       this.state = data.state;
       if (this.state === AddEditState.Edit) {
@@ -68,7 +68,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     this.form.controls['start_date'].patchValue(item.start_date);
     this.form.controls['delivery_date'].patchValue(item.delivery_date);
     this.form.controls['details'].patchValue(item.details);
-    this.form.controls['attachments'].patchValue(null);
+    //this.form.controls['images'].patchValue(item.details);
   }
   ngOnInit() {
     this.store.pipe(select(getCachedImages))
@@ -91,7 +91,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     }) || [];
     //save/upload contract
     this.store.dispatch(AddContract({ item }));
-    this.store.dispatch(uploadContractImage({ files }));
+    this.store.dispatch(uploadContractImages({ files }));
     this.dialogRef.close(true);
   }
 

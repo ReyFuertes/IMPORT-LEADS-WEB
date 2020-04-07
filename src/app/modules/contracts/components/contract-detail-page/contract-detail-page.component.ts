@@ -1,3 +1,4 @@
+import { ReOrderImages } from './../../store/contracts.action';
 import { tap } from 'rxjs/operators';
 import { getContractById } from './../../store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
@@ -100,8 +101,16 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       this.$contract = this.store.pipe(select(getContractById(this.id)));
       //passed the contract images to a variable array so we can drag and drop
       this.$contract && this.$contract.subscribe(c => {
-        if (c) this.contractImages = c.images;
+        console.log(c)
+        if (c) this.contractImages = c.images.sort((a, b) => this.orderByAsc(a, b))
       });
+    }
+  }
+  private orderByAsc(a, b): any {
+    return (a, b) => {
+      if (a.position > b.position) return 1;
+      if (a.position < b.position) return -1;
+      return 0;
     }
   }
   private formToEntity(item: IContract): void {
@@ -142,8 +151,10 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     dialogRef.afterClosed().subscribe();
   }
   public trackByField = (i: number, field: IProductImage) => field.position = i;
-  public drop(event: CdkDragDrop<any[]>) {
+  public dropImages(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
+    //update reorder images
+    setTimeout(() => this.store.dispatch(ReOrderImages({ images: this.contractImages })), 200);
   }
   public dropSpecs(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.specifications, event.previousIndex, event.currentIndex);
