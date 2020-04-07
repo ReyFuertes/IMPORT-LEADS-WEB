@@ -115,7 +115,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       this.productPillsArr.push(this.form.value);
       this.onResetForm();
     }
-    console.log(this.productPillsArr);
   }
 
   public onEditProductSave(): void {
@@ -148,7 +147,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       });
       this.hasSubProducts = !this.hasSubProducts;
     }
-
     this.isEditProduct = !this.isEditProduct;
     if (!this.isEditProduct) this.onResetForm();
   }
@@ -187,7 +185,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
         const index = this.productPillsArr.indexOf(product);
         if (index > -1)
           this.productPillsArr.splice(index, 1);
-
         this.onResetForm();
       }
     });

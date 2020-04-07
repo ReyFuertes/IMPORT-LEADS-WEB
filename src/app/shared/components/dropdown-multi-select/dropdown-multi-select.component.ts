@@ -1,10 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, SimpleChanges, OnChanges, ElementRef, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormControlName } from '@angular/forms';
-import { ViewChild } from '@angular/core';
 import { ReplaySubject, Subject, Observable } from 'rxjs';
-import { MatSelect, MatOption, MatSelectChange } from '@angular/material';
 import { takeUntil, take } from 'rxjs/operators';
-
 import * as _ from 'lodash';
 
 @Component({

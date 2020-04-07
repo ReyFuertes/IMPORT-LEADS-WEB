@@ -84,21 +84,23 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     //venues and images
     const { label, value } = this.form.get('venue').value;
     item.venue = { id: value, name: label };
+    //and upload images
+    const files = new FormData();
     item.images = this.cachedImages && this.cachedImages.map(ci => {
-      return { id: ci.id, filename: ci.filename }
+      files.append('files', ci.file, ci.filename);
+      return { id: ci.id, filename: ci.filename, size: ci.size, mimetype: ci.mimetype }
     }) || [];
 
     //create contract
     this.store.dispatch(AddContract({ item }));
-    //and upload images
-    this.files && from(this.files).pipe(
-      concatMap(item => of(item).pipe(delay(500))),
-    ).subscribe(file => {
-      const formData = new FormData();
-      formData.append('file', file, file.name);
-      this.store.dispatch(uploadContractImage({ file: formData }));
-    })
+    this.store.dispatch(uploadContractImage({ files }));
     this.dialogRef.close(true);
+
+    // const formData = new FormData();
+    // this.files && this.files.forEach(file => {
+    //   const newFileName = `${uuid()}.${file.name.split('?')[0].split('.').pop()}`;
+    //   formData.append('file', file, newFileName);
+    // });
   }
 
   public onNoClick = (): void => this.dialogRef.close();
@@ -116,7 +118,14 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     const $result = this.convertBlobToBase64(event)
       .pipe(
         take(1),
-        tap(b64Result => this.images.push({ id: uuid(), image: b64Result, filename: event.name })),
+        tap(b64Result => this.images.push({
+          id: uuid(),
+          image: b64Result,
+          filename: `${uuid()}.${event.name.split('?')[0].split('.').pop()}`,
+          file: event,
+          size: event.size,
+          mimetype: event.type
+        })),
         switchMap(() => this.store.pipe(take(1), select(getCachedImages))));
 
     $result.pipe(

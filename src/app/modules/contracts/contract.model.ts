@@ -4,6 +4,9 @@ export interface ICachedImage {
   image?: any;
   filename?: string;
   position?: number;
+  file?: File;
+  size?: any;
+  mimetype?: string;
 }
 export enum PillState {
   default = 0,

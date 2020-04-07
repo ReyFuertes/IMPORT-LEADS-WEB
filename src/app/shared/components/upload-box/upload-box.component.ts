@@ -35,7 +35,6 @@ export class UploadBoxComponent implements OnInit {
       }
     }
   }
-
   public fileOver(event) {
     //console.log(event);
   }

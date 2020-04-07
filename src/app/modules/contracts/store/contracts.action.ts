@@ -28,7 +28,7 @@ export const AddContractSuccess = createAction(
 );
 export const uploadContractImage = createAction(
   ContractActionTypes.UploadImage,
-  props<{ file: any }>()
+  props<{ files: any }>()
 );
 export const uploadContractImageSuccess = createAction(
   ContractActionTypes.UploadImageSuccess,

@@ -31,13 +31,12 @@ export class ContractsEffects {
   ));
   uploadImage$ = createEffect(() => this.actions$.pipe(
     ofType(uploadContractImage),
-    mergeMap(({ file }) => this.uploadService.upload(file, 'single').pipe(
+    mergeMap(({ files }) => this.uploadService.upload(files, 'multiple').pipe(
       map((file: any) => {
         return uploadContractImageSuccess({});
       })
     ))
   ));
-
   constructor(
     private store: Store<AppState>,
     private actions$: Actions,
