@@ -1,4 +1,4 @@
-import { loadContracts, loadContractSuccess, AddContractSuccess, cacheImages, clearCachedImages } from './contracts.action';
+import { loadContracts, loadContractSuccess, addContractSuccess, cacheImages, clearCachedImages, updateContractSuccess } from './contracts.action';
 import { IContract, IProductImage } from './../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
@@ -25,7 +25,10 @@ const contractsReducer = createReducer(
   on(loadContracts, (state) => {
     return ({ ...contractsAdapter.removeAll(state) });
   }),
-  on(AddContractSuccess, (state, action) => {
+  on(updateContractSuccess, (state, action) => {
+    return contractsAdapter.updateOne({ id: action.updated.id, changes: action.updated }, state)
+  }),
+  on(addContractSuccess, (state, action) => {
     return contractsAdapter.addOne(action.created, state)
   }),
   on(loadContractSuccess, (state, action) => {

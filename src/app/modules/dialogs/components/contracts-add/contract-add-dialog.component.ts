@@ -2,7 +2,7 @@ import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay, map } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
-import { uploadContractImages, cacheImages, clearCachedImages } from './../../../contracts/store/contracts.action';
+import { uploadContractImages, cacheImages, clearCachedImages, updateContract } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
 import { getCachedImages, getContractById } from './../../../contracts/store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
@@ -16,7 +16,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { Store, select } from '@ngrx/store';
-import { AddContract } from 'src/app/modules/contracts/store/contracts.action';
+import { addContract } from 'src/app/modules/contracts/store/contracts.action';
 import { v4 as uuid } from 'uuid';
 import { ActivatedRoute } from '@angular/router';
 
@@ -82,8 +82,15 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     /* we call these from state because the data that is stored/pushed in here is from dropped images */
     this.store.pipe(select(getCachedImages))
       .subscribe(result => {
-        if (result) this.cachedImages = result;
+        if (result) {
+          console.log('state: ', result);
+          this.cachedImages = result;
+        }
       });
+
+    this.form.valueChanges.subscribe(res => {
+      console.log(res);
+    })
 
     this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
       this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
@@ -95,32 +102,48 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     return this.cachedImages && this.cachedImages.length > 0;
   }
 
-  public save = (item: IContract): void => {
-    if (this.state === AddEditState.Add) {
-      const { label, value } = this.form.get('venue').value;
-      item.venue = { id: value, name: label };
-
-      //and upload images
-      const files = new FormData();
-      item.images = this.cachedImages && this.cachedImages.map(ci => {
+  private cnstctFileObj(files: FormData): any {
+    return Object.values(this.cachedImages) && this.cachedImages.map(ci => {
+      if (ci.file)
         files.append('files', ci.file, ci.filename);
-        return { id: ci.id, filename: ci.filename, size: ci.size, mimetype: ci.mimetype }
-      }) || [];
-      //temporarily inject
+      return { id: ci.id, filename: ci.filename, size: ci.size, mimetype: ci.mimetype }
+    }) || null;
+  }
+
+  public save = (item: IContract): void => {
+    const files = new FormData();
+
+    const venue = this.form.get('venue').value;
+    if (typeof (venue) === 'string') {
+      item.venue = { id: venue };
+    } else {
+      const { label, value } = venue;
+      item.venue = { id: value, name: label };
+    }
+    console.log(this.cnstctFileObj(files));
+    debugger
+    item.images = this.cnstctFileObj(files);
+
+
+    if (this.state === AddEditState.Add) {
+      //NOTE: temporarily inject -- remove this if user auth is implemented
       item.user = {
         id: '06d4804a-c068-4d4c-84a0-59858b3da73b'
       };
       //save/upload contract
-      this.store.dispatch(AddContract({ item }));
-      this.store.dispatch(uploadContractImages({ files }));
+      this.store.dispatch(addContract({ item }));
     } else {
-
+      this.store.dispatch(updateContract({ item }));
     }
+
+    this.store.dispatch(uploadContractImages({ files }));
+
     this.dialogRef.close(true);
   }
   public getBg(base64: string): string {
     return `url(${base64})`;
   }
+
   public onNoClick = (): void => this.dialogRef.close();
   public drop = (event: CdkDragDrop<any[]>) => moveItemInArray(this.cachedImages || this.form.get('images').value, event.previousIndex, event.currentIndex);
 
@@ -150,6 +173,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       .subscribe((result) => this.store
         .dispatch(cacheImages({ images: this.cachedImages.concat([result]) })));
   }
+
   public convertBlobToBase64(blob: Blob): Observable<{}> {
     const fileReader = new FileReader();
     const observable = new Observable(observer => {

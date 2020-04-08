@@ -7,18 +7,28 @@ import { ContractsService } from './../contracts.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, tap, switchMap } from 'rxjs/operators';
-import { loadContracts, loadContractSuccess, AddContract, AddContractSuccess, uploadContractImages, uploadContractImageSuccess, ReOrderImages } from './contracts.action';
+import { loadContracts, loadContractSuccess, addContract, addContractSuccess, uploadContractImages, uploadContractImageSuccess, ReOrderImages, updateContract, updateContractSuccess } from './contracts.action';
 import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ContractsEffects {
+  updateContract$ = createEffect(() => this.actions$.pipe(
+    ofType(updateContract),
+    mergeMap(({ item }) => this.contractsService.patch(item)
+      .pipe(
+        map((updated: IContract) => {
+          return updateContractSuccess({ updated });
+        })
+      ))
+  ));
+
   addContract$ = createEffect(() => this.actions$.pipe(
-    ofType(AddContract),
+    ofType(addContract),
     mergeMap(({ item }) => this.contractsService.post(item)
       .pipe(
         map((created: IContract) => {
           if (created) this.store.dispatch(appNotification({ success: true }));
-          return AddContractSuccess({ created });
+          return addContractSuccess({ created });
         })
       ))
   ));

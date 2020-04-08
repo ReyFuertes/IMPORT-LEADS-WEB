@@ -30,7 +30,7 @@ export abstract class BaseService<T> {
   }
 
   public patch(object: T, url?: string): Observable<T> {
-    return this.http.patch<T>(`${this.baseUrl}${this.entity}/${url}`, object, { headers: this.commonHeaders() }
+    return this.http.patch<T>(`${this.baseUrl}${this.entity}${url ? '/' + url : ''}`, object, { headers: this.commonHeaders() }
     );
   }
 
