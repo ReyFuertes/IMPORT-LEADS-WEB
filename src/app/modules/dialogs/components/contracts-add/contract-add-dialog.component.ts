@@ -103,7 +103,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       }) || [];
       //temporarily inject
       item.user = {
-        id: 'c6e0699f-f4e2-456f-b182-39833ba8f1ef'
+        id: '06d4804a-c068-4d4c-84a0-59858b3da73b'
       };
       //save/upload contract
       this.store.dispatch(AddContract({ item }));

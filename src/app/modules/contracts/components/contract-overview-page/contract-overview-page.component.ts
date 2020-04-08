@@ -44,7 +44,6 @@ export class ContractOverviewPageComponent implements OnInit {
   }
   public addContract(): void {
     this.store.dispatch(clearCachedImages());
-
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {
       data: { state: AddEditState.Add }
     });

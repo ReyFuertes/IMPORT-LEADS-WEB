@@ -1,4 +1,4 @@
-<mat-card fxLayout="column" class="contract-card">
+<mat-card fxLayout="column" class="contract-card" fxLayoutGap="10px">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <div fxFlex fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
       <div class="img-box" fxLayoutAlign="center center">
@@ -13,15 +13,11 @@
       </div>
       <div>
         <span class="col-text">Created by</span>
-        <span class="row-text">John Doe</span>
+        <span class="row-text">{{ getFullName(contract?.user) }}</span>
       </div>
       <div>
         <span class="col-text">Related Venue</span>
         <span class="row-text">{{ contract?.venue?.name }}</span>
-      </div>
-      <div>
-        <span class="col-text">Progress</span>
-        <span class="row-text">25% done</span>
       </div>
       <div fxFlex="5">
         <img class="ellipse" [matMenuTriggerFor]="menu" [src]="svgPath + 'dots-icon-blue.svg'" />
@@ -31,7 +27,7 @@
       </div>
     </div>
   </div>
-  <div>
-    <il-contract-card-milestone></il-contract-card-milestone>
-  </div>
+
+  <il-contract-card-milestone fxFlex></il-contract-card-milestone>
+
 </mat-card>

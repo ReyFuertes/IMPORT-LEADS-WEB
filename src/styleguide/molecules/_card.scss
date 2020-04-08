@@ -8,10 +8,6 @@
     place-content: center flex-start;
     align-items: center;
     height: 50px;
-    &:last-child {
-      margin-bottom: 25px;
-      height: 40px;
-    }
   }
   img {
     object-fit: contain;

@@ -1,3 +1,4 @@
+import { User } from './../../../users/users.models';
 import { ReOrderImages } from './../../store/contracts.action';
 import { tap } from 'rxjs/operators';
 import { getContractById } from './../../store/contracts.selector';
@@ -35,6 +36,8 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   public dragStartSpecs: boolean = false;
   public imgUrl: string = `${environment.apiUrl}contracts/image/`;
   public contractImages: IProductImage[];
+  public images: any[];
+
   public specifications: Array<{ id: number, title: string, specification?: any }> = [
     {
       id: 1,
@@ -110,6 +113,11 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       });
     }
   }
+
+  public getFullName(user: User): string {
+    return user ? `${user.firstname} ${user.lastname}` : '';
+  }
+
   private orderByAsc(a, b): any {
     return (a, b) => {
       if (a.position > b.position) return 1;
@@ -117,16 +125,20 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       return 0;
     }
   }
+
   public getBg(url: string): string {
     return `url(${url})`;
   }
+
   public showTabActions(): void {
     this._showTabActions != this._showTabActions;
   }
+
   public createUpdateTemplate = (): void => {
     this.showRightNav = !this.showRightNav;
     this.openNavChange.emit(this.showRightNav);
   }
+
   public editContract = (): void => {
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {
       data: {
@@ -137,6 +149,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     });
     dialogRef.afterClosed().subscribe();
   }
+
   public saveContractAsTemplate = (): void => {
     const dialogRef = this.dialog.open(ContractTemplateDialogComponent, {
       data: {
@@ -146,6 +159,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     });
     dialogRef.afterClosed().subscribe();
   }
+
   public trackByField = (i: number, field: IProductImage) => field.position = i;
   public dropImages(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);

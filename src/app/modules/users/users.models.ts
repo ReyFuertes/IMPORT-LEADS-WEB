@@ -1,6 +1,8 @@
 export interface User {
   id: number;
   name: string;
+  firstname?: string;
+  lastname?: string;
   position: string;
   role: UserRole;
   company: string;

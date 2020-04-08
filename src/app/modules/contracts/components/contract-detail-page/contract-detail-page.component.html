@@ -26,7 +26,7 @@
             </div>
             <div>
               <div>Responsible Person</div>
-              <div>{{ ($contract | async)?.responsible_person }}</div>
+              <div>{{ getFullName(($contract | async)?.user) }}</div>
             </div>
             <div>
               <div>Upload Date</div>

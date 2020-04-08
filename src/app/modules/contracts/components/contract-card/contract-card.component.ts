@@ -1,3 +1,4 @@
+import { User } from './../../../users/users.models';
 import { IContract } from './../../contract.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
@@ -20,5 +21,9 @@ export class ContractCardComponent implements OnInit {
 
   public gotoDetail(id: string): void {
     this.router.navigateByUrl(`dashboard/contracts/${id}/detail`);
+  }
+
+  public getFullName(user: User): string {
+    return `${user.firstname} ${user.lastname}`;
   }
 }

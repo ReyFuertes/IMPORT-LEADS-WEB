@@ -31,6 +31,7 @@ import { ContractProductSpecsTitleComponent } from './components/contract-produc
 import { ContractsReducer } from './store/contracts.reducer';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 const routes: Routes = [
   {
@@ -52,7 +53,8 @@ const routes: Routes = [
 const primeNgModules = [
   SidebarModule,
   InputSwitchModule,
-  ConfirmDialogModule
+  ConfirmDialogModule,
+  OverlayPanelModule
 ];
 
 const materialModules = [
