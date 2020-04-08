@@ -1,4 +1,4 @@
-<div class="il-dialog" fxLayout="column" fxLayoutAlign="center center">
+<div class="il-dialog" [ngClass]="{'has-dialog-imgs': !hasImgs}" fxLayout="column" fxLayoutAlign="center center">
   <div class="header" fxLayoutAlign="center center" fxLayout="column">
     <div fxLayoutAlign="end center">
       <img class="close" (click)="dialogRef.close(false)" [src]="svgPath + 'close-icon-big-gray.svg'" />
