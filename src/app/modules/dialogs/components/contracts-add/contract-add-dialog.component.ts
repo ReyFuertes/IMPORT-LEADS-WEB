@@ -82,15 +82,8 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     /* we call these from state because the data that is stored/pushed in here is from dropped images */
     this.store.pipe(select(getCachedImages))
       .subscribe(result => {
-        if (result) {
-          console.log('state: ', result);
-          this.cachedImages = result;
-        }
+        if (result) this.cachedImages = result;
       });
-
-    this.form.valueChanges.subscribe(res => {
-      console.log(res);
-    })
 
     this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
       this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
@@ -120,10 +113,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       const { label, value } = venue;
       item.venue = { id: value, name: label };
     }
-    console.log(this.cnstctFileObj(files));
-    debugger
     item.images = this.cnstctFileObj(files);
-
 
     if (this.state === AddEditState.Add) {
       //NOTE: temporarily inject -- remove this if user auth is implemented
@@ -135,9 +125,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     } else {
       this.store.dispatch(updateContract({ item }));
     }
-
     this.store.dispatch(uploadContractImages({ files }));
-
     this.dialogRef.close(true);
   }
   public getBg(base64: string): string {
