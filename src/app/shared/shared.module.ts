@@ -34,8 +34,6 @@ import { DropdownMultiSelectComponent } from './components/dropdown-multi-select
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { PopoverSelectComponent } from './components/popover-select/popover-select.component';
 import { PopoverMultiSelectComponent } from './components/popover-multi-select/popover-multi-select.component';
-import { CkeditorComponent } from './components/ckeditor/ckeditor.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { PrimengEditorComponent } from './components/primeng-editor/primeng-editor.component';
 import { EditorModule } from 'primeng/editor';
@@ -86,7 +84,6 @@ const sharedComponents = [
   EllipseMenuComponent,
   PopoverSelectComponent,
   PopoverMultiSelectComponent,
-  CkeditorComponent,
   StarRatingComponent,
   PrimengEditorComponent,
   InputSearchComponent,
@@ -106,7 +103,6 @@ const directives = [
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
     EditorModule,
-    CKEditorModule,
     ...materialModules,
     ...primeNgModules,
     RouterModule,
