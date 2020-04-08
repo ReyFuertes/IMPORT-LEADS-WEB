@@ -1,14 +1,12 @@
 @import "src/styleguide/shared";
 .cdk-virtual-scroll .example-viewport {
-  height: 200px;
+  height: 155px;
   width: 100%;
 }
-
 .cdk-virtual-scroll .example-viewport .cdk-virtual-scroll-content-wrapper {
   display: flex;
   flex-direction: row;
 }
-
 .cdk-virtual-scroll .example-item {
   width: 50px;
   height: 100%;
