@@ -35,8 +35,6 @@ export class ContractCardMilestoneComponent implements OnInit {
     for (let index = 0; index <= Math.abs(from.diff(to, 'days')); index++) {
       this.pointOfDates.push(currDate.clone().add(index, 'days').format('MM/DD/YYYY'));
     }
-    console.log(this.pointOfDates);
-    console.log(this.mileStoneDates);
   }
 
   public getLen(len: number): number[] {
