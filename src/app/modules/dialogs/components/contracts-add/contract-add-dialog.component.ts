@@ -67,6 +67,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
 
   private formToEntity(item: IContract): void {
+    if(!item) return;
     const { id, contract_name, venue, start_date, delivery_date, details, images } = item;
     this.form.controls['id'].patchValue(id);
     this.form.controls['contract_name'].patchValue(contract_name);
@@ -88,6 +89,10 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
         { label: venue.name, value: venue.id }));
     });
+  }
+
+  public get hasImgs(): boolean {
+    return this.cachedImages && this.cachedImages.length > 0;
   }
 
   public save = (item: IContract): void => {

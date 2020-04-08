@@ -7,7 +7,7 @@
       <h2>{{modalTitle}}</h2>
     </div>
   </div>
-  <div class="content">
+  <div class="content" [ngClass]="{'has-imgs': hasImgs}">
     <!-- contract details -->
     <div *ngIf="form" fxLayoutAlign="start center" fxLayout="row" fxLayoutGap="40px">
       <il-input fxFlex="25" [form]="form" isFloatLabel="true" [controlName]="'contract_name'" placeholder="Contract Name"></il-input>
@@ -21,7 +21,7 @@
       <il-upload-box (imageEmitter)="onImageChange($event)" fxFlex="30"></il-upload-box>
     </div>
     <!-- contract images -->
-    <div *ngIf="cachedImages && cachedImages.length > 0" class="cdk-virtual-scroll">
+    <div *ngIf="hasImgs" class="cdk-virtual-scroll">
       <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
         <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
           <div class="drag-box" cdkDrag *ngFor="let cached of cachedImages" [cdkDragData]="cached" fxLayoutAlign="center center">
