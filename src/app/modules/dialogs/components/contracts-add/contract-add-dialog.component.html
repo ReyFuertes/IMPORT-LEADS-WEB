@@ -23,7 +23,7 @@
     <!-- contract images -->
     <div *ngIf="hasImgs" class="cdk-virtual-scroll">
       <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
-        <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
+        <div cdkDropList (cdkDropListDropped)="drop($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
           <div class="drag-box" cdkDrag *ngFor="let cached of cachedImages" [cdkDragData]="cached" fxLayoutAlign="center center">
             <div class="drag-placeholder" *cdkDragPlaceholder></div>
             <div fxLayout="column" fxLayoutAlign="center end">
