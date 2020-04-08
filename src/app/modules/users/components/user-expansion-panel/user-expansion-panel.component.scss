@@ -13,9 +13,6 @@
 .il-button {
   @include il-button;
 }
-.hidden {
-  display: none !important;
-}
 .il-draggable-expansion {
   @include il-draggable-expansion;
   .mat-expansion-panel-header {

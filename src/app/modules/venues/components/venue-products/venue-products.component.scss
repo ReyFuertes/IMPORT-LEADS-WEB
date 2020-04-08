@@ -13,9 +13,6 @@
 .il-button {
   @include il-button;
 }
-.hidden {
-  display: none !important;
-}
 .il-draggable-expansion {
   @include il-draggable-expansion;
 }
@@ -51,6 +48,6 @@ mat-icon {
 ::ng-deep {
   .cdk-drag-preview {
     border-radius: 0 !important;
-    @extend .il-draggable-expansion; 
+    @extend .il-draggable-expansion;
   }
 }

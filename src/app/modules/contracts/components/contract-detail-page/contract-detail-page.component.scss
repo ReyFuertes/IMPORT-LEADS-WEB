@@ -1,4 +1,19 @@
 @import "src/styleguide/shared";
+.cdk-virtual-scroll .example-viewport {
+  height: 200px;
+  width: 100%;
+}
+
+.cdk-virtual-scroll .example-viewport .cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.cdk-virtual-scroll .example-item {
+  width: 50px;
+  height: 100%;
+  writing-mode: vertical-lr;
+}
 .il-rightnav {
   @include rightnav;
   .upper-pane {
@@ -6,16 +21,7 @@
     overflow: hidden;
   }
 }
-.hidden {
-  display: none;
-}
-img {
-  border-radius: 2px;
-}
-.reduce-opacity {
-  opacity: 0.6;
-}
-.item-container {
+.detail-container {
   margin-bottom: 0;
   > div {
     color: $color-black-1;

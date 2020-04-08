@@ -30,6 +30,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ContractProductSpecsTitleComponent } from './components/contract-product-specs-title/contract-product-specs-title.component';
 import { ContractsReducer } from './store/contracts.reducer';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const routes: Routes = [
   {
@@ -74,7 +75,8 @@ const materialModules = [
   MatDialogModule,
   MatSlideToggleModule,
   MatCheckboxModule,
-  MatTooltipModule
+  MatTooltipModule,
+  ScrollingModule
 ];
 
 @NgModule({

@@ -18,7 +18,8 @@
             </div>
             <h2>Contract</h2>
           </div>
-          <div class="item-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <!-- contract details -->
+          <div class="detail-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
             <div>
               <div>Company</div>
               <div>{{ ($contract | async)?.company }}</div>
@@ -40,23 +41,26 @@
               <div>{{ ($contract | async)?.venue?.name }}</div>
             </div>
           </div>
-          <div class="image-container">
-            <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
-              <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let image of contractImages; trackBy: trackByField" [cdkDragData]="image" fxLayoutAlign="center center">
-                <div class="drag-placeholder" *cdkDragPlaceholder></div>
-                <div *ngIf="image && image?.filename" class="img" [ngStyle]="{'background-image': getBg(imgUrl +  image?.filename)}"></div>
+          <!-- contract images -->
+          <div class="cdk-virtual-scroll">
+            <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
+              <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
+                <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let image of contractImages; trackBy: trackByField" [cdkDragData]="image" fxLayoutAlign="center center">
+                  <div class="drag-placeholder" *cdkDragPlaceholder></div>
+                  <div *ngIf="image && image?.filename" class="img" [ngStyle]="{'background-image': getBg(imgUrl +  image?.filename)}"></div>
+                </div>
               </div>
-            </div>
+            </cdk-virtual-scroll-viewport>
           </div>
         </div>
       </div>
-
+      <!-- contract products -->
       <div class="card-row">
         <il-contract-detail-products [isRightNavOpen]="showRightNav"></il-contract-detail-products>
       </div>
     </div>
   </mat-card>
-
+  <!-- contract specification tabs -->
   <div fxLayout="column" fxLayoutGap="20px" cdkDropList (cdkDropListDropped)="dropSpecs($event)">
     <div *ngFor="let specification of specifications" fxLayoutGap="20px">
       <il-contract-product-specs [isRightNavOpen]="showRightNav" [specification]="specification" (removeProductSpecEmitter)="handleRemoveProductSpecs($event)"></il-contract-product-specs>

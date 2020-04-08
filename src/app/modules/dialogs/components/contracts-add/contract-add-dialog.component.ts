@@ -91,7 +91,6 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
 
   public save = (item: IContract): void => {
-    debugger
     if (this.state === AddEditState.Add) {
       const { label, value } = this.form.get('venue').value;
       item.venue = { id: value, name: label };
