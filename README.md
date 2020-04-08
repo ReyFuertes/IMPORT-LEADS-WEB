@@ -1,2 +1,2 @@
 ## Mirror Build
-![Image description](https://imgur.com/kYk5dBq)
+![](https://i.imgur.com/kYk5dBq.png)
