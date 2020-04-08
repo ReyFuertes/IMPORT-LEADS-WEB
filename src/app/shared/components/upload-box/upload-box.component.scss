@@ -17,6 +17,7 @@
   .ngx-file-drop__content {
     background: $color-white !important;
     height: 96px !important;
+    cursor: pointer;
   }
   .ngx-file-drop__drop-zone {
     border-radius: 0 !important;
