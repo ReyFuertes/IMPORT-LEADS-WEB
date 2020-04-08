@@ -1,3 +1,4 @@
+import { IUser } from './../../models/user.model';
 
 export interface IProductImage {
   id?: string;
@@ -43,4 +44,5 @@ export interface IContract {
   images?: IProductImage[];
   created_at?: Date;
   updated_at: Date;
+  user: IUser;
 }

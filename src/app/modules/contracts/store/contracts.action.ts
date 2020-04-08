@@ -10,6 +10,7 @@ export enum ContractActionTypes {
   UploadImages = '[Contract] Upload Images',
   UploadImagesSuccess = '[Contract] Upload Images (success)',
   ReorderImages = '[Contract] Reorder Images',
+  ClearCachedImages = '[Contract] Clear Cached Images',
 }
 export const loadContracts = createAction(
   ContractActionTypes.LoadContracts,
@@ -42,4 +43,7 @@ export const cacheImages = createAction(
 export const ReOrderImages = createAction(
   ContractActionTypes.ReorderImages,
   props<{ images: IProductImage[] }>()
+);
+export const clearCachedImages = createAction(
+  ContractActionTypes.ClearCachedImages
 );

@@ -1,4 +1,4 @@
-import { loadContracts, loadContractSuccess, AddContractSuccess, cacheImages } from './contracts.action';
+import { loadContracts, loadContractSuccess, AddContractSuccess, cacheImages, clearCachedImages } from './contracts.action';
 import { IContract, IProductImage } from './../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
@@ -33,6 +33,9 @@ const contractsReducer = createReducer(
   }),
   on(cacheImages, (state, action) => {
     return ({ ...state, cachedImages: action.images })
+  }),
+  on(clearCachedImages, (state) => {
+    return ({ ...state, cachedImages: null })
   })
 );
 export function ContractsReducer(state: ContractsState, action: Action) {

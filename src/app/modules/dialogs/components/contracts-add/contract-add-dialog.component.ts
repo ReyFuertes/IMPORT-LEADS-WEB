@@ -2,7 +2,7 @@ import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay, map } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
-import { uploadContractImages, cacheImages } from './../../../contracts/store/contracts.action';
+import { uploadContractImages, cacheImages, clearCachedImages } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
 import { getCachedImages, getContractById } from './../../../contracts/store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
@@ -94,19 +94,24 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     if (this.state === AddEditState.Add) {
       const { label, value } = this.form.get('venue').value;
       item.venue = { id: value, name: label };
+
       //and upload images
       const files = new FormData();
       item.images = this.cachedImages && this.cachedImages.map(ci => {
         files.append('files', ci.file, ci.filename);
         return { id: ci.id, filename: ci.filename, size: ci.size, mimetype: ci.mimetype }
       }) || [];
+      //temporarily inject
+      item.user = {
+        id: 'c6e0699f-f4e2-456f-b182-39833ba8f1ef'
+      };
       //save/upload contract
       this.store.dispatch(AddContract({ item }));
       this.store.dispatch(uploadContractImages({ files }));
-      this.dialogRef.close(true);
     } else {
 
     }
+    this.dialogRef.close(true);
   }
   public getBg(base64: string): string {
     return `url(${base64})`;

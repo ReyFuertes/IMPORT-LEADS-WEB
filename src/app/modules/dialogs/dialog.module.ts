@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { InspectionRunCommentDialogComponent } from './components/inspection-run-comment/inspection-run-comment-dialog.component';
 import { ContractSpecTitleDialogComponent } from './components/contract-spec-title/contract-spec-title-dialog.component';
@@ -48,7 +49,8 @@ const materialModules = [
   MatListModule,
   MatCheckboxModule,
   DragDropModule,
-  MatDividerModule
+  MatDividerModule,
+  ScrollingModule
 ];
 
 @NgModule({

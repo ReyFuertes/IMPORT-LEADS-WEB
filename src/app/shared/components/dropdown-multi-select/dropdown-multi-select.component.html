@@ -4,7 +4,7 @@
       <mat-option>
         <ngx-mat-select-search [clearSearchInput]="'false'" [placeholderLabel]="'Search'" [formControl]="dataFilterForm" [noEntriesFoundLabel]="'No result'" *ngIf="searchItem"></ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let item of filteredData$ | async" [value]="item?.value">
+      <mat-option *ngFor="let item of filteredData$ | async" [value]="form.get(this.controlName).value ? item?.value : item">
         {{ item.label }}
       </mat-option>
     </mat-select>

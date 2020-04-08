@@ -1,3 +1,4 @@
+import { clearCachedImages } from './../../store/contracts.action';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { appNotification } from './../../../../store/notification.action';
 import { tap, delay, take, debounceTime } from 'rxjs/operators';
@@ -42,6 +43,8 @@ export class ContractOverviewPageComponent implements OnInit {
     this.dragStart = event;
   }
   public addContract(): void {
+    this.store.dispatch(clearCachedImages());
+
     const dialogRef = this.dialog.open(ContractAddDialogComponent, {
       data: { state: AddEditState.Add }
     });

@@ -22,27 +22,19 @@
           <div class="detail-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
             <div>
               <div>Company</div>
-              <div>{{ ($contract | async)?.company }}</div>
+              <div>{{ ($contract | async)?.venue?.name }}</div>
             </div>
             <div>
               <div>Responsible Person</div>
               <div>{{ ($contract | async)?.responsible_person }}</div>
             </div>
             <div>
-              <div>Position</div>
-              <div>{{ ($contract | async)?.position }}</div>
-            </div>
-            <div>
               <div>Upload Date</div>
-              <div>{{ ($contract | async)?.upload_date }}</div>
-            </div>
-            <div>
-              <div>Venue</div>
-              <div>{{ ($contract | async)?.venue?.name }}</div>
+              <div>{{ ($contract | async)?.created_at | date: 'dd/MM/yyyy'}}</div>
             </div>
           </div>
           <!-- contract images -->
-          <div class="cdk-virtual-scroll">
+          <div *ngIf="contractImages && contractImages.length > 0" class="cdk-virtual-scroll">
             <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
               <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
                 <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let image of contractImages; trackBy: trackByField" [cdkDragData]="image" fxLayoutAlign="center center">

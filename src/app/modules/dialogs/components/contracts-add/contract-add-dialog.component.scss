@@ -1,15 +1,28 @@
 @import "src/styleguide/shared";
 .image-list {
-  min-height: 60px;
+  height: 125px;
   display: flex;
   flex-direction: row;
   border-radius: 4px;
-  overflow-y: hidden;
-  overflow-x: auto;
+  overflow: hidden;
   > div {
     margin: 10px;
     background-color: transparent !important;
   }
+}
+.cdk-virtual-scroll .example-viewport {
+  height: 155px;
+  width: 100%;
+  overflow-y: hidden;
+}
+.cdk-virtual-scroll .example-viewport .cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.cdk-virtual-scroll .example-item {
+  width: 50px;
+  height: 100%;
+  writing-mode: vertical-lr;
 }
 .thumb-img {
   width: 100px;
