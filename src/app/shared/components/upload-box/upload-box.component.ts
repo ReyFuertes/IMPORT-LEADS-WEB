@@ -35,6 +35,9 @@ export class UploadBoxComponent implements OnInit {
       }
     }
   }
+  public upload($event): void {
+    this.imageEmitter.emit($event.target.files[0]);
+  }
   public fileOver(event) {
     //console.log(event);
   }

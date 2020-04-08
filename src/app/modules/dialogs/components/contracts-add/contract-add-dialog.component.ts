@@ -67,7 +67,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
 
   private formToEntity(item: IContract): void {
-    if(!item) return;
+    if (!item) return;
     const { id, contract_name, venue, start_date, delivery_date, details, images } = item;
     this.form.controls['id'].patchValue(id);
     this.form.controls['contract_name'].patchValue(contract_name);
@@ -158,7 +158,8 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
         observer.complete();
       };
     });
-    fileReader.readAsDataURL(blob);
+    if (blob)
+      fileReader.readAsDataURL(blob);
     return observable;
   }
 }

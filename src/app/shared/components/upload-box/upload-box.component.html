@@ -1,8 +1,9 @@
-<ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+<ngx-file-drop dropZoneLabel="Drop files here" (click)="uploader.click()" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
   <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
       <img [src]="svgPath + 'camera-icon-blue.svg'" />
       <span>{{label}}</span>
     </div>
   </ng-template>
+  <input hidden type="file" #uploader (change)="upload($event)" />
 </ngx-file-drop>
