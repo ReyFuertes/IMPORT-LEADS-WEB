@@ -113,14 +113,9 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
 
   public save = (item: IContract): void => {
     const files = new FormData();
+    const { label, value } = this.venues.filter(v => v.value === this.form.get('venue').value)[0];
 
-    const venue = this.form.get('venue').value;
-    if (typeof (venue) === 'string') {
-      item.venue = { id: venue };
-    } else {
-      const { label, value } = venue;
-      item.venue = { id: value, name: label };
-    }
+    item.venue = { id: value, name: label };
     item.images = this.cnstctFileObj(files);
 
     if (this.state === AddEditState.Add) {
