@@ -22,4 +22,15 @@
   .ngx-file-drop__drop-zone {
     border-radius: 0 !important;
   }
+  .disabled .ngx-file-drop__drop-zone {
+    border-color: $color-gray-2 !important;
+  }
+
+  .disabled .ngx-file-drop__content {
+    cursor: default !important;
+    color: $color-gray-2 !important;
+    img {
+      display: none !important;
+    }
+  }
 }

@@ -1,17 +1,4 @@
 @import "src/styleguide/shared";
-.cdk-virtual-scroll .example-viewport {
-  height: 155px;
-  width: 100%;
-}
-.cdk-virtual-scroll .example-viewport .cdk-virtual-scroll-content-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-.cdk-virtual-scroll .example-item {
-  width: 50px;
-  height: 100%;
-  writing-mode: vertical-lr;
-}
 .il-rightnav {
   @include rightnav;
   .upper-pane {
@@ -57,6 +44,7 @@
   border-radius: 4px;
   overflow-y: hidden;
   overflow-x: auto;
+  width: 100%;
   > div {
     margin: 10px;
     background-color: $color-white;

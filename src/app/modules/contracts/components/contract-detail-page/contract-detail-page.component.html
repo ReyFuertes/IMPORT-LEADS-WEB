@@ -19,30 +19,32 @@
             <h2>Contract</h2>
           </div>
           <!-- contract details -->
-          <div class="detail-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
-            <div>
-              <div>Company</div>
-              <div>{{ ($contract | async)?.venue?.name }}</div>
+          <div fxLayout="row">
+            <div fxFlex="40" class="detail-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
+              <div>
+                <div>Company</div>
+                <div>{{ ($contract | async)?.venue?.name }}</div>
+              </div>
+              <div>
+                <div>Responsible Person</div>
+                <div>{{ getFullName(($contract | async)?.user) }}</div>
+              </div>
+              <div>
+                <div>Upload Date</div>
+                <div>{{ ($contract | async)?.created_at | date: 'dd/MM/yyyy'}}</div>
+              </div>
             </div>
-            <div>
-              <div>Responsible Person</div>
-              <div>{{ getFullName(($contract | async)?.user) }}</div>
-            </div>
-            <div>
-              <div>Upload Date</div>
-              <div>{{ ($contract | async)?.created_at | date: 'dd/MM/yyyy'}}</div>
-            </div>
-          </div>
-          <!-- contract images -->
-          <div *ngIf="contractImages && contractImages.length > 0" class="cdk-virtual-scroll">
-            <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
-              <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="start center">
-                <div class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" *ngFor="let image of contractImages; trackBy: trackByField" [cdkDragData]="image" fxLayoutAlign="center center">
-                  <div class="drag-placeholder" *cdkDragPlaceholder></div>
-                  <div *ngIf="image && image?.filename" class="img" [ngStyle]="{'background-image': getBg(imgUrl +  image?.filename)}"></div>
+            <!-- contract images -->
+            <div fxFlex="60">
+              <div *ngIf="hasImgs" class="cdk-virtual-scroll">
+                <div cdkDropList (cdkDropListDropped)="dropImages($event)" fxLayout="row" class="image-list" cdkDropListOrientation="horizontal" fxLayoutAlign="end center">
+                  <div *ngFor="let image of getContractImages; trackBy: trackByField" class="drag-box" cdkDrag [cdkDragDisabled]="showRightNav" [cdkDragData]="image" fxLayoutAlign="center center">
+                    <div class="drag-placeholder" *cdkDragPlaceholder></div>
+                    <div *ngIf="image && image?.filename" class="img" [ngStyle]="{'background-image': getBg(imgUrl +  image?.filename)}"></div>
+                  </div>
                 </div>
               </div>
-            </cdk-virtual-scroll-viewport>
+            </div>
           </div>
         </div>
       </div>

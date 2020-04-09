@@ -29,13 +29,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ContractAddDialogComponent extends GenericAddEditComponent<IContract> implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
-  public contractImages: IImage[];
   public venues: SimpleItem[];
   public modalTitle: string = 'Add';
   public images: IProductImage[] = [];
   public cachedImages: IProductImage[] = [];
   public files: File[] = [];
   public imgUrl: string = `${environment.apiUrl}contracts/image/`;
+  public AddEditState = AddEditState;
 
   constructor(public fb: FormBuilder, public dialogRef: MatDialogRef<ContractAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddEditDialogState, private store: Store<AppState>, public route: ActivatedRoute) {
@@ -57,7 +57,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       })
 
     this.state = data && data.state || null;
-    if (this.state === AddEditState.Edit && data.id) {
+    if (this.state === this.AddEditState.Edit && data.id) {
       this.store.pipe(select(getContractById(data.id)))
         .subscribe(c => this.formToEntity(c));
 
@@ -89,6 +89,14 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
         { label: venue.name, value: venue.id }));
     });
+  }
+
+  public get isUploadDisabled(): boolean {
+    return this.cachedImages.length === 4 || this.cachedImages.length > 4;
+  }
+
+  public get getContractImages(): IProductImage[] {
+    return this.cachedImages.slice(0, 4);
   }
 
   public get hasImgs(): boolean {

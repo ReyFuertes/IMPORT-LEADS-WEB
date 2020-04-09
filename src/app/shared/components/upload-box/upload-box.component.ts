@@ -13,6 +13,8 @@ export class UploadBoxComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public label: string = 'Drop Image Here..';
+  @Input()
+  public disabled: boolean = false;
   @Output()
   public imageEmitter = new EventEmitter<File>();
   public files: NgxFileDropEntry[] = [];

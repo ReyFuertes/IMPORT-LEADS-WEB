@@ -114,6 +114,14 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     }
   }
 
+  public get hasImgs(): boolean {
+    return this.contractImages && this.contractImages.length > 0;
+  }
+
+  public get getContractImages(): IProductImage[] {
+    return this.contractImages.slice(0, 4);
+  }
+
   public getFullName(user: User): string {
     return user ? `${user.firstname} ${user.lastname}` : '';
   }
