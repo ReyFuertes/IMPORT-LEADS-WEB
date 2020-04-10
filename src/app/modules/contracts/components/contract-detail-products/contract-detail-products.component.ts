@@ -1,4 +1,4 @@
-import { addProduct } from './../../store/actions/contract-product.action';
+import { addContractProduct } from './../../store/actions/contract-products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { IProduct, PillState } from './../../contract.model';
@@ -113,8 +113,9 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     if (this.form.value) {
       const id = this.productPillsArr.length + 1;
       this.form.controls['id'].patchValue(id);
+
       this.productPillsArr.push(this.form.value);
-      //this.store.dispatch(addProduct({ item: this.form.value }))
+
       this.onResetForm();
     }
   }

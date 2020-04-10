@@ -28,7 +28,7 @@ import { ConfirmationService } from 'primeng/api';
 import { SidebarModule } from 'primeng/sidebar';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ContractProductSpecsTitleComponent } from './components/contract-product-specs-title/contract-product-specs-title.component';
-import { ContractsReducer } from './store/reducers/contracts.reducer';
+import { ContractsReducer } from './store/reducers/contract.reducer';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
