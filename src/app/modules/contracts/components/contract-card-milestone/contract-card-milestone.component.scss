@@ -1,6 +1,6 @@
 @import "src/styleguide/shared";
 .milestone__container {
-  height: 15px;
+  height: 45px;
 }
 .milestone {
   background-color: $color-primary !important;
@@ -19,12 +19,22 @@
   &.border-left {
     border-left: 2px $color-primary solid;
   }
-  div.milestone__date {
-    font-size: 10px;
-    position: relative;
-    top: 12px;
-    font-weight: 600;
-    text-align: center;
+  div {
+    .milestone__date {
+      font-size: 10px;
+      position: relative;
+      top: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+  .caption > div {
+    &:first-child {
+      left: -4px;
+    }
+    &:last-child {
+      left: 2px;
+    }
   }
   div.milestone__date-title {
     letter-spacing: normal;
@@ -39,10 +49,6 @@
     height: 8px;
     background-color: transparent;
     z-index: 999;
-  }
-  .captions {
-    position: relative;
-    top: 10px;
   }
 }
 .milestone__h-line {

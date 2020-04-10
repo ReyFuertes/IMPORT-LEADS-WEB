@@ -25,11 +25,9 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy {
   public dataFilterForm = new FormControl();
   public filteredData$ = new ReplaySubject<any>();
   private newDataList: any;
-  protected _unsubscribe$ = new Subject<void>();
+  private _unsubscribe$ = new Subject<void>();
 
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnInit() {
     //when edit mode pass id to display selected item

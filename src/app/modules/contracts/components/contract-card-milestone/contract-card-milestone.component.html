@@ -11,6 +11,7 @@
           </div>
           <div class="milestone__date">{{date}}</div>
         </div> -->
+        <div *ngIf="i === 0 || i === (pointOfDates.length - 1)" class="milestone__date">{{date}}</div>
       </div>
     </div>
     <div class="milestone__bar" *ngIf="i !== 0 && (pointOfDates.length - 1) !== i" [ngClass]="{'milestone': mileStoneDates.includes(date)}"></div>
