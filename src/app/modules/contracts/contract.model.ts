@@ -16,22 +16,13 @@ export enum PillState {
 }
 export interface IProduct {
   id?: string | number;
-  name: string;
+  product_name: string;
   qty: string | number;
   cost: string | number;
-  subProducts: IProduct[];
-}
-export interface IProduct {
-  id?: string | number;
-  name: string;
-  qty: string | number;
-  cost: string | number;
-}
-export interface IContractProduct {
-  id?: string | number;
-  name: string;
-  qty: string | number;
-  cost: string | number;
+  parent?: IProduct;
+  subProducts?: IProduct[];
+  created_at?: Date;
+  updated_at?: Date;
 }
 export interface IContract {
   id?: string;
@@ -43,6 +34,6 @@ export interface IContract {
   attachments?: any[];
   images?: IProductImage[];
   created_at?: Date;
-  updated_at: Date;
+  updated_at?: Date;
   user: IUser;
 }

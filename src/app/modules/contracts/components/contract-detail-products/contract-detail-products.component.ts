@@ -1,3 +1,6 @@
+import { addProduct } from './../../store/actions/contract-product.action';
+import { AppState } from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
 import { IProduct, PillState } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,7 +10,6 @@ import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, 
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { IContractProduct } from '../../contract.model';
 
 @Component({
   selector: 'il-contract-detail-products',
@@ -51,10 +53,10 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
+  constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
       id: [null],
-      name: [null, Validators.required],
+      product_name: [null, Validators.required],
       qty: [null, Validators.required],
       cost: [null, Validators.required],
       subProducts: new FormArray([]),
@@ -98,7 +100,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     return this.fb.group(item);
   }
 
-  public createSubItem(item: IContractProduct): FormGroup {
+  public createSubItem(item: IProduct): FormGroup {
     return this.fb.group(item);
   }
 
@@ -112,7 +114,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       const id = this.productPillsArr.length + 1;
       this.form.controls['id'].patchValue(id);
       this.productPillsArr.push(this.form.value);
-
+      //this.store.dispatch(addProduct({ item: this.form.value }))
       this.onResetForm();
     }
   }
@@ -128,18 +130,21 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   }
 
   public OnEditProduct(product: IProduct): void {
-    this.form.controls['id'].patchValue(product.id);
-    this.form.controls['name'].patchValue(product.name);
-    this.form.controls['qty'].patchValue(product.qty);
-    this.form.controls['cost'].patchValue(product.cost);
-    this.form.controls['subProducts'].patchValue(product.subProducts);
+    if (!product) return;
+
+    const { id, product_name, qty, cost, subProducts } = product;
+    this.form.controls['id'].patchValue(id);
+    this.form.controls['name'].patchValue(product_name);
+    this.form.controls['qty'].patchValue(qty);
+    this.form.controls['cost'].patchValue(cost);
+    this.form.controls['subProducts'].patchValue(subProducts);
 
     if (product.subProducts.length > 0) {
       this.subProductsArray = this.form.get('subProducts') as FormArray;
       if (this.subProductsArray) this.subProductsArray.clear();
       product.subProducts && product.subProducts.forEach(subItem => {
         const item = this.createSubItem({
-          name: subItem.name,
+          product_name: subItem.product_name,
           qty: subItem.qty,
           cost: subItem.cost
         });
@@ -163,15 +168,15 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   }
 
   public onAddSubProduct(): void {
-    const products: IProduct = Object.assign([], this.form.value);
+    const item: IProduct = Object.assign([], this.form.value);
     this.subProductsArray = this.form.get('subProducts') as FormArray;
 
-    const item = this.createSubItem({
-      name: products.name,
+    const result = this.createSubItem({
+      product_name: item.product_name,
       qty: this.form.get('qty').value,
       cost: 1,
     });
-    this.subProductsArray.push(item);
+    this.subProductsArray.push(result);
     this.cdRef.detectChanges();
   }
 
