@@ -28,14 +28,6 @@
       text-align: center;
     }
   }
-  .caption > div {
-    &:first-child {
-      left: -4px;
-    }
-    &:last-child {
-      left: 2px;
-    }
-  }
   div.milestone__date-title {
     letter-spacing: normal;
     white-space: nowrap;

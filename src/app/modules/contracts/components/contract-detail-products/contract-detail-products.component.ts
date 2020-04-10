@@ -1,5 +1,4 @@
-import { IProductPill, PillState } from './../../contract.model';
-import { PillComponent } from './../../../../shared/components/pill/pill.component';
+import { IProduct, PillState } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
@@ -20,7 +19,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public svgPath: string = environment.svgPath;
   public productsArray: FormArray;
   public subProductsArray: FormArray;
-  public productPillsArr: IProductPill[] = [];
+  public productPillsArr: IProduct[] = [];
   public form: FormGroup;
   public hasSubProducts: boolean = false;
   public isEditProduct: boolean = false;
@@ -113,13 +112,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       const id = this.productPillsArr.length + 1;
       this.form.controls['id'].patchValue(id);
       this.productPillsArr.push(this.form.value);
+
       this.onResetForm();
     }
   }
 
   public onEditProductSave(): void {
     if (this.form.value) {
-      const product: IProductPill = Object.assign([], this.form.value);
+      const product: IProduct = Object.assign([], this.form.value);
       const i = this.productPillsArr.findIndex(x => x.id === product.id);
       this.productPillsArr[i] = product;
       this.isEditProduct = !this.isEditProduct;
@@ -127,7 +127,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public OnEditProduct(product: IProductPill): void {
+  public OnEditProduct(product: IProduct): void {
     this.form.controls['id'].patchValue(product.id);
     this.form.controls['name'].patchValue(product.name);
     this.form.controls['qty'].patchValue(product.qty);
@@ -163,7 +163,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   }
 
   public onAddSubProduct(): void {
-    const products: IProductPill = Object.assign([], this.form.value);
+    const products: IProduct = Object.assign([], this.form.value);
     this.subProductsArray = this.form.get('subProducts') as FormArray;
 
     const item = this.createSubItem({
@@ -175,7 +175,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
   }
 
-  public onRemoveProduct(product: IProductPill): void {
+  public onRemoveProduct(product: IProduct): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '410px',
       data: {}
@@ -190,7 +190,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public onRemoveSubProduct(product: IProductPill, subProduct: IProductPill, i: number): void {
+  public onRemoveSubProduct(product: IProduct, subProduct: IProduct, i: number): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '410px',
       data: {}

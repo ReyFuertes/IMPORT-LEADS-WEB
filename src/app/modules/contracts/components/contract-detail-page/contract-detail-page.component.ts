@@ -1,7 +1,6 @@
+import { ReOrderImages } from './../../store/actions/contracts.action';
+import { getContractById } from './../../store/selectors/contracts.selector';
 import { User } from './../../../users/users.models';
-import { ReOrderImages } from './../../store/contracts.action';
-import { tap } from 'rxjs/operators';
-import { getContractById } from './../../store/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';

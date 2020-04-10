@@ -2,9 +2,8 @@ import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay, map } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
-import { uploadContractImages, cacheImages, clearCachedImages, updateContract } from './../../../contracts/store/contracts.action';
 import { IImage } from './../../../../models/image.model';
-import { getCachedImages, getContractById } from './../../../contracts/store/contracts.selector';
+import { getCachedImages, getContractById } from './../../../contracts/store/selectors/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { AddEditDialogState } from '../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
@@ -16,7 +15,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { Store, select } from '@ngrx/store';
-import { addContract } from 'src/app/modules/contracts/store/contracts.action';
+import { addContract, uploadContractImages, cacheImages, clearCachedImages, updateContract } from 'src/app/modules/contracts/store/actions/contracts.action';
 import { v4 as uuid } from 'uuid';
 import { ActivatedRoute } from '@angular/router';
 

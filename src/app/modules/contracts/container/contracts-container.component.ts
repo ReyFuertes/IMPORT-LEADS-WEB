@@ -1,4 +1,4 @@
-import { loadContracts } from './../store/contracts.action';
+import { loadContracts } from './../store/actions/contracts.action';
 import { AppState } from './../../../store/app.reducer';
 import { GenericContainer } from './../../../shared/generics/generic-container';
 import { Component, OnInit } from '@angular/core';

@@ -1,5 +1,5 @@
-import { loadContracts, loadContractSuccess, addContractSuccess, cacheImages, clearCachedImages, updateContractSuccess } from './contracts.action';
-import { IContract, IProductImage } from './../contract.model';
+import { loadContracts, loadContractSuccess, addContractSuccess, cacheImages, clearCachedImages, updateContractSuccess } from '../actions/contracts.action';
+import { IContract, IProductImage } from './../../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 

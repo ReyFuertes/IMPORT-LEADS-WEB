@@ -1,8 +1,8 @@
-import { clearCachedImages } from './../../store/contracts.action';
+import { clearCachedImages } from './../../store/actions/contracts.action';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { appNotification } from './../../../../store/notification.action';
 import { tap, delay, take, debounceTime } from 'rxjs/operators';
-import { getAllContracts } from './../../store/contracts.selector';
+import { getAllContracts } from './../../store/selectors/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { IContract } from './../../contract.model';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts-add/contract-add-dialog.component';

@@ -14,14 +14,14 @@ export enum PillState {
   default = 0,
   reset = 1
 }
-export interface IProductPill {
+export interface IProduct {
   id?: string | number;
   name: string;
   qty: string | number;
   cost: string | number;
-  subProducts: IProductPill[];
+  subProducts: IProduct[];
 }
-export interface IProductPill {
+export interface IProduct {
   id?: string | number;
   name: string;
   qty: string | number;

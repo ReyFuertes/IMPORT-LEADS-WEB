@@ -1,5 +1,5 @@
-import { QueryParam } from './../../../models/generic..model';
-import { IContract, IProductImage } from './../contract.model';
+import { QueryParam } from './../../../../models/generic..model';
+import { IContract, IProductImage } from './../../contract.model';
 import { createAction, props } from '@ngrx/store';
 
 export enum ContractActionTypes {

@@ -1,7 +1,7 @@
 import { NotificationState } from './notification.reducer';
 import { ActionReducerMap } from '@ngrx/store';
 import { VenuesState, VenuesReducer } from './../modules/venues/store/venues.reducer';
-import { ContractsState, ContractsReducer } from './../modules/contracts/store/contracts.reducer';
+import { ContractsState, ContractsReducer } from './../modules/contracts/store/reducers/contracts.reducer';
 import { NotificationReducer } from './notification.reducer';
 
 export interface AppState {
