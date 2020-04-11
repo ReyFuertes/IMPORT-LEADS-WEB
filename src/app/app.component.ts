@@ -17,7 +17,7 @@ export class AppComponent {
   public title = 'Import Leads';
   public $notify: Observable<boolean>;
   constructor(private store: Store<AppState>) {
-    this.store.dispatch(loadVenues());
-    this.$notify = this.store.pipe(select(getSuccessSelector), delay(500));
+    // this.store.dispatch(loadVenues());
+    // this.$notify = this.store.pipe(select(getSuccessSelector), delay(500));
   }
 }

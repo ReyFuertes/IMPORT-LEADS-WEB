@@ -113,9 +113,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     if (this.form.value) {
       const id = this.productPillsArr.length + 1;
       this.form.controls['id'].patchValue(id);
-
       this.productPillsArr.push(this.form.value);
-
+      this.store.dispatch(addContractProduct({ item: this.form.value }));
       this.onResetForm();
     }
   }

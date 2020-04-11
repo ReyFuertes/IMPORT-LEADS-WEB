@@ -1,20 +1,20 @@
-import { ContractsState } from '../reducers/contract.reducer';
-import { createSelector } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.reducer';
+import { ContractModuleState } from './../reducers/index';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromContracts from '../reducers/contract.reducer'
 
-export const selectedState = (state: AppState) => state.contracts;
-export const getCachedImages = createSelector(
-  selectedState,
-  fromContracts.getCachedImages
-);
+export const selectContractModuleState = createFeatureSelector<ContractModuleState>('contractsModule');
 
-export const getAllContracts = createSelector(
-  selectedState,
+export const getAllContractsSelector = createSelector(
+  selectContractModuleState,
   fromContracts.getAllContracts
 );
 
+export const getCachedImages = createSelector(
+  selectContractModuleState,
+  fromContracts.getCachedImages
+);
+
 export const getContractById = (id: string) => createSelector(
-  selectedState,
-  (state: ContractsState) => state.entities[id]
+  selectContractModuleState,
+  (state: ContractModuleState) => state.contract.entities[id]
 );

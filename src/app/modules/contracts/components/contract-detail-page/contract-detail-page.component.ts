@@ -1,5 +1,5 @@
-import { ReOrderImages } from './../../store/actions/contracts.action';
 import { getContractById } from './../../store/selectors/contracts.selector';
+import { ReOrderImages } from './../../store/actions/contracts.action';
 import { User } from './../../../users/users.models';
 import { AppState } from './../../../../store/app.reducer';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -171,7 +171,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   public dropImages(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
     //update reorder images
-    setTimeout(() => this.store.dispatch(ReOrderImages({ images: this.contractImages })), 200);
+    // setTimeout(() => this.store.dispatch(ReOrderImages({ images: this.contractImages })), 200);
   }
   public dropSpecs(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.specifications, event.previousIndex, event.currentIndex);

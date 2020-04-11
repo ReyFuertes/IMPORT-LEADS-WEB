@@ -1,9 +1,11 @@
+import { ContractModuleState } from './../../store/reducers/index';
+import { ContractsState } from './../../store/reducers/contract.reducer';
+import { getAllContractsSelector } from './../../store/selectors/contracts.selector';
 import { clearCachedImages } from './../../store/actions/contracts.action';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { appNotification } from './../../../../store/notification.action';
-import { tap, delay, take, debounceTime } from 'rxjs/operators';
-import { getAllContracts } from './../../store/selectors/contracts.selector';
-import { AppState } from './../../../../store/app.reducer';
+import { tap, delay, take, debounceTime } from 'rxjs/operators'
+import { AppState, reducers } from './../../../../store/app.reducer';
 import { IContract } from './../../contract.model';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts-add/contract-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,7 +22,7 @@ import { Store, select } from '@ngrx/store';
 
 export class ContractOverviewPageComponent implements OnInit {
   public svgPath: string = environment.svgPath;
-  public contracts: IContract[];
+  public contracts: IContract[] = [];
 
   public dragStart: boolean = false;
   public drop(event: CdkDragDrop<string[]>) {
@@ -28,16 +30,16 @@ export class ContractOverviewPageComponent implements OnInit {
     this.dragStart = false;
   }
 
-  constructor(public store: Store<AppState>, public dialog: MatDialog) {
-    this.store.pipe(select(getAllContracts))
-      .pipe(tap(contracts => this.contracts = contracts), debounceTime(1000))
+  constructor(public store: Store<ContractModuleState>, public dialog: MatDialog) {
+    this.store.pipe(select(getAllContractsSelector),
+      tap(res => this.contracts = res))
       .subscribe();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   public get hasRecords(): boolean {
-    return Object.keys(this.contracts).length > 0;
+    return this.contracts && Object.keys(this.contracts).length > 0;
   }
   public dragStarted(event: any) {
     this.dragStart = event;

@@ -1,9 +1,9 @@
+import { getContractById } from './../../../contracts/store/selectors/contracts.selector';
 import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay, map } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
 import { IImage } from './../../../../models/image.model';
-import { getCachedImages, getContractById } from './../../../contracts/store/selectors/contracts.selector';
 import { AppState } from './../../../../store/app.reducer';
 import { AddEditDialogState } from '../../../../shared/generics/generic.model';
 import { GenericAddEditComponent } from '../../../../shared/generics/generic-ae';
@@ -79,15 +79,15 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
   ngOnInit() {
     /* we call these from state because the data that is stored/pushed in here is from dropped images */
-    this.store.pipe(select(getCachedImages))
-      .subscribe(result => {
-        if (result) this.cachedImages = result;
-      });
+    // this.store.pipe(select(getCachedImages))
+    //   .subscribe(result => {
+    //     if (result) this.cachedImages = result;
+    //   });
 
-    this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
-      this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
-        { label: venue.name, value: venue.id }));
-    });
+    // this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
+    //   this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
+    //     { label: venue.name, value: venue.id }));
+    // });
   }
 
   public get isUploadDisabled(): boolean {

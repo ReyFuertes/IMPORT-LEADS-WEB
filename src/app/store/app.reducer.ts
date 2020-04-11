@@ -8,13 +8,9 @@ import { ContractProductsReducer } from '../modules/contracts/store/reducers/con
 
 export interface AppState {
   notification?: NotificationState,
-  contracts?: ContractsState,
-  contractProducts: ContractProductsState
   venues?: VenuesState
 }
 export const reducers: ActionReducerMap<AppState> = {
   notification: NotificationReducer,
-  contracts: ContractsReducer,
-  contractProducts: ContractProductsReducer,
   venues: VenuesReducer
 };

@@ -1,9 +1,11 @@
+import { ContractProductssEffects } from './store/effects/contract-products.effects';
+import { ContractProductsService } from './services/contract-products.service';
 import { ImagesService } from './../../services/images.service';
 import { UploadService } from './../../services/upload.service';
 import { ContractsEffects } from './store/effects/contracts.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ContractsService } from './contracts.service';
+import { ContractsService } from './services/contracts.service';
 import { ContractProductSpecsComponent } from './components/contract-product-specs/contract-product-specs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContractRightContentComponent } from './components/contract-right-content/contract-right-content.component';
@@ -32,6 +34,7 @@ import { ContractsReducer } from './store/reducers/contract.reducer';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { reducers } from './store/reducers';
 
 const routes: Routes = [
   {
@@ -92,8 +95,8 @@ const materialModules = [
     ...materialModules,
     DialogModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('contracts', ContractsReducer),
-    EffectsModule.forFeature([ContractsEffects])
+    StoreModule.forFeature('contractsModule', reducers),
+    EffectsModule.forFeature([ContractsEffects, ContractProductssEffects])
   ],
   exports: [],
   declarations: [
@@ -113,7 +116,8 @@ const materialModules = [
     ConfirmationService,
     ContractsService,
     UploadService,
-    ImagesService
+    ImagesService,
+    ContractProductsService
   ],
 })
 export class ContractsModule { }
