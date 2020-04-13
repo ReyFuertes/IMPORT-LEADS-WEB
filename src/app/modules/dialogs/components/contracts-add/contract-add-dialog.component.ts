@@ -116,7 +116,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
 
     item.venue = { id: value, name: label };
     item.images = this.cnsFileObj(files);
-    debugger
+
     if (this.state === AddEditState.Add) {
       //NOTE: temporarily inject -- remove this if user auth is implemented
       item.user = {

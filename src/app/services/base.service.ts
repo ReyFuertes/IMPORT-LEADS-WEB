@@ -26,11 +26,14 @@ export abstract class BaseService<T> {
     });
   }
 
-  private removeNullProps(obj: T): T {
-    return Object.assign({}, _.pickBy(obj, _.identity))
+  private removeNullProps(obj: T | T[]): T | T[] {
+    const ret = Object.assign({}, typeof (obj) === 'object'
+    ? _.pickBy(obj, _.identity)
+    : _.pickBy(obj, o => o !== null && o !== undefined))
+    return ret;
   }
 
-  public post(object?: T): Observable<T> {
+  public post(object?: T | T[]): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}${this.entity}`, this.removeNullProps(object), { headers: this.commonHeaders() });
   }
 
@@ -44,7 +47,7 @@ export abstract class BaseService<T> {
   }
 
   public upload(object?: any, additionalParam?: string): Observable<T> {
-    const formatParam = additionalParam ? `/${additionalParam}`: '';
+    const formatParam = additionalParam ? `/${additionalParam}` : '';
     let headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`,
       Accept: "application/json"

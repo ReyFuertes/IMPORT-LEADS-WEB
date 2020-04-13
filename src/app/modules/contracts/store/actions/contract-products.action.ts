@@ -6,11 +6,11 @@ export enum ProductActionTypes {
   addContractProductSuccess = '[Product] Add (success)'
 }
 
-export const addContractProduct = createAction(
+export const addContractProducts = createAction(
   ProductActionTypes.addContractProduct,
-  props<{ item: IProduct }>()
+  props<{ items: IProduct[] }>()
 );
 export const addContractProductSuccess = createAction(
   ProductActionTypes.addContractProductSuccess,
-  props<{ created: IProduct }>()
+  props<{ created: IProduct[] }>()
 );

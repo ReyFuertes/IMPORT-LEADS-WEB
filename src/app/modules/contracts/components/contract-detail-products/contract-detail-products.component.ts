@@ -1,5 +1,5 @@
 import { getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
-import { addContractProduct } from './../../store/actions/contract-products.action';
+import { addContractProducts } from './../../store/actions/contract-products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store, select } from '@ngrx/store';
 import { IProduct, PillState, IContract } from './../../contract.model';
@@ -65,19 +65,34 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     //map products to suggestions
-    this.store.pipe(select(getAllContractProductsSelector),
-      tap(p => this.suggestions = this.setSuggestions(p)))
-      .subscribe();
+    // this.store.pipe(select(getAllContractProductsSelector),
+    //   tap(p => this.suggestions = this.suggest(p)))
+    //   .subscribe();
 
-    this.suggestions = this.setSuggestions(this.contract.products);
+    // this.suggestions = this.suggest(this.contract.products);
     this.store.subscribe(res => console.log(res));
   }
 
   ngAfterViewInit() { }
 
-  private setSuggestions(conProducts: IProduct[]): SimpleItem[] {
+  public addProductToPills(): void {
+    if (this.form.value) {
+      const { product_name, qty, cost, sub_products } = this.form.value;
+      const items: IProduct[] = [];
+      sub_products.concat({
+        product_name, qty, cost
+      }).forEach(p => items.push(p));
+
+      console.log(items);
+      this.productPillsArr.push(this.form.value);
+      this.store.dispatch(addContractProducts({ items }));
+      this.onResetForm();
+    }
+  }
+
+  private suggest(conProducts: IProduct[]): SimpleItem[] {
     return conProducts && conProducts.reduce(
-      (result, { id, product_name, sub_products }) => [{ value: id, label: product_name }]
+      ({ }, { id, product_name, sub_products }) => [{ value: id, label: product_name }]
         .concat(sub_products.map((sub) => ({ value: id, label: product_name, ...{ value: sub.id, label: sub.product_name } }))),
       []
     );
@@ -110,17 +125,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.productPillsArr.splice(i);
   }
 
-  public addProductToPills(): void {
-    if (this.form.value) {
-      const item = Object.assign({}, {
-        contract: { id: this.contract.id }
-      }, _.pickBy(this.form.value, _.identity));
-      this.productPillsArr.push(item);
-      this.store.dispatch(addContractProduct({ item }));
-      this.onResetForm();
-    }
-  }
-
   public onEditProductSave(): void {
     if (this.form.value) {
       const product: IProduct = Object.assign([], this.form.value);
@@ -133,7 +137,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public OnEditProduct(product: IProduct): void {
     if (!product) return;
-
     const { id, product_name, qty, cost, sub_products } = product;
     this.form.controls['id'].patchValue(id);
     this.form.controls['name'].patchValue(product_name);
