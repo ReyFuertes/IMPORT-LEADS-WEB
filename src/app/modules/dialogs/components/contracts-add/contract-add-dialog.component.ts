@@ -1,4 +1,4 @@
-import { getContractById } from './../../../contracts/store/selectors/contracts.selector';
+import { getContractById, getCachedImages } from './../../../contracts/store/selectors/contracts.selector';
 import { getVenuesSelector } from './../../../venues/store/venues.selector';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay, map } from 'rxjs/operators';
@@ -79,15 +79,15 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
   }
   ngOnInit() {
     /* we call these from state because the data that is stored/pushed in here is from dropped images */
-    // this.store.pipe(select(getCachedImages))
-    //   .subscribe(result => {
-    //     if (result) this.cachedImages = result;
-    //   });
+    this.store.pipe(select(getCachedImages))
+      .subscribe(result => {
+        if (result) this.cachedImages = result;
+      });
 
-    // this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
-    //   this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
-    //     { label: venue.name, value: venue.id }));
-    // });
+    this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
+      this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
+        { label: venue.name, value: venue.id }));
+    });
   }
 
   public get isUploadDisabled(): boolean {
@@ -102,7 +102,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     return this.cachedImages && this.cachedImages.length > 0;
   }
 
-  private cnstctFileObj(files: FormData): any {
+  private cnsFileObj(files: FormData): any {
     return Object.values(this.cachedImages) && this.cachedImages.map(ci => {
       if (ci.file)
         files.append('files', ci.file, ci.filename);
@@ -115,8 +115,8 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
     const { label, value } = this.venues.filter(v => v.value === this.form.get('venue').value)[0];
 
     item.venue = { id: value, name: label };
-    item.images = this.cnstctFileObj(files);
-
+    item.images = this.cnsFileObj(files);
+    debugger
     if (this.state === AddEditState.Add) {
       //NOTE: temporarily inject -- remove this if user auth is implemented
       item.user = {

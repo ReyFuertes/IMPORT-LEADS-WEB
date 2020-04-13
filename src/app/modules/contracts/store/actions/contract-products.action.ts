@@ -12,5 +12,5 @@ export const addContractProduct = createAction(
 );
 export const addContractProductSuccess = createAction(
   ProductActionTypes.addContractProductSuccess,
-  props<{ item: IProduct }>()
+  props<{ created: IProduct }>()
 );

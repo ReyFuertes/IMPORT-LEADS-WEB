@@ -1,7 +1,7 @@
 import { addContractProduct } from './../../store/actions/contract-products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
-import { IProduct, PillState } from './../../contract.model';
+import { IProduct, PillState, IContract } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
@@ -10,7 +10,7 @@ import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, 
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
+import * as _ from 'lodash';
 @Component({
   selector: 'il-contract-detail-products',
   templateUrl: './contract-detail-products.component.html',
@@ -29,6 +29,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public state: PillState = PillState.default;
   @Input()
   public isRightNavOpen: boolean = false;
+  @Input()
+  public contract: IContract;
   @Input()
   public suggestions: Array<{ label: string, value: string }> = [
     {
@@ -59,13 +61,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       product_name: [null, Validators.required],
       qty: [null, Validators.required],
       cost: [null, Validators.required],
-      subProducts: new FormArray([]),
+      sub_products: new FormArray([]),
+      contract: [null]
     });
     //get the sub total of all productSet
-    this.form.get('subProducts')
+    this.form.get('sub_products')
       .valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe(subProducts => {
-        const totalValueOfSubProducts = subProducts.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
+      .subscribe(children => {
+        const totalValueOfSubProducts = children.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
         const valueOfParentProduct = this.form.get('cost').value;
         //if the value of input is less than the value of sub products cost total, mark as invalid error
         if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
@@ -111,10 +114,11 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public addProductToPills(): void {
     if (this.form.value) {
-      const id = this.productPillsArr.length + 1;
-      this.form.controls['id'].patchValue(id);
-      this.productPillsArr.push(this.form.value);
-      this.store.dispatch(addContractProduct({ item: this.form.value }));
+      const item = Object.assign({}, _.pickBy(this.form.value, _.identity), this.contract);
+      debugger
+      this.productPillsArr.push(item);
+      debugger
+      this.store.dispatch(addContractProduct({ item }));
       this.onResetForm();
     }
   }
@@ -132,17 +136,17 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public OnEditProduct(product: IProduct): void {
     if (!product) return;
 
-    const { id, product_name, qty, cost, subProducts } = product;
+    const { id, product_name, qty, cost, sub_products } = product;
     this.form.controls['id'].patchValue(id);
     this.form.controls['name'].patchValue(product_name);
     this.form.controls['qty'].patchValue(qty);
     this.form.controls['cost'].patchValue(cost);
-    this.form.controls['subProducts'].patchValue(subProducts);
+    this.form.controls['sub_product'].patchValue(sub_products);
 
-    if (product.subProducts.length > 0) {
-      this.subProductsArray = this.form.get('subProducts') as FormArray;
+    if (product.sub_products.length > 0) {
+      this.subProductsArray = this.form.get('sub_products') as FormArray;
       if (this.subProductsArray) this.subProductsArray.clear();
-      product.subProducts && product.subProducts.forEach(subItem => {
+      product.sub_products && product.sub_products.forEach(subItem => {
         const item = this.createSubItem({
           product_name: subItem.product_name,
           qty: subItem.qty,
@@ -169,7 +173,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public onAddSubProduct(): void {
     const item: IProduct = Object.assign([], this.form.value);
-    this.subProductsArray = this.form.get('subProducts') as FormArray;
+    this.subProductsArray = this.form.get('sub_products') as FormArray;
 
     const result = this.createSubItem({
       product_name: item.product_name,
@@ -203,12 +207,12 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //remove from displayed array
-        const index = product.subProducts.indexOf(subProduct);
+        const index = product.sub_products.indexOf(subProduct);
         if (index > -1) {
-          product.subProducts.splice(index, 1);
+          product.sub_products.splice(index, 1);
         }
         //remove from form binding
-        const item = this.form.get('subProducts') as FormArray;
+        const item = this.form.get('sub_products') as FormArray;
         item.removeAt(i);
         this.onResetForm();
       }

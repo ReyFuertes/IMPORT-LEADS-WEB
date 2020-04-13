@@ -19,9 +19,7 @@ import { Store, select } from '@ngrx/store';
 @Component({
   selector: 'il-contract-detail-page',
   templateUrl: './contract-detail-page.component.html',
-  styleUrls: ['./contract-detail-page.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./contract-detail-page.component.scss']
 })
 
 export class ContractDetailPageComponent extends GenericPageDetailComponent<IContract> implements OnInit {

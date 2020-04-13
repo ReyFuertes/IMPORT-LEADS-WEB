@@ -11,7 +11,7 @@ export const initialState: ContractProductsState = adapter.getInitialState({
 const reducer = createReducer(
   initialState,
   on(addContractProductSuccess, (state, action) => {
-    return adapter.addOne(action.item, state)
+    return adapter.addOne(action.created, state)
   })
 );
 export function ContractProductsReducer(state: ContractProductsState, action: Action) {

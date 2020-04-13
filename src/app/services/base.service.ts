@@ -2,6 +2,7 @@ import { QueryParam } from './../models/generic..model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 export abstract class BaseService<T> {
   protected baseUrl: string;
@@ -25,12 +26,16 @@ export abstract class BaseService<T> {
     });
   }
 
+  private removeNullProps(obj: T): T {
+    return Object.assign({}, _.pickBy(obj, _.identity))
+  }
+
   public post(object?: T): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}${this.entity}`, object, { headers: this.commonHeaders() });
+    return this.http.post<T>(`${this.baseUrl}${this.entity}`, this.removeNullProps(object), { headers: this.commonHeaders() });
   }
 
   public patch(object: T, url?: string): Observable<T> {
-    return this.http.patch<T>(`${this.baseUrl}${this.entity}${url ? '/' + url : ''}`, object, { headers: this.commonHeaders() }
+    return this.http.patch<T>(`${this.baseUrl}${this.entity}${url ? '/' + url : ''}`, this.removeNullProps(object), { headers: this.commonHeaders() }
     );
   }
 
@@ -45,6 +50,6 @@ export abstract class BaseService<T> {
       Accept: "application/json"
     });
     headers.set('Content-Type', 'multipart/form-data');
-    return this.http.post<T>(`${this.baseUrl}${this.entity}${formatParam}`, object, { headers: headers });
+    return this.http.post<T>(`${this.baseUrl}${this.entity}${formatParam}`, this.removeNullProps(object), { headers: headers });
   }
 }
