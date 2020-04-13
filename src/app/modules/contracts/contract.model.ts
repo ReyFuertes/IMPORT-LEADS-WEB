@@ -21,6 +21,7 @@ export interface IProduct {
   cost: string | number;
   parent?: IProduct;
   sub_products?: IProduct[];
+  contract?: IContract;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -36,4 +37,5 @@ export interface IContract {
   created_at?: Date;
   updated_at?: Date;
   user: IUser;
+  products?: IProduct[]
 }

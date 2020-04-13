@@ -8,6 +8,10 @@ export const getAllContractsSelector = createSelector(
   selectContractModuleState,
   fromContracts.getAllContracts
 );
+export const getAllContractProductsSelector = createSelector(
+  selectContractModuleState,
+  fromContracts.getAllContractProducts
+);
 
 export const getCachedImages = createSelector(
   selectContractModuleState,

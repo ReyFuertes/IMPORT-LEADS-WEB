@@ -1,6 +1,7 @@
+import { getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
 import { addContractProduct } from './../../store/actions/contract-products.action';
 import { AppState } from 'src/app/store/app.reducer';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { IProduct, PillState, IContract } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,7 +9,7 @@ import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
-import { take, takeUntil } from 'rxjs/operators';
+import { take, takeUntil, filter, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as _ from 'lodash';
 @Component({
@@ -27,33 +28,12 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public isEditProduct: boolean = false;
   private destroy$ = new Subject();
   public state: PillState = PillState.default;
+  public suggestions: SimpleItem[];
+
   @Input()
   public isRightNavOpen: boolean = false;
   @Input()
   public contract: IContract;
-  @Input()
-  public suggestions: Array<{ label: string, value: string }> = [
-    {
-      label: 'Product 1',
-      value: '1'
-    },
-    {
-      label: 'Product 2',
-      value: '2'
-    },
-    {
-      label: 'Product 3',
-      value: '3'
-    },
-    {
-      label: 'Product 4',
-      value: '4'
-    },
-    {
-      label: 'Product 5',
-      value: '5'
-    }
-  ];
 
   constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
@@ -66,24 +46,42 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     });
     //get the sub total of all productSet
     this.form.get('sub_products')
-      .valueChanges.pipe(takeUntil(this.destroy$))
+      .valueChanges.pipe(takeUntil(this.destroy$), filter((result) => !!result))
       .subscribe(children => {
-        const totalValueOfSubProducts = children.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
-        const valueOfParentProduct = this.form.get('cost').value;
-        //if the value of input is less than the value of sub products cost total, mark as invalid error
-        if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
-          this.form.controls['cost'].setErrors({ 'invalid': true });
-        } else {
-          this.form.controls['cost'].setErrors(null);
+        if (children) {
+          const totalValueOfSubProducts = children.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
+          const valueOfParentProduct = this.form.get('cost').value;
+          //if the value of input is less than the value of sub products cost total, mark as invalid error
+          if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
+            this.form.controls['cost'].setErrors({ 'invalid': true });
+          } else {
+            this.form.controls['cost'].setErrors(null);
+          }
         }
       })
   }
 
   ngOnDestroy() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    //map products to suggestions
+    this.store.pipe(select(getAllContractProductsSelector),
+      tap(p => this.suggestions = this.setSuggestions(p)))
+      .subscribe();
+
+    this.suggestions = this.setSuggestions(this.contract.products);
+    this.store.subscribe(res => console.log(res));
+  }
 
   ngAfterViewInit() { }
+
+  private setSuggestions(conProducts: IProduct[]): SimpleItem[] {
+    return conProducts && conProducts.reduce(
+      (result, { id, product_name, sub_products }) => [{ value: id, label: product_name }]
+        .concat(sub_products.map((sub) => ({ value: id, label: product_name, ...{ value: sub.id, label: sub.product_name } }))),
+      []
+    );
+  }
 
   public removeSelection(): void {
     const pillArrContainer = document.querySelectorAll('.pill-container');
@@ -114,10 +112,10 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public addProductToPills(): void {
     if (this.form.value) {
-      const item = Object.assign({}, _.pickBy(this.form.value, _.identity), this.contract);
-      debugger
+      const item = Object.assign({}, {
+        contract: { id: this.contract.id }
+      }, _.pickBy(this.form.value, _.identity));
       this.productPillsArr.push(item);
-      debugger
       this.store.dispatch(addContractProduct({ item }));
       this.onResetForm();
     }

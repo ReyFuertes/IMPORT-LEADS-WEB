@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 export class InputSelectComponent implements OnInit {
   @Input()
-  public suggestions: Array<{ label: string, value: string }>;
+  public suggestions: SimpleItem[];
   @Input()
   public controlName: any;
   @Input()

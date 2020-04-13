@@ -49,8 +49,8 @@
         </div>
       </div>
       <!-- contract products -->
-      <div class="card-row">
-        <il-contract-detail-products [isRightNavOpen]="showRightNav"></il-contract-detail-products>
+      <div *ngIf="($contract | async)" class="card-row">
+        <il-contract-detail-products [contract]="($contract | async)" [isRightNavOpen]="showRightNav"></il-contract-detail-products>
       </div>
     </div>
   </mat-card>
