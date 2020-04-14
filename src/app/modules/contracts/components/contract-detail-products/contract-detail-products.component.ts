@@ -1,8 +1,8 @@
 import { getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
-import { addContractProducts } from './../../store/actions/contract-products.action';
+import { addProducts } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store, select } from '@ngrx/store';
-import { IProduct, PillState, IContract } from './../../contract.model';
+import { IProduct, PillState, IContract, IContractProduct } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
@@ -77,15 +77,23 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public addProductToPills(): void {
     if (this.form.value) {
-      const { product_name, qty, cost, sub_products } = this.form.value;
-      const items: IProduct[] = [];
-      sub_products.concat({
-        product_name, qty, cost
-      }).forEach(p => items.push(p));
+      const { id, product_name, qty, cost, sub_products } = this.form.value;
 
-      console.log(items);
+      const products: IProduct[] = Object.assign([], sub_products);
+      products.push({ product_name, qty, cost });
+
+      //construct contract products
+      let contractProducts: IContractProduct[] = [];
+      sub_products && sub_products.forEach((product: IProduct) => {
+        contractProducts.push({
+          parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
+          child: product,
+          contract: { id: this.contract.id, contract_name: this.contract.contract_name }
+        })
+      });
+
       this.productPillsArr.push(this.form.value);
-      this.store.dispatch(addContractProducts({ items }));
+      this.store.dispatch(addProducts({ products, contractProducts }));
       this.onResetForm();
     }
   }

@@ -1,5 +1,12 @@
 import { IUser } from './../../models/user.model';
-
+export interface IContractProduct {
+  id?: string | number;
+  parent?: IProduct;
+  child: IProduct;
+  contract?: IContract;
+  created_at?: Date;
+  updated_at?: Date;
+}
 export interface IProductImage {
   id?: string;
   image?: any;
@@ -36,6 +43,6 @@ export interface IContract {
   images?: IProductImage[];
   created_at?: Date;
   updated_at?: Date;
-  user: IUser;
+  user?: IUser;
   products?: IProduct[]
 }

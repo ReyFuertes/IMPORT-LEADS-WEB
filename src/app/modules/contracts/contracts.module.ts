@@ -1,5 +1,5 @@
-import { ContractProductssEffects } from './store/effects/contract-products.effects';
-import { ContractProductsService } from './services/contract-products.service';
+import { ProductssEffects } from './store/effects/products.effects';
+import { ProductService, ContractProductService } from './services/products.service';
 import { ImagesService } from './../../services/images.service';
 import { UploadService } from './../../services/upload.service';
 import { ContractsEffects } from './store/effects/contracts.effects';
@@ -96,7 +96,7 @@ const materialModules = [
     DialogModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('contractsModule', reducers),
-    EffectsModule.forFeature([ContractsEffects, ContractProductssEffects])
+    EffectsModule.forFeature([ContractsEffects, ProductssEffects])
   ],
   exports: [],
   declarations: [
@@ -117,7 +117,8 @@ const materialModules = [
     ContractsService,
     UploadService,
     ImagesService,
-    ContractProductsService
+    ProductService,
+    ContractProductService
   ],
 })
 export class ContractsModule { }

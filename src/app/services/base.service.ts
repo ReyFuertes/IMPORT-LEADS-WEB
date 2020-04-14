@@ -26,15 +26,25 @@ export abstract class BaseService<T> {
     });
   }
 
-  private removeNullProps(obj: T | T[]): T | T[] {
-    const ret = Object.assign({}, typeof (obj) === 'object'
-    ? _.pickBy(obj, _.identity)
-    : _.pickBy(obj, o => o !== null && o !== undefined))
-    return ret;
+  private setEntityParam(param: string): any {
+    return param ? ['/',param].join() : '';
   }
 
-  public post(object?: T | T[]): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}${this.entity}`, this.removeNullProps(object), { headers: this.commonHeaders() });
+  private removeNullProps(obj: any): any {
+    let ret: any;
+    if (!Array.isArray(obj)) {
+      ret = _.pickBy(obj, _.identity);
+    } else {
+      ret = _.pickBy(obj, o => o !== null && o !== undefined);
+    }
+    console.log(Object.values(ret))
+    return Object.values(ret);
+  }
+
+  public post(object?: T | any[], entityParam?: string): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}${this.entity}${this.setEntityParam(entityParam)}`,
+      this.removeNullProps(object),
+      { headers: this.commonHeaders() });
   }
 
   public patch(object: T, url?: string): Observable<T> {
