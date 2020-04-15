@@ -35,10 +35,9 @@ export abstract class BaseService<T> {
     if (!Array.isArray(obj)) {
       ret = _.pickBy(obj, _.identity);
     } else {
-      ret = _.pickBy(obj, o => o !== null && o !== undefined);
+      ret = Object.values(_.pickBy(obj, o => o !== null && o !== undefined));
     }
-    console.log(Object.values(ret))
-    return Object.values(ret);
+    return ret;
   }
 
   public post(object?: T | any[], entityParam?: string): Observable<T> {

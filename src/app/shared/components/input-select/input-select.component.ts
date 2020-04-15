@@ -25,7 +25,9 @@ export class InputSelectComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log('InputSelectComponent', this.form.value);
+  }
 
   public filter(event) {
     let query = event.query;

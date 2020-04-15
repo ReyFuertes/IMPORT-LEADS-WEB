@@ -1,3 +1,4 @@
+import { addContractSuccess } from './../actions/contracts.action';
 import { mergeMap, map } from 'rxjs/operators';
 import { ProductService, ContractProductService } from './../../services/products.service';
 import { addProducts, addProductSuccess } from './../actions/products.action';
@@ -7,19 +8,15 @@ import { zip, of } from 'rxjs';
 
 @Injectable()
 export class ProductssEffects {
-  addProducts$ = createEffect(() => this.actions$.pipe(
+  addReturnContracts$ = createEffect(() => this.actions$.pipe(
     ofType(addProducts),
-    mergeMap(({ products, contractProducts }) => {
-      return zip(
-        this.productsService.post(products),
-        this.contractProductService.post(contractProducts),
-      ).pipe(
-        map(([created]: any[]) => {
-          debugger
-          return addProductSuccess({ created });
-        })
-      )
-    })
+    mergeMap(({ payload }) =>
+      this.contractProductService.post(payload)
+        .pipe(
+          map((created: any) => {
+            return addContractSuccess({ created });
+          })
+        ))
   ));
 
   constructor(

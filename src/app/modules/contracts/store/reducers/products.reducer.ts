@@ -10,9 +10,9 @@ export const initialState: ProductsState = adapter.getInitialState({
 });
 const reducer = createReducer(
   initialState,
-  on(addProductSuccess, (state, action) => {
-    return adapter.addAll(action.created, state)
-  })
+  // on(addProductSuccess, (state, action) => {
+  //   return adapter.addAll(action.created, state)
+  // })
 );
 export function ContractProductsReducer(state: ProductsState, action: Action) {
   return reducer(state, action);

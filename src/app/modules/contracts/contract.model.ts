@@ -1,11 +1,28 @@
+import { IVenue } from './../venues/venues.models';
 import { IUser } from './../../models/user.model';
+
+export class IContractResponse {
+  id: string;
+  contract_name: string;
+  start_date: any;
+  delivery_date: any;
+  details: string;
+  company: string;
+  responsible_person: string;
+  position: string;
+  upload_date: any;
+  created_at: any;
+  updated_at: any;
+  venue: IVenue;
+  images: any[];
+  user: IUser;
+  contract_products: any[];
+}
+
 export interface IContractProduct {
-  id?: string | number;
-  parent?: IProduct;
-  child: IProduct;
-  contract?: IContract;
-  created_at?: Date;
-  updated_at?: Date;
+  parent: IProduct
+  child: IProduct[],
+  contract: IContract
 }
 export interface IProductImage {
   id?: string;
@@ -26,9 +43,7 @@ export interface IProduct {
   product_name: string;
   qty: string | number;
   cost: string | number;
-  parent?: IProduct;
   sub_products?: IProduct[];
-  contract?: IContract;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -44,5 +59,5 @@ export interface IContract {
   created_at?: Date;
   updated_at?: Date;
   user?: IUser;
-  products?: IProduct[]
+  contract_products?: IProduct[]
 }

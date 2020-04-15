@@ -1,4 +1,4 @@
-<div class="products" fxFlex fxLayout="column" fxLayoutGap="20px">
+<div *ngIf="form" class="products" fxFlex fxLayout="column" fxLayoutGap="20px">
   <div *ngIf="!isRightNavOpen && productPillsArr" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <div class="img-box">
       <img [src]="svgPath + 'doc-icon-blue.svg'" />
@@ -21,18 +21,19 @@
     <div *ngIf="!isRightNavOpen" class="product-section" fxLayout="row" [formGroup]="form" fxLayoutGap="20px">
       <div fxFlex fxLayout="column" fxLayoutAlign="start start">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-          <il-input-select fxFlex [form]="form" [controlName]="'product_name'" [suggestions]="suggestions" [isReadOnly]="isRightNavOpen"></il-input-select>
-
+          <!-- <il-input-select fxFlex [form]="form" [controlName]="'product_name'" [suggestions]="suggestions" [isReadOnly]="isRightNavOpen"></il-input-select> -->
+          <il-input fxFlex [form]="form" [controlName]="'product_name'" placeholder="Product name" [isReadOnly]="isRightNavOpen"></il-input>
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
           <div fxFlex="5"></div>
         </div>
-        <ng-container *ngIf="hasSubProducts">
+        <ng-container *ngIf="hasSubProducts || subProductsArr">
           <div *ngFor="let sub_product of form.get('sub_products')?.controls; let i = index" fxLayout="column">
             <ng-container formArrayName="sub_products">
               <div fxFlex fxLayoutGap="20px" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-                <il-input-select [form]="sub_product" [controlName]="'product_name'" fxFlex fxFlexOffset="20px">
-                </il-input-select>
+                <!-- <il-input-select [form]="sub_product" [controlName]="'product_name'" fxFlex fxFlexOffset="20px">
+                </il-input-select> -->
+                <il-input fxFlex fxFlexOffset="20px" [form]="sub_product" [controlName]="'product_name'" placeholder="Product name" [isReadOnly]="isRightNavOpen"></il-input>
                 <il-input fxFlex="15" [form]="sub_product" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
                 <il-input fxFlex="15" [form]="sub_product" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
                 <div fxFlex="5" fxLayoutAlign="start center">

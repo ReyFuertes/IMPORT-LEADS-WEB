@@ -1,4 +1,4 @@
-import { IProduct, IContractProduct } from './../../contract.model';
+import { IProduct, IContractProduct, IContract } from './../../contract.model';
 import { createAction, props } from '@ngrx/store';
 
 export enum ProductActionTypes {
@@ -8,9 +8,9 @@ export enum ProductActionTypes {
 
 export const addProducts = createAction(
   ProductActionTypes.addProduct,
-  props<{ products: IProduct[], contractProducts?: IContractProduct[] }>()
+  props<{ payload: IContractProduct }>()
 );
 export const addProductSuccess = createAction(
   ProductActionTypes.addProductSuccess,
-  props<{ created: IProduct[] }>()
+  props<{ created: IContract }>()
 );

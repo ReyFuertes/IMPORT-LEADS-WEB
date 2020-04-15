@@ -1,8 +1,8 @@
-import { getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
+import { getAllContractsSelector } from './../../store/selectors/contracts.selector';
 import { addProducts } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store, select } from '@ngrx/store';
-import { IProduct, PillState, IContract, IContractProduct } from './../../contract.model';
+import { IProduct, PillState, IContract, IContractProduct, IContractResponse } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleItem } from './../../../../shared/generics/generic.model';
@@ -70,10 +70,26 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     //   .subscribe();
 
     // this.suggestions = this.suggest(this.contract.products);
-    this.store.subscribe(res => console.log(res));
+
   }
 
-  ngAfterViewInit() { }
+  public get subProductsArr() {
+    return this.form.get('sub_products') as FormArray;
+  }
+
+  ngAfterViewInit() {
+    this.form.patchValue(this.contract.contract_products);
+    this.subProductsArray = this.form.get('sub_products') as FormArray;
+    const subProducts = (this.contract.contract_products as any).sub_products;
+    subProducts.forEach(product => {
+      this.subProductsArr.push(this.fb.group(product))
+    });
+
+    console.log(this.form.value);
+
+    //console.log(this.form.value);
+    this.cdRef.detectChanges();
+  }
 
   public addProductToPills(): void {
     if (this.form.value) {
@@ -82,18 +98,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       const products: IProduct[] = Object.assign([], sub_products);
       products.push({ product_name, qty, cost });
 
-      //construct contract products
-      let contractProducts: IContractProduct[] = [];
-      sub_products && sub_products.forEach((product: IProduct) => {
-        contractProducts.push({
-          parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
-          child: product,
-          contract: { id: this.contract.id, contract_name: this.contract.contract_name }
-        })
-      });
+      const payload = {
+        parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
+        child: Object.assign([], sub_products),
+        contract: this.contract
+      }
 
       this.productPillsArr.push(this.form.value);
-      this.store.dispatch(addProducts({ products, contractProducts }));
+      this.store.dispatch(addProducts({ payload }));
       this.onResetForm();
     }
   }
@@ -177,7 +189,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       this.form.controls['cost'].setErrors(null);
     }
     this.hasSubProducts = !this.hasSubProducts;
-    this.cdRef.detectChanges();
+
   }
 
   public onAddSubProduct(): void {
