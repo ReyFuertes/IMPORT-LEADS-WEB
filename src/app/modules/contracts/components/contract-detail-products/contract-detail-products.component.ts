@@ -70,7 +70,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     //   .subscribe();
 
     // this.suggestions = this.suggest(this.contract.products);
-
   }
 
   public get subProductsArr() {
@@ -78,16 +77,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.form.patchValue(this.contract.contract_products);
-    this.subProductsArray = this.form.get('sub_products') as FormArray;
-    const subProducts = (this.contract.contract_products as any).sub_products;
-    subProducts.forEach(product => {
-      this.subProductsArr.push(this.fb.group(product))
-    });
-
-    console.log(this.form.value);
-
-    //console.log(this.form.value);
+    this.productPillsArr = this.contract.contract_products;
     this.cdRef.detectChanges();
   }
 
