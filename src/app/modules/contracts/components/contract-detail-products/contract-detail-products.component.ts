@@ -42,7 +42,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       qty: [null, Validators.required],
       cost: [null, Validators.required],
       sub_products: new FormArray([]),
-      contract: [null]
+      contract: [null],
+      cp_id: [null]
     });
     //get the sub total of all productSet
     this.form.get('sub_products')
@@ -64,7 +65,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   ngOnDestroy() { }
 
   ngOnInit() {
-    console.log('contract', this.contract);
     //map products to suggestions
     // this.store.pipe(select(getAllContractProductsSelector),
     //   tap(p => this.suggestions = this.suggest(p)))
@@ -72,9 +72,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     // this.suggestions = this.suggest(this.contract.products);
   }
 
-  public get subProductsArr() {
-    return this.form.get('sub_products') as FormArray;
-  }
+  public subProductsArr = () => this.form.get('sub_products') as FormArray;
 
   ngAfterViewInit() {
     this.productPillsArr = this.contract.contract_products;
@@ -100,13 +98,21 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     }
   }
 
-    public onSave(): void {
+  public onSave(): void {
     if (this.form.value) {
-      const product: IProduct = Object.assign([], this.form.value);
-      const i = this.productPillsArr.findIndex(x => x.id === product.id);
-      this.productPillsArr[i] = product;
+      const { id, product_name, cost, qty, sub_products, cp_id } = this.form.value;
+      const i = this.productPillsArr.findIndex(x => x.id === id);
+      this.productPillsArr[i] = this.form.value;
       this.isEditProduct = !this.isEditProduct;
-      console.log(product);
+      debugger
+      this.store.dispatch(addProducts({
+        payload: {
+          cp_id,
+          parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
+          child: Object.assign([], sub_products),
+          contract: this.contract
+        }
+      }));
       this.onResetForm();
     }
   }
@@ -149,12 +155,13 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public OnEditProduct(product: IProduct): void {
     if (!product) return;
     //assign selected item to form
-    const { id, product_name, qty, cost, sub_products } = product;
+    const { id, product_name, qty, cost, sub_products, cp_id } = product;
     this.form.controls['id'].patchValue(id);
     this.form.controls['product_name'].patchValue(product_name);
     this.form.controls['qty'].patchValue(qty);
     this.form.controls['cost'].patchValue(cost);
     this.form.controls['sub_products'].patchValue(sub_products);
+    this.form.controls['cp_id'].patchValue(cp_id);
 
     if (sub_products && sub_products.length > 0) {
       this.subProductsArray = this.form.get('sub_products') as FormArray;

@@ -22,7 +22,8 @@ export class IContractResponse {
 export interface IContractProduct {
   parent: IProduct
   child: IProduct[],
-  contract: IContract
+  contract: IContract;
+  cp_id?: string;
 }
 export interface IProductImage {
   id?: string;
@@ -46,6 +47,7 @@ export interface IProduct {
   sub_products?: IProduct[];
   created_at?: Date;
   updated_at?: Date;
+  cp_id?: string;
 }
 export interface IContract {
   id?: string;
