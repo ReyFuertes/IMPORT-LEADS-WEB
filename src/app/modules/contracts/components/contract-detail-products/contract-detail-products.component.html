@@ -46,10 +46,10 @@
       </div>
 
       <div fxFlex="20" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-        <button [disabled]="!form.valid" *ngIf="!isEditProduct" mat-flat-button class="il-button primary" (click)="addProductToPills()">
+        <button [disabled]="!form.valid" *ngIf="!isEditProduct" mat-flat-button class="il-button primary" (click)="onAdd()">
           Add Product
         </button>
-        <button *ngIf="isEditProduct" mat-flat-button class="il-button primary" (click)="onEditProductSave()">
+        <button *ngIf="isEditProduct" mat-flat-button class="il-button primary" (click)="onSave()">
           Save Product
         </button>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">

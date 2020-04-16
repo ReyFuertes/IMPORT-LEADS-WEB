@@ -64,11 +64,11 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   ngOnDestroy() { }
 
   ngOnInit() {
+    console.log('contract', this.contract);
     //map products to suggestions
     // this.store.pipe(select(getAllContractProductsSelector),
     //   tap(p => this.suggestions = this.suggest(p)))
     //   .subscribe();
-
     // this.suggestions = this.suggest(this.contract.products);
   }
 
@@ -81,7 +81,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
   }
 
-  public addProductToPills(): void {
+  public onAdd(): void {
     if (this.form.value) {
       const { id, product_name, qty, cost, sub_products } = this.form.value;
 
@@ -96,6 +96,17 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
       this.productPillsArr.push(this.form.value);
       this.store.dispatch(addProducts({ payload }));
+      this.onResetForm();
+    }
+  }
+
+    public onSave(): void {
+    if (this.form.value) {
+      const product: IProduct = Object.assign([], this.form.value);
+      const i = this.productPillsArr.findIndex(x => x.id === product.id);
+      this.productPillsArr[i] = product;
+      this.isEditProduct = !this.isEditProduct;
+      console.log(product);
       this.onResetForm();
     }
   }
@@ -135,36 +146,30 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.productPillsArr.splice(i);
   }
 
-  public onEditProductSave(): void {
-    if (this.form.value) {
-      const product: IProduct = Object.assign([], this.form.value);
-      const i = this.productPillsArr.findIndex(x => x.id === product.id);
-      this.productPillsArr[i] = product;
-      this.isEditProduct = !this.isEditProduct;
-      this.onResetForm();
-    }
-  }
-
   public OnEditProduct(product: IProduct): void {
     if (!product) return;
+    //assign selected item to form
     const { id, product_name, qty, cost, sub_products } = product;
     this.form.controls['id'].patchValue(id);
-    this.form.controls['name'].patchValue(product_name);
+    this.form.controls['product_name'].patchValue(product_name);
     this.form.controls['qty'].patchValue(qty);
     this.form.controls['cost'].patchValue(cost);
-    this.form.controls['sub_product'].patchValue(sub_products);
+    this.form.controls['sub_products'].patchValue(sub_products);
 
-    if (product.sub_products.length > 0) {
+    if (sub_products && sub_products.length > 0) {
       this.subProductsArray = this.form.get('sub_products') as FormArray;
       if (this.subProductsArray) this.subProductsArray.clear();
-      product.sub_products && product.sub_products.forEach(subItem => {
+
+      sub_products && sub_products.forEach(subItem => {
         const item = this.createSubItem({
+          id: subItem.id,
           product_name: subItem.product_name,
           qty: subItem.qty,
           cost: subItem.cost
         });
         this.subProductsArray.push(item);
       });
+
       this.hasSubProducts = !this.hasSubProducts;
     }
     this.isEditProduct = !this.isEditProduct;
