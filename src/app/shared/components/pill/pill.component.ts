@@ -28,6 +28,9 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
   public removeEmitter = new EventEmitter<number>();
   @Output()
   public stateEmitter = new EventEmitter<PillState>();
+  @Output()
+  public deSelectEmitter = new EventEmitter<boolean>(null);
+
   @ViewChild('btn', { static: false }) ev: any;
   constructor(private cdRef: ChangeDetectorRef) {
     super();
@@ -37,7 +40,10 @@ export class PillComponent extends GenericControl<SimpleItem> implements OnInit,
 
   ngAfterViewInit() {
     fromEvent(this.ev.nativeElement, 'dblclick')
-      .subscribe((e: any) => { this.ev.nativeElement.parentNode.classList.remove('selected') });
+      .subscribe((e: any) => {
+        this.ev.nativeElement.parentNode.classList.remove('selected');
+        this.deSelectEmitter.emit(false);
+      });
   }
 
   public onHighlightProduct(event: any): void {

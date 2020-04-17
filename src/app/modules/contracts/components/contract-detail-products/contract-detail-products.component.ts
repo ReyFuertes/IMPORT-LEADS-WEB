@@ -86,11 +86,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       const products: IProduct[] = Object.assign([], sub_products);
       products.push({ product_name, qty, cost });
 
-      const payload = {
-        parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
-        child: Object.assign([], sub_products),
-        contract: this.contract
-      }
+      const payload = this.fmtPayload(this.form.value);
 
       this.productPillsArr.push(this.form.value);
       this.store.dispatch(addProducts({ payload }));
@@ -98,17 +94,23 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  private fmtPayload(value: any): any {
+    const { id, product_name, qty, cost, sub_products } = value;
+    return {
+      parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
+      child: Object.assign([], sub_products),
+      contract: this.contract
+    }
+  }
+
   public onSave(): void {
     if (this.form.value) {
-      const { id, product_name, cost, qty, sub_products, cp_id } = this.form.value;
+      const { id } = this.form.value;
       const i = this.productPillsArr.findIndex(x => x.id === id);
       this.productPillsArr[i] = this.form.value;
       this.isEditProduct = !this.isEditProduct;
-      const payload = {
-        parent: _.pickBy({ id, product_name, qty, cost, cp_id }, _.identity),
-        child: Object.assign([], sub_products),
-        contract: this.contract
-      }
+
+      const payload = this.fmtPayload(this.form.value);
 
       this.store.dispatch(addProducts({
         payload
@@ -123,6 +125,10 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
         .concat(sub_products.map((sub) => ({ value: id, label: product_name, ...{ value: sub.id, label: sub.product_name } }))),
       []
     );
+  }
+
+  public deSelectChange(): void {
+    this.onResetForm();
   }
 
   public removeSelection(): void {
