@@ -24,11 +24,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { TopNavComponent } from './components/topnav/topnav.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NgModule } from '@angular/core';
-import { MatCheckboxModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatCheckboxModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { QuillModule } from 'ngx-quill';
 import { CircleGraphComponent } from './components/circle-graph/circle-graph.component';
 import { DropdownMultiSelectComponent } from './components/dropdown-multi-select/dropdown-multi-select.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -53,7 +52,8 @@ const materialModules = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatIconModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatTooltipModule
 ];
 
 const primeNgModules = [
