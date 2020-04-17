@@ -104,14 +104,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       const i = this.productPillsArr.findIndex(x => x.id === id);
       this.productPillsArr[i] = this.form.value;
       this.isEditProduct = !this.isEditProduct;
-      debugger
+      const payload = {
+        parent: _.pickBy({ id, product_name, qty, cost, cp_id }, _.identity),
+        child: Object.assign([], sub_products),
+        contract: this.contract
+      }
+
       this.store.dispatch(addProducts({
-        payload: {
-          cp_id,
-          parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
-          child: Object.assign([], sub_products),
-          contract: this.contract
-        }
+        payload
       }));
       this.onResetForm();
     }
@@ -172,7 +172,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
           id: subItem.id,
           product_name: subItem.product_name,
           qty: subItem.qty,
-          cost: subItem.cost
+          cost: subItem.cost,
+          cp_id: subItem.cp_id
         });
         this.subProductsArray.push(item);
       });
