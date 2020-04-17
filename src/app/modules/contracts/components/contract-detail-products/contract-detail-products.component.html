@@ -14,7 +14,7 @@
           [enableHighlight]="true" (removeEmitter)="onRemoveProduct(item)" [selectable]="true">
         </il-pill>
         <!-- child -->
-        <il-pill size="small" [enabled]="isRightNavOpen" *ngFor="let sub of item.sub_products; let i = index;" [item]="{label: sub.product_name}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(product, sub, $event)" [selectable]="true">
+        <il-pill size="small" [enabled]="isRightNavOpen" *ngFor="let sub of item.sub_products; let i = index;" [item]="{label: sub.product_name, value: item.id}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(sub)" [selectable]="true">
         </il-pill>
       </ng-container>
     </div>

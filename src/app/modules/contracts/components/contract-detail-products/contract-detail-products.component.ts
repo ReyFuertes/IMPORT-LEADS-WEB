@@ -215,13 +215,10 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   }
 
   public onRemoveProduct(product: IProduct): void {
-    const dialogRef = this.dialog.open(ConfirmationComponent, {
-      width: '410px',
-      data: {}
-    });
+    const dialogRef = this.dialog.open(ConfirmationComponent, { width: '410px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        //remote item from the database
+        /* remote item from the database */
         this.store.dispatch(deleteContractProduct({ id: product.cp_id }));
 
         /* remove item from the array */
@@ -235,21 +232,19 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   }
 
   public onRemoveSubProduct(product: IProduct): void {
-    const dialogRef = this.dialog.open(ConfirmationComponent, {
-      width: '410px',
-      data: {}
-    });
+    const dialogRef = this.dialog.open(ConfirmationComponent, { width: '410px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        /* remote sub item from the database */
         this.store.dispatch(deleteContractProduct({ id: product.cp_id }));
-        //remove from displayed array
-        // const index = product.sub_products.indexOf(subProduct);
-        // if (index > -1) {
-        //   product.sub_products.splice(index, 1);
-        // }
-        //remove from form binding
-        // const item = this.form.get('sub_products') as FormArray;
-        // item.removeAt(i);
+
+        /* remove item from the array */
+        this.productPillsArr && this.productPillsArr.forEach(p => {
+          const index = p.sub_products.indexOf(product);
+          if (index > -1)
+            p.sub_products.splice(index, 1);
+
+        });
         this.onResetForm();
       }
     });
