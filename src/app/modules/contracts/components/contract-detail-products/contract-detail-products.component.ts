@@ -21,7 +21,7 @@ import * as _ from 'lodash';
 export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public svgPath: string = environment.svgPath;
   public productsArray: FormArray;
-  public subProductsArray: FormArray;
+  public subProdsArr: FormArray;
   public productPillsArr: IProduct[] = [];
   public form: FormGroup;
   public hasSubProducts: boolean = false;
@@ -141,7 +141,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   private onResetForm(): void {
     this.form.reset();
     this.hasSubProducts = false;
-    if (this.subProductsArray) this.subProductsArray.clear();
+    if (this.subProdsArr) this.subProdsArr.clear();
     this.isEditProduct = false;
   }
 
@@ -163,6 +163,9 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
     //assign selected item to form
     const { id, product_name, qty, cost, sub_products, cp_id } = product;
+    this.form.reset();
+    this.subProdsArr = null;
+
     this.form.controls['id'].patchValue(id);
     this.form.controls['product_name'].patchValue(product_name);
     this.form.controls['qty'].patchValue(qty);
@@ -171,8 +174,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.form.controls['cp_id'].patchValue(cp_id);
 
     if (sub_products && sub_products.length > 0) {
-      this.subProductsArray = this.form.get('sub_products') as FormArray;
-      if (this.subProductsArray) this.subProductsArray.clear();
+      this.subProdsArr = this.form.get('sub_products') as FormArray;
+      if (this.subProdsArr) this.subProdsArr.clear();
 
       sub_products && sub_products.forEach(subItem => {
         const item = this.createSubItem({
@@ -182,19 +185,19 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
           cost: subItem.cost,
           cp_id: subItem.cp_id
         });
-        this.subProductsArray.push(item);
+        this.subProdsArr.push(item);
       });
     }
-    this.hasSubProducts = true;
+    this.hasSubProducts = this.subProdsArr && this.subProdsArr.length > 0;
     this.isEditProduct = true;
     if (!this.isEditProduct) this.onResetForm();
   }
 
   public onShowSubProduct(): void {
-    if (!this.subProductsArray || this.subProductsArray.length === 0) {
+    if (!this.subProdsArr || this.subProdsArr.length === 0) {
       this.onAddSubProduct();
     } else {
-      this.subProductsArray.clear();
+      this.subProdsArr.clear();
       this.form.controls['cost'].setErrors(null);
     }
     this.hasSubProducts = !this.hasSubProducts;
@@ -203,14 +206,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public onAddSubProduct(): void {
     const item: IProduct = Object.assign([], this.form.value);
-    this.subProductsArray = this.form.get('sub_products') as FormArray;
+    this.subProdsArr = this.form.get('sub_products') as FormArray;
 
     const result = this.createSubItem({
       product_name: item.product_name,
       qty: this.form.get('qty').value,
       cost: 1,
     });
-    this.subProductsArray.push(result);
+    this.subProdsArr.push(result);
     this.cdRef.detectChanges();
   }
 
@@ -231,7 +234,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public onRemoveSubProduct(product: IProduct): void {
+  public remove(array, id) {
+    return array.some((o, i, a) => o.id === id
+      ? a.splice(i, 1)
+      : this.remove(o.sub || [], id)
+    );
+  }
+
+  public onRemoveSubProduct(product: IProduct, i?: number): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, { width: '410px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -243,8 +253,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
           const index = p.sub_products.indexOf(product);
           if (index > -1)
             p.sub_products.splice(index, 1);
-
         });
+
         this.onResetForm();
       }
     });
