@@ -177,10 +177,9 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
         });
         this.subProductsArray.push(item);
       });
-
-      this.hasSubProducts = !this.hasSubProducts;
     }
-    this.isEditProduct = !this.isEditProduct;
+    this.hasSubProducts = true;
+    this.isEditProduct = true;
     if (!this.isEditProduct) this.onResetForm();
   }
 
