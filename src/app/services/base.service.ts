@@ -27,7 +27,7 @@ export abstract class BaseService<T> {
   }
 
   private setEntityParam(param: string): any {
-    return param ? ['/',param].join() : '';
+    return param ? ['/', param].join() : '';
   }
 
   private removeNullProps(obj: any): any {
@@ -46,8 +46,15 @@ export abstract class BaseService<T> {
       { headers: this.commonHeaders() });
   }
 
+  public delete(id?: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}${this.entity}/${id}`,
+      { headers: this.commonHeaders() });
+  }
+
   public patch(object: T, url?: string): Observable<T> {
-    return this.http.patch<T>(`${this.baseUrl}${this.entity}${url ? '/' + url : ''}`, this.removeNullProps(object), { headers: this.commonHeaders() }
+    return this.http.patch<T>(`${this.baseUrl}${this.entity}${url ? '/' + url : ''}`,
+      this.removeNullProps(object),
+      { headers: this.commonHeaders() }
     );
   }
 

@@ -1,5 +1,5 @@
 import { getAllContractsSelector } from './../../store/selectors/contracts.selector';
-import { addProducts } from './../../store/actions/products.action';
+import { addContractProducts, deleteContractProduct } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store, select } from '@ngrx/store';
 import { IProduct, PillState, IContract, IContractProduct, IContractResponse } from './../../contract.model';
@@ -89,7 +89,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       const payload = this.fmtPayload(this.form.value);
 
       this.productPillsArr.push(this.form.value);
-      this.store.dispatch(addProducts({ payload }));
+      this.store.dispatch(addContractProducts({ payload }));
       this.onResetForm();
     }
   }
@@ -112,7 +112,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
       const payload = this.fmtPayload(this.form.value);
 
-      this.store.dispatch(addProducts({
+      this.store.dispatch(addContractProducts({
         payload
       }));
       this.onResetForm();
@@ -153,13 +153,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     return this.fb.group(item);
   }
 
-  public onRemove(value: string | number): void {
-    const i = this.productPillsArr.findIndex(x => x.id === value);
+  public onRemove(id: string): void {
+    const i = this.productPillsArr.findIndex(x => x.id === id);
     this.productPillsArr.splice(i);
   }
 
   public OnEditProduct(product: IProduct): void {
     if (!product) return;
+
     //assign selected item to form
     const { id, product_name, qty, cost, sub_products, cp_id } = product;
     this.form.controls['id'].patchValue(id);
@@ -220,29 +221,35 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        //remote item from the database
+        this.store.dispatch(deleteContractProduct({ id: product.cp_id }));
+
+        /* remove item from the array */
         const index = this.productPillsArr.indexOf(product);
         if (index > -1)
           this.productPillsArr.splice(index, 1);
+
         this.onResetForm();
       }
     });
   }
 
-  public onRemoveSubProduct(product: IProduct, subProduct: IProduct, i: number): void {
+  public onRemoveSubProduct(product: IProduct): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '410px',
       data: {}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.store.dispatch(deleteContractProduct({ id: product.cp_id }));
         //remove from displayed array
-        const index = product.sub_products.indexOf(subProduct);
-        if (index > -1) {
-          product.sub_products.splice(index, 1);
-        }
+        // const index = product.sub_products.indexOf(subProduct);
+        // if (index > -1) {
+        //   product.sub_products.splice(index, 1);
+        // }
         //remove from form binding
-        const item = this.form.get('sub_products') as FormArray;
-        item.removeAt(i);
+        // const item = this.form.get('sub_products') as FormArray;
+        // item.removeAt(i);
         this.onResetForm();
       }
     });

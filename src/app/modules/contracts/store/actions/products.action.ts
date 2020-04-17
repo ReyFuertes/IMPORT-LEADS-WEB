@@ -3,14 +3,20 @@ import { createAction, props } from '@ngrx/store';
 
 export enum ProductActionTypes {
   addProduct = '[Product] Add',
-  addProductSuccess = '[Product] Add (success)'
+  addContractProductsSuccess = '[Product] Add (success)',
+  deleteContractProduct = '[Product] Delete',
+  deleteContractProductSuccess = '[Product] Delete (success)',
 }
 
-export const addProducts = createAction(
+export const addContractProducts = createAction(
   ProductActionTypes.addProduct,
   props<{ payload: IContractProduct }>()
 );
-export const addProductSuccess = createAction(
-  ProductActionTypes.addProductSuccess,
-  props<{ created: IContract }>()
+export const addContractProductsSuccess = createAction(
+  ProductActionTypes.addContractProductsSuccess,
+  props<{ created: IContractProduct }>()
+);
+export const deleteContractProduct = createAction(
+  ProductActionTypes.deleteContractProduct ,
+  props<{ id: string }>()
 );

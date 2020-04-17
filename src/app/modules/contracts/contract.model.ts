@@ -20,6 +20,7 @@ export class IContractResponse {
 }
 
 export interface IContractProduct {
+  id?: string;
   parent: IProduct
   child: IProduct[],
   contract: IContract;
