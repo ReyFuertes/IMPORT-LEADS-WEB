@@ -19,8 +19,12 @@
 .il-button {
   @include il-button;
 }
-.add-icon, .remove-icon {
+.remove-icon {
   cursor: pointer;
 }
-
-
+.add-icon {
+  height: 25px;
+  top: 2px;
+  position: relative;
+  cursor: pointer;
+}

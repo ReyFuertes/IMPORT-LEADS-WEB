@@ -5,7 +5,7 @@
   <div fxLayout="row" fxLayoutGap="20px">
     <div class="action-item" *ngFor="let option of options" (click)="option?.action()" fxLayoutAlign="start center" fxLayoutGap="5px">
       <img [src]="svgPath + option?.icon" />
-      <span>{{ option?.label }}</span>
+      <span [matTooltip]="option?.label">{{ option?.label }}</span>
     </div>
   </div>
   <mat-card>
