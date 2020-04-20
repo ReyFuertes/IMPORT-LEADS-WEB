@@ -1,21 +1,41 @@
 import { IContractProduct } from './../../contract.model';
-import { addContractSuccess } from './../actions/contracts.action';
 import { mergeMap, map } from 'rxjs/operators';
-import { ProductService, ContractProductService } from './../../services/products.service';
-import { addContractProducts, addContractProductsSuccess, deleteContractProduct } from './../actions/products.action';
+import { ContractProductService } from './../../services/products.service';
+import { addContractProducts, addContractProductsSuccess, loadContractProducts, loadContractProductSuccess, deleteContractProduct, updateContractProductsSuccess, updateContractProduct } from './../actions/products.action';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { zip, of } from 'rxjs';
 
 @Injectable()
-export class ProductssEffects {
+export class ProductsEffects {
+  loadContractProducts$ = createEffect(() => this.actions$.pipe(
+    ofType(loadContractProducts),
+    mergeMap(({ id }) => this.contractProductService.getById(id).pipe(
+      map((items: IContractProduct[]) => {
+        return loadContractProductSuccess({ items });
+      })
+    ))
+  ));
+
+  updateContractProduct$ = createEffect(() => this.actions$.pipe(
+    ofType(updateContractProduct),
+    mergeMap(({ payload }) =>
+      this.contractProductService.patch(payload)
+        .pipe(
+          map((updated: any) => {
+            return updateContractProductsSuccess({ updated });
+          })
+        ))
+  ));
+
   addContractProduct$ = createEffect(() => this.actions$.pipe(
     ofType(addContractProducts),
     mergeMap(({ payload }) =>
       this.contractProductService.post(payload)
         .pipe(
           map((created: any) => {
-            return addContractSuccess({ created });
+            debugger
+            return addContractProductsSuccess({ created });
           })
         ))
   ));

@@ -21,9 +21,9 @@ export class IContractResponse {
 
 export interface IContractProduct {
   id?: string;
-  parent: IProduct
-  child: IProduct[],
-  contract: IContract;
+  parent?: IProduct
+  sub_products?: IProduct[],
+  contract?: IContract;
   cp_id?: string;
 }
 export interface IProductImage {
@@ -41,7 +41,7 @@ export enum PillState {
   reset = 1
 }
 export interface IProduct {
-  id?: string | number;
+  id?: string;
   product_name: string;
   qty: string | number;
   cost: string | number;

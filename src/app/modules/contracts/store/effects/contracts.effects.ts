@@ -34,7 +34,7 @@ export class ContractsEffects {
   ));
   loadContracts$ = createEffect(() => this.actions$.pipe(
     ofType(loadContracts),
-    mergeMap(({ queryParam }) => this.contractsService.getAll(queryParam).pipe(
+    mergeMap(({ param }) => this.contractsService.getAll(param).pipe(
       map((items: IContract[]) => {
         return loadContractSuccess({ items });
       })

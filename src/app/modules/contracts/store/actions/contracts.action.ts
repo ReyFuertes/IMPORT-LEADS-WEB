@@ -24,7 +24,7 @@ export const updateContractSuccess = createAction(
 );
 export const loadContracts = createAction(
   ContractActionTypes.LoadContracts,
-  props<{ queryParam: QueryParam }>()
+  props<{ param }>()
 );
 export const loadContractSuccess = createAction(
   ContractActionTypes.LoadContractsSuccess,

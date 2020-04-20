@@ -1,5 +1,6 @@
-import { getAllContractsSelector } from './../../store/selectors/contracts.selector';
-import { addContractProducts, deleteContractProduct } from './../../store/actions/products.action';
+
+import { getAllContractsSelector, getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
+import { addContractProducts, deleteContractProduct, updateContractProduct } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store, select } from '@ngrx/store';
 import { IProduct, PillState, IContract, IContractProduct, IContractResponse } from './../../contract.model';
@@ -10,7 +11,7 @@ import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { take, takeUntil, filter, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import * as _ from 'lodash';
 @Component({
   selector: 'il-contract-detail-products',
@@ -34,6 +35,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public isRightNavOpen: boolean = false;
   @Input()
   public contract: IContract;
+  public $contractProducts: Observable<IContractProduct[]>;
 
   constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
@@ -46,30 +48,34 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       cp_id: [null]
     });
     //get the sub total of all productSet
-    // this.form.get('sub_products')
-    //   .valueChanges.pipe(takeUntil(this.destroy$), filter((result) => !!result))
-    //   .subscribe(children => {
-    //     if (children) {
-    //       const totalValueOfSubProducts = children.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0);
-    //       const valueOfParentProduct = this.form.get('cost').value;
-    //       //if the value of input is less than the value of sub products cost total, mark as invalid error
-    //       if (parseInt(totalValueOfSubProducts) !== parseInt(valueOfParentProduct)) {
-    //         this.form.controls['cost'].setErrors({ 'invalid': true });
-    //       } else {
-    //         this.form.controls['cost'].setErrors(null);
-    //       }
-    //     }
-    //   })
+    this.form.get('sub_products')
+      .valueChanges.pipe(takeUntil(this.destroy$), filter((result) => !!result))
+      .subscribe(children => {
+        if (children) {
+          const totalValOfSP = children.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0) || 0;
+          const valOfParent = this.form.get('cost').value;
+          console.log(totalValOfSP, valOfParent)
+          //if the value of input is less than the value of sub products cost total, mark as invalid error
+          if (parseInt(totalValOfSP) > parseInt(valOfParent)) {
+            this.form.controls['cost'].setErrors({ 'invalid': true });
+          } else {
+            this.form.controls['cost'].setErrors(null);
+          }
+        }
+      })
   }
 
   ngOnDestroy() { }
 
   ngOnInit() {
+    this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
+
     //map products to suggestions
     // this.store.pipe(select(getAllContractProductsSelector),
     //   tap(p => this.suggestions = this.suggest(p)))
     //   .subscribe();
     // this.suggestions = this.suggest(this.contract.products);
+
   }
 
   public subProductsArr = () => this.form.get('sub_products') as FormArray;
@@ -85,11 +91,10 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
       const products: IProduct[] = Object.assign([], sub_products);
       products.push({ product_name, qty, cost });
-
       const payload = this.fmtPayload(this.form.value);
 
-      this.productPillsArr.push(this.form.value);
       this.store.dispatch(addContractProducts({ payload }));
+
       this.onResetForm();
     }
   }
@@ -107,13 +112,12 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     if (this.form.value) {
       const { id } = this.form.value;
       const i = this.productPillsArr.findIndex(x => x.id === id);
+
       this.productPillsArr[i] = this.form.value;
       this.isEditProduct = !this.isEditProduct;
 
-      const payload = this.fmtPayload(this.form.value);
-
-      this.store.dispatch(addContractProducts({
-        payload
+      this.store.dispatch(updateContractProduct({
+        payload: this.fmtPayload(this.form.value)
       }));
       this.onResetForm();
     }
@@ -221,37 +225,54 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ConfirmationComponent, { width: '410px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        /* remote item from the database */
-        //this.store.dispatch(deleteContractProduct({ id: product.cp_id }));
-
-        /* remove item from the array */
-        const index = this.productPillsArr.indexOf(product);
-        if (index > -1)
-          this.productPillsArr.splice(index, 1);
+        let toRemove: IContractProduct;
+        this.$contractProducts.subscribe(p => {
+          toRemove = p.filter(p => p.id === product.id)[0];
+          const index = p.indexOf(toRemove);
+          if (index > -1) {
+            p.splice(index, 1);
+          }
+        })
+        /* remote product from the database */
+        if (toRemove)
+          this.store.dispatch(deleteContractProduct({ id: toRemove.id }));
 
         this.onResetForm();
       }
     });
   }
 
-  public onRemoveSubProduct(product: IProduct): void {
+  public onRemoveSubProduct(product: IProduct, i?: number): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, { width: '410px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        /* remote sub item from the database */
-        this.store.dispatch(deleteContractProduct({ id: product.cp_id }));
 
-        /* remove item from the array */
-        this.productPillsArr.forEach(p => {
-          p.sub_products.forEach((item, index) => {
-            if (item.id === product.id) {
-              p.sub_products.splice(index, 1);
-              return;
-            }
+        //remove item from form array
+        const item = this.form.get('sub_products') as FormArray;
+        item.removeAt(i);
+
+        /* collect the contract product to be removed */
+        let toRemove: IContractProduct;
+        this.$contractProducts.subscribe(p => {
+          p.forEach(p => {
+            p.sub_products.forEach(sp => {
+              if (sp.id === product.id) {
+                const index = p.sub_products.indexOf(sp);
+                if (index > -1) {
+                  p.sub_products.splice(index, 1);
+                  toRemove = sp;
+                }
+                return;
+              }
+            });
           });
-        });
+        })
+        /* remote sub product from the database */
+        if (toRemove) {
+          this.store.dispatch(deleteContractProduct({ id: toRemove.id }));
 
-        this.onResetForm();
+          this.onResetForm();
+        }
       }
     });
   }

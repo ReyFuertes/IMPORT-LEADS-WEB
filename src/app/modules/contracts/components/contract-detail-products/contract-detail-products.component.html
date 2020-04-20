@@ -10,7 +10,7 @@
       Select the product to select the related terms that you want to inspect
     </p>
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px">
-      <ng-container *ngFor="let item of productPillsArr; let i = index;">
+      <ng-container *ngFor="let item of ($contractProducts | async); let i = index;">
         <!-- parent -->
         <il-pill [state]="state" (deSelectEmitter)="deSelectChange()" (stateEmitter)="removeSelection()" (click)="OnEditProduct(item)" [enabled]="!isRightNavOpen ||isRightNavOpen && (item?.sub_products && !item?.sub_products.length > 0)"
           [item]="{label: item.product_name, value: item.id}" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(item)" [selectable]="true">
@@ -43,7 +43,7 @@
                 <il-input fxFlex="15" [form]="sub_product" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity"></il-input>
                 <il-input fxFlex="15" [form]="sub_product" [isNumberOnly]="true" [controlName]="'cost'" placeholder="Enter unit cost"></il-input>
                 <div fxFlex="5" fxLayoutAlign="start center">
-                  <img class="remove-icon" matTooltip="Remove" (click)="onRemoveSubProduct(sub_product?.value)" [src]="svgPath + 'delete-icon-red.svg'">
+                  <img class="remove-icon" matTooltip="Remove" (click)="onRemoveSubProduct(sub_product?.value, i)" [src]="svgPath + 'delete-icon-red.svg'">
                 </div>
               </div>
             </ng-container>

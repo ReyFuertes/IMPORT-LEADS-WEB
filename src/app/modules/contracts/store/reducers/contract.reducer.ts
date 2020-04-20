@@ -1,7 +1,7 @@
 import { ContractModuleState } from './index';
 import { AppState } from 'src/app/store/app.reducer';
 import { loadContracts, loadContractSuccess, addContractSuccess, cacheImages, clearCachedImages, updateContractSuccess } from '../actions/contracts.action';
-import { IContract, IProductImage, IProduct } from './../../contract.model';
+import { IContract, IProductImage, IProduct, IContractProduct } from './../../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
@@ -52,8 +52,8 @@ export const getAllContracts = (state: ContractModuleState) => {
   return contracts && contracts.sort((a: IContract, b: IContract) => sortCreatedAt(a, b));
 };
 export const getAllContractProducts = (state: ContractModuleState) => {
-  const products: IProduct[] = state && state.contractProduct.entities ? Object.values(state.contractProduct.entities) : null;
-  return products && products.sort((a: IProduct, b: IProduct) => sortCreatedAt(a, b));
+  const contractProducts: IContractProduct[] = state && state.contractProduct.entities ? Object.values(state.contractProduct.entities) : null;
+  return contractProducts; // && products.sort((a: IContractProduct, b: IContractProduct) => sortCreatedAt(a, b));
 };
 export const sortCreatedAt = (a, b) => {
   if (a.created_at < b.created_at) return 1;

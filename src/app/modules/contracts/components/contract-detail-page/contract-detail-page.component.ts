@@ -1,10 +1,11 @@
-import { getContractById } from './../../store/selectors/contracts.selector';
+import { loadContractProducts } from './../../store/actions/products.action';
+import { getContractById, getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
 import { ReOrderImages } from './../../store/actions/contracts.action';
 import { User } from './../../../users/users.models';
 import { AppState } from './../../../../store/app.reducer';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { IContract, IProductImage } from './../../contract.model';
+import { IContract, IProductImage, IContractProduct } from './../../contract.model';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, ViewChild, ElementRef, HostListener, Inject, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
@@ -100,6 +101,9 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
 
     this.id = this.route.snapshot.paramMap.get('id') || null;
     if (this.id) {
+      //load contract products also..
+      this.store.dispatch(loadContractProducts({ id: this.id }));
+
       this.$contract = this.store.pipe(select(getContractById(this.id)));
       //passed the contract images to a variable array so we can drag and drop
       this.$contract && this.$contract.subscribe(c => {
