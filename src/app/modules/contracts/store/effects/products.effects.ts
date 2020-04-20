@@ -34,7 +34,6 @@ export class ProductsEffects {
       this.contractProductService.post(payload)
         .pipe(
           map((created: any) => {
-            debugger
             return addContractProductsSuccess({ created });
           })
         ))

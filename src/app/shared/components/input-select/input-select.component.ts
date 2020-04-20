@@ -25,18 +25,15 @@ export class InputSelectComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  public filter(event) {
-    let query = event.query;
-    this.filtered = this.filterArr(query, this.suggestions);
-  }
+  public filter = (event) => this.filtered = this.filterArr(event.query, this.suggestions);
 
   public filterArr(query, items: any[]): any[] {
     let filtered: any[] = [];
-    items && items.forEach((val, i) => {
-      if (val.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(val);
+    items && items.forEach((item, i) => {
+      if (item.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(item);
       }
     });
     return filtered;

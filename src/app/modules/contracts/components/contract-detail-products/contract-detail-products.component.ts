@@ -10,7 +10,7 @@ import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
-import { take, takeUntil, filter, tap } from 'rxjs/operators';
+import { take, takeUntil, filter, tap, concatMap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import * as _ from 'lodash';
 @Component({
@@ -47,6 +47,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       contract: [null],
       cp_id: [null]
     });
+
     //get the sub total of all productSet
     this.form.get('sub_products')
       .valueChanges.pipe(takeUntil(this.destroy$), filter((result) => !!result))
@@ -54,7 +55,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
         if (children) {
           const totalValOfSP = children.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0) || 0;
           const valOfParent = this.form.get('cost').value;
-          console.log(totalValOfSP, valOfParent)
+
           //if the value of input is less than the value of sub products cost total, mark as invalid error
           if (parseInt(totalValOfSP) > parseInt(valOfParent)) {
             this.form.controls['cost'].setErrors({ 'invalid': true });
@@ -69,13 +70,21 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
+    this.$contractProducts.subscribe((p: IProduct[]) => {
+      const subProducts = _.flatten(p
+        .filter(o => o && o.sub_products.length > 0)
+        .map(o => o.sub_products));
 
-    //map products to suggestions
-    // this.store.pipe(select(getAllContractProductsSelector),
-    //   tap(p => this.suggestions = this.suggest(p)))
-    //   .subscribe();
-    // this.suggestions = this.suggest(this.contract.products);
-
+      const parents = p.map(p => {
+        return { id: p.id, product_name: p.product_name }
+      });
+      this.suggestions = parents.concat(subProducts).map(cp => {
+        return {
+          value: cp.id,
+          label: cp.product_name
+        }
+      })
+    });
   }
 
   public subProductsArr = () => this.form.get('sub_products') as FormArray;
@@ -87,33 +96,37 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public onAdd(): void {
     if (this.form.value) {
-      const { id, product_name, qty, cost, sub_products } = this.form.value;
-
-      const products: IProduct[] = Object.assign([], sub_products);
-      products.push({ product_name, qty, cost });
-      const payload = this.fmtPayload(this.form.value);
-
-      this.store.dispatch(addContractProducts({ payload }));
+      let payload: IContractProduct = this.fmtPayload(this.form.value);
+      if (payload)
+        this.store.dispatch(addContractProducts({ payload }));
 
       this.onResetForm();
+    }
+  }
+
+  private fmtProductName(name: any | string): any {
+    if (typeof (name) === 'object') {
+      return name.label;
+    } else {
+      return name;
     }
   }
 
   private fmtPayload(value: any): any {
     const { id, product_name, qty, cost, sub_products } = value;
     return {
-      parent: _.pickBy({ id, product_name, qty, cost }, _.identity),
+      parent: _.pickBy({
+        id,
+        product_name: this.fmtProductName(product_name),
+        qty, cost
+      }, _.identity),
       child: Object.assign([], sub_products),
-      contract: this.contract
+      contract: { id: this.contract.id, contract_name: this.contract.contract_name}
     }
   }
 
   public onSave(): void {
     if (this.form.value) {
-      const { id } = this.form.value;
-      const i = this.productPillsArr.findIndex(x => x.id === id);
-
-      this.productPillsArr[i] = this.form.value;
       this.isEditProduct = !this.isEditProduct;
 
       this.store.dispatch(updateContractProduct({
@@ -123,12 +136,34 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private suggest(conProducts: IProduct[]): SimpleItem[] {
-    return conProducts && conProducts.reduce(
-      ({ }, { id, product_name, sub_products }) => [{ value: id, label: product_name }]
-        .concat(sub_products.map((sub) => ({ value: id, label: product_name, ...{ value: sub.id, label: sub.product_name } }))),
-      []
-    );
+  public OnEditProduct(product: IProduct): void {
+    if (!product) return;
+
+    //assign selected item to form
+    const { id, product_name, qty, cost, sub_products } = product;
+    this.form.reset();
+    this.subProdsArr = null;
+
+    this.form.controls['id'].patchValue(id);
+    this.form.controls['product_name'].patchValue({ label: product_name, value: id }); // we use an object for suggestion to get the values
+    this.form.controls['qty'].patchValue(qty);
+    this.form.controls['cost'].patchValue(cost);
+    this.form.controls['sub_products'].patchValue(sub_products);
+
+    //structure subproducts
+    if (sub_products && sub_products.length > 0) {
+      this.subProdsArr = this.form.get('sub_products') as FormArray;
+      if (this.subProdsArr) this.subProdsArr.clear();
+
+      sub_products && sub_products.forEach(subItem => {
+        const item = this.createSubItem(subItem);
+        this.subProdsArr.push(item);
+      });
+    }
+
+    this.hasSubProducts = this.subProdsArr && this.subProdsArr.length > 0;
+    this.isEditProduct = true;
+    if (!this.isEditProduct) this.onResetForm();
   }
 
   public deSelectChange(): void {
@@ -160,41 +195,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public onRemove(id: string): void {
     const i = this.productPillsArr.findIndex(x => x.id === id);
     this.productPillsArr.splice(i);
-  }
-
-  public OnEditProduct(product: IProduct): void {
-    if (!product) return;
-
-    //assign selected item to form
-    const { id, product_name, qty, cost, sub_products, cp_id } = product;
-    this.form.reset();
-    this.subProdsArr = null;
-
-    this.form.controls['id'].patchValue(id);
-    this.form.controls['product_name'].patchValue(product_name);
-    this.form.controls['qty'].patchValue(qty);
-    this.form.controls['cost'].patchValue(cost);
-    this.form.controls['sub_products'].patchValue(sub_products);
-    this.form.controls['cp_id'].patchValue(cp_id);
-
-    if (sub_products && sub_products.length > 0) {
-      this.subProdsArr = this.form.get('sub_products') as FormArray;
-      if (this.subProdsArr) this.subProdsArr.clear();
-
-      sub_products && sub_products.forEach(subItem => {
-        const item = this.createSubItem({
-          id: subItem.id,
-          product_name: subItem.product_name,
-          qty: subItem.qty,
-          cost: subItem.cost,
-          cp_id: subItem.cp_id
-        });
-        this.subProdsArr.push(item);
-      });
-    }
-    this.hasSubProducts = this.subProdsArr && this.subProdsArr.length > 0;
-    this.isEditProduct = true;
-    if (!this.isEditProduct) this.onResetForm();
   }
 
   public onShowSubProduct(): void {

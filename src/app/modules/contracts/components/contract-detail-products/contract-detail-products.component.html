@@ -25,8 +25,8 @@
     <div *ngIf="!isRightNavOpen" class="product-section" fxLayout="row" [formGroup]="form" fxLayoutGap="20px">
       <div fxFlex fxLayout="column" fxLayoutAlign="start start">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-          <!-- <il-input-select fxFlex [form]="form" [controlName]="'product_name'" [suggestions]="suggestions" [isReadOnly]="isRightNavOpen"></il-input-select> -->
-          <il-input fxFlex [form]="form" [controlName]="'product_name'" placeholder="Product name" [isReadOnly]="isRightNavOpen"></il-input>
+          <il-input-select fxFlex [form]="form" [controlName]="'product_name'" [suggestions]="suggestions" [isReadOnly]="isRightNavOpen"></il-input-select>
+          <!-- <il-input fxFlex [form]="form" [controlName]="'product_name'" placeholder="Product name" [isReadOnly]="isRightNavOpen"></il-input> -->
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'qty'" placeholder="Enter quantity" [isReadOnly]="isRightNavOpen"></il-input>
           <il-input fxFlex="15" [form]="form" [isNumberOnly]="true" [controlName]="'cost'" [showErrors]="hasSubProducts" placeholder="Enter unit cost"></il-input>
           <div fxFlex="5"></div>
