@@ -1,9 +1,9 @@
-
+import { IProduct } from './../../../products/products.model';
 import { getAllContractsSelector, getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
 import { addContractProducts, deleteContractProduct, updateContractProduct } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store, select } from '@ngrx/store';
-import { IProduct, PillState, IContract, IContractProduct, IContractResponse } from './../../contract.model';
+import { PillState, IContract, IContractProduct, IContractResponse } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleItem } from './../../../../shared/generics/generic.model';

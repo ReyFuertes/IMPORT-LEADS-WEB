@@ -1,5 +1,5 @@
+import { IProduct } from './../../products.model';
 import { IRelatedProduct } from '../../../venues/venues.models';
-import { IProduct } from '../../../contracts/contract.model';
 import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from '../../../../../environments/environment';

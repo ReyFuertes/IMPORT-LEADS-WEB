@@ -1,3 +1,4 @@
+import { IProduct } from './../products/products.model';
 import { IVenue } from './../venues/venues.models';
 import { IUser } from './../../models/user.model';
 
@@ -40,16 +41,7 @@ export enum PillState {
   default = 0,
   reset = 1
 }
-export interface IProduct {
-  id?: string;
-  product_name: string | any;
-  qty: string | number;
-  cost: string | number;
-  sub_products?: IProduct[];
-  created_at?: Date;
-  updated_at?: Date;
-  cp_id?: string;
-}
+
 export interface IContract {
   id?: string;
   contract_name: string;

@@ -1,7 +1,7 @@
 import { ContractModuleState } from './index';
 import { AppState } from 'src/app/store/app.reducer';
 import { loadContracts, loadContractSuccess, addContractSuccess, cacheImages, clearCachedImages, updateContractSuccess } from '../actions/contracts.action';
-import { IContract, IProductImage, IProduct, IContractProduct } from './../../contract.model';
+import { IContract, IProductImage, IContractProduct } from './../../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 

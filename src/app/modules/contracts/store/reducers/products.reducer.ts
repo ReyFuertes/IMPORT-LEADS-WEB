@@ -1,5 +1,5 @@
 import { loadContractProductSuccess, updateContractProductsSuccess } from './../actions/products.action';
-import { IProduct, IContractProduct } from './../../contract.model';
+import { IContractProduct } from './../../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { addContractProductsSuccess } from '../actions/products.action';

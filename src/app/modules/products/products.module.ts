@@ -1,9 +1,9 @@
+import { ProductsService } from './products.service';
+import { ProductsEffects } from './../contracts/store/effects/products.effects';
 import { ProductsSubListComponent } from './components/products-sub-list/products-sub-list.component';
 import { ProductListComponent } from './components/products-list/product-list.component';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { ProductsContainerComponent } from './container/products-container.component';
-import { ImagesService } from './../../services/images.service';
-import { UploadService } from './../../services/upload.service';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MatTableModule } from '@angular/material/table';
+import { ProductsReducer } from './store/products.reducer';
 
 const routes: Routes = [
   {
@@ -79,8 +80,8 @@ const materialModules = [
     ...materialModules,
     DialogModule,
     RouterModule.forChild(routes),
-    // StoreModule.forFeature('product', reducers),
-    // EffectsModule.forFeature([ContractsEffects, ProductsEffects])
+    StoreModule.forFeature('products', ProductsReducer),
+    EffectsModule.forFeature([ProductsEffects])
   ],
   exports: [],
   declarations: [
@@ -90,6 +91,7 @@ const materialModules = [
     ProductsSubListComponent
   ],
   providers: [
+    ProductsService
   ],
 })
 export class ProductsModule { }

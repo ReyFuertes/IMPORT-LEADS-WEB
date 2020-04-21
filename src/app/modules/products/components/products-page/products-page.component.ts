@@ -1,4 +1,4 @@
-import { IProduct } from './../../../contracts/contract.model';
+import { IProduct } from './../../products.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

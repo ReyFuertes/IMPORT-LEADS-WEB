@@ -1,4 +1,4 @@
-import { IProduct, IContractProduct, IContract } from './../../contract.model';
+import { IContractProduct, IContract } from './../../contract.model';
 import { createAction, props } from '@ngrx/store';
 
 export enum ProductActionTypes {
