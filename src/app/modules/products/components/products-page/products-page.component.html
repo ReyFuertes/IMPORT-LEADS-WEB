@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <div>
+    <div fxFlex>
+      <h1>Products</h1>
+    </div>
+    <div fxFlex="120px" fxLayoutAlign="end center">
+      <il-sort></il-sort>
+    </div>
+  </div>
+  <div>
+    <il-product-list [cols]="cols" [products]="products"></il-product-list>
+  </div>
+
+  <div class="action-btn">
+    <button mat-button color="primary" class="mat-elevation-z4" (click)="onAddVenues()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

@@ -77,6 +77,6 @@ export abstract class BaseService<T> {
       Accept: "application/json"
     });
     headers.set('Content-Type', 'multipart/form-data');
-    return this.http.post<T>(`${this.baseUrl}${this.entity}${formatParam}`, (object), { headers: headers });
+    return this.http.post<T>(`${this.baseUrl}${this.entity}${formatParam}`, object, { headers: headers });
   }
 }

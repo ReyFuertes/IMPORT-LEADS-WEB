@@ -47,8 +47,8 @@ export class TopNavComponent implements OnInit {
         route: '/dashboard/venues',
       },
       {
-        label: 'USERS',
-        route: '/dashboard/users',
+        label: 'PRODUCTS',
+        route: '/dashboard/products',
       }
     ];
   }

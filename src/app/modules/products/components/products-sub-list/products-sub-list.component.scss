@@ -1,0 +1,15 @@
+@import "src/styleguide/shared";
+.col-header {
+  color: $color-gray-1;
+  font-size: 12px;
+}
+:host ::ng-deep {
+  .mat-list-base .mat-list-item .mat-list-item-content,
+  .mat-list-base .mat-list-option .mat-list-item-content {
+    font-size: 14px;
+    color: $color-black-2;
+  }
+  .mat-list-item-content {
+    border-bottom: thin $color-gray-3 solid;
+  }
+}

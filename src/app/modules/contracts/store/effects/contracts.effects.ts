@@ -32,6 +32,7 @@ export class ContractsEffects {
         })
       ))
   ));
+
   loadContracts$ = createEffect(() => this.actions$.pipe(
     ofType(loadContracts),
     mergeMap(({ param }) => this.contractsService.getAll(param).pipe(
@@ -40,14 +41,18 @@ export class ContractsEffects {
       })
     ))
   ));
+
   uploadImages$ = createEffect(() => this.actions$.pipe(
     ofType(uploadContractImages),
-    mergeMap(({ files }) => this.uploadService.upload(files, 'multiple').pipe(
-      map((file: any) => {
-        return uploadContractImageSuccess({});
-      })
-    ))
+    mergeMap(({ files }) => {
+      return this.uploadService.upload(files, 'multiple').pipe(
+        map((file: any) => {
+          return uploadContractImageSuccess({});
+        })
+      )
+    })
   ));
+
   reOrderImages$ = createEffect(() => this.actions$.pipe(
     ofType(ReOrderImages),
     switchMap(({ images }) => this.imagesService.patch(images, 'reorder'))

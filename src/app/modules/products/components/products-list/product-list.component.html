@@ -1,0 +1,45 @@
+<div class="col-header" fxLayoutAlign="start center" fxLayoutGap="5px">
+  <div *ngFor="let col of cols; let last = last" [fxFlex]="col?.width">{{ col?.label }}</div>
+</div>
+<div class="il-draggable-expansion">
+  <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
+    <mat-expansion-panel #pnl cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel" *ngFor="let product of products; let i = index" hideToggle="true">
+
+      <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i)" (mouseover)="onHover(i)" (mouseleave)="mouseout()">
+        <div class="pnl-header" fxLayout="row" fxLayoutGap="10px">
+          <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
+          <div fxFlex="40" fxLayoutAlign="start center">
+            <span>{{product?.product_name}}</span>
+          </div>
+          <div fxFlex="33" fxLayoutAlign="start center">
+            <div *ngFor="let product of product?.sub_products | slice:0:1; let i = index;">
+              <span> {{ product.product_name }}</span>
+            </div>
+          </div>
+          <div fxFlex="9" fxLayoutAlign="start center">
+            <span>{{product?.qty}}</span>
+          </div>
+          <div fxFlex="8" fxLayoutAlign="start center">
+            <span>{{product?.cost}}</span>
+          </div>
+        </div>
+
+        <div fxFlex="100px" class="pnl-actions" fxLayoutAlign="end center">
+          <il-ellipse-menu class="menu-ellipse" *ngIf="hoveredIndex !== i"></il-ellipse-menu>
+          <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex === null">
+            <img [src]="svgPath + 'edit-icon-blue.svg'" />
+            <img [src]="svgPath + 'delete-icon-red.svg'">
+          </div>
+          <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex === i">
+            <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" />
+            <img [src]="svgPath + 'save-icon-blue.svg'">
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+      <div>
+        <il-products-sub-list></il-products-sub-list>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
