@@ -1,5 +1,5 @@
+import { ProductsEffects } from './store/products.effects';
 import { ProductsService } from './products.service';
-import { ProductsEffects } from './../contracts/store/effects/products.effects';
 import { ProductsSubListComponent } from './components/products-sub-list/products-sub-list.component';
 import { ProductListComponent } from './components/products-list/product-list.component';
 import { ProductsPageComponent } from './components/products-page/products-page.component';

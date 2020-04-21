@@ -11,7 +11,6 @@ export class ProductsEffects {
     ofType(loadProducts),
     mergeMap(() => this.productService.getAll().pipe(
       map((items: IProduct[]) => {
-        debugger
         return loadProductsSuccess({ items });
       })
     ))
