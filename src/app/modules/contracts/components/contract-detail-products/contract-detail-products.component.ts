@@ -112,6 +112,17 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     }
   }
 
+  private fmtSubProducts(sp: IProduct[]): any {
+    return sp.map(sp => {
+      return _.pickBy({
+        id: sp.id,
+        product_name: this.fmtProductName(sp.product_name),
+        qty: sp.qty,
+        cost: sp.cost
+      }, _.identity)
+    })
+  }
+
   private fmtPayload(value: any): any {
     const { id, product_name, qty, cost, sub_products } = value;
     return {
@@ -120,8 +131,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
         product_name: this.fmtProductName(product_name),
         qty, cost
       }, _.identity),
-      child: Object.assign([], sub_products),
-      contract: { id: this.contract.id, contract_name: this.contract.contract_name}
+      child: Object.assign([], this.fmtSubProducts(sub_products)),
+      contract: { id: this.contract.id, contract_name: this.contract.contract_name }
     }
   }
 
@@ -213,7 +224,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.subProdsArr = this.form.get('sub_products') as FormArray;
 
     const result = this.createSubItem({
-      product_name: item.product_name,
+      product_name: this.fmtProductName(item.product_name),
       qty: this.form.get('qty').value,
       cost: 1,
     });
