@@ -42,7 +42,7 @@ export enum PillState {
 }
 export interface IProduct {
   id?: string;
-  product_name: string;
+  product_name: string | any;
   qty: string | number;
   cost: string | number;
   sub_products?: IProduct[];

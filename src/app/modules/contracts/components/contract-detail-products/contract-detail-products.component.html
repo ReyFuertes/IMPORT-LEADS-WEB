@@ -9,6 +9,7 @@
     <p *ngIf="isRightNavOpen && productPillsArr && productPillsArr.length > 0">
       Select the product to select the related terms that you want to inspect
     </p>
+
     <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="15px">
       <ng-container *ngFor="let item of ($contractProducts | async); let i = index;">
         <!-- parent -->
@@ -32,7 +33,7 @@
         </div>
 
         <!-- form iterated elements -->
-        <ng-container *ngIf="hasSubProducts || subProdsArr">
+        <ng-container *ngIf="hasSubProducts || formSubProdsArr">
           <div *ngFor="let sub_product of form.get('sub_products')?.controls; let i = index" fxLayout="column">
             <ng-container formArrayName="sub_products">
               <div fxFlex fxLayoutGap="20px" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">

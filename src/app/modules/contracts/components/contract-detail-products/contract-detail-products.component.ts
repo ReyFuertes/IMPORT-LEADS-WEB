@@ -22,7 +22,7 @@ import * as _ from 'lodash';
 export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public svgPath: string = environment.svgPath;
   public productsArray: FormArray;
-  public subProdsArr: FormArray;
+  public formSubProdsArr: FormArray;
   public productPillsArr: IProduct[] = [];
   public form: FormGroup;
   public hasSubProducts: boolean = false;
@@ -153,26 +153,30 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     //assign selected item to form
     const { id, product_name, qty, cost, sub_products } = product;
     this.form.reset();
-    this.subProdsArr = null;
+    this.formSubProdsArr = null;
 
     this.form.controls['id'].patchValue(id);
-    this.form.controls['product_name'].patchValue({ label: product_name, value: id }); // we use an object for suggestion to get the values
+    this.form.controls['product_name'].patchValue({ label: product_name, value: id }); // we use an object for passing values to suggestion control
     this.form.controls['qty'].patchValue(qty);
     this.form.controls['cost'].patchValue(cost);
-    this.form.controls['sub_products'].patchValue(sub_products);
+    this.form.controls['sub_products'].patchValue(this.fmtSubProducts(sub_products));
 
     //structure subproducts
-    if (sub_products && sub_products.length > 0) {
-      this.subProdsArr = this.form.get('sub_products') as FormArray;
-      if (this.subProdsArr) this.subProdsArr.clear();
+    const subProducts = this.fmtSubProducts(sub_products);
+    this.formSubProdsArr = this.form.get('sub_products') as FormArray;
+    if (this.formSubProdsArr) this.formSubProdsArr.clear();
 
-      sub_products && sub_products.forEach(subItem => {
-        const item = this.createSubItem(subItem);
-        this.subProdsArr.push(item);
+    subProducts && subProducts.forEach(subItem => {
+      const item = this.createSubItem({
+        id: subItem.id,
+        product_name: { label: subItem.product_name, value: subItem.id },  // we use an object for passing values to suggestion control
+        qty: subItem.qty,
+        cost: subItem.cost
       });
-    }
+      this.formSubProdsArr.push(item);
+    });
 
-    this.hasSubProducts = this.subProdsArr && this.subProdsArr.length > 0;
+    this.hasSubProducts = this.formSubProdsArr && this.formSubProdsArr.length > 0;
     this.isEditProduct = true;
     if (!this.isEditProduct) this.onResetForm();
   }
@@ -191,7 +195,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   private onResetForm(): void {
     this.form.reset();
     this.hasSubProducts = false;
-    if (this.subProdsArr) this.subProdsArr.clear();
+    if (this.formSubProdsArr) this.formSubProdsArr.clear();
     this.isEditProduct = false;
   }
 
@@ -209,10 +213,10 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   }
 
   public onShowSubProduct(): void {
-    if (!this.subProdsArr || this.subProdsArr.length === 0) {
+    if (!this.formSubProdsArr || this.formSubProdsArr.length === 0) {
       this.onAddSubProduct();
     } else {
-      this.subProdsArr.clear();
+      this.formSubProdsArr.clear();
       this.form.controls['cost'].setErrors(null);
     }
     this.hasSubProducts = !this.hasSubProducts;
@@ -221,14 +225,14 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   public onAddSubProduct(): void {
     const item: IProduct = Object.assign([], this.form.value);
-    this.subProdsArr = this.form.get('sub_products') as FormArray;
+    this.formSubProdsArr = this.form.get('sub_products') as FormArray;
 
     const result = this.createSubItem({
       product_name: this.fmtProductName(item.product_name),
       qty: this.form.get('qty').value,
       cost: 1,
     });
-    this.subProdsArr.push(result);
+    this.formSubProdsArr.push(result);
     this.cdRef.detectChanges();
   }
 
