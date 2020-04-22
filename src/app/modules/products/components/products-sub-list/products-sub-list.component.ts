@@ -1,3 +1,4 @@
+import { environment } from './../../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 
 export interface PeriodicElement {
@@ -22,6 +23,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ProductsSubListComponent implements OnInit {
   public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   public dataSource = ELEMENT_DATA;
+  public svgPath: string = environment.svgPath;
+
   constructor() { }
 
   ngOnInit() { }

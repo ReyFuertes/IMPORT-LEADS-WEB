@@ -1,5 +1,7 @@
 @mixin il-draggable-expansion {
   .pnl-header {
+    color: $color-black-2;
+    font-size: 14px;
     &:first-child > img {
       width: 8px;
     }
@@ -8,7 +10,6 @@
     height: 50px;
     > div {
       height: 50px;
-      // margin-right: 20px;
     }
   }
   .pnl-actions {
@@ -24,9 +25,6 @@
       font-weight: 500;
     }
     @media (max-width: 1280px) {
-      // .menu-icon {
-      //   display: none;
-      // }
       .menu-ellipse {
         display: flex;
       }

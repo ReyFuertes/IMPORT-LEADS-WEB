@@ -1,4 +1,4 @@
-<div class="col-header">
+<div class="col-header" fxLayoutAlign="start center">
   <div fxFlexOffset="39" fxFlex>Product Name</div>
   <div fxFlex="9">Cost</div>
   <div fxFlex="13">Qty</div>
@@ -11,5 +11,11 @@
     <div fxFlex="9">1</div>
     <div fxFlex="12">1</div>
     <div fxFlex="100px"></div>
+  </mat-list-item>
+</mat-list>
+
+<mat-list class="list-footer">
+  <mat-list-item fxLayoutAlign="center center">
+    <img [src]="svgPath + 'add-icon-gray.svg'" />
   </mat-list-item>
 </mat-list>
