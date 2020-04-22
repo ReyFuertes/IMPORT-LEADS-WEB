@@ -8,9 +8,8 @@
     </div>
   </div>
   <div>
-    <il-product-list [cols]="cols" [products]="products"></il-product-list>
+    <il-product-list [products]="($products | async)"></il-product-list>
   </div>
-
   <div class="action-btn">
     <button mat-button color="primary" class="mat-elevation-z4">
       <mat-icon>add</mat-icon>

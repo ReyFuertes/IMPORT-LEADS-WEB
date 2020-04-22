@@ -1,3 +1,7 @@
+import { Observable } from 'rxjs';
+import { getProductsSelector } from './../../store/products.selector';
+import { AppState } from './../../../../store/app.reducer';
+import { Store, select } from '@ngrx/store';
 import { IProduct } from './../../products.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,52 +12,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ProductsPageComponent implements OnInit {
-  public products: IProduct[] = [
-    {
-      id: 'b6a9010e-b655-455d-96aa-3dbfba3b759f',
-      product_name: 'Canhui toys limited ',
-      qty: 1,
-      cost: 1,
-      sub_products: [
-        {
-          id: 'b6a9010e-b655-455d-96aa-3dbfba3b457',
-          product_name: 'Touch Dimmer Switch',
-          qty: 1,
-          cost: 1,
-        },
-        {
-          id: 'b6a9010e-b655-455d-96aa-3dbfba3b7234',
-          product_name: 'Touch Dimmer Switch 1G1',
-          qty: 1,
-          cost: 1,
-        }
-      ]
-    }
-  ];
-  public cols: Array<{ label: string, width?: string | number }> = [
-    {
-      label: 'Product name',
-      width: 37.5
-    },
-    {
-      label: 'Related products',
-      width: 31
-    },
-    {
-      label: 'Qty',
-      width: '100px'
-    },
-    {
-      label: 'Cost',
-      width: '100px'
-    },
-    {
-      label: '',
-    }
-  ];
+  public $products: Observable<IProduct[]>;
 
+  constructor(private store: Store<AppState>) {
+    this.$products = this.store.pipe(select(getProductsSelector))
+  }
 
-  constructor() { }
+  ngOnInit() {
 
-  ngOnInit() { }
+  }
 }

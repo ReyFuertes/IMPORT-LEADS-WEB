@@ -17,11 +17,31 @@ export class ProductListComponent extends GenericPanelComponent implements OnIni
   public dragStart: boolean = false;
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
+  public cols: Array<{ label: string, width?: string | number }> = [
+    {
+      label: 'Product name',
+      width: 37.5
+    },
+    {
+      label: 'Related products',
+      width: 31
+    },
+    {
+      label: 'Qty',
+      width: '100px'
+    },
+    {
+      label: 'Cost',
+      width: '100px'
+    },
+    {
+      label: '',
+    }
+  ];
+
 
   @Input()
   public products: IProduct[];
-  @Input()
-  public cols: Array<{ label: string, width?: string | number }>;
 
   public drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.products, event.previousIndex, event.currentIndex);
@@ -32,7 +52,9 @@ export class ProductListComponent extends GenericPanelComponent implements OnIni
     super();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.products);
+  }
 
   public dragStarted = (event: any) => this.dragStart = event;
 
