@@ -7,6 +7,14 @@
   font-weight: 500;
   color: $color-black-2;
 }
+.menu-icon {
+  cursor: pointer;
+  &:first-child {
+    img {
+      margin-right: 7px;
+    }
+  }
+}
 ::ng-deep {
   .il-draggable-expansion .mat-expansion-panel-header,
   .cdk-drag-preview .mat-expansion-panel-header {

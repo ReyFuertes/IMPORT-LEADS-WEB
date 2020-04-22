@@ -1,18 +1,6 @@
+import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'}
-];
 
 @Component({
   selector: 'il-products-sub-list',
@@ -20,12 +8,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./products-sub-list.component.scss']
 })
 
-export class ProductsSubListComponent implements OnInit {
+export class ProductsSubListComponent extends GenericPanelComponent implements OnInit {
   public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  public dataSource = ELEMENT_DATA;
   public svgPath: string = environment.svgPath;
+  public hoveredIndex: number | null = null;
+  public selectedIndex: number | null = null;
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit() { }
 }

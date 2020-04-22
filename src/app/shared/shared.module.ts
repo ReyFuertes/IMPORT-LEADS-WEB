@@ -87,7 +87,7 @@ const sharedComponents = [
   StarRatingComponent,
   PrimengEditorComponent,
   InputSearchComponent,
-  MenuComponent
+  MenuComponent,
 ];
 
 const directives = [
