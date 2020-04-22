@@ -16,8 +16,8 @@
   }
 }
 ::ng-deep {
-  .il-draggable-expansion .mat-expansion-panel-header,
-  .cdk-drag-preview .mat-expansion-panel-header {
+  .il-draggable-expansion .mat-expansion-panel-header.mat-expanded,
+  .cdk-drag-preview .mat-expansion-panel-header.mat-expanded {
     border-bottom: thin $color-gray-3 solid !important;
   }
 }
@@ -39,7 +39,7 @@
   .mat-list-base .mat-list-item .mat-list-item-content,
   .mat-list-base .mat-list-option .mat-list-item-content {
     font-size: 14px;
-    color: $color-black-2;
+    color: $color-black-1;
   }
   .mat-list-item-content {
     border-bottom: thin $color-gray-3 solid;
