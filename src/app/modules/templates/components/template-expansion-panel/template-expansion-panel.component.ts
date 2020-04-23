@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { ContractSelectDialogComponent } from './../../../dialogs/components/contract-select/contract-select-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./template-expansion-panel.component.scss']
 })
 
-export class TemplateExpansionPanelComponent extends GenericPanelComponent implements OnInit {
+export class TemplateExpansionPanelComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public items: Array<{ id: string, name: string, description1?: string, description2?: string }>;

@@ -1,7 +1,7 @@
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
 
 @Component({
   selector: 'il-contract-expansion-panel',
@@ -9,7 +9,7 @@ import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
   styleUrls: ['./contract-expansion-panel.component.scss']
 })
 
-export class ContractExpansionPanelComponent extends GenericPanelComponent implements OnInit, OnChanges {
+export class ContractExpansionPanelComponent extends GenericRowComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   @Input()
   public panels: Array<{ title: string, description: string }>;
@@ -44,12 +44,6 @@ export class ContractExpansionPanelComponent extends GenericPanelComponent imple
     event.preventDefault();
     this.isTitleEditMode = colToEdit === 0 ? true : false;
     this.isDescEditMode = colToEdit === 1 ? true : false;
-  }
-
-  public mouseout(): void {
-    this.dragIndex = null;
-    this.isTitleHover = null;
-    this.isDescHover = null;
   }
 
   public onEditMode(i: number, col: 0 | 1): void {

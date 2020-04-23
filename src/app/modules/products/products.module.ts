@@ -1,6 +1,5 @@
 import { ProductsEffects } from './store/products.effects';
 import { ProductsService } from './products.service';
-import { ProductsSubListComponent } from './components/products-sub-list/products-sub-list.component';
 import { ProductListComponent } from './components/products-list/product-list.component';
 import { ProductsPageComponent } from './components/products-page/products-page.component';
 import { ProductsContainerComponent } from './container/products-container.component';
@@ -88,7 +87,6 @@ const materialModules = [
     ProductsContainerComponent,
     ProductsPageComponent,
     ProductListComponent,
-    ProductsSubListComponent
   ],
   providers: [
     ProductsService

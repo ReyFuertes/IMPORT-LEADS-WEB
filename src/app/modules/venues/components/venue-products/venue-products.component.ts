@@ -2,7 +2,7 @@ import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { IVenue, IRelatedProduct } from '../../venues.models';
 
 @Component({
@@ -11,7 +11,7 @@ import { IVenue, IRelatedProduct } from '../../venues.models';
   styleUrls: ['./venue-products.component.scss']
 })
 
-export class VenueProductsComponent  extends GenericPanelComponent implements OnInit {
+export class VenueProductsComponent  extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public items: IVenue[];

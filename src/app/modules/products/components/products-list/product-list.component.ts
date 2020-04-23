@@ -4,7 +4,7 @@ import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 
 @Component({
   selector: 'il-product-list',
@@ -12,32 +12,12 @@ import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
   styleUrls: ['./product-list.component.scss']
 })
 
-export class ProductListComponent extends GenericPanelComponent implements OnInit {
+export class ProductListComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public dragStart: boolean = false;
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
-  public cols: Array<{ label: string, width?: string | number }> = [
-    {
-      label: 'Product name',
-      width: 37.5
-    },
-    {
-      label: 'Related products',
-      width: 31
-    },
-    {
-      label: 'Qty',
-      width: '100px'
-    },
-    {
-      label: 'Cost',
-      width: '100px'
-    },
-    {
-      label: '',
-    }
-  ];
+  public cols: string[] = ['product_name', 'qty', 'cost'];
 
 
   @Input()
@@ -53,7 +33,6 @@ export class ProductListComponent extends GenericPanelComponent implements OnIni
   }
 
   ngOnInit() {
-    console.log(this.products);
   }
 
   public dragStarted = (event: any) => this.dragStart = event;

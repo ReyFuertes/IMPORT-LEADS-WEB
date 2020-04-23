@@ -4,14 +4,14 @@ import { Menu } from './../../../../shared/generics/generic.model';
 import { InspectionPanelModel } from './../../inspections.models';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 
 @Component({
   selector: 'il-inspection-active-panel',
   templateUrl: './inspection-active-panel.component.html',
   styleUrls: ['./inspection-active-panel.component.scss']
 })
-export class InspectionActivePanelComponent extends GenericPanelComponent implements OnInit {
+export class InspectionActivePanelComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
   public menus: Menu[];

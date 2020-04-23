@@ -3,7 +3,7 @@ import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { MatDialog } from '@angular/material/dialog';
 import { TagsQuestionDialogComponent } from 'src/app/modules/dialogs/components/tags-question/tags-question-dialog.component';
 import { Tag } from '../../tags.models';
@@ -14,7 +14,7 @@ import { Tag } from '../../tags.models';
   styleUrls: ['./tag-expansion-panel.component.scss']
 })
 
-export class TagExpansionPanelComponent extends GenericPanelComponent implements OnInit {
+export class TagExpansionPanelComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public items: Tag[];

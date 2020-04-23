@@ -1,3 +1,4 @@
+import { DatatableComponent } from './components/datatable/datatable.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { MenuComponent } from './components/menu/menu.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
@@ -24,7 +25,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { TopNavComponent } from './components/topnav/topnav.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NgModule } from '@angular/core';
-import { MatCheckboxModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
+import { MatCheckboxModule, MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule, MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -53,7 +54,10 @@ const materialModules = [
   MatNativeDateModule,
   MatIconModule,
   MatCheckboxModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSortModule,
+  MatTableModule,
+  MatPaginatorModule
 ];
 
 const primeNgModules = [
@@ -88,6 +92,7 @@ const sharedComponents = [
   PrimengEditorComponent,
   InputSearchComponent,
   MenuComponent,
+  DatatableComponent
 ];
 
 const directives = [

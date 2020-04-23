@@ -1,4 +1,4 @@
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { IVenue } from './../../venues.models';
 import { environment } from './../../../../../environments/environment';
@@ -10,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./venue-address.component.scss']
 })
 
-export class VenueAddressComponent extends GenericPanelComponent implements OnInit {
+export class VenueAddressComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public items: IVenue[];

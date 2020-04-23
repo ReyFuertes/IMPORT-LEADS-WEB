@@ -3,7 +3,7 @@ import { SimpleItem } from 'src/app/shared/generics/generic.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { UserAccess } from '../../users.models';
 import { DropdownSelect } from './../../../../shared/generics/generic.model';
 
@@ -12,7 +12,7 @@ import { DropdownSelect } from './../../../../shared/generics/generic.model';
   templateUrl: './user-expansion-panel.component.html',
   styleUrls: ['./user-expansion-panel.component.scss']
 })
-export class UserExpansionPanelComponent extends GenericPanelComponent implements OnInit {
+export class UserExpansionPanelComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public users: User[];

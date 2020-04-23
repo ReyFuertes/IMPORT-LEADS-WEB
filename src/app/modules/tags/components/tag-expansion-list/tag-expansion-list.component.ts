@@ -43,7 +43,7 @@ export class TagExpansionListComponent implements OnInit {
     this.selectedIndex = null;
   }
 
-  public onHover(i: number): void {
+  public mouseover(i: number): void {
     this.hoveredIndex = i;
   }
 

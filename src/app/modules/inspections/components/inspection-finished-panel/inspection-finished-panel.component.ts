@@ -4,14 +4,14 @@ import { SimpleItem, Menu } from './../../../../shared/generics/generic.model';
 import { InspectionPanelModel } from './../../inspections.models';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
-import { GenericPanelComponent } from 'src/app/shared/generics/generic-panel';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 
 @Component({
   selector: 'il-inspection-finished-panel',
   templateUrl: './inspection-finished-panel.component.html',
   styleUrls: ['./inspection-finished-panel.component.scss']
 })
-export class InspectionFinishedPanelComponent extends GenericPanelComponent implements OnInit {
+export class InspectionFinishedPanelComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
   public menus: Menu[];
