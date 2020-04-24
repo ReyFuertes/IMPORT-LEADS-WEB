@@ -13,7 +13,7 @@ import { SharedModule } from './../../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule, MatButtonModule, MatDialogModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatSelectModule, MatAutocompleteModule, MatExpansionModule, MatSlideToggleModule } from '@angular/material';
+import { MatIconModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule, MatButtonModule, MatDialogModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatSelectModule, MatAutocompleteModule, MatExpansionModule, MatSlideToggleModule, MatSortModule } from '@angular/material';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';;
 import { SidebarModule } from 'primeng/sidebar';
 import { InputSwitchModule } from 'primeng/inputswitch';
@@ -65,7 +65,8 @@ const materialModules = [
   MatCheckboxModule,
   MatTooltipModule,
   ScrollingModule,
-  MatTableModule
+  MatTableModule,
+  MatSortModule
 ];
 
 @NgModule({

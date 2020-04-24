@@ -15,7 +15,7 @@ export class ProductsPageComponent implements OnInit {
   public $products: Observable<IProduct[]>;
 
   constructor(private store: Store<AppState>) {
-    this.$products = this.store.pipe(select(getProductsSelector))
+    this.$products = this.store.pipe(select(getProductsSelector));
   }
 
   ngOnInit() {

@@ -4,7 +4,7 @@
     </th>
     <td mat-cell *matCellDef="let element">
       <div>
-        <span *ngIf="selectedIndex !== element?.id">{{ element[col] }}</span>
+        <span [ngClass]="{'hidden': selectedIndex === element?.id}">{{ element[col] }}</span>
         <input *ngIf="selectedIndex === element?.id && !last" (input)="onInput($event, element, col)" [value]="element[col]">
       </div>
       <div [ngClass]="{'hidden': !last}">

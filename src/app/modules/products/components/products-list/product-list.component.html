@@ -1,2 +1,1 @@
-
-<iv-datatable fxFlex [cols]="cols" (deleteEmitter)="onDelete($event)" (modValueEmitter)="onSave($event)" [dataSource]="products"></iv-datatable>
+<iv-datatable *ngIf="products && products.length > 0" fxFlex [cols]="cols" (deleteEmitter)="onDelete($event)" (modValueEmitter)="onSave($event)" [data]="products"></iv-datatable>
