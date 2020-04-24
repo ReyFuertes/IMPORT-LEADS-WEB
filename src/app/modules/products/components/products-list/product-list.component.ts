@@ -19,7 +19,6 @@ export class ProductListComponent extends GenericRowComponent implements OnInit 
   public selectedIndex: number | null = null;
   public cols: string[] = ['product_name', 'qty', 'cost'];
 
-
   @Input()
   public products: IProduct[];
 
@@ -32,7 +31,10 @@ export class ProductListComponent extends GenericRowComponent implements OnInit 
     super();
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  public onSave(event: any): void {
+    console.log(event);
   }
 
   public dragStarted = (event: any) => this.dragStart = event;

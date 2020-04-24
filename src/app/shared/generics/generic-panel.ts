@@ -1,6 +1,10 @@
-export abstract class GenericRowComponent<T = null> {
+import { Output, EventEmitter } from '@angular/core';
+export abstract class GenericRowComponent {
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
+  public modifiedValue: any;
+  @Output()
+  public modValueEmitter = new EventEmitter<any>();
 
   public mouseout(): void {
     if (this.selectedIndex != null) return;
@@ -20,14 +24,15 @@ export abstract class GenericRowComponent<T = null> {
     }, 100);
   }
 
-  public onSave(event: T): void {
-    console.log(event);
+  public onSave(event: any): void {
+    this.modValueEmitter.emit(event);
+    this.onClose();
   }
 
-  public onInput = (event: any, element: any): void => {
+  //update the object value base on input value
+  public onInput(event: any, element: any, col: any): void {
     setTimeout(() => {
-      element = Object.assign({}, event.target.value);
-      console.log(element);
+      Object.assign({}, element[col] = event.target.value);
     }, 100);
   };
 
