@@ -47,9 +47,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  public onDelete(event: any): void {
-    this.deleteEmitter.emit(event);
-  }
+
 
   public splitToSentCase(str: string): string {
     return str.replace(

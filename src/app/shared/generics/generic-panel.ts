@@ -5,6 +5,8 @@ export abstract class GenericRowComponent {
   public modifiedValue: any;
   @Output()
   public modValueEmitter = new EventEmitter<any>();
+  @Output()
+  public deleteEmitter = new EventEmitter<any>();
 
   public mouseout(): void {
     if (this.selectedIndex != null) return;
@@ -22,6 +24,11 @@ export abstract class GenericRowComponent {
     setTimeout(() => {
       this.selectedIndex = null;
     }, 100);
+  }
+
+  public onDelete(event: any): void {
+    this.deleteEmitter.emit(event);
+    this.onClose();
   }
 
   public onSave(event: any): void {

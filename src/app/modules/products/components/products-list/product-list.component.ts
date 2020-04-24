@@ -1,3 +1,6 @@
+import { addProduct, deleteProduct } from './../../store/products.actions';
+import { AppState } from './../../../../store/app.reducer';
+import { Store } from '@ngrx/store';
 import { IProduct } from './../../products.model';
 import { IRelatedProduct } from '../../../venues/venues.models';
 import { SimpleItem } from '../../../../shared/generics/generic.model';
@@ -27,14 +30,22 @@ export class ProductListComponent extends GenericRowComponent implements OnInit 
     this.dragStart = false;
   }
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
     super();
   }
 
   ngOnInit() { }
 
-  public onSave(event: any): void {
-    console.log(event);
+  public onDelete(item: IProduct): void {
+    const { id } = item;
+    this.store.dispatch(deleteProduct({ id }));
+  }
+
+  public onSave(item: IProduct): void {
+    setTimeout(() => {
+      if (item)
+        this.store.dispatch(addProduct({ item }));
+    }, 100);
   }
 
   public dragStarted = (event: any) => this.dragStart = event;

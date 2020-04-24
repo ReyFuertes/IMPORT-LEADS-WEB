@@ -6,5 +6,4 @@ export interface IProduct {
   sub_products?: IProduct[];
   created_at?: Date;
   updated_at?: Date;
-  cp_id?: string;
 }
