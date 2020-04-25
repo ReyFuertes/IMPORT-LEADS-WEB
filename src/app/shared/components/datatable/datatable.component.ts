@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { environment } from './../../../../environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
@@ -16,6 +17,10 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public cols: string[] = [];
   @Input()
   public data: any[];
+  @Input()
+  public dialogIndex: number = 1;
+  @Input()
+  public colFunc: () => void;
   @Input()
   public pageSizeOptions: number[] = [10, 15, 25, 100];
   @Output()
@@ -42,6 +47,16 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
     this.cdRef.detectChanges();
   }
 
+  public onTriggerFunc = (): void => this.colFunc();
+
+  public isColFunc(el: any, i: number): boolean {
+    return el && this.dialogIndex === i;
+  }
+
+  public isLastElement(arr: any[], i: number): boolean {
+    return (arr.length - 1) === i;
+  }
+
   private setData(data: any): void {
     this.dataSource = new MatTableDataSource<any>(data);
     this.dataSource.paginator = this.paginator;
@@ -49,7 +64,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes && changes.data && changes.data.currentValue) {
+    if (changes && changes.data && changes.data.currentValue) {
       this.setData(changes.data.currentValue);
     }
   }

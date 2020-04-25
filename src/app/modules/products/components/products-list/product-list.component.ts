@@ -3,7 +3,6 @@ import { AppState } from './../../../../store/app.reducer';
 import { Store } from '@ngrx/store';
 import { IProduct } from './../../products.model';
 import { IRelatedProduct } from '../../../venues/venues.models';
-import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
@@ -20,7 +19,7 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
   public dragStart: boolean = false;
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
-  public cols: string[] = ['product_name', 'qty', 'cost'];
+  public cols: string[] = ['product_name', 'parent', 'qty', 'cost'];
 
   @Input()
   public products: IProduct[];
@@ -37,9 +36,13 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes && changes.products && changes.products.currentValue) {
+    if (changes && changes.products && changes.products.currentValue) {
       this.products = changes.products.currentValue;
     }
+  }
+
+  public colFunc(): void {
+    alert('No implementation yet!');
   }
 
   public onDelete(item: IProduct): void {

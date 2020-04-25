@@ -51,3 +51,62 @@ mat-icon {
     @extend .il-draggable-expansion;
   }
 }
+:host ::ng-deep {
+  .menu-icon img {
+    cursor: pointer;
+  }
+  tr.mat-header-row {
+    height: 40px;
+    font-weight: 600;
+  }
+  tr.mat-footer-row,
+  tr.mat-row {
+    height: 40px;
+    font-size: 14px;
+  }
+  td.mat-cell,
+  td.mat-footer-cell,
+  th.mat-header-cell {
+    margin-right: 20px;
+    input {
+      height: 30px;
+      border-radius: 2px;
+      border: thin $color-gray-2 solid;
+      padding-left: 5px;
+      font-size: 14px;
+    }
+    &:first-child input {
+      width: 95% !important;
+    }
+    &:not(:first-child) input {
+      width: 80% !important;
+    }
+    &:nth-child(2) {
+      width: 275px;
+      max-width: 275px;
+      min-width: 275px;
+    }
+    &:nth-child(3) {
+      width: 75px;
+      max-width: 75px;
+      min-width: 75px;
+    }
+    &:nth-child(4) {
+      width: 75px;
+      max-width: 75px;
+      min-width: 75px;
+    }
+  }
+  .mat-header-row th {
+    &:last-child {
+      max-width: 100px;
+      width: 100px;
+      .mat-sort-header-arrow {
+        display: none !important;
+      }
+      button {
+        display: none !important;
+      }
+    }
+  }
+}

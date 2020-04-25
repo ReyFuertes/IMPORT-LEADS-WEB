@@ -29,6 +29,17 @@ export function ProductsReducer(state: ProductsState, action: Action) {
   return productsReducer(state, action);
 }
 export const getProducts = (state: ProductsState) => {
-  const products = state && state.entities ? Object.values(state.entities) : null;
+  let products = state && state.entities ? Object.values(state.entities) : null;
+  products = products.map(p => {
+    return {
+      cost: p.cost || 0,
+      created_at: p.created_at,
+      id: p.id,
+      parent: p.parent ? p.parent.product_name : '',
+      product_name: p.product_name,
+      qty: p.qty || 0,
+      updated_at: p.updated_at
+    }
+  })
   return products.sort((a: IProduct, b: IProduct) => sortCreatedAt(a, b));
 };
