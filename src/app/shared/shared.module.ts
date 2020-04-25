@@ -1,3 +1,4 @@
+import { DropdownSelectRowComponent } from './components/dropdown-select-row/dropdown-select-row.component';
 import { DatatableComponent } from './components/datatable/datatable.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { MenuComponent } from './components/menu/menu.component';
@@ -38,6 +39,7 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { PrimengEditorComponent } from './components/primeng-editor/primeng-editor.component';
 import { EditorModule } from 'primeng/editor';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { DropdownModule } from 'primeng/dropdown';
 
 const materialModules = [
   MatListModule,
@@ -63,7 +65,8 @@ const materialModules = [
 const primeNgModules = [
   AccordionModule,
   CalendarModule,
-  AutoCompleteModule
+  AutoCompleteModule,
+  DropdownModule
 ];
 
 const sharedComponents = [
@@ -92,7 +95,8 @@ const sharedComponents = [
   PrimengEditorComponent,
   InputSearchComponent,
   MenuComponent,
-  DatatableComponent
+  DatatableComponent,
+  DropdownSelectRowComponent
 ];
 
 const directives = [

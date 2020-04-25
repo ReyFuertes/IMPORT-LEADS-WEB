@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { environment } from './../../../../environments/environment';
@@ -31,8 +32,13 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private cdRef: ChangeDetectorRef) {
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     super();
+    this.form = this.fb.group({
+      parent: [null]
+    });
   }
 
   ngOnInit(): void {
@@ -50,7 +56,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public onTriggerFunc = (): void => this.colFunc();
 
   public isColFunc(el: any, i: number): boolean {
-    return el && this.dialogIndex === i;
+    return this.dialogIndex === i;
   }
 
   public isLastElement(arr: any[], i: number): boolean {
