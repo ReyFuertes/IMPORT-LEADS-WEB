@@ -6,7 +6,7 @@ import { IRelatedProduct } from '../../../venues/venues.models';
 import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from '../../../../../environments/environment';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 
 @Component({
@@ -15,7 +15,7 @@ import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
   styleUrls: ['./product-list.component.scss']
 })
 
-export class ProductListComponent extends GenericRowComponent implements OnInit {
+export class ProductListComponent extends GenericRowComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public dragStart: boolean = false;
   public hoveredIndex: number | null = null;
@@ -35,6 +35,12 @@ export class ProductListComponent extends GenericRowComponent implements OnInit 
   }
 
   ngOnInit() { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes && changes.products && changes.products.currentValue) {
+      this.products = changes.products.currentValue;
+    }
+  }
 
   public onDelete(item: IProduct): void {
     const { id } = item;

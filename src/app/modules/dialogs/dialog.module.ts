@@ -1,3 +1,4 @@
+import { ProductAddDialogComponent } from './components/products-add/products-add-dialog.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { InspectionRunCommentDialogComponent } from './components/inspection-run-comment/inspection-run-comment-dialog.component';
@@ -13,7 +14,7 @@ import { ContractAddDialogComponent } from './components/contracts-add/contract-
 import { NgModule } from '@angular/core';
 import { MatDialogModule, MatButtonModule, MatListModule, MatCheckboxModule } from '@angular/material';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { VenuesAddDialogComponent } from './components/venues/venues-add-dialog.component';
+import { VenuesAddDialogComponent } from './components/venue-add/venues-add-dialog.component';
 import { UserAddDialogComponent } from './components/users/user-add-dialog.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ContractTemplateDialogComponent } from './components/contract-template/contract-template-dialog.component';
@@ -40,7 +41,8 @@ const dialogComponents = [
   TagsQuestionDialogComponent,
   ChatUserDialogComponent,
   ChatDetailDialogComponent,
-  ConfirmationComponent
+  ConfirmationComponent,
+  ProductAddDialogComponent
 ];
 
 const materialModules = [

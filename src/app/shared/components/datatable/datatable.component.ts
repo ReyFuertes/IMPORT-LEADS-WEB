@@ -3,7 +3,7 @@ import { environment } from './../../../../environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, AfterViewInit, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'iv-datatable',
@@ -11,7 +11,7 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter, AfterViewIni
   styleUrls: ['./datatable.component.scss']
 })
 
-export class DatatableComponent extends GenericRowComponent implements OnInit, AfterViewInit {
+export class DatatableComponent extends GenericRowComponent implements OnInit, AfterViewInit, OnChanges {
   @Input()
   public cols: string[] = [];
   @Input()
@@ -37,11 +37,21 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
 
   ngAfterViewInit(): void {
     if (this.data && this.data.length > 0) {
-      this.dataSource = new MatTableDataSource<any>(this.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.setData(this.data);
     }
     this.cdRef.detectChanges();
+  }
+
+  private setData(data: any): void {
+    this.dataSource = new MatTableDataSource<any>(data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes && changes.data && changes.data.currentValue) {
+      this.setData(changes.data.currentValue);
+    }
   }
 
   public splitToSentCase(str: string): string {

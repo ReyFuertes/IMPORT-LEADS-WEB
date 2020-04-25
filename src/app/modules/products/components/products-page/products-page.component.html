@@ -9,7 +9,7 @@
   </div>
   <il-product-list fxFlex [products]="($products | async)"></il-product-list>
   <div class="action-btn">
-    <button mat-button color="primary" class="mat-elevation-z4">
+    <button mat-button color="primary" (click)="addProduct()" class="mat-elevation-z4">
       <mat-icon>add</mat-icon>
     </button>
   </div>
