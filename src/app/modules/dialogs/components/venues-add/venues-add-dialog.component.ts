@@ -1,6 +1,6 @@
+import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { environment } from 'src/environments/environment';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SimpleItem} from 'src/app/shared/generics/generic.model';
 
@@ -52,7 +52,6 @@ export class VenuesAddDialogComponent implements OnInit {
 
   ngOnInit() {
   }
-
 
   public handleSelectChange(event: any): void {
     event.value.forEach(item => {

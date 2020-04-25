@@ -14,7 +14,7 @@ import { ContractAddDialogComponent } from './components/contracts-add/contract-
 import { NgModule } from '@angular/core';
 import { MatDialogModule, MatButtonModule, MatListModule, MatCheckboxModule } from '@angular/material';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { VenuesAddDialogComponent } from './components/venue-add/venues-add-dialog.component';
+import { VenuesAddDialogComponent } from './components/venues-add/venues-add-dialog.component';
 import { UserAddDialogComponent } from './components/users/user-add-dialog.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ContractTemplateDialogComponent } from './components/contract-template/contract-template-dialog.component';

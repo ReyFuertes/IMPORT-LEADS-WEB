@@ -1,7 +1,6 @@
-import { SimpleItem } from '../../../../shared/generics/generic.model';
 import { Component, OnInit } from '@angular/core';
 import { IVenue, IVenuesAddress } from '../../venues.models';
-import { VenuesAddDialogComponent } from 'src/app/modules/dialogs/components/venues/venues-add-dialog.component';
+import { VenuesAddDialogComponent } from 'src/app/modules/dialogs/components/venues-add/venues-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
