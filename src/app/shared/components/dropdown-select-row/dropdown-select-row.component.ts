@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class DropdownSelectRowComponent implements OnInit {
   @Input()
-  public options: SimpleItem[];
+  public items: SimpleItem[];
   @Input()
   public selectedItem: any;
   @Input()
@@ -17,8 +17,10 @@ export class DropdownSelectRowComponent implements OnInit {
   constructor() {
 
   }
-
+  public options: any;
   ngOnInit() {
+
+    this.options = this.items;
 
   }
 }
