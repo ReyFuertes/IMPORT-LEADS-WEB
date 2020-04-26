@@ -35,7 +35,7 @@ export const getProducts = (state: ProductsState) => {
       cost: p.cost || 0,
       created_at: p.created_at,
       id: p.id,
-      parent: p.parent ? p.parent.product_name : '',
+      parent: p.parent ? p.parent.id : null,
       product_name: p.product_name,
       qty: p.qty || 0,
       updated_at: p.updated_at

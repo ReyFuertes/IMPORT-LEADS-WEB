@@ -1,3 +1,4 @@
+import { SimpleItem } from './../../generics/generic.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
@@ -22,6 +23,8 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public dialogIndex: number = 1;
   @Input()
   public colFunc: () => void;
+  @Input()
+  public items: SimpleItem[];
   @Input()
   public pageSizeOptions: number[] = [10, 15, 25, 100];
   @Output()
@@ -55,7 +58,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
 
   public onTriggerFunc = (): void => this.colFunc();
 
-  public isColFunc(el: any, i: number): boolean {
+  public isColFunc(i: number): boolean {
     return this.dialogIndex === i;
   }
 

@@ -1,3 +1,4 @@
+import { SimpleItem } from './../../../../shared/generics/generic.model';
 import { addProduct, deleteProduct } from './../../store/products.actions';
 import { AppState } from './../../../../store/app.reducer';
 import { Store } from '@ngrx/store';
@@ -34,6 +35,15 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
   }
 
   ngOnInit() { }
+
+  public get getDdItems(): SimpleItem[] {
+    return this.products.slice(0, 10).map(p => {
+      return {
+        value: p.id,
+        label: p.product_name
+      }
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.products && changes.products.currentValue) {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { SimpleItem } from './../../generics/generic.model';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'il-dropdown-select-row',
@@ -7,24 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DropdownSelectRowComponent implements OnInit {
-  cars: any[];
-  selectedCar2: string = 'BMW';
+  @Input()
+  public options: SimpleItem[];
+  @Input()
+  public selectedItem: any;
+  @Input()
+  public placeholder: string;
   constructor() {
 
   }
 
   ngOnInit() {
-    this.cars = [
-      { label: 'Audi', value: 'Audi' },
-      { label: 'BMW', value: 'BMW' },
-      { label: 'Fiat', value: 'Fiat' },
-      { label: 'Ford', value: 'Ford' },
-      { label: 'Honda', value: 'Honda' },
-      { label: 'Jaguar', value: 'Jaguar' },
-      { label: 'Mercedes', value: 'Mercedes' },
-      { label: 'Renault', value: 'Renault' },
-      { label: 'VW', value: 'VW' },
-      { label: 'Volvo', value: 'Volvo' }
-    ];
+
   }
 }

@@ -4,7 +4,7 @@ export interface IProduct {
   qty: string | number;
   cost: string | number;
   sub_products?: IProduct[];
-  parent?: IProduct;
+  parent?: IProduct | any;
   created_at?: Date;
   updated_at?: Date;
 }

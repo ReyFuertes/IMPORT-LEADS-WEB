@@ -4,11 +4,9 @@
     </th>
     <td mat-cell *matCellDef="let element">
       <div>
-        <div [ngClass]="{'hidden': selectedIndex === element?.id, 'col-dialog': isColFunc(element[col], i)}" fxLayoutAlign="start center">
-
-          <span *ngIf="!isColFunc(element[col], i)">{{ element[col] }}</span>
-          <il-dropdown-select-row *ngIf="isColFunc(element[col], i)"></il-dropdown-select-row>
-
+        <div [ngClass]="{'hidden': selectedIndex === element?.id, 'col-dialog': isColFunc(i)}" fxLayoutAlign="start center">
+          <span *ngIf="!isColFunc(i)">{{ element[col] }}</span>
+          <il-dropdown-select-row *ngIf="isColFunc(i) && items && items.length > 0" [selectedItem]="element?.parent" placeholder="Select parent" [options]="items"></il-dropdown-select-row>
         </div>
         <input *ngIf="selectedIndex === element?.id && !(isLastElement(cols, i))" (input)="onInput($event, element, col)" [value]="element[col]">
       </div>
