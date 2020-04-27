@@ -81,8 +81,6 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   ngOnInit(): void {
     if (!this.cols.includes('action_col'))
       this.cols.push('action_col');
-
-    console.log('data', this.data);
   }
 
   ngAfterViewInit(): void {
