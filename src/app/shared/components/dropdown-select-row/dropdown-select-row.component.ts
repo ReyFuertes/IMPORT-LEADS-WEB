@@ -22,5 +22,6 @@ export class DropdownSelectRowComponent implements OnInit {
   public options: any;
   ngOnInit() {
     this.options = this.items;
+    console.log('selectedItem', this.selectedItem);
   }
 }

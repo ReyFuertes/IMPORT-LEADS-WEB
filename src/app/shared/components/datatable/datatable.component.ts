@@ -28,6 +28,8 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public items: SimpleItem[];
   @Input()
   public pageSizeOptions: number[] = [10, 15, 25, 100];
+  @Input()
+  public ddPlaceholder: string = 'Select item';
   @Output()
   public deleteEmitter = new EventEmitter<any>();
   @Output()
@@ -48,17 +50,44 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
     });
   }
 
+  public formatItems(data: any): any {
+    return data && data.map(d => {
+      return {
+        cost: d.cost,
+        created_at: d.created_at,
+        id: d.id || null,
+        parent: {
+          value: d.parent && d.parent.id || null,
+          label: d.parent && d.parent.product_name  || null,
+        },
+        product_name: d.product_name,
+        qty: d.qty,
+        updated_at: d.updated_at,
+      }
+    })
+  }
+
+  public getValue(param: any): any {
+    let ret: any = param;
+    if (typeof (param) === 'object') {
+      ret = param.label;
+    }
+    return ret;
+  }
+
   public ddUpdate = (parent: Product, child: Product): void =>
     this.ddUpdateEmitter.emit({ parent, child });
 
   ngOnInit(): void {
     if (!this.cols.includes('action_col'))
       this.cols.push('action_col');
+
+    console.log('data', this.data);
   }
 
   ngAfterViewInit(): void {
     if (this.data && this.data.length > 0) {
-      this.setData(this.data);
+      this.setData(this.formatItems(this.data));
     }
     this.cdRef.detectChanges();
   }

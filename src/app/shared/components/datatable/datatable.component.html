@@ -6,9 +6,9 @@
       <div>
         <div [ngClass]="{'hidden': selectedIndex === element?.id, 'col-dialog': isColFunc(i)}" fxLayoutAlign="start center">
           <span *ngIf="!isColFunc(i)">{{ element[col] }}</span>
-          <il-dropdown-select-row *ngIf="isColFunc(i) && items && items.length > 0" (valueEmitter)="ddUpdate($event, element)" [selectedItem]="element?.parent" placeholder="Select parent" [items]="items"></il-dropdown-select-row>
+          <il-dropdown-select-row *ngIf="isColFunc(i) && items && items.length > 0" (valueEmitter)="ddUpdate($event, element)" [selectedItem]="element?.parent?.value" placeholder="Select parent" [items]="items"></il-dropdown-select-row>
         </div>
-        <input *ngIf="selectedIndex === element?.id && !(isLastElement(cols, i))" (input)="onInput($event, element, col)" [value]="element[col]">
+        <input *ngIf="selectedIndex === element?.id && !(isLastElement(cols, i))" (input)="onInput($event, element, col)" [value]="getValue(element[col])">
       </div>
       <div [ngClass]="{'hidden': !(isLastElement(cols, i))}">
         <div fxFlex="100px" class="pnl-actions" fxLayoutAlign="end center">
