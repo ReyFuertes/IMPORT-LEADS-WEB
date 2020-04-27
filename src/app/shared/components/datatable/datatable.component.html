@@ -4,11 +4,12 @@
     </th>
     <td mat-cell *matCellDef="let element">
       <div>
-        <div [ngClass]="{'hidden': selectedIndex === element?.id, 'col-dialog': isColFunc(i)}" fxLayoutAlign="start center">
-          <span *ngIf="!isColFunc(i)">{{ element[col] }}</span>
-          <il-dropdown-select-row *ngIf="isColFunc(i) && items && items.length > 0" (valueEmitter)="ddUpdate($event, element)" [selectedItem]="element?.parent?.value" placeholder="Select parent" [items]="items"></il-dropdown-select-row>
+        <div [ngClass]="{'col-dialog': isColControl(i)}" fxLayoutAlign="start center">
+          <span *ngIf="!isColControl(i) && selectedIndex !== element?.id">{{ element[col] }}</span>
+          <il-dropdown-select-row *ngIf="isColControl(i) && items && items.length > 0 && !(isLastElement(cols, i))" (valueEmitter)="ddUpdate($event, element)" [selectedItem]="element?.parent?.value" placeholder="Select parent" [items]="items">
+          </il-dropdown-select-row>
         </div>
-        <input *ngIf="selectedIndex === element?.id && !(isLastElement(cols, i))" (input)="onInput($event, element, col)" [value]="getValue(element[col])">
+        <input *ngIf="selectedIndex === element?.id && !(isLastElement(cols, i)) && !isColControl(i)" (input)="onInput($event, element, col)" [value]="getValue(element[col])">
       </div>
       <div [ngClass]="{'hidden': !(isLastElement(cols, i))}">
         <div fxFlex="100px" class="pnl-actions" fxLayoutAlign="end center">

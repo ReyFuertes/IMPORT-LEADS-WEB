@@ -1,4 +1,4 @@
-import { SimpleItem } from './../../../../shared/generics/generic.model';
+import { SimpleItem, AddEditState } from './../../../../shared/generics/generic.model';
 import { addProduct, deleteProduct, updateProduct } from './../../store/products.actions';
 import { AppState } from './../../../../store/app.reducer';
 import { Store } from '@ngrx/store';
@@ -67,10 +67,10 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
       this.store.dispatch(deleteProduct({ id }));
   }
 
-  public onSave(item: IProduct): void {
+  public onSave(item: any): void {
     setTimeout(() => {
       if (item)
-        this.store.dispatch(addProduct({ item }));
+        this.store.dispatch(updateProduct({ item }));
     }, 100);
   }
 

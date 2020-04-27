@@ -21,7 +21,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   @Input()
   public data: any[];
   @Input()
-  public dialogIndex: number = 1;
+  public colControlIndex: number = 1;
   @Input()
   public colFunc: () => void;
   @Input()
@@ -53,23 +53,24 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public formatItems(data: any): any {
     return data && data.map(d => {
       return {
-        cost: d.cost,
+        cost: parseInt(d.cost) + parseInt(d.parent ? d.parent.cost : 0), //calculate total parent and child cost
         created_at: d.created_at,
         id: d.id || null,
-        parent: {
+        parent: d.parent ? {
           value: d.parent && d.parent.id || null,
           label: d.parent && d.parent.product_name || null,
-        },
+        } : null,
         product_name: d.product_name,
         qty: d.qty,
         updated_at: d.updated_at,
       }
-    })
+    });
   }
 
   public getValue(param: any): any {
     let ret: any = param;
     if (typeof (param) === 'object') {
+      debugger
       ret = param.label;
     }
     return ret;
@@ -92,8 +93,8 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
 
   public onTriggerFunc = (): void => this.colFunc();
 
-  public isColFunc(i: number): boolean {
-    return this.dialogIndex === i;
+  public isColControl(i: number): boolean {
+    return this.colControlIndex === i;
   }
 
   public isLastElement(arr: any[], i: number): boolean {
@@ -107,7 +108,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.data && changes.data.currentValue !== changes.data.previousValue) {
+    if (changes && changes.data && changes.data.currentValue) {
       this.setData(this.formatItems(changes.data.currentValue));
     }
   }

@@ -1,3 +1,5 @@
+import { AppState } from './../../../store/app.reducer';
+import { Store } from '@ngrx/store';
 import { ProductsService } from './../products.service';
 import { IProduct } from './../products.model';
 import { loadProducts, loadProductsSuccess, addProduct, addProductSuccess, deleteProduct, deleteProductSuccess, updateProductSuccess, updateProduct } from './products.actions';
@@ -11,6 +13,8 @@ export class ProductsEffects {
     ofType(updateProduct),
     mergeMap(({ item }) => this.productService.patch(item)
       .pipe(
+        // reload all products since the child parent cost value cannot be updated via state update
+        tap(() => this.store.dispatch(loadProducts())),
         map((updated: IProduct) => {
           return updateProductSuccess({ updated });
         })
@@ -47,6 +51,7 @@ export class ProductsEffects {
   ));
 
   constructor(
+    private store: Store<AppState>,
     private actions$: Actions,
     private productService: ProductsService
   ) { }
