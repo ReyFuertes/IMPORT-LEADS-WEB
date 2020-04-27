@@ -63,7 +63,8 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
 
   public onDelete(item: IProduct): void {
     const { id } = item;
-    this.store.dispatch(deleteProduct({ id }));
+    if (id)
+      this.store.dispatch(deleteProduct({ id }));
   }
 
   public onSave(item: IProduct): void {

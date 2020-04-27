@@ -58,7 +58,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
         id: d.id || null,
         parent: {
           value: d.parent && d.parent.id || null,
-          label: d.parent && d.parent.product_name  || null,
+          label: d.parent && d.parent.product_name || null,
         },
         product_name: d.product_name,
         qty: d.qty,
@@ -107,9 +107,12 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // if (changes && changes.data && changes.data.currentValue) {
-    //   this.setData(changes.data.currentValue);
-    // }
+    if (changes.data)
+      console.log(changes.data.previousValue, changes.data.currentValue);
+
+    if (changes && changes.data && changes.data.currentValue !== changes.data.previousValue) {
+      this.setData(changes.data.currentValue);
+    }
   }
 
   public splitToSentCase(str: string): string {
