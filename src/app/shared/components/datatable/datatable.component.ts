@@ -48,9 +48,8 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
     });
   }
 
-  public ddUpdate(parent: Product, child: Product): void {
+  public ddUpdate = (parent: Product, child: Product): void =>
     this.ddUpdateEmitter.emit({ parent, child });
-  }
 
   ngOnInit(): void {
     if (!this.cols.includes('action_col'))
@@ -81,9 +80,9 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.data && changes.data.currentValue) {
-      this.setData(changes.data.currentValue);
-    }
+    // if (changes && changes.data && changes.data.currentValue) {
+    //   this.setData(changes.data.currentValue);
+    // }
   }
 
   public splitToSentCase(str: string): string {
