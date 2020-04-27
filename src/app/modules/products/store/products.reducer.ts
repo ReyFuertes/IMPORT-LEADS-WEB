@@ -1,4 +1,4 @@
-import { loadProducts, loadProductsSuccess, addProductSuccess, deleteProductSuccess } from './products.actions';
+import { loadProducts, loadProductsSuccess, addProductSuccess, deleteProductSuccess, updateProductSuccess } from './products.actions';
 import { IProduct } from './../products.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
@@ -12,6 +12,9 @@ export const initialState: ProductsState = adapter.getInitialState({
 });
 const productsReducer = createReducer(
   initialState,
+  on(updateProductSuccess, (state, action) => {
+    return adapter.updateOne({ id: action.updated.id, changes: action.updated }, state)
+  }),
   on(deleteProductSuccess, (state, action) => {
     return adapter.removeOne(action.deleted.id, state)
   }),

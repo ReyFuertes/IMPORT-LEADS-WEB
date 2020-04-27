@@ -1,8 +1,8 @@
 export interface IProduct {
   id?: string;
-  product_name: string | any;
-  qty: string | number;
-  cost: string | number;
+  product_name?: string | any;
+  qty?: string | number;
+  cost?: string | number;
   sub_products?: IProduct[];
   parent?: IProduct | any;
   created_at?: Date;

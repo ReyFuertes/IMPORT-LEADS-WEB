@@ -8,7 +8,17 @@ export enum ProductsActionTypes {
   addProductSuccess = '[Products] Create (success)',
   deleteProduct = '[Products] Delete',
   deleteProductSuccess = '[Products] Delete (success)',
+  updateProduct = '[Products] Save',
+  updateProductSuccess = '[Products] Save (success)',
 }
+export const updateProduct = createAction(
+  ProductsActionTypes.updateProduct,
+  props<{ item: IProduct }>()
+);
+export const updateProductSuccess = createAction(
+  ProductsActionTypes.updateProductSuccess,
+  props<{ updated: IProduct }>()
+);
 export const deleteProduct = createAction(
   ProductsActionTypes.deleteProduct,
   props<{ id: string }>()

@@ -1,5 +1,5 @@
 import { SimpleItem } from './../../generics/generic.model';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'il-dropdown-select-row',
@@ -17,10 +17,10 @@ export class DropdownSelectRowComponent implements OnInit {
   constructor() {
 
   }
+  @Output()
+  public valueEmitter = new EventEmitter<SimpleItem>();
   public options: any;
   ngOnInit() {
-
     this.options = this.items;
-
   }
 }

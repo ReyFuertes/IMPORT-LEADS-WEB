@@ -1,12 +1,22 @@
 import { ProductsService } from './../products.service';
 import { IProduct } from './../products.model';
-import { loadProducts, loadProductsSuccess, addProduct, addProductSuccess, deleteProduct, deleteProductSuccess } from './products.actions';
+import { loadProducts, loadProductsSuccess, addProduct, addProductSuccess, deleteProduct, deleteProductSuccess, updateProductSuccess, updateProduct } from './products.actions';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ProductsEffects {
+  updateProduct$ = createEffect(() => this.actions$.pipe(
+    ofType(updateProduct),
+    mergeMap(({ item }) => this.productService.patch(item)
+      .pipe(
+        map((updated: IProduct) => {
+          return updateProductSuccess({ updated });
+        })
+      ))
+  ));
+
   deleteProduct$ = createEffect(() => this.actions$.pipe(
     ofType(deleteProduct),
     mergeMap(({ id }) => this.productService.delete(id)

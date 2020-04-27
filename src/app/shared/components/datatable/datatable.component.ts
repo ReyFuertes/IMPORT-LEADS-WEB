@@ -1,3 +1,4 @@
+import { Product } from './../../../modules/inspections/components/inspection-report-products/inspection-report-products.component';
 import { SimpleItem } from './../../generics/generic.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -29,6 +30,9 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public pageSizeOptions: number[] = [10, 15, 25, 100];
   @Output()
   public deleteEmitter = new EventEmitter<any>();
+  @Output()
+  public ddUpdateEmitter = new EventEmitter<{ parent: any, child: any }>();
+
   public svgPath: string = environment.svgPath;
   public dataSource: MatTableDataSource<any[]>;
 
@@ -42,6 +46,10 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
     this.form = this.fb.group({
       parent: [null]
     });
+  }
+
+  public ddUpdate(parent: Product, child: Product): void {
+    this.ddUpdateEmitter.emit({ parent, child });
   }
 
   ngOnInit(): void {

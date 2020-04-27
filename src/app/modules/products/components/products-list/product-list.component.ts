@@ -1,5 +1,5 @@
 import { SimpleItem } from './../../../../shared/generics/generic.model';
-import { addProduct, deleteProduct } from './../../store/products.actions';
+import { addProduct, deleteProduct, updateProduct } from './../../store/products.actions';
 import { AppState } from './../../../../store/app.reducer';
 import { Store } from '@ngrx/store';
 import { IProduct } from './../../products.model';
@@ -35,6 +35,12 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
   }
 
   ngOnInit() { }
+
+  public onUpdate(event: any): void {
+    const { parent, child } = event;
+    const payload = Object.assign({}, child, { parent: { id: parent } });
+    this.store.dispatch(updateProduct({ item: payload }))
+  }
 
   public get getDdItems(): SimpleItem[] {
     return this.products.slice(0, 10).map(p => {
