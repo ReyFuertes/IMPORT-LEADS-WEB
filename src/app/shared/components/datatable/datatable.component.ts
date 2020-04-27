@@ -108,7 +108,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.data && changes.data.currentValue !== changes.data.previousValue) {
-      this.setData(changes.data.currentValue);
+      this.setData(this.formatItems(changes.data.currentValue));
     }
   }
 

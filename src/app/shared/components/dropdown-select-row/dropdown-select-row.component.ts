@@ -1,5 +1,5 @@
 import { SimpleItem } from './../../generics/generic.model';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'il-dropdown-select-row',
@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./dropdown-select-row.component.scss']
 })
 
-export class DropdownSelectRowComponent implements OnInit {
+export class DropdownSelectRowComponent implements OnInit, OnChanges {
   @Input()
   public items: SimpleItem[];
   @Input()
@@ -22,6 +22,11 @@ export class DropdownSelectRowComponent implements OnInit {
   public options: any;
   ngOnInit() {
     this.options = this.items;
-    console.log('selectedItem', this.selectedItem);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes && changes.selectedItem && changes.selectedItem.currentValue) {
+      this.selectedItem = changes.selectedItem.currentValue;
+    }
   }
 }
