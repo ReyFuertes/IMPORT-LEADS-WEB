@@ -53,7 +53,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public formatItems(data: any): any {
     return data && data.map(d => {
       return {
-        cost: parseInt(d.cost) + parseInt(d.parent ? d.parent.cost : 0), //calculate total parent and child cost
+        cost: d.cost, //calculate total parent and child cost
         created_at: d.created_at,
         id: d.id || null,
         parent: d.parent ? {
