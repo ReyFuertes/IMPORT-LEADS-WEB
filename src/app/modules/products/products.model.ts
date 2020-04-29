@@ -5,6 +5,7 @@ export interface IProduct {
   cost?: string | number;
   sub_products?: IProduct[];
   parent?: IProduct | any;
+  pos?: number;
   created_at?: Date;
   updated_at?: Date;
 }

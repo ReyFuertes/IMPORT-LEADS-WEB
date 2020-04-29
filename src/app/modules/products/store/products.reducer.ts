@@ -44,5 +44,5 @@ export const getProducts = (state: ProductsState) => {
       updated_at: p.updated_at
     }
   })
-  return products.sort((a: IProduct, b: IProduct) => sortCreatedAt(a, b));
+  return products; //.sort((a: IProduct, b: IProduct) => sortCreatedAt(a, b));
 };

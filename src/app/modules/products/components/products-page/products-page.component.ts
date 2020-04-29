@@ -9,6 +9,7 @@ import { AppState } from './../../../../store/app.reducer';
 import { Store, select } from '@ngrx/store';
 import { IProduct } from './../../products.model';
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'il-products-page',
@@ -18,14 +19,17 @@ import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/co
 
 export class ProductsPageComponent implements OnInit, AfterViewInit {
   public $products: Observable<IProduct[]>;
+  public items: IProduct[];
 
   constructor(private cdRef: ChangeDetectorRef, private dialog: MatDialog, private store: Store<AppState>) {
     this.$products = this.store.pipe(select(getProductsSelector));
+    this.$products.subscribe(res => {
+      this.items = res//_.orderBy(res, ['product_name', 'parent.product_name'], ['asc', 'asc']);
+      console.log(this.items);
+    })
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   ngAfterViewInit(): void {
     this.cdRef.detectChanges();
