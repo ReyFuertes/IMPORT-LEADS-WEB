@@ -1,6 +1,5 @@
-import { getProductsSelector, getSuggestionProductsSelector } from './../../../products/store/products.selector';
+import { getProductsSelector } from './../../../products/store/products.selector';
 import { ProductsState } from './../../store/reducers/products.reducer';
-import { getAllProducts } from './../../../products/store/products.reducer';
 import { IProduct } from './../../../products/products.model';
 import { getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
 import { addContractProducts, deleteContractProduct, updateContractProduct } from './../../store/actions/products.action';
@@ -85,19 +84,19 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
     this.store.pipe(select(getProductsSelector)).subscribe(p => {
       if (p) {
-        const subProducts = _.flatten(p
-          .filter(o => o && o.sub_products && o.sub_products.length > 0)
-          .map(o => o.sub_products));
+        const parent = p.filter(o => o.parent).filter(Boolean);
 
-        const parents = p.map(p => {
+        const child = p.map(p => {
           return { id: p.id, product_name: p.product_name }
         });
 
         //get all suggesstions
-        this.suggestions = parents.concat(subProducts).map(cp => {
+        this.suggestions = child.map(cp => {
+          const _parents = parent.filter(_p => _p.parent.id === cp.id)
+            .map(_p => ` - (${_p.product_name})`);
           return {
             value: cp.id,
-            label: cp.product_name
+            label: cp.product_name + _parents.join(' ')
           }
         })
       }
@@ -123,9 +122,9 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   private fmtProductName(name: any | string): any {
     if (typeof (name) === 'object') {
-      return name.label;
+      return name.label.split('-')[0].trim() || '';
     } else {
-      return name;
+      return name.split('-')[0].trim() || '';
     }
   }
 
@@ -142,7 +141,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   private fmtPayload(value: any): any {
     const { id, product_name, qty, cost, sub_products } = value;
-    return {
+    return  {
       parent: _.pickBy({
         id,
         product_name: this.fmtProductName(product_name),
@@ -150,7 +149,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       }, _.identity),
       child: Object.assign([], this.fmtSubProducts(sub_products)),
       contract: { id: this.contract.id, contract_name: this.contract.contract_name }
-    }
+    };
   }
 
   public onSave(): void {
