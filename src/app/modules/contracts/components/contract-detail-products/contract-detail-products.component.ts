@@ -73,13 +73,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   ngOnDestroy() { }
 
-  public fmtToSimpleItem(p: IProduct): ISimpleItem {
-    return {
-      value: p.id,
-      label: p.product_name
-    }
-  }
-
   ngOnInit() {
     this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
     this.store.pipe(select(getProductsSelector)).subscribe(p => {
@@ -103,6 +96,13 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     })
   }
 
+  public fmtToSimpleItem(p: IProduct): ISimpleItem {
+    return {
+      value: p.id,
+      label: p.product_name
+    }
+  }
+
   public subProductsArr = () => this.form.get('sub_products') as FormArray;
 
   ngAfterViewInit() {
@@ -120,12 +120,18 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private fmtProductName(name: any | string): any {
+  private fmtProductName(name: any): any {
     if (typeof (name) === 'object') {
       return name.label.split('-')[0].trim() || '';
-    } else {
-      return name.split('-')[0].trim() || '';
     }
+    return name.split('-')[0].trim() || '';
+  }
+
+  private fmtProductId(obj: any): any {
+    if (typeof (obj) === 'object') {
+      return obj.value;
+    }
+    return null;
   }
 
   private fmtSubProducts(sp: IProduct[]): any {
@@ -141,9 +147,11 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   private fmtPayload(value: any): any {
     const { id, product_name, qty, cost, sub_products } = value;
-    return  {
+    const _id: string = this.fmtProductId(product_name);
+
+    return {
       parent: _.pickBy({
-        id,
+        id: _id ? _id : id,
         product_name: this.fmtProductName(product_name),
         qty, cost
       }, _.identity),
