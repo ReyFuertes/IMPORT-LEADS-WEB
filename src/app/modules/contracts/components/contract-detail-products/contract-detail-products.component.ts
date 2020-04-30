@@ -1,18 +1,23 @@
+import { getProductsSelector, getSuggestionProductsSelector } from './../../../products/store/products.selector';
+import { ProductsState } from './../../store/reducers/products.reducer';
+import { getAllProducts } from './../../../products/store/products.reducer';
 import { IProduct } from './../../../products/products.model';
-import { getAllContractsSelector, getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
+import { getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
 import { addContractProducts, deleteContractProduct, updateContractProduct } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
-import { Store, select } from '@ngrx/store';
+import { Store, select, State } from '@ngrx/store';
 import { PillState, IContract, IContractProduct, IContractResponse } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
-import { SimpleItem } from './../../../../shared/generics/generic.model';
+import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { take, takeUntil, filter, tap, concatMap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import * as _ from 'lodash';
+import * as fromRoot from 'src/app/store/app.reducer'
+
 @Component({
   selector: 'il-contract-detail-products',
   templateUrl: './contract-detail-products.component.html',
@@ -29,15 +34,16 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public isEditProduct: boolean = false;
   private destroy$ = new Subject();
   public state: PillState = PillState.default;
-  public suggestions: SimpleItem[];
+  public suggestions: ISimpleItem[];
 
   @Input()
   public isRightNavOpen: boolean = false;
   @Input()
   public contract: IContract;
   public $contractProducts: Observable<IContractProduct[]>;
+  public $products: Observable<IProduct[]>;
 
-  constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
+  constructor(private productStore: Store<ProductsState>, private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
       id: [null],
       product_name: [null, Validators.required],
@@ -68,23 +74,34 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   ngOnDestroy() { }
 
+  public fmtToSimpleItem(p: IProduct): ISimpleItem {
+    return {
+      value: p.id,
+      label: p.product_name
+    }
+  }
+
   ngOnInit() {
     this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
-    this.$contractProducts.subscribe((p: IProduct[]) => {
-      const subProducts = _.flatten(p
-        .filter(o => o && o.sub_products.length > 0)
-        .map(o => o.sub_products));
+    this.store.pipe(select(getProductsSelector)).subscribe(p => {
+      if (p) {
+        const subProducts = _.flatten(p
+          .filter(o => o && o.sub_products && o.sub_products.length > 0)
+          .map(o => o.sub_products));
 
-      const parents = p.map(p => {
-        return { id: p.id, product_name: p.product_name }
-      });
-      this.suggestions = parents.concat(subProducts).map(cp => {
-        return {
-          value: cp.id,
-          label: cp.product_name
-        }
-      })
-    });
+        const parents = p.map(p => {
+          return { id: p.id, product_name: p.product_name }
+        });
+
+        //get all suggesstions
+        this.suggestions = parents.concat(subProducts).map(cp => {
+          return {
+            value: cp.id,
+            label: cp.product_name
+          }
+        })
+      }
+    })
   }
 
   public subProductsArr = () => this.form.get('sub_products') as FormArray;
@@ -199,7 +216,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     this.isEditProduct = false;
   }
 
-  public createItem(item: SimpleItem): FormGroup {
+  public createItem(item: ISimpleItem): FormGroup {
     return this.fb.group(item);
   }
 

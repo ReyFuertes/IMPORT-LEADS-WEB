@@ -1,6 +1,6 @@
 import { getContractById, getCachedImages } from './../../../contracts/store/selectors/contracts.selector';
 import { getVenuesSelector } from './../../../venues/store/venues.selector';
-import { SimpleItem } from './../../../../shared/generics/generic.model';
+import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { take, switchMap, tap, debounceTime, concatMap, delay, map } from 'rxjs/operators';
 import { Observable, from, of, forkJoin } from 'rxjs';
 import { IImage } from './../../../../models/image.model';
@@ -28,7 +28,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ContractAddDialogComponent extends GenericAddEditComponent<IContract> implements OnInit {
   public svgPath: string = environment.svgPath;
   public imgPath: string = environment.imgPath;
-  public venues: SimpleItem[];
+  public venues: ISimpleItem[];
   public modalTitle: string = 'Add';
   public images: IProductImage[] = [];
   public cachedImages: IProductImage[] = [];
@@ -85,7 +85,7 @@ export class ContractAddDialogComponent extends GenericAddEditComponent<IContrac
       });
 
     this.store.pipe(select(getVenuesSelector)).subscribe(venues => {
-      this.venues = <SimpleItem[]>venues.map(venue => Object.assign([],
+      this.venues = <ISimpleItem[]>venues.map(venue => Object.assign([],
         { label: venue.name, value: venue.id }));
     });
   }

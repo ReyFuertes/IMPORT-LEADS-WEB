@@ -1,4 +1,4 @@
-import { SimpleItem } from './../../generics/generic.model';
+import { ISimpleItem } from './../../generics/generic.model';
 import { GenericControl } from './../../generics/generic-control';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControlName } from '@angular/forms';
@@ -9,9 +9,9 @@ import { FormGroup, FormControlName } from '@angular/forms';
   styleUrls: ['./dropdown-select.component.scss']
 })
 
-export class DropdownSelectComponent extends GenericControl<SimpleItem> implements OnInit {
+export class DropdownSelectComponent extends GenericControl<ISimpleItem> implements OnInit {
   @Input()
-  public items: SimpleItem[];
+  public items: ISimpleItem[];
   @Input()
   public placeholder: string = '';
   @Input()

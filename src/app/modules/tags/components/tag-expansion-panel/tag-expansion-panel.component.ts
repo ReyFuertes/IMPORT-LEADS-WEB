@@ -1,5 +1,5 @@
 import { TagsDialogComponent } from 'src/app/modules/dialogs/components/tags/tags-dialog.component';
-import { SimpleItem } from './../../../../shared/generics/generic.model';
+import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';

@@ -1,4 +1,4 @@
-import { SimpleItem } from './../../generics/generic.model';
+import { ISimpleItem } from './../../generics/generic.model';
 import { Component, OnInit, Input, ViewChild, ElementRef, Output } from '@angular/core';
 import { FormGroup, FormControl, FormControlName } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 export class InputSelectComponent implements OnInit {
   @Input()
-  public suggestions: SimpleItem[];
+  public suggestions: ISimpleItem[];
   @Input()
   public controlName: any;
   @Input()
@@ -21,7 +21,7 @@ export class InputSelectComponent implements OnInit {
   public placeholder: string = 'Your product here..';
   @Input()
   public isReadOnly: boolean = false;
-  public filtered: SimpleItem[] | any[];
+  public filtered: ISimpleItem[] | any[];
 
   constructor() { }
 

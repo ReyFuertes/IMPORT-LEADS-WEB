@@ -5,5 +5,5 @@ import * as fromProducts from './products.reducer'
 export const selectedState = (state: AppState) => state.products;
 export const getProductsSelector = createSelector(
   selectedState,
-  fromProducts.getProducts
+  fromProducts.getAllProducts
 );

@@ -1,4 +1,4 @@
-import { SimpleItem } from './../../../../shared/generics/generic.model';
+import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class InspectionPanelDetailComponent implements OnInit {
   @Input()
-  public products: SimpleItem[];
+  public products: ISimpleItem[];
   constructor() { }
 
   ngOnInit() { }

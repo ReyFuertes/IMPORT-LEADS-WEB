@@ -7,7 +7,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { zip, of } from 'rxjs';
 
 @Injectable()
-export class ProductsEffects {
+export class ContractProductsEffects {
   loadContractProducts$ = createEffect(() => this.actions$.pipe(
     ofType(loadContractProducts),
     mergeMap(({ id }) => this.contractProductService.getById(id).pipe(

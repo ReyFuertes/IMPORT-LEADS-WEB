@@ -14,7 +14,7 @@
       <ng-container *ngFor="let item of ($contractProducts | async); let i = index;">
         <!-- parent -->
         <il-pill [state]="state" (deSelectEmitter)="deSelectChange()" (stateEmitter)="removeSelection()" (click)="OnEditProduct(item)" [enabled]="!isRightNavOpen ||isRightNavOpen && (item?.sub_products && !item?.sub_products.length > 0)"
-          [item]="{label: item.product_name, value: item.id}" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(item)" [selectable]="true">
+          [item]="fmtToSimpleItem(item)" [enableHighlight]="true" (removeEmitter)="onRemoveProduct(item)" [selectable]="true">
         </il-pill>
         <!-- child -->
         <il-pill size="small" [enabled]="isRightNavOpen" *ngFor="let sub of item?.sub_products; let i = index;" [item]="{label: sub.product_name, value: item.id}" [enableHighlight]="true" (removeEmitter)="onRemoveSubProduct(sub)" [selectable]="true">

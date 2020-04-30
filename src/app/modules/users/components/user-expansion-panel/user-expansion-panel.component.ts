@@ -1,5 +1,5 @@
 import { User } from './../../users.models';
-import { SimpleItem } from 'src/app/shared/generics/generic.model';
+import { ISimpleItem } from 'src/app/shared/generics/generic.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -20,8 +20,8 @@ export class UserExpansionPanelComponent extends GenericRowComponent implements 
   public selectedIndex: number | null = null;
   @Input()
   public colsHeaders: Array<{ label: string, width?: string | number }>;
-  public selectedRole: SimpleItem;
-  public roles: SimpleItem[] = [
+  public selectedRole: ISimpleItem;
+  public roles: ISimpleItem[] = [
     {
       value: '1',
       label: 'Admin',

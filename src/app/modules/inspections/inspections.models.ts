@@ -1,4 +1,4 @@
-import { SimpleItem } from './../../shared/generics/generic.model';
+import { ISimpleItem } from './../../shared/generics/generic.model';
 export interface InspectionPanelModel {
   id: string;
   title: string;
@@ -7,5 +7,5 @@ export interface InspectionPanelModel {
   startDate?: string;
   endDate?: string;
   totalAmount?: number;
-  products?: SimpleItem[];
+  products?: ISimpleItem[];
 }

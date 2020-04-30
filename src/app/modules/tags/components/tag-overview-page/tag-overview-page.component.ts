@@ -1,4 +1,4 @@
-import { SimpleItem } from './../../../../shared/generics/generic.model';
+import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Tag } from '../../tags.models';

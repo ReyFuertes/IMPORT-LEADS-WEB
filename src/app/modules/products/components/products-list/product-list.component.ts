@@ -1,4 +1,4 @@
-import { SimpleItem, AddEditState } from './../../../../shared/generics/generic.model';
+import { ISimpleItem, AddEditState } from './../../../../shared/generics/generic.model';
 import { addProduct, deleteProduct, updateProduct } from './../../store/products.actions';
 import { AppState } from './../../../../store/app.reducer';
 import { Store } from '@ngrx/store';
@@ -42,7 +42,7 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
     this.store.dispatch(updateProduct({ item: payload }))
   }
 
-  public get getDdItems(): SimpleItem[] {
+  public get getDdItems(): ISimpleItem[] {
     return this.products.slice(0, 10).map(p => {
       return {
         value: p.id,

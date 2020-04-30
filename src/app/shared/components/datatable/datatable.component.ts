@@ -1,5 +1,5 @@
 import { Product } from './../../../modules/inspections/components/inspection-report-products/inspection-report-products.component';
-import { SimpleItem } from './../../generics/generic.model';
+import { ISimpleItem } from './../../generics/generic.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
@@ -25,7 +25,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   @Input()
   public colFunc: () => void;
   @Input()
-  public items: SimpleItem[];
+  public items: ISimpleItem[];
   @Input()
   public pageSizeOptions: number[] = [10, 15, 25, 100];
   @Input()

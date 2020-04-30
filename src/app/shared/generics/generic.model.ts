@@ -7,7 +7,7 @@ export interface AddEditDialogState {
   formValues?: any;
   state?: AddEditState
 }
-export interface SimpleItem {
+export interface ISimpleItem {
   label: string;
   value: string;
 }

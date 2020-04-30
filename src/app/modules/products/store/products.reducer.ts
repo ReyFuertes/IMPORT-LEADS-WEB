@@ -1,3 +1,4 @@
+import { ISimpleItem } from './../../../shared/generics/generic.model';
 import { loadProducts, loadProductsSuccess, addProductSuccess, deleteProductSuccess, updateProductSuccess } from './products.actions';
 import { IProduct } from './../products.model';
 import { createReducer, on, Action } from "@ngrx/store";
@@ -31,9 +32,9 @@ const productsReducer = createReducer(
 export function ProductsReducer(state: ProductsState, action: Action) {
   return productsReducer(state, action);
 }
-export const getProducts = (state: ProductsState) => {
+export const getAllProducts = (state: ProductsState) => {
   let products = state && state.entities ? Object.values(state.entities) : null;
-  products = products.map(p => {
+  products = products && products.map(p => {
     return {
       cost: p.cost || 0,
       created_at: p.created_at,

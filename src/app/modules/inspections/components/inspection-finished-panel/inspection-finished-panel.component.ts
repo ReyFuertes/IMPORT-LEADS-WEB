@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-import { SimpleItem, Menu } from './../../../../shared/generics/generic.model';
+import { ISimpleItem, Menu } from './../../../../shared/generics/generic.model';
 import { InspectionPanelModel } from './../../inspections.models';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';

@@ -1,4 +1,4 @@
-import { SimpleItem } from './../../generics/generic.model';
+import { ISimpleItem } from './../../generics/generic.model';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 
 export class DropdownSelectRowComponent implements OnInit, OnChanges {
   @Input()
-  public items: SimpleItem[];
+  public items: ISimpleItem[];
   @Input()
   public selectedItem: any;
   @Input()
@@ -18,7 +18,7 @@ export class DropdownSelectRowComponent implements OnInit, OnChanges {
 
   }
   @Output()
-  public valueEmitter = new EventEmitter<SimpleItem>();
+  public valueEmitter = new EventEmitter<ISimpleItem>();
   public options: any;
   ngOnInit() {
     this.options = this.items;

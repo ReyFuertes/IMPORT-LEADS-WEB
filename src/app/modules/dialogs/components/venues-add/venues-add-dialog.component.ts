@@ -2,7 +2,7 @@ import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SimpleItem} from 'src/app/shared/generics/generic.model';
+import { ISimpleItem} from 'src/app/shared/generics/generic.model';
 
 @Component({
   selector: 'il-venues-add-dialog',
@@ -13,8 +13,8 @@ export class VenuesAddDialogComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public form: FormGroup;
   public isProduct: boolean;
-  public selectedItems: SimpleItem[] = [];
-  public items: SimpleItem[] = [
+  public selectedItems: ISimpleItem[] = [];
+  public items: ISimpleItem[] = [
     {
       label: 'Product 1',
       value: '1'
