@@ -69,6 +69,12 @@ export class ProductListComponent extends GenericRowComponent implements OnInit,
 
   public onSave(item: any): void {
     setTimeout(() => {
+      if (item && item.parent) {
+        item.parent = Object.assign({}, {
+          id: item.parent.value,
+          product_name: item.parent.label
+        })
+      }
       if (item)
         this.store.dispatch(updateProduct({ item }));
     }, 100);
