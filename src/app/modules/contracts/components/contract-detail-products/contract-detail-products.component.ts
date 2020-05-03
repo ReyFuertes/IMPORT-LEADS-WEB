@@ -5,17 +5,16 @@ import { getAllContractProductsSelector } from './../../store/selectors/contract
 import { addContractProducts, deleteContractProduct, updateContractProduct } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store, select, State } from '@ngrx/store';
-import { PillState, IContract, IContractProduct, IContractResponse, IContractProductForm } from './../../contract.model';
+import { PillState, IContract, IContractProduct } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
-import { take, takeUntil, filter, tap, concatMap, map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Component, OnInit, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { take, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import * as _ from 'lodash';
-import * as fromRoot from 'src/app/store/app.reducer'
 
 @Component({
   selector: 'il-contract-detail-products',
@@ -24,6 +23,7 @@ import * as fromRoot from 'src/app/store/app.reducer'
 })
 
 export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
+  private destroy$ = new Subject();
   public svgPath: string = environment.svgPath;
   public productsArray: FormArray;
   public formSubProdsArr: FormArray;
@@ -31,7 +31,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public hasSubProducts: boolean = false;
   public isEditProduct: boolean = false;
-  private destroy$ = new Subject();
   public state: PillState = PillState.default;
   public suggestions: ISimpleItem[];
 
@@ -43,7 +42,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public $products: Observable<IProduct[]>;
   public children: any[];
 
-  constructor(private productStore: Store<ProductsState>, private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
+  constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
       id: [null],
       product_name: [null, Validators.required],
@@ -281,7 +280,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ConfirmationComponent, { width: '410px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-
         //remove item from form array
         const item = this.form.get('sub_products') as FormArray;
         item.removeAt(i);
