@@ -12,7 +12,7 @@ import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
-import { take, takeUntil, filter, tap, concatMap, map } from 'rxjs/operators';
+import { take, takeUntil, filter, tap, concatMap, map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import * as _ from 'lodash';
 import * as fromRoot from 'src/app/store/app.reducer'
@@ -41,6 +41,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public contract: IContract;
   public $contractProducts: Observable<IContractProduct[]>;
   public $products: Observable<IProduct[]>;
+  public children: any[];
 
   constructor(private productStore: Store<ProductsState>, private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.form = this.fb.group({
@@ -55,8 +56,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
     /* get the sub total of all productSet */
     this.form.get('sub_products')
-      .valueChanges.pipe(
-        takeUntil(this.destroy$))
+      .valueChanges
+      .pipe(takeUntil(this.destroy$))
       .subscribe(children => {
         if (children) {
           const childsCost = children.reduce((sum, current) => parseInt(sum) + parseInt(current.cost), 0) || 0;
@@ -69,25 +70,24 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
             this.form.controls['cost'].setErrors(null);
           }
 
-          /* check if the sub product is edited */
-          this.$contractProducts.subscribe(res => {
-            let subProducts = res.map(p => Object.assign([], ...p.sub_products))
-            console.log(res);
-            subProducts.forEach((sp: IProduct) => {
-              /* update product id if edited then set to null */
-              let p: any = children.filter((c: IProduct) => c.id === sp.id).shift();
+          /* check if the sub product is edited then update the id */
+          this.formSubProdsArr = this.form.get('sub_products') as FormArray;
+          let match: boolean = false;
+          this.$products.subscribe((products: IProduct[]) => {
+            products.forEach(product => {
+              if (match) return;
 
-              if (!p) return;
-              debugger
-              const name = p && typeof (p.product_name) === 'object'
-                ? <ISimpleItem>p.label
-                : p.product_name;
-
-              if (p && name === sp.product_name) {
-                p = Object.assign({}, p, { id: sp.id });
-              } else if (p) {
-                delete p.id
-              }
+              this.formSubProdsArr.value.forEach(p => {
+                if (p.id === product.id || p.product_name === product.product_name) {
+                  match = true;
+                  p.id = product.id
+                  return;
+                } else {
+                  match = false;
+                  delete p.id;
+                  return
+                }
+              });
             });
           })
         }
@@ -96,18 +96,18 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   ngOnDestroy() { }
 
-  public contractProducts: IContractProductForm[];
   ngOnInit() {
     this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
 
-    this.store.pipe(select(getProductsSelector)).subscribe(p => {
+    this.$products = this.store.pipe(select(getProductsSelector));
+    this.$products.subscribe(p => {
       if (p) {
         const parent = p.filter(o => o.parent).filter(Boolean);
         const child = p.map(p => {
           return { id: p.id, product_name: p.product_name }
         });
 
-        //get all suggesstions
+        //get all suggestions
         this.suggestions = child.map(cp => {
           const _parents = parent.filter(_p => _p.parent.id === cp.id)
             .map(_p => ` - (${_p.product_name})`);
@@ -137,7 +137,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public onAdd(): void {
     if (this.form.value) {
       let payload: IContractProduct = this.fmtPayload(this.form.value);
-
       if (payload)
         this.store.dispatch(addContractProducts({ payload }));
 
@@ -171,20 +170,21 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   private fmtSubProducts(sp: IProduct[]): any {
     return sp.map(sp => {
-      return _.pickBy({
+      const ret = _.pickBy({
         _id: sp._id,
-        id: sp.id,
+        id: sp.id ? sp.id : this.getId(sp.product_name),
         product_name: this.getName(sp.product_name),
         qty: sp.qty,
         cost: sp.cost
-      }, _.identity);;
+      }, _.identity);
+      return ret;
     })
   }
 
   private fmtPayload(formValue: IProduct): any {
     const { id, product_name, qty, cost, sub_products } = formValue;
-    const pid: string = this.getId(product_name);
 
+    const pid: string = this.getId(product_name);
     return {
       parent: _.pickBy({
         _id: id,
