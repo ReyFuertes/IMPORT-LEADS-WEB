@@ -20,12 +20,21 @@ export class IContractResponse {
   contract_products: any[];
 }
 
+export interface IContractProductForm {
+  id?: string;
+  product_name?: string | any;
+  qty?: string | number;
+  cost?: string | number;
+  sub_products?: IProduct[];
+  contract?: IContract;
+}
+
 export interface IContractProduct {
   id?: string;
   parent?: IProduct
   sub_products?: IProduct[],
   contract?: IContract;
-  cp_id?: string;
+  // cp_id?: string;
 }
 export interface IProductImage {
   id?: string;
