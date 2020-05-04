@@ -57,9 +57,9 @@
   <!-- contract specification tabs -->
   <div fxLayout="column" fxLayoutGap="20px" cdkDropList (cdkDropListDropped)="dropSpecs($event)">
     <div *ngFor="let specification of specifications" fxLayoutGap="20px">
-      <il-contract-product-specs [isRightNavOpen]="showRightNav" [specification]="specification" (removeProductSpecEmitter)="handleRemoveProductSpecs($event)"></il-contract-product-specs>
+      <il-contract-product-category [isRightNavOpen]="showRightNav" [specification]="specification" (removeProductSpecEmitter)="handleRemoveProductSpecs($event)"></il-contract-product-category>
 
-      <il-contract-product-specs-title cdkDrag (cdkDragStarted)="dragStartedSpecs(true)" [specification]="specification" (removeSpecTitleEmitter)="handleRemoveSpecsTitle($event)"></il-contract-product-specs-title>
+      <il-contract-product-category-title cdkDrag (cdkDragStarted)="dragStartedSpecs(true)" [specification]="specification" (removeSpecTitleEmitter)="handleRemoveSpecsTitle($event)"></il-contract-product-category-title>
     </div>
   </div>
 

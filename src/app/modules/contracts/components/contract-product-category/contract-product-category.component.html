@@ -12,8 +12,9 @@
     <mat-tab-group class="il-tab">
       <mat-tab class="tab-1">
         <ng-template matTabContent>
-          <il-contract-expansion-panel [isRightNavOpen]="isRightNavOpen" [panels]="panels"></il-contract-expansion-panel>
-          <!-- make this a component -->
+          <il-contract-product-category-table></il-contract-product-category-table>
+          <!-- <il-contract-expansion-panel [isRightNavOpen]="isRightNavOpen" [panels]="panels"></il-contract-expansion-panel>
+
           <div [ngClass]="{'disabled': isRightNavOpen}" fxLayout="row" fxLayoutAlign="center center" class="footer">
             <img class="add" *ngIf="!_showTabActions" (click)="!isRightNavOpen ? _showTabActions = !_showTabActions: null" [src]="svgPath + 'add-icon-gray.svg'" />
             <img *ngIf="!_showTabActions" (click)="!isRightNavOpen ? onDeleteProductSpecs(): null" [src]="svgPath + 'delete-icon-red.svg'">
@@ -36,7 +37,7 @@
                 <img class="close" (click)="_showTabActions = false" [src]="svgPath + 'close-icon-gray.svg'" />
               </div>
             </div>
-          </div>
+          </div> -->
         </ng-template>
       </mat-tab>
     </mat-tab-group>

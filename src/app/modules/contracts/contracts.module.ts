@@ -1,3 +1,4 @@
+import { ContractProductCategoryTableComponent } from './components/contract-product-category-table/contract-product-category-table.component';
 import { ProductsEffects } from './../products/store/products.effects';
 import { ContractProductsEffects } from './store/effects/products.effects';
 import { ContractProductService } from './services/products.service';
@@ -7,7 +8,7 @@ import { ContractsEffects } from './store/effects/contracts.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ContractsService } from './services/contracts.service';
-import { ContractProductSpecsComponent } from './components/contract-product-specs/contract-product-specs.component';
+import { ContractProductCategoryComponent } from './components/contract-product-category/contract-product-category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContractRightContentComponent } from './components/contract-right-content/contract-right-content.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -25,13 +26,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ContractsContainerComponent } from './container/contracts-container.component';
 import { CommonModule } from '@angular/common';
-import { MatIconModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule, MatButtonModule, MatDialogModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatSelectModule, MatAutocompleteModule, MatExpansionModule, MatSlideToggleModule } from '@angular/material';
+import {
+  MatIconModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatStepperModule, MatTabsModule, MatButtonModule, MatDialogModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatSelectModule, MatAutocompleteModule, MatExpansionModule, MatSlideToggleModule,
+  MatTableModule
+} from '@angular/material';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { SidebarModule } from 'primeng/sidebar';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { ContractProductSpecsTitleComponent } from './components/contract-product-specs-title/contract-product-specs-title.component';
-import { ContractsReducer } from './store/reducers/contract.reducer';
+import { ContractProductCategoryTitleComponent } from './components/contract-product-category-title/contract-product-category-title.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -82,7 +85,8 @@ const materialModules = [
   MatSlideToggleModule,
   MatCheckboxModule,
   MatTooltipModule,
-  ScrollingModule
+  ScrollingModule,
+  MatTableModule
 ];
 
 @NgModule({
@@ -110,8 +114,9 @@ const materialModules = [
     ContractAddComponent,
     ContractExpansionPanelComponent,
     ContractRightContentComponent,
-    ContractProductSpecsComponent,
-    ContractProductSpecsTitleComponent
+    ContractProductCategoryComponent,
+    ContractProductCategoryTitleComponent,
+    ContractProductCategoryTableComponent
   ],
   providers: [
     ConfirmationService,

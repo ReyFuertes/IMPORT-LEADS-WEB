@@ -1,19 +1,19 @@
-import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
-import { ContractSpecTitleDialogComponent } from './../../../dialogs/components/contract-spec-title/contract-spec-title-dialog.component';
-import { ContractProductSpecDialogComponent } from './../../../dialogs/components/contract-product-spec/contract-product-spec-dialog.component';
+import { ConfirmationComponent } from '../../../dialogs/components/confirmation/confirmation.component';
+import { ContractCategoryTitleDialogComponent } from '../../../dialogs/components/contract-category-title/contract-category-title-dialog.component';
+import { ContractProductSpecDialogComponent } from '../../../dialogs/components/contract-product-spec/contract-product-spec-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { environment } from './../../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'il-contract-product-specs',
-  templateUrl: './contract-product-specs.component.html',
-  styleUrls: ['./contract-product-specs.component.scss'],
+  selector: 'il-contract-product-category',
+  templateUrl: './contract-product-category.component.html',
+  styleUrls: ['./contract-product-category.component.scss'],
   providers: [ConfirmationService]
 })
 
-export class ContractProductSpecsComponent implements OnInit, OnChanges {
+export class ContractProductCategoryComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public _showTabActions: boolean = false;
   public panels: Array<{ id: number, title: string, description: string }> = [
@@ -62,7 +62,7 @@ export class ContractProductSpecsComponent implements OnInit, OnChanges {
   }
 
   public addTitle(): void {
-    const dialogRef = this.dialog.open(ContractSpecTitleDialogComponent);
+    const dialogRef = this.dialog.open(ContractCategoryTitleDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.specification['title'] = result;

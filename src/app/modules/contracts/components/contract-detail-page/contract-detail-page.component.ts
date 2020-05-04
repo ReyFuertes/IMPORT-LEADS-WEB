@@ -39,10 +39,6 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     {
       id: 1,
       title: ''
-    },
-    {
-      id: 2,
-      title: ''
     }
   ];
   @Output()
