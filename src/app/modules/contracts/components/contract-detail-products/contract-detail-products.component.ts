@@ -1,10 +1,9 @@
 import { getProductsSelector } from './../../../products/store/products.selector';
-import { ProductsState } from './../../store/reducers/products.reducer';
 import { IProduct } from './../../../products/products.model';
 import { getAllContractProductsSelector } from './../../store/selectors/contracts.selector';
 import { addContractProducts, deleteContractProduct, updateContractProduct } from './../../store/actions/products.action';
 import { AppState } from 'src/app/store/app.reducer';
-import { Store, select, State } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { PillState, IContract, IContractProduct } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -97,6 +96,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
+    this.$contractProducts.subscribe(res => console.log(res));
 
     this.$products = this.store.pipe(select(getProductsSelector));
     this.$products.subscribe(p => {
@@ -106,7 +106,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
           return { id: p.id, product_name: p.product_name }
         });
 
-        //get all suggestions
+        /* get all suggestions */
         this.suggestions = child.map(cp => {
           const _parents = parent.filter(_p => _p.parent.id === cp.id)
             .map(_p => ` - (${_p.product_name})`);
@@ -199,13 +199,15 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public OnEditProduct(product: IProduct): void {
     if (!product) return;
 
-    //assign selected item to form
+    /* assign selected item to form */
     const { _id, id, product_name, qty, cost, sub_products } = product;
     this.form.reset();
     this.formSubProdsArr = null;
 
-    this.form.controls['id'].patchValue(_id); // use contract product id here
-    this.form.controls['product_name'].patchValue({ label: product_name, value: id }); // we use an object for passing values to suggestion control
+    /* use contract product id here */
+    this.form.controls['id'].patchValue(_id);
+    /* we use an object for passing values to suggestion control */
+    this.form.controls['product_name'].patchValue({ label: product_name, value: id });
     this.form.controls['qty'].patchValue(qty);
     this.form.controls['cost'].patchValue(cost);
     this.form.controls['sub_products'].patchValue(this.fmtSubProducts(sub_products));
@@ -220,7 +222,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
       const item = this.createSubItem({
         _id: subItem._id,
         id: subItem.id,
-        product_name: { label: subItem.product_name, value: subItem.id },  // we use an object for passing values to suggestion control
+        product_name: { label: subItem.product_name, value: subItem.id }, /* we use an object for passing values to suggestion control */
         qty: subItem.qty,
         cost: subItem.cost
       });
