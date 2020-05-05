@@ -30,11 +30,11 @@ export interface IContractProductForm {
 }
 
 export interface IContractProduct {
+  _id?: string;
   id?: string;
   parent?: IProduct
   sub_products?: IProduct[],
   contract?: IContract;
-  // cp_id?: string;
 }
 export interface IProductImage {
   id?: string;

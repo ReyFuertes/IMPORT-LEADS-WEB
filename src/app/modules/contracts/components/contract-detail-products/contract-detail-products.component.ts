@@ -271,7 +271,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
         })
         /* remote product from the database */
         if (toRemove)
-          this.store.dispatch(deleteContractProduct({ id: toRemove.id }));
+          this.store.dispatch(deleteContractProduct({ id: toRemove._id }));
 
         this.onResetForm();
       }
@@ -304,7 +304,8 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
         })
         /* remote sub product from the database */
         if (toRemove) {
-          this.store.dispatch(deleteContractProduct({ id: toRemove.id }));
+          debugger
+          this.store.dispatch(deleteContractProduct({ id: toRemove._id }));
 
           this.onResetForm();
         }
