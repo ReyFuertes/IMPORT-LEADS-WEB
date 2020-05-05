@@ -1,3 +1,4 @@
+import { DropdownPopoverSelectComponent } from './components/dropdown-popover-select/dropdown-popover-select.component';
 import { DropdownSelectRowComponent } from './components/dropdown-select-row/dropdown-select-row.component';
 import { DatatableComponent } from './components/datatable/datatable.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
@@ -96,7 +97,8 @@ const sharedComponents = [
   InputSearchComponent,
   MenuComponent,
   DatatableComponent,
-  DropdownSelectRowComponent
+  DropdownSelectRowComponent,
+  DropdownPopoverSelectComponent
 ];
 
 const directives = [
