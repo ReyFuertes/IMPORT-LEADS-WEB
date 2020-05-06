@@ -3,7 +3,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { InspectionRunCommentDialogComponent } from './components/inspection-run-comment/inspection-run-comment-dialog.component';
 import { ContractCategoryTitleDialogComponent } from './components/contract-category-title/contract-category-title-dialog.component';
-import { ContractProductSpecDialogComponent } from './components/contract-product-spec/contract-product-spec-dialog.component';
+import { ContractProductCategoryDialogComponent } from './components/contract-product-category/contract-product-category-dialog.component';
 import { InspectionCommentDialogComponent } from './components/inspection-comments/inspection-comments-dialog.component';
 import { BriefDialogComponent } from './components/brief/brief-dialog.component';
 import { AQLDialogComponent } from './components/aql/aql-dialog.component';
@@ -32,7 +32,7 @@ const dialogComponents = [
   InspectionCommentDialogComponent,
   VenuesAddDialogComponent,
   UserAddDialogComponent,
-  ContractProductSpecDialogComponent,
+  ContractProductCategoryDialogComponent,
   ContractCategoryTitleDialogComponent,
   InspectionRunCommentDialogComponent,
   ContractTemplateDialogComponent,

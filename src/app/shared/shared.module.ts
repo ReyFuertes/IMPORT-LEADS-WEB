@@ -1,3 +1,4 @@
+import { DropdownSelectSearchComponent } from './components/dropdown-select-search/dropdown-select-search.component';
 import { DropdownPopoverSelectComponent } from './components/dropdown-popover-select/dropdown-popover-select.component';
 import { DropdownSelectRowComponent } from './components/dropdown-select-row/dropdown-select-row.component';
 import { DatatableComponent } from './components/datatable/datatable.component';
@@ -98,7 +99,8 @@ const sharedComponents = [
   MenuComponent,
   DatatableComponent,
   DropdownSelectRowComponent,
-  DropdownPopoverSelectComponent
+  DropdownPopoverSelectComponent,
+  DropdownSelectSearchComponent
 ];
 
 const directives = [

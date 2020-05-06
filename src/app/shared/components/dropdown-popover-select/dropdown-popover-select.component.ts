@@ -14,6 +14,18 @@ export class DropdownPopoverSelectComponent implements OnInit {
   public items: any[] = [
     { value: 'steak-0', label: 'Steak' },
     { value: 'pizza-1', label: 'Pizza' },
+    { value: 'tacos-2', label: 'Tacos' },
+    { value: 'steak-0', label: 'Steak' },
+    { value: 'pizza-1', label: 'Pizza' },
+    { value: 'tacos-2', label: 'Tacos' },
+    { value: 'steak-0', label: 'Steak' },
+    { value: 'pizza-1', label: 'Pizza' },
+    { value: 'tacos-2', label: 'Tacos' },
+    { value: 'steak-0', label: 'Steak' },
+    { value: 'pizza-1', label: 'Pizza' },
+    { value: 'tacos-2', label: 'Tacos' },
+    { value: 'steak-0', label: 'Steak' },
+    { value: 'pizza-1', label: 'Pizza' },
     { value: 'tacos-2', label: 'Tacos' }
   ];
   public valueEmitter = new EventEmitter<ISimpleItem>();

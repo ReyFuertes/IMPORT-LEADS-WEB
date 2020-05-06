@@ -1,0 +1,13 @@
+<div *ngIf="form" fxLayout="row" fxLayoutAlign="center center" [formGroup]="form">
+  <mat-form-field floatLabel="never">
+    <mat-select #multiSelect [placeholder]="placeholder" [formControlName]="controlName">
+      <mat-option>
+        <ngx-mat-select-search [clearSearchInput]="'false'" [placeholderLabel]="'Search'" [formControl]="dataFilterForm" [noEntriesFoundLabel]="'No result'"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let item of ($filteredData | async)" [value]="item?.value">
+        {{ item?.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <img [src]="svgPath + 'arrow-down-icon-blue.svg'" />
+</div>

@@ -12,7 +12,8 @@
     <mat-tab-group class="il-tab">
       <mat-tab class="tab-1">
         <ng-template matTabContent>
-          <il-contract-product-category-table></il-contract-product-category-table>
+          <il-contract-product-category-table [isRightNavOpen]="isRightNavOpen"></il-contract-product-category-table>
+
           <!-- <il-contract-expansion-panel [isRightNavOpen]="isRightNavOpen" [panels]="panels"></il-contract-expansion-panel>
 
           <div [ngClass]="{'disabled': isRightNavOpen}" fxLayout="row" fxLayoutAlign="center center" class="footer">

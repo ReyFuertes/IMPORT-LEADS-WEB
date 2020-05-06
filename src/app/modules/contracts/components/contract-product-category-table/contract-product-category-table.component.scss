@@ -1,4 +1,21 @@
 @import "src/styleguide/shared";
+.table-footer {
+  height: 40px;
+  background-color: $color-white;
+  padding: 10px;
+  span {
+    font-size: 12px;
+    font-weight: 500;
+    color: $color-primary;
+  }
+  img {
+    cursor: pointer;
+  }
+  > div > div {
+    cursor: pointer;
+    width: fit-content;
+  }
+}
 table {
   width: 100%;
 }
@@ -6,10 +23,10 @@ tr.example-detail-row {
   height: 0;
 }
 tr.element-row:not(.expanded-row):hover {
-  background: whitesmoke;
+  background: $color-white-1;
 }
 tr.element-row:not(.expanded-row):active {
-  background: #efefef;
+  background: $color-white-1;
 }
 .element-row td {
   border-bottom-width: 0;
@@ -18,31 +35,36 @@ tr.element-row:not(.expanded-row):active {
   overflow: hidden;
   display: flex;
 }
-.element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
-}
-.element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
-}
-.element-description {
-  padding: 16px;
-}
-.element-description-attribution {
-  opacity: 0.5;
-}
 ::ng-deep {
+  p-inputswitch {
+    @include il-input-switch;
+  }
   .mat-tab-group {
     box-shadow: $box-shadow;
   }
 }
 :host ::ng-deep {
+  il-dropdown-select-search {
+    height: 30px;
+    margin-bottom: 9px;
+  }
+  .mat-select-value-text {
+    font-size: 14px !important;
+    float: right;
+    margin-right: 10px;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0 !important;
+    display: none !important;
+  }
+  p-inputswitch .ui-inputswitch-slider {
+    left: 3px;
+  }
+  td.mat-cell:last-of-type,
+  td.mat-footer-cell:last-of-type,
+  th.mat-header-cell:last-of-type {
+    padding-right: 15px !important;
+  }
   td.mat-cell:not(last-child) {
     cursor: pointer;
   }

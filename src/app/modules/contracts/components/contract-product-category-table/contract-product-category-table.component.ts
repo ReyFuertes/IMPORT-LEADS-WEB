@@ -1,6 +1,8 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { trigger, transition, style, state, animate } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 export class TableExpandableRowsExample {
   dataSource = ELEMENT_DATA;
@@ -36,17 +38,56 @@ export interface PeriodicElement {
   ],
 })
 
-export class ContractProductCategoryTableComponent implements OnInit {
+export class ContractProductCategoryTableComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public dataSource = ELEMENT_DATA;
   public columnsToDisplay = ['name', 'description', 'action-col'];
   public expandedElement: PeriodicElement | null;
 
-  constructor() { }
+  public actionState: boolean = false;
+  @Input()
+  public isRightNavOpen: boolean = false;
+  public items: ISimpleItem[] = [
+    {
+      label: 'TEST',
+      value: 'TEST'
+    },
+    {
+      label: 'TEST',
+      value: 'TEST'
+    },
+    {
+      label: 'TEST',
+      value: 'TEST'
+    },
+    {
+      label: 'TEST',
+      value: 'TEST'
+    },
+    {
+      label: 'TEST',
+      value: 'TEST'
+    },
+    {
+      label: 'TEST',
+      value: 'TEST'
+    }
+  ];
+  public form: FormGroup
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      contract_tag: [null]
+    })
+   }
 
   ngOnInit() { }
 
   public onExpand(event: any): void {
     console.log(event);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.isRightNavOpen)
+      this.isRightNavOpen = changes.isRightNavOpen.currentValue;
   }
 }
