@@ -19,7 +19,7 @@
 table {
   width: 100%;
 }
-tr.example-detail-row {
+tr.detail-row {
   height: 0;
 }
 tr.element-row:not(.expanded-row):hover {
@@ -50,6 +50,14 @@ tr.element-row:not(.expanded-row):active {
   }
 }
 :host ::ng-deep {
+  td.mat-cell {
+    &:first-child {
+      width: 300px;
+    }
+  }
+  td.mat-cell:not(:last-child) > div {
+    margin-right: 20px;
+  }
   mat-footer-row,
   mat-header-row,
   mat-row,
@@ -67,7 +75,7 @@ tr.element-row:not(.expanded-row):active {
     float: right;
     margin-right: 10px;
   }
-  .mat-form-field-appearance-legacy .mat-form-field-underline {
+  il-dropdown-select-search .mat-form-field-appearance-legacy .mat-form-field-underline {
     height: 0 !important;
     display: none !important;
   }
