@@ -1,3 +1,4 @@
+import { environment } from './../../../../../environments/environment';
 import { trigger, transition, style, state, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
@@ -36,6 +37,7 @@ export interface PeriodicElement {
 })
 
 export class ContractProductCategoryTableComponent implements OnInit {
+  public svgPath: string = environment.svgPath;
   public dataSource = ELEMENT_DATA;
   public columnsToDisplay = ['name', 'description', 'action-col'];
   public expandedElement: PeriodicElement | null;

@@ -9,7 +9,7 @@ export interface AddEditDialogState {
 }
 export interface ISimpleItem {
   label: string;
-  value: string;
+  value?: string;
 }
 export interface Menu {
   label: string;

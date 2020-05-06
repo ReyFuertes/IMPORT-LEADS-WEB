@@ -1,3 +1,4 @@
+@import "src/styleguide/shared";
 table {
   width: 100%;
 }
@@ -36,8 +37,19 @@ tr.element-row:not(.expanded-row):active {
 .element-description-attribution {
   opacity: 0.5;
 }
-// :host ::ng-deep {
-//   .mat-table thead{
-//     display: none !important;
-//   }
-// }
+::ng-deep {
+  .mat-tab-group {
+    box-shadow: $box-shadow;
+  }
+}
+:host ::ng-deep {
+  td.mat-cell:not(last-child) {
+    cursor: pointer;
+  }
+  td.mat-cell:last-child {
+    width: 175px;
+  }
+  .mat-table thead {
+    display: none !important;
+  }
+}
