@@ -43,7 +43,21 @@ tr.element-row:not(.expanded-row):active {
     box-shadow: $box-shadow;
   }
 }
+::ng-deep {
+  .mat-tab-header,
+  .mat-tab-nav-bar {
+    border-bottom: 1px solid $color-gray-3 !important;
+  }
+}
 :host ::ng-deep {
+  mat-footer-row,
+  mat-header-row,
+  mat-row,
+  td.mat-cell,
+  td.mat-footer-cell,
+  th.mat-header-cell {
+    border-bottom-color: $color-gray-3 !important;
+  }
   il-dropdown-select-search {
     height: 30px;
     margin-bottom: 9px;

@@ -13,32 +13,6 @@
       <mat-tab class="tab-1">
         <ng-template matTabContent>
           <il-contract-product-category-table [isRightNavOpen]="isRightNavOpen"></il-contract-product-category-table>
-
-          <!-- <il-contract-expansion-panel [isRightNavOpen]="isRightNavOpen" [panels]="panels"></il-contract-expansion-panel>
-
-          <div [ngClass]="{'disabled': isRightNavOpen}" fxLayout="row" fxLayoutAlign="center center" class="footer">
-            <img class="add" *ngIf="!_showTabActions" (click)="!isRightNavOpen ? _showTabActions = !_showTabActions: null" [src]="svgPath + 'add-icon-gray.svg'" />
-            <img *ngIf="!_showTabActions" (click)="!isRightNavOpen ? onDeleteProductSpecs(): null" [src]="svgPath + 'delete-icon-red.svg'">
-            <div fxFlex *ngIf="_showTabActions" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-              <div class="actions-links" fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-                <div (click)="add()">
-                  <img [src]="svgPath + 'add-category-icon-blue.svg'" />
-                  <span>Add a category</span>
-                </div>
-                <div (click)="addTitle()">
-                  <img [src]="svgPath + 'add-title-icon-blue.svg'" />
-                  <span>Add a title</span>
-                </div>
-                <div>
-                  <img [src]="svgPath + 'templates-icon-blue.svg'" />
-                  <span>Import category template</span>
-                </div>
-              </div>
-              <div fxFlex="4" fxLayoutAlign="center center">
-                <img class="close" (click)="_showTabActions = false" [src]="svgPath + 'close-icon-gray.svg'" />
-              </div>
-            </div>
-          </div> -->
         </ng-template>
       </mat-tab>
     </mat-tab-group>

@@ -1,13 +1,15 @@
+import { addContractCategory } from './../../store/actions/category.action';
+import { ContractProductCategoryDialogComponent } from './../../../dialogs/components/contract-product-category/contract-product-category-dialog.component';
 import { loadContractProducts } from './../../store/actions/products.action';
 import { getContractById } from './../../store/selectors/contracts.selector';
 import { User } from './../../../users/users.models';
 import { AppState } from './../../../../store/app.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { IContract, IProductImage } from './../../contract.model';
+import { IContract, IProductImage, IContractCategory } from './../../contract.model';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ContractAddDialogComponent } from 'src/app/modules/dialogs/components/contracts-add/contract-add-dialog.component';
 import { ContractTemplateDialogComponent } from 'src/app/modules/dialogs/components/contract-template/contract-template-dialog.component';
 import { GenericPageDetailComponent } from 'src/app/shared/generics/generic-page-detail';
@@ -34,6 +36,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   public imgUrl: string = `${environment.apiUrl}contracts/image/`;
   public contractImages: IProductImage[];
   public images: any[];
+  public contract: IContract;
 
   public specifications: Array<{ id: number, title: string, specification?: any }> = [
     {
@@ -85,6 +88,12 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
       },
       {
         id: 5,
+        label: 'Create Category',
+        icon: 'save-icon-blue.svg',
+        action: this.createCategory
+      },
+      {
+        id: 6,
         label: 'Delete contract',
         icon: 'delete-icon-red.svg'
       }
@@ -108,6 +117,27 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
         }
       });
     }
+  }
+
+  public createCategory = (): void => {
+    const dialogRef = this.dialog.open(ContractProductCategoryDialogComponent, {
+      height: '200px'
+    });
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        const payload: IContractCategory = {
+          category: {
+            category_name: result
+          },
+          contract: {
+            id: this.form.get('id').value,
+            contract_name: this.form.get('contract_name').value
+          }
+        }
+        debugger
+        this.store.dispatch(addContractCategory({ payload }))
+      }
+    });
   }
 
   public get hasImgs(): boolean {

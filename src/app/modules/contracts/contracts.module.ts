@@ -1,3 +1,5 @@
+import { ContractCategoryEffects } from './store/effects/category.effects';
+import { ContractCategoryService } from './services/category.service';
 import { ContractProductCategoryTableComponent } from './components/contract-product-category-table/contract-product-category-table.component';
 import { ProductsEffects } from './../products/store/products.effects';
 import { ContractProductsEffects } from './store/effects/products.effects';
@@ -101,7 +103,7 @@ const materialModules = [
     DialogModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('contractsModule', reducers),
-    EffectsModule.forFeature([ContractsEffects, ContractProductsEffects, ProductsEffects])
+    EffectsModule.forFeature([ContractsEffects, ContractProductsEffects, ProductsEffects, ContractCategoryEffects])
   ],
   exports: [],
   declarations: [
@@ -123,7 +125,8 @@ const materialModules = [
     ContractsService,
     UploadService,
     ImagesService,
-    ContractProductService
+    ContractProductService,
+    ContractCategoryService
   ],
 })
 export class ContractsModule { }

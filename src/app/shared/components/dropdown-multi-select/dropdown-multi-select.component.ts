@@ -24,6 +24,7 @@ export class DropdownMultiSelectComponent implements OnInit, OnDestroy {
   public valueEmitter = new EventEmitter<any>();
   public dataFilterForm = new FormControl();
   public filteredData$ = new ReplaySubject<any>();
+
   private newDataList: any;
   private _unsubscribe$ = new Subject<void>();
 

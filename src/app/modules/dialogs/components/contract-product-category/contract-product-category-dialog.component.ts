@@ -1,6 +1,6 @@
 import { environment } from '../../../../../environments/environment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class ContractProductCategoryDialogComponent implements OnInit {
     public fb: FormBuilder,
     public dialogRef: MatDialogRef<ContractProductCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
     this.form = this.fb.group({
-      title: ['']
+      title: [null, [Validators.required]]
     });
   }
 

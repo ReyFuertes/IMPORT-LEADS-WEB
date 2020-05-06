@@ -4,6 +4,7 @@
 }
 .il-dialog {
   width: 385px !important;
+  height: 200px !important;
   padding: 20px;
   > div {
     &:first-child {
@@ -12,6 +13,7 @@
   }
   .content {
     width: 100%;
+    height: 70px !important;
   }
   il-input {
     width: 100%;
