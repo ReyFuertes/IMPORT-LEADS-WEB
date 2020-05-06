@@ -4,17 +4,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
-  selector: 'il-contract-product-category-dialog',
-  templateUrl: './contract-product-category-dialog.component.html',
-  styleUrls: ['./contract-product-category-dialog.component.scss']
+  selector: 'il-contract-category-dialog',
+  templateUrl: './contract-category-dialog.component.html',
+  styleUrls: ['./contract-category-dialog.component.scss']
 })
 
-export class ContractProductCategoryDialogComponent implements OnInit {
+export class ContractCategoryDialogComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   public form: FormGroup;
   constructor(
     public fb: FormBuilder,
-    public dialogRef: MatDialogRef<ContractProductCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
+    public dialogRef: MatDialogRef<ContractCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
     this.form = this.fb.group({
       title: [null, [Validators.required]]
     });

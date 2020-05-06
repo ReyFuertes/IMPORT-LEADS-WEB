@@ -1,9 +1,10 @@
+import { ContractCategoryTermDialogComponent } from './components/contract-category-term/contract-category-term-dialog.component';
 import { ProductAddDialogComponent } from './components/products-add/products-add-dialog.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { InspectionRunCommentDialogComponent } from './components/inspection-run-comment/inspection-run-comment-dialog.component';
 import { ContractCategoryTitleDialogComponent } from './components/contract-category-title/contract-category-title-dialog.component';
-import { ContractProductCategoryDialogComponent } from './components/contract-product-category/contract-product-category-dialog.component';
+import { ContractCategoryDialogComponent } from './components/contract-category/contract-category-dialog.component';
 import { InspectionCommentDialogComponent } from './components/inspection-comments/inspection-comments-dialog.component';
 import { BriefDialogComponent } from './components/brief/brief-dialog.component';
 import { AQLDialogComponent } from './components/aql/aql-dialog.component';
@@ -32,7 +33,7 @@ const dialogComponents = [
   InspectionCommentDialogComponent,
   VenuesAddDialogComponent,
   UserAddDialogComponent,
-  ContractProductCategoryDialogComponent,
+  ContractCategoryDialogComponent,
   ContractCategoryTitleDialogComponent,
   InspectionRunCommentDialogComponent,
   ContractTemplateDialogComponent,
@@ -42,7 +43,8 @@ const dialogComponents = [
   ChatUserDialogComponent,
   ChatDetailDialogComponent,
   ConfirmationComponent,
-  ProductAddDialogComponent
+  ProductAddDialogComponent,
+  ContractCategoryTermDialogComponent
 ];
 
 const materialModules = [

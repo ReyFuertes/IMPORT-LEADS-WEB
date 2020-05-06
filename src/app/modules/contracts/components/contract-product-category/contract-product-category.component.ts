@@ -1,6 +1,6 @@
 import { ConfirmationComponent } from '../../../dialogs/components/confirmation/confirmation.component';
 import { ContractCategoryTitleDialogComponent } from '../../../dialogs/components/contract-category-title/contract-category-title-dialog.component';
-import { ContractProductCategoryDialogComponent } from '../../../dialogs/components/contract-product-category/contract-product-category-dialog.component';
+import { ContractCategoryDialogComponent } from '../../../dialogs/components/contract-category/contract-category-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../../../../environments/environment';
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
@@ -71,7 +71,7 @@ export class ContractProductCategoryComponent implements OnInit, OnChanges {
   }
 
   public UpdateProductSpecTitle(): void {
-    const dialogRef = this.dialog.open(ContractProductCategoryDialogComponent);
+    const dialogRef = this.dialog.open(ContractCategoryDialogComponent);
     dialogRef.afterClosed().subscribe(result => { });
   }
 

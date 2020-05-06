@@ -1,5 +1,5 @@
 import { addContractCategory } from './../../store/actions/category.action';
-import { ContractProductCategoryDialogComponent } from './../../../dialogs/components/contract-product-category/contract-product-category-dialog.component';
+import { ContractCategoryDialogComponent } from '../../../dialogs/components/contract-category/contract-category-dialog.component';
 import { loadContractProducts } from './../../store/actions/products.action';
 import { getContractById } from './../../store/selectors/contracts.selector';
 import { User } from './../../../users/users.models';
@@ -120,7 +120,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   }
 
   public createCategory = (): void => {
-    const dialogRef = this.dialog.open(ContractProductCategoryDialogComponent, {
+    const dialogRef = this.dialog.open(ContractCategoryDialogComponent, {
       height: '200px'
     });
     dialogRef.afterClosed().subscribe((result: string) => {
@@ -134,7 +134,6 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
             contract_name: this.form.get('contract_name').value
           }
         }
-        debugger
         this.store.dispatch(addContractCategory({ payload }))
       }
     });

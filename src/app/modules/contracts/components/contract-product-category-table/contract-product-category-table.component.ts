@@ -1,3 +1,5 @@
+import { ContractCategoryTermDialogComponent } from './../../../dialogs/components/contract-category-term/contract-category-term-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
@@ -74,13 +76,24 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
     }
   ];
   public form: FormGroup
-  constructor(private fb: FormBuilder) {
+  constructor(private dialog: MatDialog, private fb: FormBuilder) {
     this.form = this.fb.group({
       contract_tag: [null]
     })
-   }
+  }
 
   ngOnInit() { }
+
+  public createTerm(): void {
+    const dialogRef = this.dialog.open(ContractCategoryTermDialogComponent, {
+      height: '270px'
+    });
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result) {
+        console.log(result);
+      }
+    });
+  }
 
   public onExpand(event: any): void {
     console.log(event);

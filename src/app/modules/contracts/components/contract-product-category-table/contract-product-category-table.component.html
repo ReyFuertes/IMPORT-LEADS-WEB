@@ -36,10 +36,10 @@
     <div [ngClass]="{'hidden': actionState}" fxFlex fxLayoutAlign="center center">
       <img (click)="actionState = !actionState" [src]="svgPath + 'add-icon-gray.svg'" />
     </div>
-    <div fxFlex [ngClass]="{'hidden': !actionState}" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-      <div fxLayoutAlign="start center" fxLayoutGap="5px">
+    <div fxFlex [ngClass]="{'hidden': !actionState}" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px">
+      <div (click)="createTerm()" fxLayoutAlign="start center" fxLayoutGap="5px">
         <img [src]="svgPath + 'add-category-icon-blue.svg'" />
-        <span>Add a category</span>
+        <span >Add a term</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="5px">
         <img [src]="svgPath + 'add-title-icon-blue.svg'" />
