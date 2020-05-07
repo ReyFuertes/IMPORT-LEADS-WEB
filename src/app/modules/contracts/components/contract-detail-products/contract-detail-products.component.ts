@@ -96,7 +96,6 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.$contractProducts = this.store.pipe(select(getAllContractProductsSelector));
-    this.$contractProducts.subscribe(res => console.log(res));
 
     this.$products = this.store.pipe(select(getProductsSelector));
     this.$products.subscribe(p => {

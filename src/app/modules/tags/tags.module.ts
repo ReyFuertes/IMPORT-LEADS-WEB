@@ -1,3 +1,4 @@
+import { TagsService } from './tags.service';
 import { TagExpansionListComponent } from './components/tag-expansion-list/tag-expansion-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -70,6 +71,8 @@ const materialModules = [
     TagOverviewPageComponent,
     TagExpansionListComponent
   ],
-  providers: [],
+  providers: [
+    TagsService
+  ],
 })
 export class TagsModule { }

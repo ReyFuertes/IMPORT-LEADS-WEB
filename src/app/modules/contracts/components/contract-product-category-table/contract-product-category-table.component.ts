@@ -58,22 +58,6 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
     {
       label: 'TEST',
       value: 'TEST'
-    },
-    {
-      label: 'TEST',
-      value: 'TEST'
-    },
-    {
-      label: 'TEST',
-      value: 'TEST'
-    },
-    {
-      label: 'TEST',
-      value: 'TEST'
-    },
-    {
-      label: 'TEST',
-      value: 'TEST'
     }
   ];
   public form: FormGroup;
@@ -108,8 +92,13 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
     this.selectedCol = event[col];
   }
 
+  public isHidden(element: any): boolean {
+    return element && element.description == this.selectedCol;
+  }
+
   public onClose(): void {
     this.expandedElement = null;
+    this.selectedCol = null;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

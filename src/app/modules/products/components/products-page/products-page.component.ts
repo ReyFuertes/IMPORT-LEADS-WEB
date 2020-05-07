@@ -25,7 +25,6 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
     this.$products = this.store.pipe(select(getProductsSelector));
     this.$products.subscribe(res => {
       this.items = res//_.orderBy(res, ['product_name', 'parent.product_name'], ['asc', 'asc']);
-      console.log(this.items);
     })
   }
 

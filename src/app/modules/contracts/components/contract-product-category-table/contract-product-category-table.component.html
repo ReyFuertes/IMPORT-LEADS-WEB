@@ -39,7 +39,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let row; let element; columns: columnsToDisplay;" class="element-row" [ngClass]="element">
+    <tr mat-row *matRowDef="let row; let element; columns: columnsToDisplay;" class="element-row" [ngClass]="{'element': true, 'hidden': isHidden(element)}">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
   </table>
@@ -51,7 +51,7 @@
     <div fxFlex [ngClass]="{'hidden': !actionState}" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
       <div (click)="createTerm()" fxLayoutAlign="start center" fxLayoutGap="5px">
         <img [src]="svgPath + 'add-category-icon-blue.svg'" />
-        <span>Add a category</span>
+        <span>Add a term</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="5px">
         <img [src]="svgPath + 'add-title-icon-blue.svg'" />

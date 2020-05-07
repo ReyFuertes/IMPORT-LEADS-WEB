@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TagsQuestionDialogComponent } from 'src/app/modules/dialogs/components/tags-question/tags-question-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Tag } from '../../tags.models';
+import { ITag } from '../../tags.model';
 
 @Component({
   selector: 'il-tag-expansion-list',

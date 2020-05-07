@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { MatDialog } from '@angular/material/dialog';
 import { TagsQuestionDialogComponent } from 'src/app/modules/dialogs/components/tags-question/tags-question-dialog.component';
-import { Tag } from '../../tags.models';
+import { ITag } from '../../tags.model';
 
 @Component({
   selector: 'il-tag-expansion-panel',
@@ -17,7 +17,7 @@ import { Tag } from '../../tags.models';
 export class TagExpansionPanelComponent extends GenericRowComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public items: Tag[];
+  public items: ITag[];
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
 
@@ -41,7 +41,7 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
     const dialogRef = this.dialog.open(TagsDialogComponent, { data: {} });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.items.push({ id: 6, name: result, questions: [] });
+        this.items.push({ id: '6', name: result, questions: [] });
       }
      });
   }
