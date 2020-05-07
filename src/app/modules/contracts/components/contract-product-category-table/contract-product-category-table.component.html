@@ -4,7 +4,7 @@
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; let i = index">
       <th mat-header-cell *matHeaderCellDef> {{column}} </th>
       <td mat-cell *matCellDef="let element">
-        <div *ngIf="i !== (columnsToDisplay.length - 1)" (click)="onExpand(element, column)" fxLayoutGap="20px">
+        <div *ngIf="i !== (columnsToDisplay.length - 1)" fxLayoutAlign="start center" (click)="onExpand(element, column)" fxLayoutGap="20px">
           <span>{{element[column]}}</span>
         </div>
         <div *ngIf="i === (columnsToDisplay.length - 1)" fxLayoutAlign="end center" fxLayoutGap="10px">
@@ -16,13 +16,23 @@
     </ng-container>
     <!-- details -->
     <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <td mat-cell class="row-detail" *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
         <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div fxFlex="23.5">
-            <il-input *ngIf="element?.name == selectedCol" [form]="form" isFloatLabel="true" [controlName]="'term_name'" placeholder="Name"></il-input>
+            <ng-container *ngIf="element?.name == selectedCol">
+              <il-input hasBorder="true" [form]="form" isFloatLabel="'true'" [controlName]="'term_name'" placeholder="Name"></il-input>
+              <div class="element-detail__name" fxLayoutGap="10px">
+                <button mat-flat-button class="il-button default" (click)="onClose(pnl)">Cancel</button>
+                <button mat-flat-button class="il-button primary">Save</button>
+              </div>
+            </ng-container>
           </div>
-          <div fxFlex>
-            <il-input *ngIf="element?.description == selectedCol" [form]="form" isFloatLabel="true" [controlName]="'description'" placeholder="Description"></il-input>
+          <div *ngIf="element?.description == selectedCol" fxLayout="column" fxFlex="80">
+            <il-textarea [rows]="5" hasBorder="true" [form]="form" isFloatLabel="true" [controlName]="'description'" placeholder="Description"></il-textarea>
+            <div class="element-detail__btn" fxLayoutGap="10px">
+              <button mat-flat-button class="il-button default" (click)="onClose(pnl)">Cancel</button>
+              <button mat-flat-button class="il-button primary">Save</button>
+            </div>
           </div>
         </div>
       </td>

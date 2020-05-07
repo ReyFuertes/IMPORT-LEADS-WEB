@@ -30,6 +30,8 @@ export class InputComponent implements OnInit {
   public showErrors: boolean = false;
   @Input()
   public isCenter: boolean = false;
+  @Input()
+  public hasBorder: boolean = false;
   constructor() { }
 
   ngOnInit() { }

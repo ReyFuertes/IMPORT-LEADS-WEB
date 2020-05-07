@@ -34,6 +34,18 @@ tr.element-row:not(.expanded-row):active {
 .element-detail {
   overflow: hidden;
   display: flex;
+  > div {
+    &:first-child {
+      margin-top: 20px;
+    }
+    &:nth-child(2) {
+      margin-top: 20px;
+    }
+  }
+}
+.element-detail__btn,
+.element-detail__name {
+  margin-bottom: 20px;
 }
 ::ng-deep {
   p-inputswitch {
@@ -50,6 +62,10 @@ tr.element-row:not(.expanded-row):active {
   }
 }
 :host ::ng-deep {
+  .row-detail .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0;
+    display: none !important;
+  }
   td.mat-cell {
     &:first-child {
       width: 300px;
@@ -57,6 +73,7 @@ tr.element-row:not(.expanded-row):active {
   }
   td.mat-cell:not(:last-child) > div {
     margin-right: 20px;
+    height: 40px;
   }
   mat-footer-row,
   mat-header-row,

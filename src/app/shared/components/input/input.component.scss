@@ -20,3 +20,15 @@
     }
   }
 }
+:host ::ng-deep {
+  .has-border {
+    .mat-form-field-infix {
+      border: thin #ccc solid;
+      padding-left: 4px;
+      border-radius: 2px;
+    }
+    .mat-form-field-label {
+      padding-left: 4px !important;
+    }
+  }
+}

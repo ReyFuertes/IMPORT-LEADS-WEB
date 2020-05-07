@@ -108,6 +108,10 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
     this.selectedCol = event[col];
   }
 
+  public onClose(): void {
+    this.expandedElement = null;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.isRightNavOpen)
       this.isRightNavOpen = changes.isRightNavOpen.currentValue;
