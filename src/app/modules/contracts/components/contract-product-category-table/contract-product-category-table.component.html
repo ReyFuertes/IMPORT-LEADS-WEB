@@ -8,8 +8,8 @@
           <span>{{element[column]}}</span>
         </div>
         <div [ngClass]="{'hidden': i !== (columnsToDisplay.length - 1)}" fxLayoutAlign="end center" fxLayoutGap="10px">
-          <il-dropdown-select-search class="dss" *ngIf="($tags | async).length > 0" [form]="tagForm" [controlName]="'contract_tag'" [placeholder]="'Select Tag'" [items]="($tags | async)"></il-dropdown-select-search>
-          <img [ngClass]="{'hidden': isRightNavOpen}" [src]="svgPath + 'delete-icon-red.svg'">
+          <il-dropdown-select-search matTooltip="Select Tag" *ngIf="($tags | async).length > 0" [form]="tagForm" [controlName]="'contract_tag'" [placeholder]="'Select Tag'" [items]="($tags | async)"></il-dropdown-select-search>
+          <img matTooltip="Delete Term" [ngClass]="{'hidden': isRightNavOpen}" [src]="svgPath + 'delete-icon-red.svg'">
           <p-inputSwitch [ngClass]="{'hidden': !isRightNavOpen}"></p-inputSwitch>
         </div>
       </td>
@@ -46,24 +46,24 @@
   <!-- actions -->
   <div fxLayout="row" class="table-footer">
     <div [ngClass]="{'hidden': actionState}" fxFlex fxLayoutAlign="center center">
-      <img (click)="actionState = !actionState" [src]="svgPath + 'add-icon-gray.svg'" />
+      <img matTooltip="Show Menu Actions"  (click)="actionState = !actionState" [src]="svgPath + 'add-icon-gray.svg'" />
     </div>
     <div fxFlex [ngClass]="{'hidden': !actionState}" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-      <div (click)="createTerm()" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <div matTooltip="Add a term"  (click)="createTerm()" fxLayoutAlign="start center" fxLayoutGap="5px">
         <img [src]="svgPath + 'add-category-icon-blue.svg'" />
         <span>Add a term</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="5px">
+      <div matTooltip="Add a title"  fxLayoutAlign="start center" fxLayoutGap="5px">
         <img [src]="svgPath + 'add-title-icon-blue.svg'" />
         <span>Add a title</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="5px">
+      <div matTooltip="Import Template"  fxLayoutAlign="start center" fxLayoutGap="5px">
         <img [src]="svgPath + 'templates-icon-blue.svg'" />
         <span>Import template</span>
       </div>
     </div>
     <div [ngClass]="{'hidden': !actionState}" fxFlex="10px" fxLayoutAlign="end center" fxLayoutGap="5px">
-      <img class="close" (click)="actionState = !actionState" [src]="svgPath + 'close-icon-gray.svg'" />
+      <img matTooltip="Close menu action"  class="close" (click)="actionState = !actionState" [src]="svgPath + 'close-icon-gray.svg'" />
     </div>
   </div>
 </div>
