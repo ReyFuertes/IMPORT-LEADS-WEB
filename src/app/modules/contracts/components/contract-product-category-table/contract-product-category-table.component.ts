@@ -89,6 +89,7 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
         console.log(result);
+
       }
     });
   }

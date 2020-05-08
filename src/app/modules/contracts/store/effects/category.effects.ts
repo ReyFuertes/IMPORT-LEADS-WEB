@@ -1,27 +1,26 @@
-import { ContractCategoryService } from './../../services/category.service';
+import { addCategory, addCategorySuccess } from './../actions/category.action';
+import { CategoryService } from './../../../../services/category.service';
 import { AppState } from './../../../../store/app.reducer';
-import { IContractCategory } from './../../contract.model';
+import { ICategory } from './../../contract.model';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { addContractCategory, addContractCategorySuccess } from '../actions/category.action';
 
 @Injectable()
-export class ContractCategoryEffects {
+export class CategoryEffects {
   addCategory$ = createEffect(() => this.actions$.pipe(
-    ofType(addContractCategory),
-    mergeMap(({ payload }) => this.contractCategoryService.post(payload)
+    ofType(addCategory),
+    mergeMap(({ payload }) => this.categoryService.post(payload)
       .pipe(
-        map((created: IContractCategory) => {
-          return addContractCategorySuccess({ created });
+        map((created: ICategory) => {
+          return addCategorySuccess({ created });
         })
       ))
   ));
 
   constructor(
-    private store: Store<AppState>,
     private actions$: Actions,
-    private contractCategoryService: ContractCategoryService,
+    private categoryService: CategoryService
   ) { }
 }

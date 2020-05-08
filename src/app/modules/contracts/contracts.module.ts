@@ -1,10 +1,11 @@
+import { CategoryEffects } from './store/effects/category.effects';
 import { TagsEffects } from './../tags/store/tags.effects';
-import { ContractCategoryEffects } from './store/effects/category.effects';
-import { ContractCategoryService } from './services/category.service';
+import { ContractCategoryEffects } from './store/effects/contract-category.effects';
+import { ContractCategoryService } from './services/contract-category.service';
 import { ContractProductCategoryTableComponent } from './components/contract-product-category-table/contract-product-category-table.component';
 import { ProductsEffects } from './../products/store/products.effects';
-import { ContractProductsEffects } from './store/effects/products.effects';
-import { ContractProductService } from './services/products.service';
+import { ContractProductsEffects } from './store/effects/contract-products.effects';
+import { ContractProductService } from './services/contract-products.service';
 import { ImagesService } from './../../services/images.service';
 import { UploadService } from './../../services/upload.service';
 import { ContractsEffects } from './store/effects/contracts.effects';
@@ -109,7 +110,8 @@ const materialModules = [
       ContractProductsEffects,
       ProductsEffects,
       ContractCategoryEffects,
-      TagsEffects
+      TagsEffects,
+      CategoryEffects
     ])
   ],
   exports: [],

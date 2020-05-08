@@ -1,4 +1,4 @@
-import { addContractCategory } from './../../store/actions/category.action';
+import { addContractCategory } from './../../store/actions/contract-category.action';
 import { ContractCategoryDialogComponent } from '../../../dialogs/components/contract-category/contract-category-dialog.component';
 import { loadContractProducts } from './../../store/actions/products.action';
 import { getContractById } from './../../store/selectors/contracts.selector';

@@ -1,25 +1,25 @@
+import { addCategorySuccess } from './../actions/category.action';
 import { sortCreatedAt } from 'src/app/shared/util/sort';
-import { ContractModuleState } from './index';
-import { addContractCategorySuccess } from './../actions/category.action';
-import { IContractCategory } from './../../contract.model';
+import { ICategory } from './../../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
+import { ContractModuleState } from './index';
 
-export interface ContractCategoryState extends EntityState<IContractCategory> {
+export interface CategoryState extends EntityState<ICategory> {
 }
-export const adapter: EntityAdapter<IContractCategory> = createEntityAdapter<IContractCategory>({});
-export const initialState: ContractCategoryState = adapter.getInitialState({
+export const adapter: EntityAdapter<ICategory> = createEntityAdapter<ICategory>({});
+export const initialState: CategoryState = adapter.getInitialState({
 });
 const reducer = createReducer(
   initialState,
-  on(addContractCategorySuccess, (state, action) => {
+  on(addCategorySuccess, (state, action) => {
     return ({ ...adapter.addOne(action.created, state) })
   })
 );
-export function ContractCategoryReducer(state: ContractCategoryState, action: Action) {
+export function CategoryReducer(state: CategoryState, action: Action) {
   return reducer(state, action);
 }
-export const getContractCategory = (state: ContractModuleState) => {
-  const contracts: IContractCategory[] = state && state.contractCategory.entities ? Object.values(state.contractCategory.entities) : null;
-  return contracts && contracts.sort((a: IContractCategory, b: IContractCategory) => sortCreatedAt(a, b));
+export const getCategory = (state: ContractModuleState) => {
+  const contracts: ICategory[] = state && state.category.entities ? Object.values(state.category.entities) : null;
+  return contracts && contracts.sort((a: ICategory, b: ICategory) => sortCreatedAt(a, b));
 };
