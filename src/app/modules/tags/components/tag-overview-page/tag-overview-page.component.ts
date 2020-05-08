@@ -1,7 +1,11 @@
+import { getTagsSelector } from './../../store/tags.selector';
+import { Observable } from 'rxjs';
+import { AppState } from './../../../../store/app.reducer';
+import { Store, select } from '@ngrx/store';
 import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Tag } from '../../tags.models';
+import { ITag } from '../../tags.model';
 
 @Component({
   selector: 'il-tag-overview-page',
@@ -10,47 +14,13 @@ import { Tag } from '../../tags.models';
 })
 
 export class TagOverviewPageComponent implements OnInit {
-  public items: Tag[] = [
-    {
-      id: 1,
-      name: 'Appearance',
-      questions: [
-        "Did you check details what kind of raw materials the material is made of? And percentages of those materials. ",
-        "Did you enclose a technical scheme?",
-        "Did you check details what kind of raw materials the material is made of? And percentages of those materials. "
-      ]
-    },
-    {
-      id: 2,
-      name: 'Materials',
-      questions: [
-        "Did you enclose a technical scheme?",
-        "Did you check details what kind of raw materials the material is made of? And percentages of those materials. "
-      ]
-    },
-    {
-      id: 3,
-      name: 'Packaging',
-      questions: [
-        "Did you check details what kind of raw materials the material is made of? And percentages of those materials. "
-      ]
-    },
-    {
-      id: 4,
-      name: 'Technical measurements',
-      questions: [
-        "Did you enclose a technical?",
-      ]
-    },
-    {
-      id: 5,
-      name: 'Technical preformance',
-      questions: [
-        "Did you enclose a scheme?",
-      ]
-    }
-  ];
-  constructor(public dialog: MatDialog) { }
+  public $items: Observable<ITag[]>;
+  constructor(private store: Store<AppState>, public dialog: MatDialog) {
 
-  ngOnInit() { }
+  }
+
+  ngOnInit() {
+    this.$items = this.store.pipe(select(getTagsSelector));
+    this.$items.subscribe(res => console.log(res));
+  }
 }

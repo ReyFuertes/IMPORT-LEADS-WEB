@@ -7,9 +7,9 @@
         <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
           <div fxFlex fxLayoutAlign="start center">
-            <span *ngIf="selectedIndex !== i">{{item?.name}}</span>
+            <span *ngIf="selectedIndex !== i">{{item?.tag_name}}</span>
             <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
-              <input matInput [value]="item?.name">
+              <input matInput [value]="item?.tag_name">
             </mat-form-field>
           </div>
           <div fxFlex="100px" class="pnl-actions" fxLayoutAlign="end center">
@@ -25,7 +25,7 @@
         </div>
       </mat-expansion-panel-header>
       <div>
-        <il-tag-expansion-list [questions]="item?.questions"></il-tag-expansion-list>
+        <il-tag-expansion-list [items]="item?.questions"></il-tag-expansion-list>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

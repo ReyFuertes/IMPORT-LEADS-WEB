@@ -41,7 +41,7 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
     const dialogRef = this.dialog.open(TagsDialogComponent, { data: {} });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.items.push({ id: '6', name: result, questions: [] });
+        this.items.push({ id: '6', tag_name: result, questions: [] });
       }
      });
   }

@@ -3,7 +3,7 @@ import { AppState } from 'src/app/store/app.reducer';
 import * as fromTags from './tags.reducer'
 
 export const selectedState = (state: AppState) => state.tags;
-export const getProductsSelector = createSelector(
+export const getTagsSelector = createSelector(
   selectedState,
   fromTags.getTags
 );

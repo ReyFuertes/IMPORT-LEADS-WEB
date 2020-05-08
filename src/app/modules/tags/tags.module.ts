@@ -1,3 +1,6 @@
+import { TagsEffects } from './store/tags.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { TagsService } from './tags.service';
 import { TagExpansionListComponent } from './components/tag-expansion-list/tag-expansion-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -13,6 +16,7 @@ import { TagExpansionPanelComponent } from './components/tag-expansion-panel/tag
 import { TagsContainerComponent } from './container/tags-container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TagsReducer } from './store/tags.reducer';
 
 const routes: Routes = [
   {
@@ -62,7 +66,9 @@ const materialModules = [
     ...primeNgModules,
     ...materialModules,
     DialogModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('tag', TagsReducer),
+    EffectsModule.forFeature([TagsEffects])
   ],
   exports: [],
   declarations: [

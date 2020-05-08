@@ -1,3 +1,6 @@
+import { loadTags } from './../store/tags.actions';
+import { AppState } from './../../../store/app.reducer';
+import { Store } from '@ngrx/store';
 import { GenericContainer } from './../../../shared/generics/generic-container';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TagsContainerComponent extends GenericContainer implements OnInit {
-  constructor() {
+  constructor(private store: Store<AppState>) {
     super();
+    this.store.dispatch(loadTags());
   }
 }

@@ -14,7 +14,7 @@ import { ITag } from '../../tags.model';
 export class TagExpansionListComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
-  public questions: string[];
+  public items: string[];
 
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
@@ -24,7 +24,7 @@ export class TagExpansionListComponent implements OnInit {
 
   public dragStart: boolean = false;
   public drop(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(this.questions, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
     this.dragStart = false;
   }
 
@@ -52,7 +52,7 @@ export class TagExpansionListComponent implements OnInit {
     const dialogRef = this.dialog.open(TagsQuestionDialogComponent, { data: {} });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.questions.push(result);
+        this.items.push(result);
       }
      });
   }
