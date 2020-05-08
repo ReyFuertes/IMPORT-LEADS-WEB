@@ -34,6 +34,8 @@ tr.element-row:not(.expanded-row):active {
 .element-detail {
   overflow: hidden;
   display: flex;
+  min-height: 150px;
+  max-height: 100%;
   > div {
     &:first-child {
       margin-top: 20px;
@@ -60,11 +62,12 @@ tr.element-row:not(.expanded-row):active {
   }
 }
 :host ::ng-deep {
-
-  .mat-select-value-text, .mat-form-field-label {
-    font-size: 14px;
-    font-weight: 500;
-    color: $color-primary !important;
+  .dss {
+    .mat-select-value-text, .mat-form-field-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: $color-primary !important;
+    }
   }
   .row-detail .mat-form-field-appearance-legacy .mat-form-field-underline {
     height: 0;

@@ -42,7 +42,7 @@ export interface ITerm {
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> collapsed', animate('300ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
@@ -56,16 +56,7 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
   public actionState: boolean = false;
   @Input()
   public isRightNavOpen: boolean = false;
-  public items: ISimpleItem[] = [
-    {
-      label: 'TEST',
-      value: 'TEST'
-    },
-    {
-      label: 'TEST',
-      value: 'TEST'
-    }
-  ];
+  public items: ISimpleItem[];
   public form: FormGroup;
   public tagForm: FormGroup;
   public isEditName: boolean = false;
