@@ -1,3 +1,4 @@
+import { loadTags } from './../../tags/store/tags.actions';
 import { ProductsState } from './../store/reducers/products.reducer';
 import { loadContracts } from './../store/actions/contracts.action';
 import { AppState } from './../../../store/app.reducer';
@@ -17,6 +18,7 @@ export class ContractsContainerComponent extends GenericContainer implements OnI
   constructor(private productStore: Store<ProductsState>, private store: Store<AppState>) {
     super();
     this.store.dispatch(loadContracts(null));
-    this.productStore.dispatch(loadProducts())
+    this.store.dispatch(loadProducts());
+    this.store.dispatch(loadTags());
   }
 }

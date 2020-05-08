@@ -48,6 +48,10 @@ tr.element-row:not(.expanded-row):active {
   margin-bottom: 20px;
 }
 ::ng-deep {
+  .mat-tab-header,
+  .mat-tab-nav-bar {
+    border-bottom: 1px solid $color-gray-3 !important;
+  }
   p-inputswitch {
     @include il-input-switch;
   }
@@ -55,13 +59,13 @@ tr.element-row:not(.expanded-row):active {
     box-shadow: $box-shadow;
   }
 }
-::ng-deep {
-  .mat-tab-header,
-  .mat-tab-nav-bar {
-    border-bottom: 1px solid $color-gray-3 !important;
-  }
-}
 :host ::ng-deep {
+
+  .mat-select-value-text, .mat-form-field-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: $color-primary !important;
+  }
   .row-detail .mat-form-field-appearance-legacy .mat-form-field-underline {
     height: 0;
     display: none !important;

@@ -1,3 +1,8 @@
+import { getTagsSelector } from './../../../tags/store/tags.selector';
+import { AppState } from './../../../../store/app.reducer';
+import { Store, select } from '@ngrx/store';
+import { ITag } from './../../../tags/tags.model';
+import { Observable } from 'rxjs';
 import { ContractCategoryTermDialogComponent } from './../../../dialogs/components/contract-category-term/contract-category-term-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -5,6 +10,7 @@ import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { environment } from './../../../../../environments/environment';
 import { trigger, transition, style, state, animate } from '@angular/animations';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 export class TableExpandableRowsExample {
   dataSource = ELEMENT_DATA;
@@ -63,8 +69,9 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
   public form: FormGroup;
   public tagForm: FormGroup;
   public isEditName: boolean = false;
+  public $tags: Observable<ISimpleItem[]>;
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder) {
+  constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder) {
     this.form = this.fb.group({
       term_name: [null],
       description: [null]
@@ -74,7 +81,15 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.$tags = this.store.pipe(select(getTagsSelector),
+      map((tags: ITag[]) => tags.map(ret => {
+        return {
+          label: ret.tag_name,
+          value: ret.id
+        }
+      })));
+  }
 
   public createTerm(): void {
     const dialogRef = this.dialog.open(ContractCategoryTermDialogComponent, {
@@ -93,7 +108,8 @@ export class ContractProductCategoryTableComponent implements OnInit, OnChanges 
   }
 
   public isHidden(element: any): boolean {
-    return element && element.description == this.selectedCol;
+    return element && element.description == this.selectedCol
+      || element && element.name == this.selectedCol;
   }
 
   public onClose(): void {

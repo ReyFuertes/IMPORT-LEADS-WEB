@@ -1,3 +1,4 @@
+import { TagsEffects } from './../tags/store/tags.effects';
 import { ContractCategoryEffects } from './store/effects/category.effects';
 import { ContractCategoryService } from './services/category.service';
 import { ContractProductCategoryTableComponent } from './components/contract-product-category-table/contract-product-category-table.component';
@@ -103,7 +104,13 @@ const materialModules = [
     DialogModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('contractsModule', reducers),
-    EffectsModule.forFeature([ContractsEffects, ContractProductsEffects, ProductsEffects, ContractCategoryEffects])
+    EffectsModule.forFeature([
+      ContractsEffects,
+      ContractProductsEffects,
+      ProductsEffects,
+      ContractCategoryEffects,
+      TagsEffects
+    ])
   ],
   exports: [],
   declarations: [

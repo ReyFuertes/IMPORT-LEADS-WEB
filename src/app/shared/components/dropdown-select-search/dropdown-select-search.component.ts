@@ -34,13 +34,14 @@ export class DropdownSelectSearchComponent extends GenericControl<ISimpleItem> i
   }
 
   ngOnInit() {
-    this.newList = this.items.slice();
+    if (this.items)
+      this.newList = this.items.slice();
+
     this.$filteredData.next(this.newList);
+
     this.dataFilterForm.valueChanges
       .pipe(takeUntil(this.$destroy))
-      .subscribe(() => {
-        this.filterdata();
-      });
+      .subscribe(() => this.filterdata());
   }
 
   ngOnDestroy(): void {
