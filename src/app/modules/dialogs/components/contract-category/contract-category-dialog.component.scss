@@ -9,11 +9,16 @@
   > div {
     &:first-child {
       width: 100%;
+      height: 30px;
+      min-height: 30px;
     }
   }
   .content {
     width: 100%;
     height: 70px !important;
+    > div {
+      height: 55px;
+    }
   }
   il-input {
     width: 100%;
@@ -25,6 +30,9 @@
   }
 }
 :host ::ng-deep {
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    top: 24px !important;
+  }
   .mat-focused .mat-form-field-underline {
     background-color: $color-primary !important;
   }

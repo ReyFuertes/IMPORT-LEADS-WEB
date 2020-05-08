@@ -1,4 +1,4 @@
-import { addContractCategory } from './../../store/actions/contract-category.action';
+import { addContractCategory, addContractCategorySuccess } from './../../store/actions/contract-category.action';
 import { ContractCategoryDialogComponent } from '../../../dialogs/components/contract-category/contract-category-dialog.component';
 import { loadContractProducts } from './../../store/actions/products.action';
 import { getContractById } from './../../store/selectors/contracts.selector';
@@ -17,6 +17,7 @@ import { Observable, fromEvent } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { Store, select } from '@ngrx/store';
+import { addCategory } from '../../store/actions/category.action';
 
 @Component({
   selector: 'il-contract-detail-page',
@@ -123,12 +124,11 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     const dialogRef = this.dialog.open(ContractCategoryDialogComponent, {
       height: '200px'
     });
-    dialogRef.afterClosed().subscribe((result: string) => {
-      if (result) {
+    dialogRef.afterClosed().subscribe((category_name: string) => {
+      if (category_name) {
+        const category = { category_name }
         const payload: IContractCategory = {
-          category: {
-            category_name: result
-          },
+          category,
           contract: {
             id: this.form.get('id').value,
             contract_name: this.form.get('contract_name').value
