@@ -1,8 +1,9 @@
+import { ContractTermEffects } from './store/effects/contract-term.effects';
+import { ContractTermService } from './services/contract-term.service';
 import { CategoryEffects } from './store/effects/category.effects';
 import { TagsEffects } from './../tags/store/tags.effects';
 import { ContractCategoryEffects } from './store/effects/contract-category.effects';
 import { ContractCategoryService } from './services/contract-category.service';
-import { ContractCategoryTableComponent } from './components/contract-category-table/contract-category-table.component';
 import { ProductsEffects } from './../products/store/products.effects';
 import { ContractProductsEffects } from './store/effects/contract-products.effects';
 import { ContractProductService } from './services/contract-products.service';
@@ -43,6 +44,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { reducers } from './store/reducers';
+import { ContractCategoryTableComponent } from './components/contract-category-table/contract-category-table.component';
 
 const routes: Routes = [
   {
@@ -111,7 +113,8 @@ const materialModules = [
       ProductsEffects,
       ContractCategoryEffects,
       TagsEffects,
-      CategoryEffects
+      CategoryEffects,
+      ContractTermEffects
     ])
   ],
   exports: [],
@@ -135,7 +138,8 @@ const materialModules = [
     UploadService,
     ImagesService,
     ContractProductService,
-    ContractCategoryService
+    ContractCategoryService,
+    ContractTermService
   ],
 })
 export class ContractsModule { }

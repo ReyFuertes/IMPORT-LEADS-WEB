@@ -1,3 +1,7 @@
+import { addContractTerm } from './../../store/actions/contract-term.actions';
+import { loadContractCategory } from './../../store/actions/contract-category.action';
+import { MatTableDataSource } from '@angular/material/table';
+import { IContractTerm } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { getTagsSelector } from '../../../tags/store/tags.selector';
 import { AppState } from '../../../../store/app.reducer';
@@ -10,32 +14,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ISimpleItem } from '../../../../shared/generics/generic.model';
 import { environment } from '../../../../../environments/environment';
 import { trigger, transition, style, state, animate } from '@angular/animations';
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { IContractCategory } from '../../contract.model';
 import { deleteContractCategory } from '../../store/actions/contract-category.action';
-
-export class TableExpandableRowsExample {
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['name', 'description', 'action-col'];
-  term: | null;
-}
-const ELEMENT_DATA: ITerm[] = [
-  {
-    id: '111',
-    name: '2G1W Dimmer Picture',
-    description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
-  }, {
-    id: '222',
-    name: 'Helium',
-    description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum ha…`
-  }
-];
-export interface ITerm {
-  id?: string;
-  name: string;
-  description: string;
-}
 
 @Component({
   selector: 'il-contract-category-table',
@@ -50,11 +32,11 @@ export interface ITerm {
   ],
 })
 
-export class ContractCategoryTableComponent implements OnInit, OnChanges {
+export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterViewInit {
   public svgPath: string = environment.svgPath;
-  public dataSource = ELEMENT_DATA;
-  public columnsToDisplay = ['name', 'description', 'action-col'];
-  public expandedElement: ITerm | null;
+  public dataSource: MatTableDataSource<IContractTerm[]>;
+  public columnsToDisplay = ['term_name', 'term_description', 'action_col'];
+  public expandedElement: IContractTerm | null;
   public selectedCol: string;
   public actionState: boolean = false;
   public items: ISimpleItem[];
@@ -71,7 +53,7 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges {
   constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder) {
     this.form = this.fb.group({
       term_name: [null],
-      description: [null]
+      term_description: [null]
     })
     this.tagForm = this.fb.group({
       contract_tag: [null]
@@ -79,7 +61,6 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.contract_category);
     this.$tags = this.store.pipe(select(getTagsSelector),
       map((tags: ITag[]) => tags.map(ret => {
         return {
@@ -87,6 +68,10 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges {
           value: ret.id
         }
       })));
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource = new MatTableDataSource<any>(this.contract_category.terms);
   }
 
   public onDelete = (id: string): void => {
@@ -105,10 +90,17 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(ContractCategoryTermDialogComponent, {
       height: '270px'
     });
-    dialogRef.afterClosed().subscribe((result: string) => {
+    dialogRef.afterClosed().subscribe((result: IContractTerm) => {
       if (result) {
-        console.log(result);
-
+        const payload = {
+          ...result,
+          contract_category: { id: this.contract_category.id }
+        }
+        this.store.dispatch(addContractTerm({ payload }));
+        /* this is a bad solution, but due to time development i just needs this */
+        setTimeout(() => {
+          this.store.dispatch(loadContractCategory({ id: this.contract_category.contract.id }))
+        }, 1000);
       }
     });
   }
@@ -118,9 +110,9 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges {
     this.selectedCol = event[col];
   }
 
-  public isHidden(element: any): boolean {
-    return element && element.description == this.selectedCol
-      || element && element.name == this.selectedCol;
+  public isHidden(element: IContractTerm): boolean {
+    return element && element.term_description == this.selectedCol
+      || element && element.term_name == this.selectedCol;
   }
 
   public onClose(): void {
@@ -131,5 +123,8 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.isRightNavOpen)
       this.isRightNavOpen = changes.isRightNavOpen.currentValue;
+
+    if (changes && changes.contract_category)
+      this.dataSource = new MatTableDataSource<any>(changes.contract_category.currentValue.terms);
   }
 }

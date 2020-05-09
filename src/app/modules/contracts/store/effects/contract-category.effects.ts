@@ -1,11 +1,9 @@
 import { addContractCategory, addContractCategorySuccess, loadContractCategory, loadContractCategorySuccess, deleteContractCategorySuccess, deleteContractCategory } from './../actions/contract-category.action';
 import { ContractCategoryService } from './../../services/contract-category.service';
-import { AppState } from './../../../../store/app.reducer';
 import { IContractCategory } from './../../contract.model';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ContractCategoryEffects {

@@ -9,7 +9,7 @@ export enum CategoryActionTypes {
   updateContractCategory = '[Contract Category] Load]',
   updateContractCategorySuccess = '[Contract Category] Load (success)',
   deleteContractCategory = '[Contract Category] Delete',
-  deleteContractCategorySuccess = '[Contract Category] Delete (success)',
+  deleteContractCategorySuccess = '[Contract Category] Delete (success)'
 }
 export const deleteContractCategory = createAction(
   CategoryActionTypes.deleteContractCategory,

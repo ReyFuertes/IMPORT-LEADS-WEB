@@ -14,6 +14,7 @@
         </div>
       </td>
     </ng-container>
+
     <!-- details -->
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell class="row-detail" *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
@@ -27,8 +28,8 @@
               </div>
             </div>
           </div>
-          <div [ngClass]="{'hidden': element?.description !== selectedCol}" fxLayout="column" fxFlex="80">
-            <il-textarea [rows]="5" hasBorder="true" [form]="form" isFloatLabel="true" [controlName]="'description'" placeholder="Description"></il-textarea>
+          <div [ngClass]="{'hidden': element?.term_description !== selectedCol}" fxLayout="column" fxFlex="80">
+            <il-textarea [rows]="5" hasBorder="true" [form]="form" isFloatLabel="true" [controlName]="'term_description'" placeholder="Description"></il-textarea>
             <div class="element-detail__btn" fxLayoutGap="10px">
               <button mat-flat-button class="il-button default" (click)="onClose(pnl)">Cancel</button>
               <button mat-flat-button class="il-button primary">Save</button>
@@ -43,6 +44,7 @@
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
   </table>
+
   <!-- actions -->
   <div fxLayout="row" class="table-footer">
     <div [ngClass]="{'hidden': actionState}" fxFlex fxLayoutAlign="center center" fxLayoutGap="15px">

@@ -40,14 +40,14 @@ export abstract class BaseService<T> {
     return ret;
   }
 
-  public post(object?: T | T[], entityParam?: string): Observable<T | T[]> {
-    return this.http.post<T>(`${this.baseUrl}${this.entity}${this.setEntityParam(entityParam)}`,
+  public post(object?: T | T[], param?: string): Observable<T | T[]> {
+    return this.http.post<T>(`${this.baseUrl}${this.entity}${this.fmtParam(param)}`,
       this.removeNullProps(object),
       { headers: this.commonHeaders() });
   }
 
   public delete(id?: string, param?: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}${this.entity}/${id}${this.retQryPrm(param)}`,
+    return this.http.delete(`${this.baseUrl}${this.entity}/${id}${this.fmtParam(param)}`,
       { headers: this.commonHeaders() });
   }
 
@@ -58,12 +58,12 @@ export abstract class BaseService<T> {
     );
   }
 
-  private retQryPrm(param?: string): string {
-    return `${param && param ? '/' + param : ''}`
+  private fmtParam(param?: string): string {
+    return `${param ? '/' + param : ''}`
   }
 
   public getAll(param?: string): Observable<T[]> {
-    return this.http.get<T[]>(`${this.baseUrl}${this.entity}${this.retQryPrm(param)}`, { headers: this.commonHeaders() });
+    return this.http.get<T[]>(`${this.baseUrl}${this.entity}${this.fmtParam(param)}`, { headers: this.commonHeaders() });
   }
 
   public getById(id: string, additionalParam?: string): Observable<T[]> {

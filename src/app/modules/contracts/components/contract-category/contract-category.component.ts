@@ -44,7 +44,7 @@ export class ContractCategoryComponent implements OnInit, OnChanges {
       description: 'transition '
     }
   ];
-  public tabTitle: string = 'General Design and Specification';
+  public tabTitle: string;
   @Input()
   public specTitle: string = 'Specification title';
   @Input()

@@ -21,6 +21,5 @@ export class TagOverviewPageComponent implements OnInit {
 
   ngOnInit() {
     this.$items = this.store.pipe(select(getTagsSelector));
-    this.$items.subscribe(res => console.log(res));
   }
 }

@@ -2,14 +2,17 @@ import { IProduct } from './../products/products.model';
 import { IVenue } from './../venues/venues.models';
 import { IUser } from './../../models/user.model';
 
-export class ITerm {
-  name?: string;
-  description?: string;
+export class IContractTerm {
+  id?: string;
+  term_name?: string;
+  term_description?: string;
+  contract_category: IContractCategory;
 }
 export class IContractCategory {
   id?: string;
   category?: ICategory;
   contract?: IContract;
+  terms?: IContractTerm[];
 }
 export class ICategory {
   id?: string;

@@ -70,7 +70,7 @@ export class DatatableComponent extends GenericRowComponent implements OnInit, A
   public getValue(param: any): any {
     let ret: any = param;
     if (typeof (param) === 'object') {
-      debugger
+
       ret = param.label;
     }
     return ret;
