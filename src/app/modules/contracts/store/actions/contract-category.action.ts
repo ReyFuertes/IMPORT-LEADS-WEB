@@ -8,7 +8,17 @@ export enum CategoryActionTypes {
   loadContractCategorySuccess = '[Contract Category] Load (success)',
   updateContractCategory = '[Contract Category] Load]',
   updateContractCategorySuccess = '[Contract Category] Load (success)',
+  deleteContractCategory = '[Contract Category] Delete',
+  deleteContractCategorySuccess = '[Contract Category] Delete (success)',
 }
+export const deleteContractCategory = createAction(
+  CategoryActionTypes.deleteContractCategory,
+  props<{ id: string }>()
+);
+export const deleteContractCategorySuccess = createAction(
+  CategoryActionTypes.deleteContractCategorySuccess,
+  props<{ deleted: IContractCategory }>()
+);
 export const updateContractCategory = createAction(
   CategoryActionTypes.updateContractCategory,
   props<{ payload: IContractCategory }>()

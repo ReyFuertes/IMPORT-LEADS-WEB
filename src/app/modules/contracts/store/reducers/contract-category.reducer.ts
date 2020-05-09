@@ -1,6 +1,6 @@
 import { sortCreatedAt } from 'src/app/shared/util/sort';
 import { ContractModuleState } from './index';
-import { addContractCategorySuccess, loadContractCategorySuccess } from './../actions/contract-category.action';
+import { addContractCategorySuccess, loadContractCategorySuccess, deleteContractCategorySuccess } from './../actions/contract-category.action';
 import { IContractCategory } from './../../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
@@ -12,6 +12,9 @@ export const initialState: ContractCategoryState = adapter.getInitialState({
 });
 const reducer = createReducer(
   initialState,
+  on(deleteContractCategorySuccess, (state, action) => {
+    return ({ ...adapter.removeOne(action.deleted.id, state) })
+  }),
   on(addContractCategorySuccess, (state, action) => {
     return ({ ...adapter.addOne(action.created, state) })
   }),

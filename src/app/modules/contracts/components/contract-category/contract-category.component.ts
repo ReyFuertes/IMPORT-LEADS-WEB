@@ -1,7 +1,7 @@
-import { loadContractCategory } from './../../store/actions/contract-category.action';
-import { AppState } from './../../../../store/app.reducer';
+import { loadContractCategory } from '../../store/actions/contract-category.action';
+import { AppState } from '../../../../store/app.reducer';
 import { Store } from '@ngrx/store';
-import { ICategory } from './../../contract.model';
+import { ICategory } from '../../contract.model';
 import { ConfirmationComponent } from '../../../dialogs/components/confirmation/confirmation.component';
 import { ContractCategoryTitleDialogComponent } from '../../../dialogs/components/contract-category-title/contract-category-title-dialog.component';
 import { ContractCategoryDialogComponent } from '../../../dialogs/components/contract-category/contract-category-dialog.component';
@@ -13,13 +13,13 @@ import { IContractCategory } from '../../contract.model';
 import { updateCategory } from '../../store/actions/category.action';
 
 @Component({
-  selector: 'il-contract-product-category',
-  templateUrl: './contract-product-category.component.html',
-  styleUrls: ['./contract-product-category.component.scss'],
+  selector: 'il-contract-category',
+  templateUrl: './contract-category.component.html',
+  styleUrls: ['./contract-category.component.scss'],
   providers: [ConfirmationService]
 })
 
-export class ContractProductCategoryComponent implements OnInit, OnChanges {
+export class ContractCategoryComponent implements OnInit, OnChanges {
   public svgPath: string = environment.svgPath;
   public _showTabActions: boolean = false;
   public panels: Array<{ id: number, title: string, description: string }> = [
@@ -83,20 +83,7 @@ export class ContractProductCategoryComponent implements OnInit, OnChanges {
       if (payload) {
         this.store.dispatch(updateCategory({ payload }));
         /* just refresh all contract categories, may not be idea but temporary solution */
-        debugger
         this.store.dispatch(loadContractCategory({ id: this.contract_category.contract.id }))
-      }
-    });
-  }
-
-  public onDeleteProductSpecs(): void {
-    const dialogRef = this.dialog.open(ConfirmationComponent, {
-      width: '410px',
-      data: {}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        //this.removeProductSpecEmitter.emit(this.specification['id']);
       }
     });
   }

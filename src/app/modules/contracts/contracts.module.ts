@@ -2,7 +2,7 @@ import { CategoryEffects } from './store/effects/category.effects';
 import { TagsEffects } from './../tags/store/tags.effects';
 import { ContractCategoryEffects } from './store/effects/contract-category.effects';
 import { ContractCategoryService } from './services/contract-category.service';
-import { ContractProductCategoryTableComponent } from './components/contract-product-category-table/contract-product-category-table.component';
+import { ContractCategoryTableComponent } from './components/contract-category-table/contract-category-table.component';
 import { ProductsEffects } from './../products/store/products.effects';
 import { ContractProductsEffects } from './store/effects/contract-products.effects';
 import { ContractProductService } from './services/contract-products.service';
@@ -12,7 +12,7 @@ import { ContractsEffects } from './store/effects/contracts.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ContractsService } from './services/contracts.service';
-import { ContractProductCategoryComponent } from './components/contract-product-category/contract-product-category.component';
+import { ContractCategoryComponent } from './components/contract-category/contract-category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContractRightContentComponent } from './components/contract-right-content/contract-right-content.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -38,7 +38,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { SidebarModule } from 'primeng/sidebar';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { ContractProductCategoryTitleComponent } from './components/contract-product-category-title/contract-product-category-title.component';
+import { ContractCategoryTitleComponent } from './components/contract-category-title/contract-category-title.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -125,9 +125,9 @@ const materialModules = [
     ContractAddComponent,
     ContractExpansionPanelComponent,
     ContractRightContentComponent,
-    ContractProductCategoryComponent,
-    ContractProductCategoryTitleComponent,
-    ContractProductCategoryTableComponent
+    ContractCategoryComponent,
+    ContractCategoryTitleComponent,
+    ContractCategoryTableComponent
   ],
   providers: [
     ConfirmationService,

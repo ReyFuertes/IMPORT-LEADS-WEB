@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
-  selector: 'il-contract-product-category-title',
-  templateUrl: './contract-product-category-title.component.html',
-  styleUrls: ['./contract-product-category-title.component.scss']
+  selector: 'il-contract-category-title',
+  templateUrl: './contract-category-title.component.html',
+  styleUrls: ['./contract-category-title.component.scss']
 })
-export class ContractProductCategoryTitleComponent implements OnInit {
+export class ContractCategoryTitleComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public specification: { id: number, title: string };
