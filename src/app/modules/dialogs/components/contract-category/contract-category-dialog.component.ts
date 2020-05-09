@@ -28,6 +28,5 @@ export class ContractCategoryDialogComponent implements OnInit {
       this.form.get('id').patchValue(this.data.category.id);
       this.form.get('category_name').patchValue(this.data.category.category_name);
     }
-
   }
 }

@@ -8,7 +8,7 @@ import { User } from './../../../users/users.models';
 import { AppState } from './../../../../store/app.reducer';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { IContract, IProductImage, IContractCategory } from './../../contract.model';
+import { IContract, IProductImage, IContractCategory, ICategory } from './../../contract.model';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
@@ -19,6 +19,7 @@ import { Observable, fromEvent } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { Store, select } from '@ngrx/store';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'il-contract-detail-page',
@@ -127,11 +128,10 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     const dialogRef = this.dialog.open(ContractCategoryDialogComponent, {
       height: '200px'
     });
-    dialogRef.afterClosed().subscribe((category_name: string) => {
-      if (category_name) {
-        const category = { category_name }
+    dialogRef.afterClosed().subscribe((category: ICategory) => {
+      if (category) {
         const payload: IContractCategory = {
-          category,
+          category: _.pickBy(category, _.identity),
           contract: {
             id: this.form.get('id').value,
             contract_name: this.form.get('contract_name').value

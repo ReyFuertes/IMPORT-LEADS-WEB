@@ -1,4 +1,4 @@
-import { addContractCategory, addContractCategorySuccess, loadContractCategory, loadContractCategorySuccess, deleteContractCategorySuccess, deleteContractCategory } from './../actions/contract-category.action';
+import { addContractCategory, addContractCategorySuccess, loadContractCategory, loadContractCategorySuccess, deleteContractCategorySuccess, deleteContractCategory, updateContractCategory, updateContractCategorySuccess } from './../actions/contract-category.action';
 import { ContractCategoryService } from './../../services/contract-category.service';
 import { IContractCategory } from './../../contract.model';
 import { Injectable } from '@angular/core';

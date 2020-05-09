@@ -1,5 +1,5 @@
-import { addContractTerm } from './../../store/actions/contract-term.actions';
-import { loadContractCategory } from './../../store/actions/contract-category.action';
+import { addContractTerm, deleteContractTerm, updateContractTerm } from './../../store/actions/contract-term.actions';
+import { loadContractCategory, updateContractCategorySuccess, updateContractCategory } from './../../store/actions/contract-category.action';
 import { MatTableDataSource } from '@angular/material/table';
 import { IContractTerm } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
@@ -52,6 +52,7 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
 
   constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder) {
     this.form = this.fb.group({
+      id: [null],
       term_name: [null],
       term_description: [null]
     })
@@ -74,6 +75,21 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
     this.dataSource = new MatTableDataSource<any>(this.contract_category.terms);
   }
 
+  public onDeleteTerm(id: string): void {
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '410px',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.store.dispatch(deleteContractTerm({ id }));
+
+        /* this is a bad solution, but due to time development i just needs this */
+        this.reloadContractCategory();
+      }
+    });
+  }
+
   public onDelete = (id: string): void => {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
       width: '410px',
@@ -85,6 +101,11 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
       }
     });
   }
+
+  private reloadContractCategory = () =>
+    setTimeout(() => {
+      this.store.dispatch(loadContractCategory({ id: this.contract_category.contract.id }))
+    }, 1000);
 
   public createTerm(): void {
     const dialogRef = this.dialog.open(ContractCategoryTermDialogComponent, {
@@ -98,16 +119,24 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
         }
         this.store.dispatch(addContractTerm({ payload }));
         /* this is a bad solution, but due to time development i just needs this */
-        setTimeout(() => {
-          this.store.dispatch(loadContractCategory({ id: this.contract_category.contract.id }))
-        }, 1000);
+        this.reloadContractCategory();
       }
     });
+  }
+
+  public onSave(): void {
+    if (this.form.value)
+      this.store.dispatch(updateContractTerm({ payload: this.form.value }));
+
+    /* this is a bad solution, but due to time development i just needs this */
+    this.reloadContractCategory();
   }
 
   public onExpand(event: any, col: string): void {
     this.expandedElement = (this.expandedElement === event) ? null : event;
     this.selectedCol = event[col];
+    /* patch value during expand to prepare for editing */
+    this.form.patchValue(event);
   }
 
   public isHidden(element: IContractTerm): boolean {

@@ -6,8 +6,8 @@ export enum CategoryActionTypes {
   addContractCategorySuccess = '[Contract Category] Add (success)',
   loadContractCategory = '[Contract Category] Load]',
   loadContractCategorySuccess = '[Contract Category] Load (success)',
-  updateContractCategory = '[Contract Category] Load]',
-  updateContractCategorySuccess = '[Contract Category] Load (success)',
+  updateContractCategory = '[Contract Category] Update',
+  updateContractCategorySuccess = '[Contract Category] Update (success)',
   deleteContractCategory = '[Contract Category] Delete',
   deleteContractCategorySuccess = '[Contract Category] Delete (success)'
 }
