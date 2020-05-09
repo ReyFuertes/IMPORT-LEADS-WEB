@@ -66,17 +66,18 @@ export abstract class BaseService<T> {
     return this.http.get<T[]>(`${this.baseUrl}${this.entity}${this.retQryPrm(param)}`, { headers: this.commonHeaders() });
   }
 
-  public getById(id: string): Observable<T[]> {
-    return this.http.get<T[]>(`${this.baseUrl}${this.entity}/${id}`, { headers: this.commonHeaders() });
+  public getById(id: string, additionalParam?: string): Observable<T[]> {
+    const fmtParam = additionalParam ? `/${additionalParam}` : '';
+    return this.http.get<T[]>(`${this.baseUrl}${this.entity}/${id}${fmtParam}`, { headers: this.commonHeaders() });
   }
 
   public upload(object?: any, additionalParam?: string): Observable<T> {
-    const formatParam = additionalParam ? `/${additionalParam}` : '';
+    const fmtParam = additionalParam ? `/${additionalParam}` : '';
     let headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`,
       Accept: "application/json"
     });
     headers.set('Content-Type', 'multipart/form-data');
-    return this.http.post<T>(`${this.baseUrl}${this.entity}${formatParam}`, object, { headers: headers });
+    return this.http.post<T>(`${this.baseUrl}${this.entity}${fmtParam}`, object, { headers: headers });
   }
 }

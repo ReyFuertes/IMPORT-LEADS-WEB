@@ -1,4 +1,4 @@
-import { addCategorySuccess } from './../actions/category.action';
+import { addCategorySuccess, updateCategorysSuccess } from './../actions/category.action';
 import { sortCreatedAt } from 'src/app/shared/util/sort';
 import { ICategory } from './../../contract.model';
 import { createReducer, on, Action } from "@ngrx/store";
@@ -12,7 +12,11 @@ export const initialState: CategoryState = adapter.getInitialState({
 });
 const reducer = createReducer(
   initialState,
+  on(updateCategorysSuccess, (state, action) => {
+    return adapter.updateOne({ id: action.updated.id, changes: action.updated }, state)
+  }),
   on(addCategorySuccess, (state, action) => {
+    debugger
     return ({ ...adapter.addOne(action.created, state) })
   })
 );

@@ -19,16 +19,10 @@ export const updateContractProductsSuccess = createAction(
   ProductActionTypes.updateContractProductsSuccess,
   props<{ updated: IContractProduct }>()
 );
-
 export const deleteContractProduct = createAction(
   ProductActionTypes.deleteContractProduct,
   props<{ id: string }>()
 );
-export const loadContractProductSuccess = createAction(
-  ProductActionTypes.loadContractProductSuccess,
-  props<{ items: IContractProduct[] }>()
-);
-
 export const addContractProducts = createAction(
   ProductActionTypes.addContractProduct,
   props<{ payload: IContractProduct }>()
@@ -37,8 +31,11 @@ export const addContractProductsSuccess = createAction(
   ProductActionTypes.addContractProductsSuccess,
   props<{ created: IContractProduct }>()
 );
-
 export const loadContractProducts = createAction(
   ProductActionTypes.loadContractProduct,
   props<{ id: string }>()
+);
+export const loadContractProductSuccess = createAction(
+  ProductActionTypes.loadContractProductSuccess,
+  props<{ items: IContractProduct[] }>()
 );

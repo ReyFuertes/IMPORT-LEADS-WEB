@@ -1,10 +1,16 @@
+import { loadContractCategory } from './../../store/actions/contract-category.action';
+import { AppState } from './../../../../store/app.reducer';
+import { Store } from '@ngrx/store';
+import { ICategory } from './../../contract.model';
 import { ConfirmationComponent } from '../../../dialogs/components/confirmation/confirmation.component';
 import { ContractCategoryTitleDialogComponent } from '../../../dialogs/components/contract-category-title/contract-category-title-dialog.component';
 import { ContractCategoryDialogComponent } from '../../../dialogs/components/contract-category/contract-category-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../../../../environments/environment';
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
+import { IContractCategory } from '../../contract.model';
+import { updateCategory } from '../../store/actions/category.action';
 
 @Component({
   selector: 'il-contract-product-category',
@@ -42,37 +48,45 @@ export class ContractProductCategoryComponent implements OnInit, OnChanges {
   @Input()
   public specTitle: string = 'Specification title';
   @Input()
-  public specification: Array<{ id: number, title: string, specification?: any }>;
+  public contract_category: IContractCategory;
   @Input()
   public isRightNavOpen: boolean = false;
   public showToggle: boolean = false;
   @Output()
   public removeProductSpecEmitter = new EventEmitter<number>();
 
-  constructor(public dialog: MatDialog,
-    private confirmationService: ConfirmationService) { }
+  constructor(private store: Store<AppState>, public dialog: MatDialog) { }
 
   ngOnInit() { }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes && changes.contract_category.currentValue) {
+      this.contract_category = changes.contract_category.currentValue;
+    }
     this.isRightNavOpen = this.isRightNavOpen;
-  }
-  public add(): void {
-    this.panels.push({ id: 4, title: 'test title 123', description: 'test description 123' });
   }
 
   public addTitle(): void {
     const dialogRef = this.dialog.open(ContractCategoryTitleDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.specification['title'] = result;
+        //this.specification['title'] = result;
       }
     });
   }
 
-  public UpdateProductSpecTitle(): void {
-    const dialogRef = this.dialog.open(ContractCategoryDialogComponent);
-    dialogRef.afterClosed().subscribe(result => { });
+  public UpdateCategoryName(category: ICategory): void {
+    const dialogRef = this.dialog.open(ContractCategoryDialogComponent, {
+      data: { category }
+    });
+    dialogRef.afterClosed().subscribe(payload => {
+      if (payload) {
+        this.store.dispatch(updateCategory({ payload }));
+        /* just refresh all contract categories, may not be idea but temporary solution */
+        debugger
+        this.store.dispatch(loadContractCategory({ id: this.contract_category.contract.id }))
+      }
+    });
   }
 
   public onDeleteProductSpecs(): void {
@@ -82,7 +96,7 @@ export class ContractProductCategoryComponent implements OnInit, OnChanges {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.removeProductSpecEmitter.emit(this.specification['id']);
+        //this.removeProductSpecEmitter.emit(this.specification['id']);
       }
     });
   }

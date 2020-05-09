@@ -1,4 +1,6 @@
-import { addContractCategory, addContractCategorySuccess } from './../../store/actions/contract-category.action';
+import { tap } from 'rxjs/operators';
+import { getContractCategorySelector } from './../../store/selectors/contract-category.selector';
+import { addContractCategory, loadContractCategory } from './../../store/actions/contract-category.action';
 import { ContractCategoryDialogComponent } from '../../../dialogs/components/contract-category/contract-category-dialog.component';
 import { loadContractProducts } from './../../store/actions/products.action';
 import { getContractById } from './../../store/selectors/contracts.selector';
@@ -17,7 +19,6 @@ import { Observable, fromEvent } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AddEditState } from 'src/app/shared/generics/generic.model';
 import { Store, select } from '@ngrx/store';
-import { addCategory } from '../../store/actions/category.action';
 
 @Component({
   selector: 'il-contract-detail-page',
@@ -38,13 +39,8 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   public contractImages: IProductImage[];
   public images: any[];
   public contract: IContract;
+  public contract_categories: IContractCategory[];
 
-  public specifications: Array<{ id: number, title: string, specification?: any }> = [
-    {
-      id: 1,
-      title: ''
-    }
-  ];
   @Output()
   public openNavChange = new EventEmitter<boolean>();
   @ViewChild('scrollPnl', { static: false }) public scrollPnl: any;
@@ -106,18 +102,25 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
 
     this.id = this.route.snapshot.paramMap.get('id') || null;
     if (this.id) {
-      //load contract products also..
+      /* load contract products also.. */
       this.store.dispatch(loadContractProducts({ id: this.id }));
 
       this.$contract = this.store.pipe(select(getContractById(this.id)));
-      //passed the contract images to a variable array so we can drag and drop
+      /* passed the contract images to a variable array so we can drag and drop */
       this.$contract && this.$contract.subscribe(c => {
         if (c) {
+          /* get category by contract id */
+          this.store.dispatch(loadContractCategory({ id: c.id }));
+
           this.form.patchValue(c);
           this.contractImages = c.images.sort((a, b) => this.orderByAsc(a, b));
         }
       });
     }
+
+    this.store.pipe(select(getContractCategorySelector))
+      .pipe(tap(cc => this.contract_categories = cc))
+      .subscribe();
   }
 
   public createCategory = (): void => {
@@ -134,7 +137,7 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
             contract_name: this.form.get('contract_name').value
           }
         }
-        this.store.dispatch(addContractCategory({ payload }))
+        this.store.dispatch(addContractCategory({ payload }));
       }
     });
   }
@@ -200,15 +203,15 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
     // setTimeout(() => this.store.dispatch(ReOrderImages({ images: this.contractImages })), 200);
   }
   public dropSpecs(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.specifications, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.contract_categories, event.previousIndex, event.currentIndex);
   }
   public dragStartedSpecs(event: any) {
     this.dragStartSpecs = event;
   }
-  public handleRemoveSpecsTitle(specificationId: number) {
-    this.specifications.find(spec => spec.id === specificationId).title = '';
+  public handleRemoveSpecsTitle(id: string) {
+    this.contract_categories.find(cc => cc.id === id).category.category_name = '';
   }
-  public handleRemoveProductSpecs(specificationId: number) {
-    this.specifications = this.specifications.filter(specification => specification.id !== specificationId);
+  public handleRemoveProductSpecs(id: string) {
+    this.contract_categories = this.contract_categories.filter(cc => cc.id !== id);
   }
 }

@@ -1,3 +1,4 @@
+import { ICategory } from './../../../contracts/contract.model';
 import { environment } from '../../../../../environments/environment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,11 +15,19 @@ export class ContractCategoryDialogComponent implements OnInit {
   public form: FormGroup;
   constructor(
     public fb: FormBuilder,
-    public dialogRef: MatDialogRef<ContractCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: {}) {
+    public dialogRef: MatDialogRef<ContractCategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { category: ICategory }) {
     this.form = this.fb.group({
-      title: [null, [Validators.required]]
+      id: [null],
+      category_name: [null, [Validators.required]]
     });
+
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.data && this.data.category) {
+      this.form.get('id').patchValue(this.data.category.id);
+      this.form.get('category_name').patchValue(this.data.category.category_name);
+    }
+
+  }
 }

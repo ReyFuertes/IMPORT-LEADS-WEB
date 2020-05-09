@@ -1,4 +1,4 @@
-import { addContractCategory, addContractCategorySuccess } from './../actions/contract-category.action';
+import { addContractCategory, addContractCategorySuccess, loadContractCategory, loadContractCategorySuccess } from './../actions/contract-category.action';
 import { ContractCategoryService } from './../../services/contract-category.service';
 import { AppState } from './../../../../store/app.reducer';
 import { IContractCategory } from './../../contract.model';
@@ -9,7 +9,16 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ContractCategoryEffects {
-  addCategory$ = createEffect(() => this.actions$.pipe(
+  loadContractCategory$ = createEffect(() => this.actions$.pipe(
+    ofType(loadContractCategory),
+    mergeMap(({ id }) => this.contractCategoryService.getById(id, 'contract').pipe(
+      map((items: IContractCategory[]) => {
+        return loadContractCategorySuccess({ items });
+      })
+    ))
+  ));
+
+  addContractCategory$ = createEffect(() => this.actions$.pipe(
     ofType(addContractCategory),
     mergeMap(({ payload }) => this.contractCategoryService.post(payload)
       .pipe(
@@ -20,7 +29,6 @@ export class ContractCategoryEffects {
   ));
 
   constructor(
-    private store: Store<AppState>,
     private actions$: Actions,
     private contractCategoryService: ContractCategoryService,
   ) { }
