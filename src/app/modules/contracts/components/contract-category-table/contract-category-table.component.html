@@ -8,7 +8,7 @@
           <span>{{element[column]}}</span>
         </div>
         <div [ngClass]="{'hidden': i !== (columnsToDisplay.length - 1)}" fxLayoutAlign="end center" fxLayoutGap="10px">
-          <il-dropdown-select-search matTooltip="Select Tag" *ngIf="($tags | async).length > 0" [form]="tagForm" [controlName]="'contract_tag'" [placeholder]="'Select Tag'" [items]="($tags | async)"></il-dropdown-select-search>
+          <il-dropdown-select-search matTooltip="Select Tag" *ngIf="($tags | async).length > 0" (click)="getTerm(element)" [form]="tagForm" [controlName]="'id'" [placeholder]="'Select Tag'" [items]="($tags | async)"></il-dropdown-select-search>
           <img matTooltip="Delete Term" (click)="onDeleteTerm(element?.id)" [ngClass]="{'hidden': isRightNavOpen}" [src]="svgPath + 'delete-icon-red.svg'">
           <p-inputSwitch [ngClass]="{'hidden': !isRightNavOpen}"></p-inputSwitch>
         </div>

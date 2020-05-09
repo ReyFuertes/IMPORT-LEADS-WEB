@@ -21,13 +21,16 @@ export class DropdownSelectSearchComponent extends GenericControl<ISimpleItem> i
   public controlName: FormControlName;
   @Input()
   public form: FormGroup;
-  private $destroy = new Subject<void>();
+  @Input()
+  public selectedItem: any;
   @Output()
   public valueEmitter = new EventEmitter<any>();
   public dataFilterForm = new FormControl();
   public $filteredData = new ReplaySubject<any>();
-  private newList: ISimpleItem[];
   public svgPath: string = environment.svgPath;
+
+  private newList: ISimpleItem[];
+  private $destroy = new Subject<void>();
 
   constructor() {
     super();
@@ -36,6 +39,9 @@ export class DropdownSelectSearchComponent extends GenericControl<ISimpleItem> i
   ngOnInit() {
     if (this.items)
       this.newList = this.items.slice();
+
+    if (this.selectedItem)
+      this.form.patchValue(this.selectedItem)
 
     this.$filteredData.next(this.newList);
 

@@ -15,7 +15,7 @@ import { ISimpleItem } from '../../../../shared/generics/generic.model';
 import { environment } from '../../../../../environments/environment';
 import { trigger, transition, style, state, animate } from '@angular/animations';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { IContractCategory } from '../../contract.model';
 import { deleteContractCategory } from '../../store/actions/contract-category.action';
 
@@ -44,6 +44,7 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
   public tagForm: FormGroup;
   public isEditName: boolean = false;
   public $tags: Observable<ISimpleItem[]>;
+  public selectedTerm: IContractTerm;
 
   @Input()
   public isRightNavOpen: boolean = false;
@@ -54,11 +55,19 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
     this.form = this.fb.group({
       id: [null],
       term_name: [null],
-      term_description: [null]
+      term_description: [null],
+      contact_category: [null]
     })
     this.tagForm = this.fb.group({
-      contract_tag: [null]
-    })
+      id: [null]
+    });
+    this.tagForm.valueChanges.subscribe(tag => {
+      const payload = {
+        ...this.selectedTerm,
+        contract_tag: { id: tag.id }
+      }
+      this.store.dispatch(updateContractTerm({ payload }));
+    });
   }
 
   ngOnInit() {
@@ -74,6 +83,9 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
   ngAfterViewInit(): void {
     this.dataSource = new MatTableDataSource<any>(this.contract_category.terms);
   }
+
+  public getTerm = (term: IContractTerm) =>
+    this.selectedTerm = term
 
   public onDeleteTerm(id: string): void {
     const dialogRef = this.dialog.open(ConfirmationComponent, {
