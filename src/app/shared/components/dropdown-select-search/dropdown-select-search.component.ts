@@ -3,8 +3,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, ReplaySubject } from 'rxjs';
 import { ISimpleItem } from '../../generics/generic.model';
 import { GenericControl } from '../../generics/generic-control';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControlName, FormControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormControlName, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'il-dropdown-select-search',
@@ -12,42 +12,49 @@ import { FormGroup, FormControlName, FormControl } from '@angular/forms';
   styleUrls: ['./dropdown-select-search.component.scss']
 })
 
-export class DropdownSelectSearchComponent extends GenericControl<ISimpleItem> implements OnInit {
+export class DropdownSelectSearchComponent extends GenericControl<ISimpleItem> implements OnInit, AfterViewInit, OnChanges {
   @Input()
   public items: ISimpleItem[];
   @Input()
   public placeholder: string = '';
   @Input()
-  public controlName: FormControlName;
+  public controlName: any;
   @Input()
   public form: FormGroup;
   @Input()
   public selectedItem: any;
   @Output()
   public valueEmitter = new EventEmitter<any>();
+
   public dataFilterForm = new FormControl();
   public $filteredData = new ReplaySubject<any>();
   public svgPath: string = environment.svgPath;
-
   private newList: ISimpleItem[];
   private $destroy = new Subject<void>();
 
-  constructor() {
+  constructor(private fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit() {
-    if (this.items)
+    if (this.items && this.items.length > 0) {
       this.newList = this.items.slice();
 
-    if (this.selectedItem)
-      this.form.patchValue(this.selectedItem)
-
-    this.$filteredData.next(this.newList);
+      this.$filteredData.next(this.newList);
+    }
 
     this.dataFilterForm.valueChanges
       .pipe(takeUntil(this.$destroy))
       .subscribe(() => this.filterdata());
+  }
+
+  ngAfterViewInit(): void {
+    this.cdRef.detectChanges();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    this.cdRef.detectChanges();
   }
 
   ngOnDestroy(): void {

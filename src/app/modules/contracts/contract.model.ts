@@ -1,3 +1,4 @@
+import { ITag } from './../tags/tags.model';
 import { IProduct } from './../products/products.model';
 import { IVenue } from './../venues/venues.models';
 import { IUser } from './../../models/user.model';
@@ -6,7 +7,8 @@ export class IContractTerm {
   id?: string;
   term_name?: string;
   term_description?: string;
-  contract_category: IContractCategory;
+  contract_category?: IContractCategory;
+  contract_tag?: ITag
 }
 export class IContractCategory {
   id?: string;

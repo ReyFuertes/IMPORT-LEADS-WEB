@@ -45,6 +45,7 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
   public isEditName: boolean = false;
   public $tags: Observable<ISimpleItem[]>;
   public selectedTerm: IContractTerm;
+  public formTag: FormGroup;
 
   @Input()
   public isRightNavOpen: boolean = false;
@@ -58,16 +59,15 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
       term_description: [null],
       contact_category: [null]
     })
-    this.tagForm = this.fb.group({
-      id: [null]
-    });
-    this.tagForm.valueChanges.subscribe(tag => {
-      const payload = {
-        ...this.selectedTerm,
-        contract_tag: { id: tag.id }
-      }
-      this.store.dispatch(updateContractTerm({ payload }));
-    });
+  }
+
+  public onTagUpdate(event: any, id: string): void {
+    if (event) {
+      const tag = { id: event };
+      this.store.dispatch(updateContractTerm({
+        payload: { id, contract_tag: tag }
+      }));
+    };
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 export interface ITag {
   id?: string;
-  tag_name: string;
+  tag_name?: string;
   questions?: ITagQuestion[];
 }
 
