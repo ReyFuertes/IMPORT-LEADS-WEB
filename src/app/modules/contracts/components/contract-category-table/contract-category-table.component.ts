@@ -18,6 +18,8 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit } fro
 import { map, take } from 'rxjs/operators';
 import { IContractCategory } from '../../contract.model';
 import { deleteContractCategory } from '../../store/actions/contract-category.action';
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
+
 
 @Component({
   selector: 'il-contract-category-table',
@@ -32,7 +34,7 @@ import { deleteContractCategory } from '../../store/actions/contract-category.ac
   ],
 })
 
-export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterViewInit {
+export class ContractCategoryTableComponent extends GenericRowComponent implements OnInit, OnChanges, AfterViewInit {
   public svgPath: string = environment.svgPath;
   public dataSource: MatTableDataSource<IContractTerm[]>;
   public columnsToDisplay = ['term_name', 'term_description', 'action_col'];
@@ -46,6 +48,8 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
   public $tags: Observable<ISimpleItem[]>;
   public selectedTerm: IContractTerm;
   public formTag: FormGroup;
+  public hoveredIndex: number | null = null;
+  public selectedIndex: number | null = null;
 
   @Input()
   public isRightNavOpen: boolean = false;
@@ -53,6 +57,8 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
   public contract_category: IContractCategory;
 
   constructor(private store: Store<AppState>, private dialog: MatDialog, private fb: FormBuilder) {
+    super();
+
     this.form = this.fb.group({
       id: [null],
       term_name: [null],
@@ -159,6 +165,11 @@ export class ContractCategoryTableComponent implements OnInit, OnChanges, AfterV
   public onClose(): void {
     this.expandedElement = null;
     this.selectedCol = null;
+  }
+
+  public getToolTipMsg(property: string) {
+    const tooltip = property ? property.replace(/_/g, ' ') : property;
+    return tooltip;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
