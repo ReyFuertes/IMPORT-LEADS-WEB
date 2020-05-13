@@ -1,12 +1,13 @@
+import { ITag } from './../../tags.model';
+import { AppState } from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
 import { TagsDialogComponent } from 'src/app/modules/dialogs/components/tags/tags-dialog.component';
-import { ISimpleItem } from './../../../../shared/generics/generic.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { MatDialog } from '@angular/material/dialog';
-import { TagsQuestionDialogComponent } from 'src/app/modules/dialogs/components/tags-question/tags-question-dialog.component';
-import { ITag } from '../../tags.model';
+import { addTag } from '../../store/tags.actions';
 
 @Component({
   selector: 'il-tag-expansion-panel',
@@ -21,7 +22,7 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
 
-  constructor(public dialog: MatDialog) {
+  constructor(private store: Store<AppState>, public dialog: MatDialog) {
     super();
   }
 
@@ -41,8 +42,9 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
     const dialogRef = this.dialog.open(TagsDialogComponent, { data: {} });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.items.push({ id: '6', tag_name: result, questions: [] });
+        const item: ITag = { tag_name: result };
+        this.store.dispatch(addTag({ item }));
       }
-     });
+    });
   }
 }
