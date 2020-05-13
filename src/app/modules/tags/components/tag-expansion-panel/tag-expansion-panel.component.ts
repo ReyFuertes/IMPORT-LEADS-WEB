@@ -1,3 +1,4 @@
+import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { ITag } from './../../tags.model';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
@@ -7,7 +8,7 @@ import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { MatDialog } from '@angular/material/dialog';
-import { addTag } from '../../store/tags.actions';
+import { addTag, deleteTag } from '../../store/tags.actions';
 
 @Component({
   selector: 'il-tag-expansion-panel',
@@ -21,6 +22,7 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
   public items: ITag[];
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
+  public selectedId: string;
 
   constructor(private store: Store<AppState>, public dialog: MatDialog) {
     super();
@@ -46,5 +48,37 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
         this.store.dispatch(addTag({ item }));
       }
     });
+  }
+
+
+
+  public onDelete = (id: string) => this.selectedId = id;
+
+  public onClickPnl(pnl: any, event: any, i: number): void {
+    if (event.target.classList.contains('delete')) {
+
+      const dialogRef = this.dialog.open(ConfirmationComponent, {
+        width: '410px',
+        data: {}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          setTimeout(() => {
+            this.store.dispatch(deleteTag({ id: this.selectedId }));
+          }, 100);
+        }
+      });
+      pnl.close();
+    }
+
+    if (event.target.classList.contains('edit')) {
+      this.selectedIndex = i;
+      pnl.close();
+    }
+
+    if (event.target.classList.contains('close')) {
+      this.selectedIndex = null;
+      pnl.close();
+    }
   }
 }

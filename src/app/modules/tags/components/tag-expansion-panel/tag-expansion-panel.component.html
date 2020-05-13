@@ -1,7 +1,6 @@
 <div class="il-draggable-expansion">
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
-    <mat-expansion-panel #pnl cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel"
-      *ngFor="let item of items; let i = index" hideToggle="true">
+    <mat-expansion-panel #pnl cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel" *ngFor="let item of items; let i = index" hideToggle="true">
 
       <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i)" (mouseover)="mouseover(i)" (mouseleave)="mouseout()">
         <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
@@ -14,11 +13,11 @@
           </div>
           <div fxFlex="100px" class="pnl-actions" fxLayoutAlign="end center">
             <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex !== i">
-              <img [src]="svgPath + 'edit-icon-blue.svg'" />
-              <img [src]="svgPath + 'delete-icon-red.svg'">
+              <img class="edit" [src]="svgPath + 'edit-icon-blue.svg'" />
+              <img class="delete" (click)="onDelete(item?.id)" [src]="svgPath + 'delete-icon-red.svg'">
             </div>
             <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex === i">
-              <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" />
+              <img class="close" [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" />
               <img [src]="svgPath + 'save-icon-blue.svg'">
             </div>
           </div>
@@ -30,6 +29,6 @@
     </mat-expansion-panel>
   </mat-accordion>
   <div class="list-item" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <img [src]="svgPath + 'add-icon-gray.svg'" (click)="onAddTag()"/>
+    <img [src]="svgPath + 'add-icon-gray.svg'" (click)="onAddTag()" />
   </div>
 </div>
