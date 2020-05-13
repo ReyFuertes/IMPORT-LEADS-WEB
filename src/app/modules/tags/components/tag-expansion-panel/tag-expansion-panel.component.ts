@@ -1,3 +1,4 @@
+import { updateTag } from './../../store/tags.actions';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { ITag } from './../../tags.model';
 import { AppState } from 'src/app/store/app.reducer';
@@ -23,6 +24,7 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
   public selectedId: string;
+  public selectedItem: ITag;
 
   constructor(private store: Store<AppState>, public dialog: MatDialog) {
     super();
@@ -50,11 +52,26 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
     });
   }
 
-
-
   public onDelete = (id: string) => this.selectedId = id;
 
+  public onEdit(item: ITag, value: string): void {
+    this.selectedItem = item;
+    if (value)
+      item.tag_name = value;
+  }
+
+  public onSave(): void {
+    if (this.selectedItem)
+      this.store.dispatch(updateTag({ item: this.selectedItem }));
+
+    this.selectedIndex = null;
+  }
+
   public onClickPnl(pnl: any, event: any, i: number): void {
+    if (event.target.classList.contains('no-expand')) {
+      pnl.close();
+    }
+
     if (event.target.classList.contains('delete')) {
 
       const dialogRef = this.dialog.open(ConfirmationComponent, {

@@ -6,7 +6,7 @@
         <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
         <span *ngIf="selectedIndex !== i">{{item?.question_name}}</span>
         <mat-form-field *ngIf="selectedIndex === i" floatLabel="never">
-          <input matInput [value]="item?.question_name">
+          <input matInput [value]="item?.question_name" [(ngModel)]="tagName">
         </mat-form-field>
       </div>
       <div fxFlex="50px" class="pnl-actions" fxLayoutAlign="center center">
@@ -16,7 +16,7 @@
         </div>
         <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex === i" fxLayoutGap="10px">
           <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" />
-          <img [src]="svgPath + 'save-icon-blue.svg'">
+          <img [src]="svgPath + 'save-icon-blue.svg'" (click)="onSave()">
         </div>
       </div>
     </div>

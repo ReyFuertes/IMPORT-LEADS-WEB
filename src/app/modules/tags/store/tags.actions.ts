@@ -8,7 +8,17 @@ export enum TagsActionTypes {
   addTagSuccess = '[Tags] Add (success)',
   loadTags = '[Tags] Load',
   loadTagsSuccess = '[Tags] Load (success)',
+  updateTag = '[Tags] Update',
+  updateTagSuccess = '[Tags] Update (success)',
 }
+export const updateTag = createAction(
+  TagsActionTypes.updateTag,
+  props<{ item: ITag }>()
+);
+export const updateTagSuccess = createAction(
+  TagsActionTypes.updateTagSuccess,
+  props<{ updated: ITag }>()
+);
 export const deleteTag = createAction(
   TagsActionTypes.deleteTag,
   props<{ id: string }>()

@@ -5,7 +5,7 @@ import { TagsService } from './tags.service';
 import { TagExpansionListComponent } from './components/tag-expansion-list/tag-expansion-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatCardModule, MatStepperModule, MatTabsModule, MatDialogModule, MatSlideToggleModule } from '@angular/material';
+import { MatIconModule, MatListModule, MatFormFieldModule, MatInputModule, MatBadgeModule, MatMenuModule, MatSelectModule, MatButtonModule, MatAutocompleteModule, MatExpansionModule, MatCardModule, MatStepperModule, MatTabsModule, MatDialogModule, MatSlideToggleModule, MatTooltipModule } from '@angular/material';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DialogModule } from './../dialogs/dialog.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -53,7 +53,8 @@ const materialModules = [
   MatTabsModule,
   MatButtonModule,
   MatDialogModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatTooltipModule
 ];
 
 @NgModule({

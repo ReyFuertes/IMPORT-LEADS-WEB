@@ -1,4 +1,6 @@
-import { loadTags, addTag, loadTagsSuccess, addTagSuccess, deleteTag, deleteTagSuccess } from './tags.actions';
+import { AppState } from './../../../store/app.reducer';
+import { Store } from '@ngrx/store';
+import { loadTags, addTag, loadTagsSuccess, addTagSuccess, deleteTag, deleteTagSuccess, updateTag, updateTagSuccess } from './tags.actions';
 import { ITag } from './../tags.model';
 import { TagsService } from './../tags.service';
 import { Injectable } from '@angular/core';
@@ -7,6 +9,18 @@ import { map, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class TagsEffects {
+  updateTag$ = createEffect(() => this.actions$.pipe(
+    ofType(updateTag),
+    mergeMap(({ item }) => this.tagsService.patch(item)
+      .pipe(
+        // reload all products since the child parent cost value cannot be updated via state update
+        tap(() => this.store.dispatch(loadTags())),
+        map((updated: ITag) => {
+          return updateTagSuccess({ updated });
+        })
+      ))
+  ));
+
   deleteTag$ = createEffect(() => this.actions$.pipe(
     ofType(deleteTag),
     mergeMap(({ id }) => this.tagsService.delete(id)
@@ -37,6 +51,7 @@ export class TagsEffects {
   ));
 
   constructor(
+    private store: Store<AppState>,
     private actions$: Actions,
     private tagsService: TagsService
   ) { }
