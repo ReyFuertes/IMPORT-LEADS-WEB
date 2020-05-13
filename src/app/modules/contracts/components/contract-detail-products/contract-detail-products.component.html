@@ -51,7 +51,7 @@
       </div>
 
       <div fxFlex="20" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-        <button matTooltip="Add" [disabled]="!form.valid" *ngIf="!isEditProduct" mat-flat-button class="il-button primary" (click)="onAdd()">
+        <button matTooltip="Add" [disabled]="!form.valid || isDisabled" *ngIf="!isEditProduct" mat-flat-button class="il-button primary" (click)="onAdd()">
           Add Product
         </button>
         <button matTooltip="Save" [disabled]="!form.valid" *ngIf="isEditProduct" mat-flat-button class="il-button primary" (click)="onSave()">

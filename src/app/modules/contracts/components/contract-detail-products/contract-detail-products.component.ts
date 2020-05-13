@@ -32,6 +32,7 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
   public isEditProduct: boolean = false;
   public state: PillState = PillState.default;
   public suggestions: ISimpleItem[];
+  public isDisabled: boolean = false;
 
   @Input()
   public isRightNavOpen: boolean = false;
@@ -62,6 +63,17 @@ export class ContractDetailProductsComponent implements OnInit, AfterViewInit {
           const parentCost = this.form.get('cost').value;
 
           /* if the value of input is less than the value of sub products cost total, mark as invalid error */
+          if (parseInt(childsCost) > parseInt(parentCost)) {
+            this.form.controls['cost'].setErrors({ 'invalid': true });
+          } else {
+            if ((parseInt(childsCost) !== parseInt(parentCost)) && children.length > 0) {
+              this.isDisabled = true;
+            } else {
+              this.form.controls['cost'].setErrors(null);
+              this.isDisabled = false;
+            }
+          }
+
           if (parseInt(childsCost) > parseInt(parentCost)) {
             this.form.controls['cost'].setErrors({ 'invalid': true });
           } else {
