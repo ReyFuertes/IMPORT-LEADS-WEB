@@ -1,3 +1,4 @@
+import { ReOrderImages } from './../../store/actions/contracts.action';
 import { tap } from 'rxjs/operators';
 import { getContractCategorySelector } from './../../store/selectors/contract-category.selector';
 import { addContractCategory, loadContractCategory } from './../../store/actions/contract-category.action';
@@ -199,8 +200,9 @@ export class ContractDetailPageComponent extends GenericPageDetailComponent<ICon
   public trackByField = (i: number, field: IProductImage) => field.position = i;
   public dropImages(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contractImages, event.previousIndex, event.currentIndex);
-    //update reorder images
-    // setTimeout(() => this.store.dispatch(ReOrderImages({ images: this.contractImages })), 200);
+
+    /* update reorder images */
+    setTimeout(() => this.store.dispatch(ReOrderImages({ images: this.contractImages })), 200);
   }
   public dropSpecs(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.contract_categories, event.previousIndex, event.currentIndex);
