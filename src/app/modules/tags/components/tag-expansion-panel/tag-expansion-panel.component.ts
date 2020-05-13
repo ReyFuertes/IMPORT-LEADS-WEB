@@ -1,6 +1,6 @@
-import { updateTag } from './../../store/tags.actions';
+import { updateTag, deleteTag } from './../../store/actions/tags.actions';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
-import { ITag } from './../../tags.model';
+import { ITag, ITagQuestion } from './../../tags.model';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { TagsDialogComponent } from 'src/app/modules/dialogs/components/tags/tags-dialog.component';
@@ -9,7 +9,7 @@ import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
 import { MatDialog } from '@angular/material/dialog';
-import { addTag, deleteTag } from '../../store/tags.actions';
+import { addTag } from '../../store/actions/tags.actions';
 
 @Component({
   selector: 'il-tag-expansion-panel',
@@ -60,6 +60,15 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
       item.tag_name = value;
   }
 
+  public onSaveQuestion(value: ITagQuestion): void {
+    if (value) {
+      const item = Object.assign({}, this.selectedItem, {});
+        this.store.dispatch(updateTag({ item: this.selectedItem }));
+
+      this.selectedIndex = null;
+    }
+  }
+
   public onSave(): void {
     if (this.selectedItem)
       this.store.dispatch(updateTag({ item: this.selectedItem }));
@@ -67,7 +76,11 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
     this.selectedIndex = null;
   }
 
-  public onClickPnl(pnl: any, event: any, i: number): void {
+  public onClickPnl(pnl: any, event: any, i: number, item: ITag): void {
+    console.log(this.selectedItem)
+    if (item)
+      this.selectedItem = item;
+
     if (event.target.classList.contains('no-expand')) {
       pnl.close();
     }

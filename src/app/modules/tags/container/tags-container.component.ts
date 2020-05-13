@@ -1,4 +1,4 @@
-import { loadTags } from './../store/tags.actions';
+import { loadTags } from './../store/actions/tags.actions';
 import { AppState } from './../../../store/app.reducer';
 import { Store } from '@ngrx/store';
 import { GenericContainer } from './../../../shared/generics/generic-container';

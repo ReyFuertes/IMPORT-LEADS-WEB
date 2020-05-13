@@ -1,4 +1,4 @@
-import { TagsEffects } from './store/tags.effects';
+import { TagsEffects } from './store/effects/tags.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TagsService } from './tags.service';
@@ -16,7 +16,7 @@ import { TagExpansionPanelComponent } from './components/tag-expansion-panel/tag
 import { TagsContainerComponent } from './container/tags-container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TagsReducer } from './store/tags.reducer';
+import { TagsReducer } from './store/reducers/tags.reducer';
 
 const routes: Routes = [
   {

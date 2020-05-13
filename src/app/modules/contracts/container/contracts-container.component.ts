@@ -1,5 +1,5 @@
 import { loadContractCategory } from './../store/actions/contract-category.action';
-import { loadTags } from './../../tags/store/tags.actions';
+import { loadTags } from './../../tags/store/actions/tags.actions';
 import { ProductsState } from './../store/reducers/products.reducer';
 import { loadContracts } from './../store/actions/contracts.action';
 import { AppState } from './../../../store/app.reducer';

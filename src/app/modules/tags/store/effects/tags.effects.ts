@@ -1,8 +1,8 @@
-import { AppState } from './../../../store/app.reducer';
+import { AppState } from './../../../../store/app.reducer';
 import { Store } from '@ngrx/store';
-import { loadTags, addTag, loadTagsSuccess, addTagSuccess, deleteTag, deleteTagSuccess, updateTag, updateTagSuccess } from './tags.actions';
-import { ITag } from './../tags.model';
-import { TagsService } from './../tags.service';
+import { loadTags, addTag, loadTagsSuccess, addTagSuccess, deleteTag, deleteTagSuccess, updateTag, updateTagSuccess } from '../actions/tags.actions';
+import { ITag } from './../../tags.model';
+import { TagsService } from './../../tags.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap, tap } from 'rxjs/operators';

@@ -1,4 +1,4 @@
-import { TagsState, TagsReducer } from './../modules/tags/store/tags.reducer';
+import { TagsState, TagsReducer } from './../modules/tags/store/reducers/tags.reducer';
 import { ProductsState, ProductsReducer } from './../modules/products/store/products.reducer';
 import { NotificationState } from './notification.reducer';
 import { ActionReducerMap } from '@ngrx/store';

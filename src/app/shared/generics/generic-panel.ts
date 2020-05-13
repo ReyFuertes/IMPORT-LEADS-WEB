@@ -44,7 +44,7 @@ export abstract class GenericRowComponent {
     }, 100);
   };
 
-  public onClickPnl(pnl: any, event: any, i: number): void {
+  public onClickPnl(pnl: any, event: any, i: number, item?: any): void {
     event.preventDefault();
     const classList = event.target.parentNode.classList;
     this.selectedIndex = null;

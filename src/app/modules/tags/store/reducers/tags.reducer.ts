@@ -1,5 +1,5 @@
-import { loadTagsSuccess, addTagSuccess, deleteTagSuccess, updateTagSuccess } from './tags.actions';
-import { ITag } from './../tags.model';
+import { loadTagsSuccess, addTagSuccess, deleteTagSuccess, updateTagSuccess } from '../actions/tags.actions';
+import { ITag } from './../../tags.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { sortCreatedAt } from 'src/app/shared/util/sort';

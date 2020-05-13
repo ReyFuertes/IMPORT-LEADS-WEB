@@ -2,7 +2,7 @@
   <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
     <mat-expansion-panel #pnl cdkDrag (cdkDragStarted)="dragStarted(true)" #pnl="matExpansionPanel" *ngFor="let item of items; let i = index" hideToggle="true">
 
-      <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i)" (mouseover)="mouseover(i)" (mouseleave)="mouseout()">
+      <mat-expansion-panel-header (click)="onClickPnl(pnl, $event, i, item)" (mouseover)="mouseover(i)" (mouseleave)="mouseout()">
         <div class="pnl-header" fxLayout="row" fxlayoutGap="20px" fxLayoutGap="10px">
           <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
           <div fxFlex fxLayoutAlign="start center">
@@ -24,7 +24,7 @@
         </div>
       </mat-expansion-panel-header>
       <div>
-        <il-tag-expansion-list [items]="item?.questions"></il-tag-expansion-list>
+        <il-tag-expansion-list [items]="item?.questions" (valueEmitter)="onSaveQuestion($event)"></il-tag-expansion-list>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

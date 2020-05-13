@@ -1,5 +1,6 @@
+import { ITagQuestion } from './../../tags.model';
 import { environment } from './../../../../../environments/environment';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TagsQuestionDialogComponent } from 'src/app/modules/dialogs/components/tags-question/tags-question-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +19,11 @@ export class TagExpansionListComponent implements OnInit {
 
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
+  public selectedItem: ITagQuestion;
+
+  @Output()
+  public valueEmitter = new EventEmitter<ITagQuestion>();
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() { }
@@ -30,6 +36,12 @@ export class TagExpansionListComponent implements OnInit {
 
   public dragStarted(event: any): void {
     this.dragStart = event;
+  }
+
+  public onEdit(item: ITag, value: string): void {
+    this.selectedItem = item;
+    if (value)
+      item.tag_name = value;
   }
 
   public onClose(): void {
@@ -54,6 +66,6 @@ export class TagExpansionListComponent implements OnInit {
       if (result) {
         this.items.push(result);
       }
-     });
+    });
   }
 }

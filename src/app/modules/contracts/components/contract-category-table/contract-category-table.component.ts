@@ -3,7 +3,7 @@ import { loadContractCategory, updateContractCategorySuccess, updateContractCate
 import { MatTableDataSource } from '@angular/material/table';
 import { IContractTerm } from './../../contract.model';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
-import { getTagsSelector } from '../../../tags/store/tags.selector';
+import { getTagsSelector } from '../../../tags/store/selectors/tags.selector';
 import { AppState } from '../../../../store/app.reducer';
 import { Store, select } from '@ngrx/store';
 import { ITag } from '../../../tags/tags.model';

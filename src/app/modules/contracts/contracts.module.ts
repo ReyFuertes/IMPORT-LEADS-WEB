@@ -1,7 +1,7 @@
 import { ContractTermEffects } from './store/effects/contract-term.effects';
 import { ContractTermService } from './services/contract-term.service';
 import { CategoryEffects } from './store/effects/category.effects';
-import { TagsEffects } from './../tags/store/tags.effects';
+import { TagsEffects } from './../tags/store/effects/tags.effects';
 import { ContractCategoryEffects } from './store/effects/contract-category.effects';
 import { ContractCategoryService } from './services/contract-category.service';
 import { ProductsEffects } from './../products/store/products.effects';

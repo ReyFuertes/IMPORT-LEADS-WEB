@@ -1,4 +1,4 @@
-import { getTagsSelector } from './../../store/tags.selector';
+import { getTagsSelector } from './../../store/selectors/tags.selector';
 import { Observable } from 'rxjs';
 import { AppState } from './../../../../store/app.reducer';
 import { Store, select } from '@ngrx/store';

@@ -8,8 +8,8 @@ export enum ProductsActionTypes {
   addProductSuccess = '[Products] Create (success)',
   deleteProduct = '[Products] Delete',
   deleteProductSuccess = '[Products] Delete (success)',
-  updateProduct = '[Products] Save',
-  updateProductSuccess = '[Products] Save (success)',
+  updateProduct = '[Products] Update',
+  updateProductSuccess = '[Products] Update (success)',
 }
 export const updateProduct = createAction(
   ProductsActionTypes.updateProduct,

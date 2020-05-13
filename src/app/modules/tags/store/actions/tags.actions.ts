@@ -1,4 +1,4 @@
-import { ITag } from './../tags.model';
+import { ITag } from './../../tags.model';
 import { createAction, props } from '@ngrx/store';
 
 export enum TagsActionTypes {
