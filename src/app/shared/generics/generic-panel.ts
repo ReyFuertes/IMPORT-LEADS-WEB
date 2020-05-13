@@ -26,17 +26,18 @@ export abstract class GenericRowComponent {
     }, 100);
   }
 
+  /* for table */
   public onDelete(event: any): void {
     this.deleteEmitter.emit(event);
     this.onClose();
   }
-
+  /* for table */
   public onSave(event: any): void {
     this.modValueEmitter.emit(event);
     this.onClose();
   }
 
-  //update the object value base on input value
+  /* update the object value base on input value */
   public onInput(event: any, element: any, col: any): void {
     setTimeout(() => {
       Object.assign({}, element[col] = event.target.value);
