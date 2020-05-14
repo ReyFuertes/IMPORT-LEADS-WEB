@@ -22,12 +22,12 @@
     cursor: pointer;
   }
 }
-::ng-deep {
-  .cdk-drag-preview {
-    border-radius: 0 !important;
-    @extend .il-draggable-expansion;
-  }
-}
+// ::ng-deep {
+//   .cdk-drag-preview {
+//     border-radius: 0 !important;
+//     @extend .il-draggable-expansion;
+//   }
+// }
 @media (max-width: 1280px) {
   .menu-icon {
     display: flex !important;

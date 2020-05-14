@@ -7,4 +7,5 @@ export interface ITag {
 export interface ITagQuestion {
   id?: string;
   question_name?: string;
+  tag: ITag;
 }

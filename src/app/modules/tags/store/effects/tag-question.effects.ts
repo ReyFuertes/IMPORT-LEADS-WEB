@@ -1,6 +1,6 @@
 import { AppState } from './../../../contracts/store/reducers/index';
 import { Store } from '@ngrx/store';
-import { addTagQuestion, addTagQuestionSuccess, updateTagQuestion, updateTagQuestionSuccess } from './../actions/tag-question.action';
+import { addTagQuestion, addTagQuestionSuccess, updateTagQuestion, updateTagQuestionSuccess, deleteTagQuestion, deleteTagQuestionSuccess } from './../actions/tag-question.action';
 import { TagQuestionsService } from './../../services/tag-questions.service';
 import { ITagQuestion } from './../../tags.model';
 import { Injectable } from '@angular/core';
@@ -9,7 +9,27 @@ import { map, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class TagQuestionsEffects {
-  addTagQuestion$ = createEffect(() => this.actions$.pipe(
+  deleteQuestion$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteTagQuestion),
+    mergeMap(({ id }) => this.tagsService.delete(id)
+      .pipe(
+        map((deleted: ITagQuestion) => {
+          return deleteTagQuestionSuccess({ deleted });
+        })
+      ))
+  ));
+
+  addQuestion$ = createEffect(() => this.actions$.pipe(
+    ofType(addTagQuestion),
+    mergeMap(({ item }) => this.tagsService.post(item)
+      .pipe(
+        map((created: ITagQuestion) => {
+          return addTagQuestionSuccess({ created });
+        })
+      ))
+  ));
+
+  updateTagQuestion$ = createEffect(() => this.actions$.pipe(
     ofType(updateTagQuestion),
     mergeMap(({ item }) => this.tagsService.post(item)
       .pipe(

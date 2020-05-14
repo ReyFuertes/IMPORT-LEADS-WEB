@@ -1,5 +1,6 @@
+import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
 import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
-import { updateTagQuestion } from './../../store/actions/tag-question.action';
+import { updateTagQuestion, addTagQuestion, deleteTagQuestion } from './../../store/actions/tag-question.action';
 import { AppState } from './../../../contracts/store/reducers/index';
 import { Store } from '@ngrx/store';
 import { ITagQuestion } from './../../tags.model';
@@ -20,6 +21,8 @@ export class TagExpansionListComponent implements OnInit {
   public svgPath: string = environment.svgPath;
   @Input()
   public items: string[];
+  @Input()
+  public tag: ITag;
 
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
@@ -51,6 +54,20 @@ export class TagExpansionListComponent implements OnInit {
     this.selectedIndex = null;
   }
 
+  public onDelete(id: string): void {
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '410px',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        setTimeout(() => {
+          this.store.dispatch(deleteTagQuestion({ id }));
+        }, 100);
+      }
+    });
+  }
+
   public dragStarted(event: any): void {
     this.dragStart = event;
   }
@@ -80,7 +97,11 @@ export class TagExpansionListComponent implements OnInit {
     const dialogRef = this.dialog.open(TagsQuestionDialogComponent, { data: {} });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.items.push(result);
+        const item = {
+          question_name: result,
+          tag: { id: this.tag.id }
+        }
+        this.store.dispatch(addTagQuestion({ item }));
       }
     });
   }
