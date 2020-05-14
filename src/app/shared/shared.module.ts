@@ -42,6 +42,8 @@ import { PrimengEditorComponent } from './components/primeng-editor/primeng-edit
 import { EditorModule } from 'primeng/editor';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
+import { CurrencyFormatterDirective } from './directives/currency-formatter.directive';
+import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
 
 const materialModules = [
   MatListModule,
@@ -105,7 +107,8 @@ const sharedComponents = [
 
 const directives = [
   NumberOnlyDirective,
-  InputMaxLengthDirective
+  InputMaxLengthDirective,
+  CurrencyFormatterDirective
 ];
 
 @NgModule({
@@ -123,6 +126,6 @@ const directives = [
   ],
   exports: [...sharedComponents, ...directives],
   declarations: [...sharedComponents, ...directives],
-  providers: [],
+  providers: [CustomCurrencyPipe],
 })
 export class SharedModule { }
