@@ -1,6 +1,6 @@
 import { updateTag, deleteTag } from './../../store/actions/tags.actions';
 import { ConfirmationComponent } from './../../../dialogs/components/confirmation/confirmation.component';
-import { ITag, ITagQuestion } from './../../tags.model';
+import { ITag } from './../../tags.model';
 import { AppState } from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { TagsDialogComponent } from 'src/app/modules/dialogs/components/tags/tags-dialog.component';
@@ -58,15 +58,6 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
     this.selectedItem = item;
     if (value)
       item.tag_name = value;
-  }
-
-  public onSaveQuestion(value: ITagQuestion): void {
-    if (value) {
-      const item = Object.assign({}, this.selectedItem, {});
-        this.store.dispatch(updateTag({ item: this.selectedItem }));
-
-      this.selectedIndex = null;
-    }
   }
 
   public onSave(): void {

@@ -1,6 +1,5 @@
 <div cdkDropList (cdkDropListDropped)="drop($event)">
-  <div cdkDrag (cdkDragStarted)="dragStarted(true)"
-        *ngFor="let item of items; let i= index" class="list-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <div cdkDrag (cdkDragStarted)="dragStarted(true)" *ngFor="let item of items; let i= index" class="list-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
     <div (mouseover)="mouseover(i)" (mouseleave)="mouseout()">
       <div fxFlex fxLayoutAlign="start center" fxLayoutGap="10px">
         <img cdkDragHandle [src]="svgPath + 'drag-icon.svg'" />
@@ -22,7 +21,6 @@
     </div>
   </div>
   <div class="list-item" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <img [src]="svgPath + 'add-icon-gray.svg'" (click)="onAddQuestion($event)"/>
+    <img [src]="svgPath + 'add-icon-gray.svg'" (click)="onAddQuestion($event)" />
   </div>
 </div>
-

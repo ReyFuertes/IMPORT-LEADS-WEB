@@ -1,3 +1,7 @@
+import { GenericRowComponent } from 'src/app/shared/generics/generic-panel';
+import { updateTagQuestion } from './../../store/actions/tag-question.action';
+import { AppState } from './../../../contracts/store/reducers/index';
+import { Store } from '@ngrx/store';
 import { ITagQuestion } from './../../tags.model';
 import { environment } from './../../../../../environments/environment';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -19,12 +23,13 @@ export class TagExpansionListComponent implements OnInit {
 
   public hoveredIndex: number | null = null;
   public selectedIndex: number | null = null;
+  public selectedId: string;
   public selectedItem: ITagQuestion;
 
   @Output()
   public valueEmitter = new EventEmitter<ITagQuestion>();
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private store: Store<AppState>, public dialog: MatDialog) { }
 
   ngOnInit() { }
 
@@ -34,29 +39,38 @@ export class TagExpansionListComponent implements OnInit {
     this.dragStart = false;
   }
 
+  public mouseover(i: number, colIndctr?: number) {
+    if (this.selectedIndex == null)
+      this.hoveredIndex = i;
+  }
+
+  public mouseout(): void {
+    if (this.selectedIndex != null) return;
+
+    this.hoveredIndex = null;
+    this.selectedIndex = null;
+  }
+
   public dragStarted(event: any): void {
     this.dragStart = event;
   }
 
-  public onEdit(item: ITag, value: string): void {
+  public onSave(): void {
+    if (this.selectedItem) {
+      this.store.dispatch(updateTagQuestion({ item: this.selectedItem }));
+    }
+  }
+
+  public onEdit(item: ITagQuestion, value: string): void {
     this.selectedItem = item;
     if (value)
-      item.tag_name = value;
+      item.question_name = value;
   }
 
   public onClose(): void {
     setTimeout(() => {
       this.selectedIndex = null;
     }, 100);
-  }
-
-  public mouseout(): void {
-    this.hoveredIndex = null;
-    this.selectedIndex = null;
-  }
-
-  public mouseover(i: number): void {
-    this.hoveredIndex = i;
   }
 
   public onAddQuestion(event: any): void {

@@ -1,3 +1,4 @@
+import { TagQuestionsService } from './services/tag-questions.service';
 import { TagsEffects } from './store/effects/tags.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -17,6 +18,7 @@ import { TagsContainerComponent } from './container/tags-container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TagsReducer } from './store/reducers/tags.reducer';
+import { TagQuestionsEffects } from './store/effects/tag-question.effects';
 
 const routes: Routes = [
   {
@@ -69,7 +71,7 @@ const materialModules = [
     DialogModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('tag', TagsReducer),
-    EffectsModule.forFeature([TagsEffects])
+    EffectsModule.forFeature([TagsEffects, TagQuestionsEffects])
   ],
   exports: [],
   declarations: [
@@ -79,7 +81,8 @@ const materialModules = [
     TagExpansionListComponent
   ],
   providers: [
-    TagsService
+    TagsService,
+    TagQuestionsService
   ],
 })
 export class TagsModule { }
