@@ -12,6 +12,8 @@
     cursor: pointer;
   }
   &:last-child {
+    border-top: thin #f9f9f9 solid;
+    padding-top: 2px;
     img {
       cursor: pointer;
     }

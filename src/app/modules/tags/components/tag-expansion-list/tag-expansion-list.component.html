@@ -14,13 +14,13 @@
           <img [src]="svgPath + 'delete-icon-red.svg'" matTooltip="Delete question">
         </div>
         <div class="menu-icon" *ngIf="hoveredIndex === i && selectedIndex === i" fxLayoutGap="10px">
-          <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" matTooltip="Close" />
-          <img [src]="svgPath + 'save-icon-blue.svg'" (click)="onSave()" matTooltip="Save question">
+          <img [src]="svgPath + 'close-icon-blue.svg'" (click)="onClose()" matTooltip="Close" matTooltip="Close" />
+          <img [src]="svgPath + 'save-icon-blue.svg'" (click)="onSave()" matTooltip="Save question" matTooltip="Save question">
         </div>
       </div>
     </div>
   </div>
   <div class="list-item" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <img [src]="svgPath + 'add-icon-gray.svg'" (click)="onAddQuestion($event)" />
+    <img [src]="svgPath + 'add-icon-gray.svg'" matTooltip="Add question" (click)="onAddQuestion($event)" />
   </div>
 </div>
