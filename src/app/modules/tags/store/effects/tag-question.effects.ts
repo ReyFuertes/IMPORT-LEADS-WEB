@@ -1,4 +1,3 @@
-import { loadTags } from './../actions/tags.actions';
 import { AppState } from './../../../contracts/store/reducers/index';
 import { Store } from '@ngrx/store';
 import { addTagQuestion, addTagQuestionSuccess, updateTagQuestion, updateTagQuestionSuccess } from './../actions/tag-question.action';
@@ -14,8 +13,6 @@ export class TagQuestionsEffects {
     ofType(updateTagQuestion),
     mergeMap(({ item }) => this.tagsService.post(item)
       .pipe(
-        // reload all products since the child parent cost value cannot be updated via state update
-        tap(() => this.store.dispatch(loadTags())),
         map((updated: ITagQuestion) => {
           return updateTagQuestionSuccess({ updated });
         })

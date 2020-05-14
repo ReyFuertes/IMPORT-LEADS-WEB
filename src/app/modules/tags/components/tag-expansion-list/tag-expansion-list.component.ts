@@ -59,6 +59,8 @@ export class TagExpansionListComponent implements OnInit {
     if (this.selectedItem) {
       this.store.dispatch(updateTagQuestion({ item: this.selectedItem }));
     }
+
+    this.onClose();
   }
 
   public onEdit(item: ITagQuestion, value: string): void {
