@@ -52,6 +52,11 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
     });
   }
 
+  public onKeypress = (pnl: any): void => {
+    event.preventDefault();
+    pnl.close();
+  }
+
   public onDelete = (id: string) => this.selectedId = id;
 
   public onEdit(item: ITag, value: string): void {
