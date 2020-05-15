@@ -5,7 +5,7 @@ import { TagQuestionsService } from './../../services/tag-questions.service';
 import { ITagQuestion } from './../../tags.model';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { map, mergeMap, tap, take } from 'rxjs/operators';
 
 @Injectable()
 export class TagQuestionsEffects {
@@ -19,7 +19,7 @@ export class TagQuestionsEffects {
       ))
   ));
 
-  addQuestion$ = createEffect(() => this.actions$.pipe(
+  addTagQuestion$ = createEffect(() => this.actions$.pipe(
     ofType(addTagQuestion),
     mergeMap(({ item }) => this.tagsService.post(item)
       .pipe(

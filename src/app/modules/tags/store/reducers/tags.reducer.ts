@@ -1,6 +1,6 @@
 import { updateTagQuestionSuccess, addTagQuestionSuccess, deleteTagQuestionSuccess } from './../actions/tag-question.action';
 import { loadTagsSuccess, addTagSuccess, deleteTagSuccess, updateTagSuccess } from '../actions/tags.actions';
-import { ITag } from './../../tags.model';
+import { ITag, ITagQuestion } from './../../tags.model';
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { sortCreatedAt } from 'src/app/shared/util/sort';
@@ -15,21 +15,24 @@ export const initialState: TagsState = adapter.getInitialState({
 const tagsReducer = createReducer(
   initialState,
   on(deleteTagQuestionSuccess, (state, action) => {
-    let tags = Object.values(state.entities);
-    let changes = tags.find(t => t.questions.find(tg => tg.id === action.deleted.id));
-    _.remove(changes.questions, (o) => {
-      return o.id === action.deleted.id;
-    });
-    debugger
-    return adapter.updateOne({ id: changes.id, changes }, state);
+    const tags = Object.values(Object.assign([], state.entities));
+    let tag = tags.find(t => t.questions.find(tg => tg.id === action.deleted.id));
+    /* mutate the state, hack it 😁 */
+    if (tag) {
+      _.remove(tag.questions, (o) => o.id === action.deleted.id);
+    }
+    return state;
   }),
   on(addTagQuestionSuccess, (state, action) => {
     /* insert tag question to tag item */
     let tags = Object.values(state.entities);
-    const newTag = tags.find(t => t.id === action.created.tag.id);
-    delete action.created.tag;
-    newTag.questions.push(action.created);
-    return adapter.addOne(newTag, state)
+    const tag = tags.find(t => t.id === action.created.tag.id);
+
+    let newTag: ITag;
+    if (tag && !tag.questions.includes(action.created)) {
+      newTag = Object.assign({}, tag, tag.questions.push(action.created));
+      return adapter.addOne(newTag, state)
+    }
   }),
   on(updateTagQuestionSuccess, (state, action) => {
     /* update the question inside the tag object, so that we dont need to refresh the whole tag list */
@@ -40,6 +43,7 @@ const tagsReducer = createReducer(
         question = action.updated;
       }
     });
+    /* just return if it has changes or not, just to prevent the ui from refreshing */
     return adapter.updateOne({ id: action.updated.id, changes }, state);
   }),
   on(updateTagSuccess, (state, action) => {

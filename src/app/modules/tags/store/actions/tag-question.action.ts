@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 
 export enum TagQuestionsActionTypes {
   deleteTagQuestion = '[Tag Questions] Delete',
-  deleteTagQuestionSuccess = '[TagQuestions] Delete (success)',
+  deleteTagQuestionSuccess = '[Tag Questions] Delete (success)',
   addTagQuestion = '[Tag Questions] Add',
   addTagQuestionSuccess = '[Tag Questions] Add (success)',
   updateTagQuestion = '[Tag Questions] Update',

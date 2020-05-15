@@ -63,7 +63,7 @@ export class TagExpansionListComponent implements OnInit {
       if (result) {
         setTimeout(() => {
           this.store.dispatch(deleteTagQuestion({ id }));
-        }, 100);
+        }, 200);
       }
     });
   }

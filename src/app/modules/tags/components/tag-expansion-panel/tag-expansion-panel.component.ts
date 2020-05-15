@@ -68,7 +68,6 @@ export class TagExpansionPanelComponent extends GenericRowComponent implements O
   }
 
   public onClickPnl(pnl: any, event: any, i: number, item: ITag): void {
-    console.log(this.selectedItem)
     if (item)
       this.selectedItem = item;
 

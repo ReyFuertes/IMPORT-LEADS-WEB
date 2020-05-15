@@ -124,8 +124,8 @@ const directives = [
     RouterModule,
     NgxFileDropModule
   ],
-  exports: [...sharedComponents, ...directives],
-  declarations: [...sharedComponents, ...directives],
-  providers: [CustomCurrencyPipe],
+  exports: [...sharedComponents, ...directives, CustomCurrencyPipe],
+  declarations: [...sharedComponents, ...directives, CustomCurrencyPipe],
+  providers: [],
 })
 export class SharedModule { }
