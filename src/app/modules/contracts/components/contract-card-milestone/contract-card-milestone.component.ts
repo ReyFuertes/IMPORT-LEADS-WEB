@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
+import { IContract } from '../../contract.model';
 
 @Component({
   selector: 'il-contract-card-milestone',
@@ -8,17 +9,12 @@ import * as moment from 'moment';
 })
 
 export class ContractCardMilestoneComponent implements OnInit {
-  public estimatedDates: { from: string | Date, to: string | Date } = {
-    from: moment('4/1/2020').format(),
-    to: moment('4/30/2020').format()
-  };
+
+  @Input()
+  public contract: IContract;
+
   public pointOfDates: string[] = [];
-  public mileStoneDates: string[] = [
-    moment('4/01/2020').format('MM/DD/YYYY'),
-    moment('4/02/2020').format('MM/DD/YYYY'),
-    moment('4/15/2020').format('MM/DD/YYYY'),
-    moment('4/30/2020').format('MM/DD/YYYY')
-  ];
+  public mileStoneDates: string[] = [];
   constructor() { }
 
   public getTooltip(date: any, i: number): any {
@@ -26,8 +22,14 @@ export class ContractCardMilestoneComponent implements OnInit {
   }
 
   ngOnInit() {
-    const from = moment(this.estimatedDates.from);
-    const to = moment(this.estimatedDates.to);
+    this.contract = this.contract[0];
+    this.mileStoneDates = [
+      moment(this.contract.start_date).format('MM/DD/YYYY'),
+      moment(this.contract.delivery_date).format('MM/DD/YYYY')
+    ];
+
+    const from = moment(this.contract.start_date);
+    const to = moment(this.contract.delivery_date);
 
     var currDate = moment(from).startOf('day');
     var lastDate = moment(to).startOf('day');
