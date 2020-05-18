@@ -16,7 +16,7 @@
           </div>
         </div>
         <div [ngClass]="{'hidden': i !== (columnsToDisplay.length - 1)}" fxLayoutAlign="end center" fxLayoutGap="10px">
-          <il-dropdown-select-search [ngClass]="{'disabled': isRightNavOpen}" matTooltip="Select Tag" *ngIf="($tags | async).length > 0" (click)="getTerm(element)" [isDisabled]="isRightNavOpen" [placeholder]="'Select Tag'" [items]="($tags | async)" (valueEmitter)="onTagUpdate($event, element?.id)" [selectedItem]="element?.contract_tag?.id"></il-dropdown-select-search>
+          <il-dropdown-select-search [ngClass]="{'disabled': isRightNavOpen}" matTooltip="Select Tag" *ngIf="($tags | async).length > 0" (click)="getTerm(element)" [placeholder]="'Select Tag'" [items]="($tags | async)" (valueEmitter)="onTagUpdate($event, element?.id)" [selectedItem]="element?.contract_tag?.id"></il-dropdown-select-search>
           <img matTooltip="Delete Term" (click)="onDeleteTerm(element?.id)" [ngClass]="{'hidden': isRightNavOpen}" [src]="svgPath + 'delete-icon-red.svg'">
           <p-inputSwitch [ngClass]="{'hidden': !isRightNavOpen}"></p-inputSwitch>
         </div>
@@ -49,7 +49,7 @@
 
   <!-- actions -->
   <div fxLayout="row" class="table-footer">
-    <div [ngClass]="{'hidden': actionState}" fxFlex fxLayoutAlign="center center" fxLayoutGap="15px">
+    <div [ngClass]="{'hidden': actionState, 'disabled': isRightNavOpen}" fxFlex fxLayoutAlign="center center" fxLayoutGap="15px">
       <img matTooltip="Show Menu Actions" (click)="actionState = !actionState" [src]="svgPath + 'add-icon-gray.svg'" />
       <img *ngIf="contract_category" matTooltip="Delete Category" (click)="onDelete(contract_category?.id)" [src]="svgPath + 'delete-icon-gray.svg'" />
     </div>

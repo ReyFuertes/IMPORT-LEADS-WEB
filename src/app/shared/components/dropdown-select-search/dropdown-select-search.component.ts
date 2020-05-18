@@ -23,8 +23,6 @@ export class DropdownSelectSearchComponent extends GenericControl<ISimpleItem> i
   public form: FormGroup;
   @Input()
   public selectedItem: any;
-  @Input()
-  isDisabled: boolean;
   @Output()
   public valueEmitter = new EventEmitter<any>();
 

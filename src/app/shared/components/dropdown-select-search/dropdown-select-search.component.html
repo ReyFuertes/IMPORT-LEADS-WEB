@@ -1,6 +1,6 @@
 <div *ngIf="($filteredData | async)" fxLayout="row" fxLayoutAlign="center center">
   <mat-form-field floatLabel="never">
-    <mat-select #multiSelect [placeholder]="placeholder" (selectionChange)="valueEmitter.emit($event?.value)" [(ngModel)]="selectedItem" [disabled]="isDisabled">
+    <mat-select #multiSelect [placeholder]="placeholder" (selectionChange)="valueEmitter.emit($event?.value)" [(ngModel)]="selectedItem">
       <mat-option>
         <ngx-mat-select-search [clearSearchInput]="'false'" [placeholderLabel]="'Search'" [formControl]="dataFilterForm" [noEntriesFoundLabel]="'No result'"></ngx-mat-select-search>
       </mat-option>
